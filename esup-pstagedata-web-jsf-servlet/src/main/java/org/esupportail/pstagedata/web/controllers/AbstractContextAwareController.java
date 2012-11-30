@@ -4,8 +4,9 @@
  */
 package org.esupportail.pstagedata.web.controllers;
 
-import org.esupportail.pstagedata.domain.beans.User;
 import org.esupportail.commons.utils.Assert;
+import org.esupportail.pstagedata.domain.beans.User;
+
 
 /**
  * An abstract class inherited by all the beans for them to get:

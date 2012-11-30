@@ -5,7 +5,6 @@ package org.esupportail.pstagedata.services.auth;
 
 import java.io.Serializable;
 
-import org.esupportail.pstagedata.domain.beans.User;
 import org.esupportail.commons.services.authentication.AuthUtils;
 import org.esupportail.commons.services.authentication.AuthenticationService;
 import org.esupportail.commons.services.authentication.info.AuthInfo;
@@ -14,7 +13,9 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
+import org.esupportail.pstagedata.domain.beans.User;
 import org.springframework.beans.factory.InitializingBean;
+
 
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010

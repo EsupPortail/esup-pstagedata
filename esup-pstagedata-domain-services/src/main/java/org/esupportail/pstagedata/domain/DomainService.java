@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import org.esupportail.pstagedata.domain.beans.User;
 
+
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 

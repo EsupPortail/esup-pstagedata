@@ -6,10 +6,11 @@ package org.esupportail.pstagedata.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.esupportail.pstagedata.domain.beans.User;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.pstagedata.domain.beans.User;
 import org.springframework.beans.factory.InitializingBean;
+
 
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010

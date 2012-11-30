@@ -14,6 +14,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.web.controllers.Resettable;
 
+
 /**
  * An abstract class inherited by all the beans for them to get:
  * - the domain service (domainService).
