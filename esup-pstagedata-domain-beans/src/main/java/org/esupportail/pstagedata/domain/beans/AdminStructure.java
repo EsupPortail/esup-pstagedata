@@ -13,7 +13,7 @@ public class AdminStructure extends Personne implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * Login/UID

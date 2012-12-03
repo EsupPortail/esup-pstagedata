@@ -12,7 +12,7 @@ public class StatutJuridique extends NomenclatureIdEnfant implements Serializabl
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 
 	/**

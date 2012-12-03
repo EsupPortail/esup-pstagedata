@@ -16,7 +16,7 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * 
 	 */
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * idAvenant

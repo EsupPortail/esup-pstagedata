@@ -18,7 +18,7 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 * 
 	 */
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * idConvention

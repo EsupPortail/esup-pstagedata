@@ -13,7 +13,7 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * ID de la structure
@@ -36,7 +36,7 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	private String codeEtab;
 	/**
-	 * Num�ro Siret
+	 * numéro Siret
 	 */
 	private String numeroSiret;
 	/**

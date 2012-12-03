@@ -16,7 +16,7 @@ public class Etudiant extends Personne implements Serializable{
 	 * 
 	 */
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * identEtudiant

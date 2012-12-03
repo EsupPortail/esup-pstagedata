@@ -12,7 +12,7 @@ public class FapQualification extends NomenclatureIdEnfant implements Serializab
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * ID = Qualification d'un code FAP de niveau 3 (quatri�me caract�re)

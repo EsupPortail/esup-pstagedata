@@ -14,7 +14,7 @@ public class Offre extends ObjetMetiers implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * ID offre
@@ -93,7 +93,7 @@ public class Offre extends ObjetMetiers implements Serializable{
 	 */
 	private String anneeDebut;
 	/**
-	 * Pr�cision sur le d�but de la mission
+	 * Pr�cision sur ledébutde la mission
 	 */
 	private String precisionDebut;
 	/**

@@ -12,11 +12,11 @@ public class FapN3 extends NomenclatureCodeEnfant implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	
 	/**
-	 * Num�ro de Qualification : 4�me caract�re du code de niveau 3
+	 * numéro de Qualification : 4�me caract�re du code de niveau 3
 	 */
 	private int numQualification;
 

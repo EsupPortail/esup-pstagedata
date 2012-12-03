@@ -13,7 +13,7 @@ public class ObjetMetiers implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * Login de la personne ayant cr��

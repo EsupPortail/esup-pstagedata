@@ -12,10 +12,10 @@ public class TypeStructure extends NomenclatureId implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
-	 * Vrai si le num�ro SIRET est obligatoire
+	 * Vrai si le numéro SIRET est obligatoire
 	 */
 	private boolean siretObligatoire;
 	/**

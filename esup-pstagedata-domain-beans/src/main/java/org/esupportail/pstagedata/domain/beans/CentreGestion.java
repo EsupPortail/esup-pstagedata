@@ -12,7 +12,7 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * Id du centre
@@ -59,11 +59,11 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private boolean saisieTuteurProParEtudiant;
 	/**
-	 * true si choix d'ann�e possible avant le d�but de la nouvelle ann�e
+	 * true si choix d'ann�e possible avant ledébutde la nouvelle ann�e
 	 */
 	private boolean choixAnneeAvantDebutAnnee;
 	/**
-	 * true si choix d'ann�e possible apr�s le d�but de la nouvelle ann�e
+	 * true si choix d'ann�e possible apr�s ledébutde la nouvelle ann�e
 	 */
 	private boolean choixAnneeApresDebutAnnee;
 	/**

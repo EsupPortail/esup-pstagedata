@@ -12,7 +12,7 @@ public class FapQualificationSimplifiee extends NomenclatureId implements Serial
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 
 	/**

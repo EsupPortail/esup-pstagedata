@@ -13,7 +13,7 @@ public class CritereRechercheStructureAncien implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * raisonSociale.

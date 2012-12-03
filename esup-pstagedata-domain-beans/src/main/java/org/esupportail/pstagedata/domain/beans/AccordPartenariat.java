@@ -13,7 +13,7 @@ public class AccordPartenariat extends ObjetMetiers implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 	/**
 	 * Id de l'accord de partenariat
