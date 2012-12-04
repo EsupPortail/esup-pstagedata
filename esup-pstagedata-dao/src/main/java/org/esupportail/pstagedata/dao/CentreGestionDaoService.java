@@ -52,7 +52,7 @@ public interface CentreGestionDaoService extends Serializable {
 	public int getNombreCentreGestion(String codeUniversite);
 	
 	/**
-	 * R�cup�re les centres de gestion correspondant à l'uid ldap d'un personnel
+	 * récupère les centres de gestion correspondant à l'uid ldap d'un personnel
 	 * ayant les droits en ecriture ou en admin pour ces centres
 	 * 
 	 * @param uidPersonnel
@@ -62,7 +62,7 @@ public interface CentreGestionDaoService extends Serializable {
 	public List<CentreGestion> getCentreDroitEcriture(String uidPersonnel, String codeUniversite);
 	
 	/**
-	 * R�cup�re les centres de gestion correspondant à l'uid ldap d'un personnel
+	 * récupère les centres de gestion correspondant à l'uid ldap d'un personnel
 	 * ayant des droits pour ces centres
 	 * 
 	 * @param uidPersonnel

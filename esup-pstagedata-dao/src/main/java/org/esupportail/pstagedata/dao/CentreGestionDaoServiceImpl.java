@@ -36,6 +36,8 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 	@SuppressWarnings("unchecked")
 	public List<Integer> getIdsCentreGestionSansConfidentialiteFromCodeUniversite(String codeUniversite){
 		return getSqlMapClientTemplate().queryForList("getIdsCentreGestionSansConfidentialiteFromCodeUniversite",codeUniversite);
+		//return getSqlSessionTemplate().queryForList("getIdsCentreGestionSansConfidentialiteFromCodeUniversite",codeUniversite);
+
 	}
 	/**
 	 * @see org.esupportail.pstagedata.dao.CentreGestionDaoService#getCentreGestionList(String)

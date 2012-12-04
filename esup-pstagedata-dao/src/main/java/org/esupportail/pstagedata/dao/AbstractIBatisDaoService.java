@@ -1,5 +1,6 @@
 package org.esupportail.pstagedata.dao;
 
+//import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
