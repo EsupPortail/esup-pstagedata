@@ -1,19 +1,18 @@
 /**
- * ESUP-Portail Blank Application - Copyright (c) 2006 ESUP-Portail consortium
+ * ESUP-Portail PStageData - Copyright (c) 2006 ESUP-Portail consortium
  * http://sourcesup.cru.fr/projects/esup-pstagedata
  */
 package org.esupportail.pstagedata.web.controllers;
 
 import java.util.Locale;
 
-import org.esupportail.pstagedata.domain.DomainService;
-import org.esupportail.pstagedata.domain.beans.User;
-import org.esupportail.commons.beans.AbstractJsfMessagesAwareBean;
+import org.esupportail.commons.beans.AbstractApplicationAwareBean;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.web.controllers.Resettable;
-
+import org.esupportail.pstagedata.domain.DomainService;
+import org.esupportail.pstagedata.domain.beans.User;
 
 /**
  * An abstract class inherited by all the beans for them to get:
@@ -21,12 +20,7 @@ import org.esupportail.commons.web.controllers.Resettable;
  * - the application service (applicationService).
  * - the i18n service (i18nService).
  */
-public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBean implements Resettable {
-
-	/**
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 3917164118541810598L;
+public abstract class AbstractDomainAwareBean extends AbstractApplicationAwareBean implements Resettable {
 
 	/**
 	 * A logger.
@@ -73,9 +67,23 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	}
 
 	/**
+	 * @param domainService the domainService to set
+	 */
+	public void setDomainService(final DomainService domainService) {
+		this.domainService = domainService;
+	}
+
+	/**
+	 * @return the domainService
+	 */
+	public DomainService getDomainService() {
+		return domainService;
+	}
+
+	/**
 	 * @return the current user.
 	 */
-	protected User getCurrentUser() throws Exception {
+	protected User getCurrentUser() {
 		// this method should be overriden
 		return null;
 	}
@@ -88,13 +96,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		if (logger.isDebugEnabled()) {
 			logger.debug(this.getClass().getName() + ".getCurrentUserLocale()");
 		}
-		User currentUser = null;
-		try {
-			currentUser = getCurrentUser();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		User currentUser = getCurrentUser();
 		if (currentUser == null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("no current user, return null");
@@ -104,30 +106,16 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		String lang = currentUser.getLanguage();
 		if (lang == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("language not set for user '" + currentUser.getLogin() 
+				logger.debug("language not set for user '" + currentUser.getId() 
 						+ "', return null");
 			}
 			return null;
 		}
 		Locale locale = new Locale(lang);
 		if (logger.isDebugEnabled()) {
-			logger.debug("language for user '" + currentUser.getLogin() + "' is '" + locale + "'");
+			logger.debug("language for user '" + currentUser.getId() + "' is '" + locale + "'");
 		}
 		return locale;
-	}
-	
-	/**
-	 * @param domainService the domainService to set
-	 */
-	public void setDomainService(final DomainService domainService) {
-		this.domainService = domainService;
-	}
-
-	/**
-	 * @return the domainService
-	 */
-	public DomainService getDomainService() {
-		return domainService;
 	}
 
 }

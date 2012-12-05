@@ -7,7 +7,7 @@ package org.esupportail.pstagedata.batch;
 import org.esupportail.commons.services.application.ApplicationService;
 import org.esupportail.commons.services.application.ApplicationUtils;
 import org.esupportail.commons.services.application.VersionningUtils;
-import org.esupportail.commons.services.database.DatabaseUtils;
+//import org.esupportail.commons.services.database.DatabaseUtils;
 import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
 import org.esupportail.commons.services.i18n.I18nUtils;
 import org.esupportail.commons.services.ldap.LdapUtils;
@@ -48,7 +48,7 @@ public class Batch {
 	 * Test the required beans.
 	 */
 	private static void testBeans() {
-		DatabaseUtils.test();
+		//DatabaseUtils.test();
 		ApplicationUtils.createApplicationService();
 		I18nUtils.createI18nService();
 		LdapUtils.createLdapService();

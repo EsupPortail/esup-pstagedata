@@ -1,5 +1,5 @@
 /**
- * ESUP-Portail Blank Application - Copyright (c) 2006 ESUP-Portail consortium
+ * ESUP-Portail PStageData - Copyright (c) 2006 ESUP-Portail consortium
  * http://sourcesup.cru.fr/projects/esup-pstagedata
  */
 package org.esupportail.pstagedata.web.controllers;
@@ -10,22 +10,18 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.esupportail.pstagedata.domain.beans.User;
-import org.esupportail.pstagedata.services.auth.Authenticator;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.web.controllers.ExceptionController;
-
+import org.esupportail.pstagedata.domain.beans.User;
+import org.esupportail.pstagedata.services.authentication.Authenticator;
 
 /**
  * A bean to memorize the context of the application.
  */
 public class SessionController extends AbstractDomainAwareBean {
 
-	/*
-	 ******************* PROPERTIES ******************** */
-	
 	/**
 	 * The serialization id.
 	 */
@@ -42,13 +38,14 @@ public class SessionController extends AbstractDomainAwareBean {
 	private Authenticator authenticator;
 	
 	/**
+	 * true to print login/logout button in servlet mode.
+	 */
+	private boolean printLoginLogoutButtons = true;
+
+	/**
 	 * The CAS logout URL.
 	 */
 	private String casLogoutUrl;
-	
-	
-	/*
-	 ******************* INIT ******************** */
 	
 	/**
 	 * Constructor.
@@ -68,21 +65,39 @@ public class SessionController extends AbstractDomainAwareBean {
 				+ this.getClass().getName() + " can not be null");
 	}
 
-	
-	/*
-	 ******************* CALLBACK ******************** */
-	
-	
-	/*
-	 ******************* METHODS ******************** */
-	
 	/**
 	 * @return the current user, or null if guest.
-	 * @throws Exception 
 	 */
 	@Override
-	public User getCurrentUser() throws Exception {
+	public User getCurrentUser() {
 		return authenticator.getUser();
+	}
+
+	/**
+	 * @return true if the login button should be printed. 
+	 */
+	public boolean isPrintLogin() {
+		if (!printLoginLogoutButtons) {
+			return false;
+		}
+		return ContextUtils.isServlet() && getCurrentUser() == null;
+	}
+	
+	/**
+	 * @return true if the logout button should be printed. 
+	 */
+	public boolean isPrintLogout() {
+		if (!printLoginLogoutButtons) {
+			return false;
+		}
+		return ContextUtils.isServlet() && getCurrentUser() != null;
+	}
+	
+	/**
+	 * @return a debug String.
+	 */
+	public String getDebug() {
+		return toString();
 	}
 
 	/**
@@ -93,7 +108,12 @@ public class SessionController extends AbstractDomainAwareBean {
 		return getClass().getName() + "#" + hashCode();
 	}
 
-	
+	/**
+	 * @param authenticator the authenticator to set
+	 */
+	public void setAuthenticator(final Authenticator authenticator) {
+		this.authenticator = authenticator;
+	}
 
 	/**
 	 * JSF callback.
@@ -125,18 +145,6 @@ public class SessionController extends AbstractDomainAwareBean {
 		return null;
 	}
 
-	
-	
-	
-	
-	
-	
-	/*
-	 ******************* ACCESSORS ******************** */
-	
-	
-	
-	
 	/**
 	 * @param exceptionController the exceptionController to set
 	 */
@@ -145,12 +153,12 @@ public class SessionController extends AbstractDomainAwareBean {
 	}
 
 	/**
-	 * @param authenticator the authenticator to set
+	 * @param printLoginLogoutButtons the printLoginLogoutButtons to set
 	 */
-	public void setAuthenticator(final Authenticator authenticator) {
-		this.authenticator = authenticator;
+	public void setPrintLoginLogoutButtons(final boolean printLoginLogoutButtons) {
+		this.printLoginLogoutButtons = printLoginLogoutButtons;
 	}
-	
+
 	/**
 	 * @return the casLogoutUrl
 	 */

@@ -1,12 +1,11 @@
 /**
- * ESUP-Portail Blank Application - Copyright (c) 2006 ESUP-Portail consortium
+ * ESUP-Portail PStageData - Copyright (c) 2006 ESUP-Portail consortium
  * http://sourcesup.cru.fr/projects/esup-pstagedata
  */
 package org.esupportail.pstagedata.web.controllers;
 
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.pstagedata.domain.beans.User;
-
 
 /**
  * An abstract class inherited by all the beans for them to get:
@@ -17,23 +16,11 @@ import org.esupportail.pstagedata.domain.beans.User;
  */
 public abstract class AbstractContextAwareController extends AbstractDomainAwareBean {
 
-	/*
-	 ******************* PROPERTIES ******************** */
-	
-	/**
-	 * The serialization id.
-	 */
-	private static final long serialVersionUID = -1826458262448752328L;
-	
-	
 	/**
 	 * The SessionController.
 	 */
 	private SessionController sessionController;
 
-	/*
-	 ******************* INIT ******************** */
-	
 	/**
 	 * Constructor.
 	 */
@@ -50,21 +37,6 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 				+ this.getClass().getName() + " can not be null");
 	}
 
-	/*
-	 ******************* CALLBACK ******************** */
-	
-	
-	/*
-	 ******************* METHODS ******************** */
-	
-	/**
-	 * @see org.esupportail.pstagedata.web.controllers.AbstractDomainAwareBean#getCurrentUser()
-	 */
-	@Override
-	protected User getCurrentUser() throws Exception {
-		return sessionController.getCurrentUser();
-	}
-	
 	/**
 	 * @param sessionController the sessionController to set
 	 */
@@ -79,6 +51,12 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 		return sessionController;
 	}
 
-	
+	/**
+	 * @see org.esupportail.pstagedata.web.controllers.AbstractDomainAwareBean#getCurrentUser()
+	 */
+	@Override
+	protected User getCurrentUser() {
+		return sessionController.getCurrentUser();
+	}
 
 }

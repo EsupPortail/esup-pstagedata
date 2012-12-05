@@ -158,12 +158,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		updateUser(user);
 	}
 	
-	/**
-	 * @see org.esupportail.pstagedata.domain.DomainService#getAdminPaginator()
-	 */
-	public Paginator<User> getAdminPaginator() {
-		return this.daoService.getAdminPaginator();
-	}
+
 
 	/**
 	 * @param displayNameLdapAttribute the displayNameLdapAttribute to set

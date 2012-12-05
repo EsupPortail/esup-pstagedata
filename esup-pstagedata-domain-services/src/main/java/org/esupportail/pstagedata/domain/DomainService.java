@@ -10,7 +10,6 @@ import java.util.List;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
-import org.esupportail.commons.services.paginator.Paginator;
 import org.esupportail.pstagedata.domain.beans.User;
 
 /**
@@ -58,10 +57,6 @@ public interface DomainService extends Serializable {
 	 */
 	void deleteAdmin(User user);
 
-	/**
-	 * @return a paginator for administrators.
-	 */
-	Paginator<User> getAdminPaginator();
 
 	//////////////////////////////////////////////////////////////
 	// VersionManager
