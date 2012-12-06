@@ -17,6 +17,10 @@ import org.esupportail.pstagedata.domain.beans.User;
 public abstract class AbstractContextAwareController extends AbstractDomainAwareBean {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * The SessionController.
 	 */
 	private SessionController sessionController;
