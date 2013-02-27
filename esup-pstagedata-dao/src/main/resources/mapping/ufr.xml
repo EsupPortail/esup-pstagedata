@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ufr">
+	<typeAlias alias="ClassUfr" type="org.esupportail.pstagedata.domain.beans.Ufr"/>
+	<resultMap id="Ufr"
+		class="ClassUfr">
+		<result property="code" column="codeUFR" />
+		<result property="libelle" column="libelleUFR" />
+		<result property="codeUniversite" column="codeUniversite" />
+	</resultMap>
+
+	<statement id="getUfrs" resultMap="Ufr">
+		SELECT * FROM Ufr
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite">
+				codeUniversite = #codeUniversite#
+			</isNotNull>
+		</dynamic>
+	</statement>
+	
+	<statement id="getUfrsFromIdsCentreGestion" resultMap="Ufr">
+		SELECT DISTINCT	U.*
+		FROM Ufr U
+		INNER JOIN Convention C ON U.codeUfr = C.codeUfr
+		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite" prepend="AND">		
+				U.codeUniversite = #codeUniversite#
+			</isNotNull>
+			<isNotNull property="idsCG">
+				<iterate prepend="AND" property="idsCG" conjunction="OR" open="(" close=")">
+					C.idCentreGestion = #idsCG[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+	</statement>
+	
+	<statement id="getUfrFromId" resultMap="Ufr">
+		SELECT * FROM Ufr
+		WHERE codeUFR = #code#
+		<isNotNull property="codeUniversite" prepend="AND">
+			codeUniversite = #codeUniversite#
+		</isNotNull>
+		LIMIT 0, 1
+	</statement>
+	
+	<insert id="addUfr">
+       INSERT IGNORE INTO Ufr (codeUFR, libelleUFR, codeUniversite)
+		VALUES (#code#, #libelle#, #codeUniversite#);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+ 
+</sqlMap>

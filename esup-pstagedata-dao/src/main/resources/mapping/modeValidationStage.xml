@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ModeValidationStage">
+	<typeAlias alias="ClassModeValidationStage" type="org.esupportail.pstagedata.domain.beans.ModeValidationStage"/>
+	<resultMap id="ModeValidationStage"
+		class="ClassModeValidationStage">
+		<result property="id" column="idModeValidationStage" />
+		<result property="libelle" column="libelleModeValidationStage" />
+		<result property="temEnServ" column="temEnServModeValid" />
+	</resultMap>
+
+	<statement id="getModeValidationStages" resultMap="ModeValidationStage">
+		SELECT * FROM ModeValidationStage
+		WHERE temEnServModeValid = 'O'
+	</statement>
+	
+	<statement id="getModeValidationStageFromId" resultMap="ModeValidationStage">
+		SELECT * FROM ModeValidationStage
+		WHERE idModeValidationStage = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

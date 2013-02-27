@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TypeStructure">
+	
+	<typeAlias alias="ClassTypeStructure" type="org.esupportail.pstagedata.domain.beans.TypeStructure"/>
+	
+	<resultMap id="TypeStructure"
+		class="ClassTypeStructure">
+		<result property="id" column="idTypeStructure" />
+		<result property="libelle" column="libelleTypeStructure" />
+		<result property="siretObligatoire" column="siretObligatoire" />
+		<result property="temEnServ" column="temEnServTypeStructure" />
+	</resultMap>
+
+	<statement id="getTypesStructure" resultMap="TypeStructure">
+		SELECT * FROM TypeStructure
+		WHERE temEnServTypeStructure = 'O'
+	</statement>
+	<statement id="getTypeStructureFromId" resultMap="TypeStructure">
+		SELECT * FROM TypeStructure
+		WHERE idTypeStructure = #id#
+		LIMIT 0,1
+	</statement>
+	<statement id="getTypesStructureFromStatutJuridique" resultMap="TypeStructure">
+		SELECT * FROM TypeStructure ts
+		INNER JOIN StatutJuridique sj ON ts.idTypeStructure=sj.idTypeStructure
+		WHERE idStatutJuridique = #id#
+    </statement>
+
+
+</sqlMap>

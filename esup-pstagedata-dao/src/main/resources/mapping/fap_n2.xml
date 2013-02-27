@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FAP_N2">
+	
+	<typeAlias alias="ClassFapN2" type="org.esupportail.pstagedata.domain.beans.FapN2"/>
+	
+	<resultMap id="FapN2"
+		class="ClassFapN2">
+		<result property="code" column="codeFAP_N2" />
+		<result property="codeParent" column="codeFAP_N1" />
+		<result property="libelle" column="libelle" />
+	</resultMap>
+
+	<statement id="getFapN2" resultMap="FapN2">
+		SELECT * FROM FAP_N2
+	</statement>
+	<statement id="getFapN2FromCodeFapN2" parameterClass="java.lang.String" resultMap="FapN2">
+		SELECT * FROM FAP_N2
+		WHERE codeFAP_N2 = #id#
+		LIMIT 0,1
+	</statement>
+	<statement id="getFapN2FromCodeFapN3" parameterClass="java.lang.String" resultMap="FapN2">
+		SELECT * FROM FAP_N2 n2
+		INNER JOIN FAP_N3 n3 ON n2.codeFAP_N2 = n3.codeFAP_N2
+		WHERE n3.codeFAP_N3 = #id#
+		LIMIT 0,1
+    </statement>
+    <statement id="getFapN2FromCodeFapN1" parameterClass="java.lang.String" resultMap="FapN2">
+		SELECT * FROM FAP_N2 n2
+		INNER JOIN FAP_N1 n1 ON n1.codeFAP_N1 = n2.codeFAP_N1
+		WHERE n2.codeFAP_N1 = #id#
+    </statement>
+
+
+</sqlMap>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FAP_N3">
+	
+	<typeAlias alias="ClassFapN3" type="org.esupportail.pstagedata.domain.beans.FapN3"/>
+	
+	<resultMap id="FapN3"
+		class="ClassFapN3">
+		<result property="code" column="codeFAP_N3" />
+		<result property="codeParent" column="codeFAP_N2" />
+		<result property="libelle" column="libelle" />
+		<result property="numQualification" column="numFAP_Qualification" />
+	</resultMap>
+
+	<statement id="getFapN3" resultMap="FapN3">
+		SELECT * FROM FAP_N3
+	</statement>
+	<statement id="getFapN3FromCodeFapN3" parameterClass="java.lang.String" resultMap="FapN3">
+		SELECT * FROM FAP_N3
+		WHERE codeFAP_N3 = #id#
+		LIMIT 0,1
+	</statement>
+	<statement id="getFapN3FromCodeFapN2" parameterClass="java.lang.String" resultMap="FapN3">
+		SELECT * FROM FAP_N3 n3
+		INNER JOIN FAP_N2 n2 ON n2.codeFAP_N2 = n3.codeFAP_N2
+		WHERE n3.codeFAP_N2 = #id#
+		LIMIT 0,1
+    </statement>
+    <statement id="getFapN3FromQualification" parameterClass="java.lang.String" resultMap="FapN3">
+		SELECT * FROM FAP_N3 n3
+		INNER JOIN FAP_Qualification q ON n3.numFAP_Qualification = q.numFAP_Qualification
+		WHERE n3.numFAP_Qualification = #id#
+    </statement>
+	<statement id="getFapN3FromQualificationSimplifiee" parameterClass="java.lang.String" resultMap="FapN3">
+		SELECT * FROM FAP_N3 n3
+		INNER JOIN FAP_Qualification q ON n3.numFAP_Qualification = q.numFAP_Qualification
+		INNER JOIN FAP_QualificationSimplifiee qs ON q.idQualificationSimplifiee = qs.idQualificationSimplifiee
+		WHERE qs.idQualificationSimplifiee = #id#
+		GROUP BY n3.codeFAP_N3
+    </statement>
+
+</sqlMap>

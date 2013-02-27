@@ -21,6 +21,7 @@
 	
 	<import resource="classpath*:META-INF/esup-pstagedata-domain-services-auth.xml" />
 	<import resource="classpath*:META-INF/esup-pstagedata-domain-services-domain.xml" />
+	<import resource="classpath*:META-INF/esup-pstagedata-dao-dao.xml" />
 	<import resource="classpath*:META-INF/esup-pstagedata-domain-services-abstractBeans.xml" />
 	<import resource="classpath*:META-INF/esup-pstagedata-domain-services-application.xml" />
 	<import resource="classpath*:META-INF/esup-pstagedata-domain-services-i18n.xml" />

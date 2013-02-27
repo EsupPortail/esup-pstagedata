@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<!-- <settings useStatementNamespaces="true"/> -->
+
+	<sqlMap resource="mapping/accordPartenariat.xml"/>
+	<sqlMap resource="mapping/adminStructure.xml"/>
+	<sqlMap resource="mapping/affectation.xml"/>
+	<sqlMap resource="mapping/avenant.xml"/>
+	<sqlMap resource="mapping/assurance.xml"/>
+	<sqlMap resource="mapping/caisseRegime.xml"/>
+	<sqlMap resource="mapping/centreGestion.xml"/>
+	<sqlMap resource="mapping/centreGestionSuperviseur.xml"/>
+	<sqlMap resource="mapping/civilite.xml"/>
+	<sqlMap resource="mapping/confidentialite.xml"/>
+	<sqlMap resource="mapping/contact.xml"/>
+	<sqlMap resource="mapping/contratOffre.xml"/>
+	<sqlMap resource="mapping/convention.xml"/>
+	<sqlMap resource="mapping/critereGestion.xml"/>
+	<sqlMap resource="mapping/droitAdministration.xml"/>
+	<sqlMap resource="mapping/dureeDiffusion.xml"/>
+	<sqlMap resource="mapping/effectif.xml"/>
+	<sqlMap resource="mapping/enseignant.xml"/>
+	<sqlMap resource="mapping/etape.xml"/>
+	<sqlMap resource="mapping/etudiant.xml"/>
+	<sqlMap resource="mapping/fap_n1.xml"/>
+	<sqlMap resource="mapping/fap_n2.xml"/>
+	<sqlMap resource="mapping/fap_n3.xml"/>
+	<sqlMap resource="mapping/fap_qualification.xml"/>
+	<sqlMap resource="mapping/fap_qualificationSimplifiee.xml"/>
+	<sqlMap resource="mapping/indemnisation.xml"/>
+	<sqlMap resource="mapping/langueConvention.xml"/>
+	<sqlMap resource="mapping/modeCandidature.xml"/>
+	<sqlMap resource="mapping/modeValidationStage.xml"/>
+	<sqlMap resource="mapping/modeVersGratification.xml"/>
+	<sqlMap resource="mapping/naf_n1.xml"/>
+	<sqlMap resource="mapping/naf_n5.xml"/>
+	<sqlMap resource="mapping/natureTravail.xml"/>
+	<sqlMap resource="mapping/niveauCentre.xml"/>
+	<sqlMap resource="mapping/niveauFormation.xml"/>
+	<sqlMap resource="mapping/offre.xml"/>
+	<sqlMap resource="mapping/fichiers.xml"/>
+	<sqlMap resource="mapping/offreModeCandidature.xml"/>
+	<sqlMap resource="mapping/offreDiffusion.xml"/>
+	<sqlMap resource="mapping/pays.xml"/>
+	<sqlMap resource="mapping/personnelCentreGestion.xml"/>
+	<sqlMap resource="mapping/service.xml"/>
+	<sqlMap resource="mapping/statutJuridique.xml"/>
+	<sqlMap resource="mapping/structure.xml"/>
+	<sqlMap resource="mapping/tempsTravail.xml"/>
+	<sqlMap resource="mapping/ticketStructure.xml"/>
+	<sqlMap resource="mapping/theme.xml"/>
+	<sqlMap resource="mapping/typeConvention.xml"/>
+	<sqlMap resource="mapping/typeOffre.xml"/>
+	<sqlMap resource="mapping/typeStructure.xml"/>
+	<sqlMap resource="mapping/ufr.xml"/>
+	<sqlMap resource="mapping/uniteDuree.xml"/>
+	<sqlMap resource="mapping/UniteGratification.xml"/>
+	<sqlMap resource="mapping/User.xml"/>
+	<sqlMap resource="mapping/VersionManager.xml"/>
+	<sqlMap resource="mapping/origineStage.xml"/>
+	<sqlMap resource="mapping/critere.xml"/>
+	<sqlMap resource="mapping/niveau.xml"/>
+	<sqlMap resource="mapping/categorie.xml"/>
+	<sqlMap resource="mapping/statisticItem.xml"/>
+	<sqlMap resource="mapping/conventionStatisticItem.xml"/>
+	
+</sqlMapConfig>

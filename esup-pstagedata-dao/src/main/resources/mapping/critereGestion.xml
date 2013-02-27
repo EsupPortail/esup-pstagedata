@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CritereGestion">
+	
+	<typeAlias alias="ClassCritereGestion" type="org.esupportail.pstagedata.domain.beans.CritereGestion"/>
+
+	<resultMap id="CritereGestion"
+		class="ClassCritereGestion">
+		<result property="code" column="codeCritere" />
+		<result property="libelle" column="libelleCritere" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+	</resultMap>
+
+	<statement id="getCritereGestion" resultMap="CritereGestion">
+		SELECT * FROM CritereGestion
+	</statement>
+	
+	<statement id="getCritereGestionFromIdCentre" resultMap="CritereGestion">
+		SELECT * FROM CritereGestion
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+
+	<!--	Récupération du nombre de criteres de gestion -->
+	<statement id="getNombreCritereGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM CritereGestion
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+
+	<insert id="addCritere" >
+		INSERT INTO CritereGestion (codeCritere,libelleCritere,idCentreGestion)
+		VALUES (#code#,#libelle#,#idCentreGestion#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<delete id="deleteCritere">
+		DELETE FROM CritereGestion WHERE codeCritere = #codeCritere#
+	</delete>
+</sqlMap>

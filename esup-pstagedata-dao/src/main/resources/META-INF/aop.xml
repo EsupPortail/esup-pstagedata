@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+				 http://www.springframework.org/schema/tx 
+				 http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<!-- cache  -->
+	
+	
+
+
+<bean id="methodCacheAspectjAdvice"  class="org.esupportail.pstagedata.aop.MethodCacheAspectjAdvice">
+ <property name="cache">
+    <ref bean="methodCache" />
+  </property>
+</bean>
+
+
+
+<aop:config>
+	<aop:aspect ref="methodCacheAspectjAdvice">
+		<aop:pointcut  id="coupe" 
+					expression="execution(* dao..*DaoServiceImpl.get*(..))"/>
+					<aop:around method="handleCache" pointcut-ref="coupe"/>
+	</aop:aspect>
+</aop:config>
+	
+	
+	
+	
+		<!--  Gestion  des transactions -->
+		
+		
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="set*"/>
+		    <tx:method name="add*" rollback-for="CheckedException"/>
+		    <tx:method name="update*" rollback-for="CheckedException"/> 
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:advisor pointcut="execution(* dao..*DaoServiceImpl.*(..))" advice-ref="txAdvice"/>
+	</aop:config>
+	
+	
+	</beans>

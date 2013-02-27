@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AdminStructure">
+
+	<typeAlias alias="ClassAdminStructure" type="org.esupportail.pstagedata.domain.beans.AdminStructure"/>
+
+	<resultMap id="AdminStructure"
+		class="ClassAdminStructure">
+		<result property="id" column="idAdminStructure" />
+		<result property="idCivilite" column="idCivilite" nullValue="0"/>
+		<result property="nom" column="nom" />
+		<result property="prenom" column="prenom" />
+		<result property="mail" column="mail" />
+		<result property="eppn" column="eppn" />
+		<result property="login" column="login" />
+		<result property="mdp" column="mdp" />
+		<result property="derniereConnexion" column="derniereConnexion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="avantDerniereConnexion" column="avantDerniereConnexion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginCreation" column="loginCreation" />
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif" />
+	</resultMap>
+
+	<statement id="getAdminsStructure" resultMap="AdminStructure">
+		SELECT * FROM AdminStructure ORDER BY nom ASC
+	</statement>
+	<statement id="getAdminStructureFromLogin" resultMap="AdminStructure">
+		SELECT * FROM AdminStructure
+		WHERE login = #login#
+		LIMIT 0,1
+    </statement>
+    <statement id="getAdminStructureFromEppn" resultMap="AdminStructure">
+		SELECT * FROM AdminStructure
+		WHERE eppn = #eppn#
+		LIMIT 0,1
+    </statement>
+
+	<insert id="addAdminStructure">
+		INSERT INTO AdminStructure (idCivilite, nom, prenom, mail, eppn, login,
+		mdp, dateCreation, loginCreation)
+		VALUES (#idCivilite#, #nom#, #prenom#, #mail#, #eppn#, #login#,
+		#mdp#, CURRENT_TIMESTAMP(), #loginCreation#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+
+	<update id="updateAdminStructure">
+		UPDATE AdminStructure SET idCivilite=#idCivilite#, nom=#nom#, prenom=#prenom#, mail=#mail#,
+		eppn=#eppn#, login=#login#,mdp=#mdp#, dateModif = CURRENT_TIMESTAMP(), loginModif = #loginModif#
+		WHERE idAdminStructure = #id#
+    </update>
+    
+    <update id="updateAdminStructureDerniereConnexion">
+		UPDATE AdminStructure SET derniereConnexion=CURRENT_TIMESTAMP(), avantDerniereConnexion=#avantDerniereConnexion#
+		WHERE idAdminStructure = #id#
+    </update>
+
+	<delete id="deleteAdminStructure">
+		DELETE FROM AdminStructure WHERE idAdminStructure = #idAdminStructure#
+	</delete>
+
+</sqlMap>

@@ -37,6 +37,9 @@
  -->
 
 	<bean id="domainService" class="org.esupportail.pstagedata.domain.DomainServiceImpl">
+			<property name="daoService" ref="daoService" />
+		<property name="ldapUserService" ref="ldapUserService" />
+		<property name="displayNameLdapAttribute" value="displayName" />
 	</bean>
 
 </beans>

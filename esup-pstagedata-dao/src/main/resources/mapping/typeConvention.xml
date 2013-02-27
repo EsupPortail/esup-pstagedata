@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TypeConvention">
+	<typeAlias alias="ClassTypeConvention" type="org.esupportail.pstagedata.domain.beans.TypeConvention"/>
+	<resultMap id="TypeConvention"
+		class="ClassTypeConvention">
+		<result property="id" column="idTypeConvention" />
+		<result property="libelle" column="libelleTypeConvention" />
+		<result property="codeCtrl" column="codeCtrl" />
+		<result property="temEnServ" column="temEnServTypeConvention" />
+	</resultMap>
+
+	<statement id="getTypeConventions" resultMap="TypeConvention">
+		SELECT * FROM TypeConvention
+		WHERE temEnServTypeConvention = 'O'
+	</statement>
+	
+	<statement id="getTypeConventionFromId" resultMap="TypeConvention">
+		SELECT * FROM TypeConvention
+		WHERE idTypeConvention = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

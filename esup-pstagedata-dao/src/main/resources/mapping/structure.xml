@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Structure">
+	
+	<typeAlias alias="ClassStructure" type="org.esupportail.pstagedata.domain.beans.Structure"/>
+	
+	<resultMap id="Structure"
+		class="ClassStructure">
+		<result property="idStructure" column="idStructure" />
+		<result property="codeEtab" column="codeEtab" />
+		<result property="numeroSiret" column="numeroSiret" />
+		<result property="raisonSociale" column="raisonSociale" />
+		<result property="batimentResidence" column="batimentResidence" />
+		<result property="voie" column="voie" />
+		<result property="commune" column="commune" />
+		<result property="codeCommune" column="codeCommune" nullValue="0"/>
+		<result property="codePostal" column="codePostal" />
+		<result property="libCedex" column="libCedex" />
+		<result property="idPays" column="idPays" />
+		<result property="idEffectif" column="idEffectif" />
+		<result property="idStatutJuridique" column="idStatutJuridique" nullValue="0"/>
+		<result property="idTypeStructure" column="idTypeStructure" />
+		<result property="libCedex" column="libCedex" />
+		<result property="codeNAF_N5" column="codeNAF_N5" />
+		<result property="activitePrincipale" column="activitePrincipale" />
+		<result property="telephone" column="telephone" />
+		<result property="fax" column="fax" />
+		<result property="mail" column="mail" />
+		<result property="siteWeb" column="siteWeb" />
+		<result property="groupe" column="groupe" />
+		<result property="logo" column="logo" />
+		<result property="estValidee" column="estValidee" />		
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginCreation" column="loginCreation" />
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif" />
+		<result property="infosAJour" column="infosAJour"/>
+		<result property="loginInfosAJour" column="loginInfosAJour" />
+		<result property="dateValidation" column="dateValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginValidation" column="loginValidation" />
+		<result property="dateStopValidation" column="dateStopValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginStopValidation" column="loginStopValidation" />
+		
+		<result property="idAccordPartenariat" column="idAccordPartenariat" nullValue="0"/>
+	</resultMap>
+	
+	<resultMap id="StructureAvecAccord"
+		class="ClassStructure" extends="Structure">		
+		<result property="accordPartenariat" column="idStructure" select="getAccordFromIdStructure"/>
+	</resultMap>
+	
+	<resultMap id="StructureSuperLight"	class="ClassStructure">
+		<result property="idStructure" column="idStructure" />
+		<result property="raisonSociale" column="raisonSociale" />
+	</resultMap>
+	
+	<resultMap id="StructureExport"	class="ClassStructure">
+		<result property="idStructure" column="idStructure" />
+		<result property="raisonSociale" column="raisonSociale" />
+		<result property="numeroSiret" column="numeroSiret" />
+		<result property="batimentResidence" column="batimentResidence" />
+		<result property="voie" column="voie" />
+		<result property="commune" column="commune" />
+		<result property="codePostal" column="codePostal" />
+		<result property="libCedex" column="libCedex" />
+		<result property="idPays" column="idPays" />
+		<result property="idEffectif" column="idEffectif" />
+		<result property="idTypeStructure" column="idTypeStructure" />
+		<result property="idStatutJuridique" column="idStatutJuridique" nullValue="0"/>
+		<result property="codeNAF_N5" column="codeNAF_N5" />
+		<result property="telephone" column="telephone" />
+		<result property="fax" column="fax" />
+		<result property="mail" column="mail" />
+		<result property="siteWeb" column="siteWeb" />
+	</resultMap>
+
+	<statement id="getStructureFromId" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.idStructure = #idStructure#
+		LIMIT 0,1
+	</statement>
+	
+	<statement id="getStructureSuperLightFromId" resultMap="StructureSuperLight">
+		SELECT S.idStructure, S.raisonSociale FROM Structure S
+		WHERE S.idStructure = #idStructure#
+		LIMIT 0,1
+	</statement>
+	
+	<statement id="getStructureExportFromId" resultMap="StructureExport">
+		SELECT S.idStructure, S.raisonSociale, S.numeroSiret, S.batimentResidence,
+		S.voie, S.commune, S.codePostal, S.libCedex, S.idPays,
+		S.idEffectif, S.idTypeStructure, S.idStatutJuridique,
+		S.codeNAF_N5, S.telephone, S.fax, S.mail, S.siteWeb   
+		FROM Structure S
+		WHERE S.idStructure = #idStructure#
+		LIMIT 0,1
+	</statement>
+	
+	<statement id="getStructureAvecAccordFromId" resultMap="StructureAvecAccord">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.idStructure = #idStructure#
+		LIMIT 0,1
+	</statement>
+	
+	<statement id="getStructureFromIdService" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN Service Se ON S.idStructure=Se.idStructure
+		WHERE Se.idService = #idService#
+		LIMIT 0,1
+	</statement>	
+	
+	<statement id="getStructureFromRaisonSociale" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="countStructureFromRaisonSociale" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Structure 
+		WHERE raisonSociale LIKE CONCAT('%',#raisonSociale#,'%')
+	</statement>
+	
+	<statement id="getStructuresFromRaisonSocialeEtDepartement" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND S.codePostal LIKE CONCAT(#codePostal#,'%')
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresFromRaisonSocialeEtPays" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN Pays P ON S.idPays = P.idPays
+		WHERE S.raisonSociale LIKE CONCAT('%',#raisonSociale#,'%')
+		AND (
+			P.COG=#cog# 
+			OR P.CRPAY=#cog# 
+		)
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresPaysEtrangerFromRaisonSociale" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN Pays P ON S.idPays = P.idPays
+		WHERE S.raisonSociale LIKE CONCAT('%',#value#,'%')
+		AND P.COG!=99100 
+		AND P.CRPAY!=99100
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructureFromNumSiret" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.numeroSiret=#value#
+		ORDER BY S.raisonSociale
+		LIMIT 0 , 1
+	</statement>
+	
+	<statement id="getStructuresFromNumSiren" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure 
+		WHERE S.numeroSiret LIKE CONCAT(#siren#,'%')
+		ORDER BY S.raisonSociale
+		LIMIT 0 , 200
+	</statement>
+	
+	<statement id="getStructuresFromTelephone" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.telephone=#telephone#
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresFromFax" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure 
+		WHERE S.fax=#fax#
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresFromAdresse" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		<dynamic prepend="WHERE"> 
+			<isNotNull property="voie" prepend="AND">
+				S.voie LIKE CONCAT('%', #voie#,'%')
+			</isNotNull>
+			<isNotNull property="batimentResidence" prepend="AND">
+				S.batimentResidence LIKE CONCAT('%',#batimentResidence#,'%')
+			</isNotNull>
+			<isNotNull property="commune" prepend="AND">
+				S.commune LIKE CONCAT('%',#commune#,'%')
+			</isNotNull>
+			<isNotNull property="codePostal" prepend="AND">
+				S.codePostal LIKE CONCAT(#codePostal#,'%')
+			</isNotNull>
+			<isNotNull property="idPays" prepend="AND">
+				S.idPays = #idPays#
+			</isNotNull>
+		</dynamic>
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresFromNomServiceEtDepartement" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN Service Se ON S.idStructure = Se.idStructure
+		WHERE Se.nom LIKE CONCAT('%', #nom#,'%')
+		AND S.codePostal LIKE CONCAT(#codePostal#,'%')
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getStructuresFromTypeStructureNafN1EtDepartement" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN TypeStructure T ON T.idTypeStructure = S.idTypeStructure
+		INNER JOIN NAF_N5 N5 ON N5.codeNAF_N5 = S.codeNAF_N5
+		INNER JOIN NAF_N1 N1 ON N1.codeNAF_N1 = N5.codeNAF_N1
+		<dynamic prepend="WHERE"> 
+			<isNotNull property="typeStructure" prepend="AND">
+				S.idTypeStructure = #typeStructure#
+			</isNotNull>
+			<isNotNull property="nafN1" prepend="AND">
+				N1.codeNAF_N1 = #nafN1#
+			</isNotNull>
+			<isNotNull property="codePostal" prepend="AND">
+				S.codePostal LIKE CONCAT(#codePostal#,'%')
+			</isNotNull>
+		</dynamic>
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+		
+    <statement id="getStructuresAvecAccordAValiderFromRaisonSociale" resultMap="StructureAvecAccord">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		INNER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE A.estValide = false
+		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND A.dateCreation <![CDATA[ >= ]]> #dateDebut#
+		AND A.dateCreation <![CDATA[ <= ]]> #dateFin#
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+			
+    <statement id="getStructuresAvecAccordValidesFromRaisonSociale" resultMap="StructureAvecAccord">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		INNER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE A.estValide = true
+		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND A.dateCreation <![CDATA[ >= ]]> #dateDebut#
+		AND A.dateCreation <![CDATA[ <= ]]> #dateFin#
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
+    <statement id="getStructuresSansAccordFromRaisonSociale" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE A.idAccordPartenariat IS NULL 
+		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		ORDER BY S.raisonSociale
+		LIMIT 0 , 200
+	</statement>
+	
+	<statement id="getStructureFromContactMailEntrepriseAvecCompte" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		INNER JOIN Service Se ON S.idStructure = Se.idStructure
+		INNER JOIN Contact C ON Se.idService = C.idService
+		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
+		INNER JOIN NiveauCentre as N ON CG.idNiveauCentre = N.idNiveauCentre
+		WHERE C.mail = #mail#
+		AND N.libelleNiveauCentre = 'ENTREPRISE'
+		AND C.login IS NOT NULL
+		AND C.mdp IS NOT NULL
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+    </statement>
+    
+    <statement id="getStructuresAncien" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		<isNotNull property="cNAF_N1">
+			INNER JOIN NAF_N5 N5 ON N5.codeNAF_N5 = S.codeNAF_N5
+			INNER JOIN NAF_N1 N1 ON N1.codeNAF_N1 = N5.codeNAF_N1
+		</isNotNull>
+		<dynamic prepend="WHERE"> 
+			<isNotNull property="raisonSociale" prepend="AND">
+				S.raisonSociale LIKE CONCAT('%',#raisonSociale#,'%')
+			</isNotNull>
+			<isNotNull property="numeroSiret" prepend="AND">
+				S.numeroSiret = #numeroSiret#
+			</isNotNull>
+			<isNotNull property="codePostal" prepend="AND">
+				S.codePostal LIKE CONCAT(#codePostal#,'%')
+			</isNotNull>
+			<isNotNull property="cNAF_N1" prepend="AND">
+				N1.codeNAF_N1 = #cNAF_N1#
+			</isNotNull>
+			<isNotNull property="cNAF_N5" prepend="AND">
+				S.codeNAF_N5 = #cNAF_N5#
+			</isNotNull>
+			<isNotNull property="departement" prepend="AND">
+				S.codePostal LIKE CONCAT(#departement#,'%')
+			</isNotNull>
+			
+		</dynamic>
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+    
+    <statement id="countOffreFromIdStructure" resultClass="java.lang.Integer">
+    	SELECT COUNT(*) FROM Structure S
+		INNER JOIN Offre O ON O.idStructure = S.idStructure
+		WHERE S.idStructure = #idStructure#
+    </statement>
+    
+    <statement id="countConventionFromIdStructure" resultClass="java.lang.Integer">
+    	SELECT COUNT(*) FROM Structure S
+		INNER JOIN Convention C ON C.idStructure = S.idStructure
+		WHERE S.idStructure = #idStructure#
+    </statement>
+    
+    <statement id="countCompteContactFromIdStructure" resultClass="java.lang.Integer">
+    	SELECT COUNT(*) FROM Structure S
+		INNER JOIN Service Se ON Se.idStructure = S.idStructure
+		INNER JOIN Contact C ON Se.idService = C.idService
+		WHERE S.idStructure = #idStructure#
+		AND 
+		(
+			C.login IS NOT NULL
+			AND C.mdp IS NOT NULL
+		)
+    </statement>
+    
+	<insert id="addStructure">
+		INSERT INTO Structure (codeEtab, numeroSiret, raisonSociale, batimentResidence, voie, commune, codeCommune, codePostal,
+		idPays, idEffectif,	idStatutJuridique, idTypeStructure, libCedex, 
+		codeNAF_N5, activitePrincipale, telephone, fax, mail, siteWeb, groupe, logo,
+		dateCreation, loginCreation, infosAJour, loginInfosAJour)
+		VALUES (#codeEtab#, #numeroSiret#, #raisonSociale#, #batimentResidence#, #voie#, #commune#, #codeCommune#, #codePostal#,
+		#idPays#, #idEffectif#, #idStatutJuridique#, #idTypeStructure#, #libCedex#, 
+		#codeNAF_N5#, #activitePrincipale#, #telephone#, #fax#, #mail#, #siteWeb#, #groupe#, #logo#,
+		CURRENT_TIMESTAMP(), #loginCreation#, CURDATE(), #loginInfosAJour#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+
+	<update id="updateStructure">
+		UPDATE Structure SET codeEtab = #codeEtab#, numeroSiret=#numeroSiret#, raisonSociale = #raisonSociale#, batimentResidence = #batimentResidence#, voie=#voie#,
+		commune = #commune#, codeCommune = #codeCommune#, codePostal = #codePostal#, idPays=#idPays#, idEffectif=#idEffectif#, idStatutJuridique=#idStatutJuridique#,
+		idTypeStructure=#idTypeStructure#, libCedex=#libCedex#, codeNAF_N5=#codeNAF_N5#,
+		activitePrincipale=#activitePrincipale#,telephone=#telephone#,fax=#fax#,mail=#mail#,siteWeb=#siteWeb#,
+		groupe=#groupe#,logo=#logo#,
+		dateModif = CURRENT_TIMESTAMP(), loginModif = #loginModif#,
+		infosAJour = CURDATE(), loginInfosAJour = #loginInfosAJour#
+		WHERE idStructure = #idStructure#
+    </update>
+    
+    <update id="updateStructureInfosAJour">
+		UPDATE Structure SET infosAJour = CURDATE(), loginInfosAJour = #loginInfosAJour#
+		WHERE idStructure = #idStructure#
+    </update>
+    
+    <update id="updateStructureValidation">
+		UPDATE Structure SET dateValidation = CURRENT_TIMESTAMP(), loginValidation = #loginValidation#, estValidee=true
+		WHERE idStructure = #idStructure#
+    </update>
+    
+    <update id="updateStructureStopValidation">
+		UPDATE Structure SET dateStopValidation = CURRENT_TIMESTAMP(), loginStopValidation = #loginStopValidation#, estValidee=false
+		WHERE idStructure = #idStructure#
+    </update>
+
+	<delete id="deleteStructure">
+		DELETE FROM Structure WHERE idStructure = #idStructure#
+	</delete>
+
+</sqlMap>

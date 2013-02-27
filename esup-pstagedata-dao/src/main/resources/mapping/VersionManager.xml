@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="pstagedata_vers_mana">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="versionManager" type="org.esupportail.pstagedata.domain.beans.VersionManager"/>
+
+  <resultMap id="versionManagerResult" class="versionManager">
+    <result property="id" column="id"/>  
+    <result property="version" column="vers"/> 
+  </resultMap>         
+
+  <cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">
+		<flushInterval hours="24"/>
+		<property name="cache-size" value="1000" />
+  </cacheModel>
+  <select id="getVersion" parameterClass="string" resultMap="versionManagerResult">
+    select * from pstagedata_vers_mana limit 0,1
+  </select>  
+  <update id="updateVersion" parameterClass="versionManager">
+  	update pstagedata_vers_mana set vers=#version#
+  	where id = #id#
+  </update>
+  
+  
+</sqlMap>

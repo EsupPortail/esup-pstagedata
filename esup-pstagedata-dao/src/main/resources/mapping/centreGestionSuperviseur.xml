@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CentreGestionSuperviseur">
+	
+	<typeAlias alias="ClassCentreGestionSuperviseur" type="org.esupportail.pstagedata.domain.beans.CentreGestionSuperviseur"/>
+
+	<resultMap id="CentreGestionSuperviseur"
+		class="ClassCentreGestionSuperviseur">
+		<result property="idCentreGestionSuperviseur" column="idCentreGestionSuperViseur" />
+		<result property="nomCentreGestionSuperviseur" column="nomCentreSuperViseur" />
+	</resultMap>
+
+	<statement id="getCentreGestionSuperviseur" resultMap="CentreGestionSuperviseur">
+		SELECT * FROM CentreGestionSuperViseur
+	</statement>
+	
+	<insert id="addCentreGestionSuperviseur" >
+		INSERT INTO CentreGestionSuperViseur (idCentreGestionSuperViseur,nomCentreSuperViseur)
+		VALUES (#idCentreGestionSuperviseur#,#nomCentreGestionSuperviseur#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+</sqlMap>

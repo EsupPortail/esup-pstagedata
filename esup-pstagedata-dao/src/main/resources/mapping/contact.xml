@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Contact">
+
+	<typeAlias alias="ClassContact"
+		type="org.esupportail.pstagedata.domain.beans.Contact" />
+
+	<resultMap id="Contact" class="ClassContact">
+		<result property="id" column="idContact" />
+		<result property="idService" column="idService" />
+		<result property="idCivilite" column="idCivilite" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="nom" column="nom" />
+		<result property="prenom" column="prenom" />
+		<result property="mail" column="mail" />
+		<result property="tel" column="tel" />
+		<result property="fax" column="fax" />
+		<result property="fonction" column="fonction" />
+		<result property="login" column="login" />
+		<result property="mdp" column="mdp" />
+		<result property="commentaire" column="commentaire" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date"
+			jdbcType="DATETIME" />
+		<result property="loginCreation" column="loginCreation" />
+		<result property="dateModif" column="dateModif" javaType="java.util.Date"
+			jdbcType="DATETIME" />
+		<result property="loginModif" column="loginModif" />
+		<result property="infosAJour" column="infosAJour" />
+		<result property="loginInfosAJour" column="loginInfosAJour" />
+		<result property="derniereConnexion" column="derniereConnexion"
+			javaType="java.util.Date" jdbcType="DATETIME" />
+		<result property="avantDerniereConnexion" column="avantDerniereConnexion"
+			javaType="java.util.Date" jdbcType="DATETIME" />
+	</resultMap>
+	
+	<resultMap id="ContactExport" class="ClassContact">
+		<result property="id" column="idContact" />
+		<result property="idCivilite" column="idCivilite" />
+		<result property="nom" column="nom" />
+		<result property="prenom" column="prenom" />
+		<result property="mail" column="mail" />
+		<result property="tel" column="tel" />
+		<result property="fonction" column="fonction" />
+		<result property="idService" column="idService" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+	</resultMap>
+
+	<statement id="getContactFromId" resultMap="Contact">
+		SELECT C.* FROM
+		Contact C
+		WHERE C.idContact = #idContact#
+		LIMIT 0,1
+    </statement>
+	<!--
+		Uniquement pour remplissage auto d'un objet accord ou d'une offre
+	-->
+	<statement id="getContactFromIdSimple" resultMap="Contact">
+		SELECT C.*
+		FROM Contact C
+		WHERE C.idContact = #idContact#
+		LIMIT 0,1
+    </statement>
+    
+    <statement id="getContactExportFromId" resultMap="ContactExport">
+		SELECT C.idContact, C.idCivilite, C.nom, C.prenom, C.mail, C.tel, C.fonction,
+		C.idService, C.idCentreGestion
+		FROM Contact C
+		WHERE C.idContact = #idContact#
+		LIMIT 0,1
+    </statement>
+	<!--
+		Récupération des contacts d'un service pour l'université
+		"codeUniversité"
+	-->
+	<statement id="getContactsFromIdServiceAndCodeUniversite"
+		resultMap="Contact" parameterClass="java.util.HashMap">
+		SELECT C.* FROM Contact C
+		INNER JOIN
+		CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
+		WHERE
+		C.idService = #idService#
+		AND CG.codeUniversite = #codeUniversite#
+	</statement>
+	<!--
+		Récupération des contacts d'un service pour le centre de gestion "idCentreGestion"
+	-->
+	<statement id="getContactsFromIdServiceAndIdCentreGestion"
+		resultMap="Contact" parameterClass="java.util.HashMap">
+		SELECT C.* FROM Contact C
+		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
+		WHERE C.idService = #idService#
+		AND CG.idCentreGestion = #idCentreGestion#
+	</statement>
+	<statement id="getContactFromLogin" resultMap="Contact">
+		SELECT C.* FROM	Contact C
+		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
+		INNER JOIN NiveauCentre N ON N.idNiveauCentre =	CG.idNiveauCentre
+		WHERE C.login = #login#	
+		AND N.libelleNiveauCentre =	'ENTREPRISE'
+		LIMIT 0,1
+    </statement>
+	<statement id="getContactEntrepriseAvecCompteFromMailAndIdStructure"
+		resultMap="Contact">
+		SELECT
+		C.idContact, C.idService, C.idCivilite, C.idCentreGestion, C.nom, C.prenom,
+		C.mail, C.tel, C.fax,C.login, C.mdp,
+		C.fonction, C.dateCreation,	C.loginCreation, C.infosAJour, C.loginInfosAJour,
+		C.loginModif,C.dateModif, C.commentaire,C.derniereConnexion,
+		C.avantDerniereConnexion
+		FROM Contact C
+		INNER JOIN CentreGestion CG ON	CG.idCentreGestion = C.idCentreGestion
+		INNER JOIN NiveauCentre as N ON	CG.idNiveauCentre = N.idNiveauCentre
+		INNER JOIN Service Se ON C.idService = Se.idService
+		INNER JOIN Structure S ON S.idStructure = Se.idStructure
+		WHERE C.mail =	#mail#
+		AND N.libelleNiveauCentre = 'ENTREPRISE'
+		AND S.idStructure =	#idStructure#
+		AND C.login IS NOT NULL
+		AND C.mdp IS NOT NULL
+		LIMIT 0, 1
+	</statement>
+	<statement id="getContactEntrepriseFromMailAndIdStructure"
+		resultMap="Contact">
+		SELECT C.*
+		FROM Contact C
+		INNER JOIN CentreGestion CG ON
+		CG.idCentreGestion = C.idCentreGestion
+		INNER JOIN NiveauCentre as N ON
+		CG.idNiveauCentre = N.idNiveauCentre
+		INNER JOIN Service Se ON
+		C.idService = Se.idService
+		INNER JOIN Structure S ON S.idStructure = Se.idStructure
+		WHERE C.mail =
+		#mail#
+		AND N.libelleNiveauCentre = 'ENTREPRISE'
+		AND S.idStructure =
+		#idStructure#
+		LIMIT 0, 1
+    </statement>
+	<statement id="countOffreRefContact" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Offre O
+		INNER JOIN Structure S ON S.idStructure =
+		O.idStructure
+		INNER JOIN Service Se ON Se.idStructure = S.idStructure
+		INNER JOIN Contact C ON C.idService = Se.idService
+		WHERE
+		O.idContactCand = #idContact#
+		OR O.idContactInfo = #idContact#
+	</statement>
+
+	<statement id="countConventionRefContact" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Convention Co
+		INNER JOIN Structure S ON S.idStructure =
+		Co.idStructure
+		INNER JOIN Service Se ON Se.idStructure = S.idStructure
+		INNER JOIN Contact C ON C.idService = Se.idService
+		WHERE Co.idContact =
+		#idContact#
+		OR Co.idSignataire = #idContact#
+    </statement>
+
+	<statement id="getNombreContactByCentreGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Contact
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<insert id="addContact">
+		INSERT INTO Contact (idService, idCivilite, idCentreGestion, nom,
+		prenom, mail, tel, fax,
+		fonction, dateCreation, loginCreation,
+		infosAJour, loginInfosAJour)
+		VALUES (#idService#, #idCivilite#,
+		#idCentreGestion#, #nom#, #prenom#, #mail#, #tel#, #fax#,
+		#fonction#,
+		CURRENT_TIMESTAMP(), #loginCreation#, CURDATE(), #loginInfosAJour#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+
+	<update id="updateContact">
+		UPDATE Contact SET nom = #nom#, prenom = #prenom#,
+		mail = #mail#, tel= #tel#, fax = #fax#,
+		fonction = #fonction#, idCentreGestion = #idCentreGestion#,
+		loginModif = #loginModif#, dateModif = CURRENT_TIMESTAMP(), infosAJour
+		= CURDATE(),
+		loginInfosAJour = #loginInfosAJour#, idService =
+		#idService#, idCivilite = #idCivilite#
+		WHERE idContact = #id#
+    </update>
+
+	<update id="updateCompteContact">
+		UPDATE Contact SET login = #login#, mdp = #mdp#,
+		loginModif = #loginModif#, dateModif = CURRENT_TIMESTAMP(), infosAJour
+		= CURDATE(),
+		loginInfosAJour = #loginInfosAJour#
+		WHERE idContact = #id#
+	</update>
+
+	<update id="updateContactInfosAJour">
+		UPDATE Contact SET infosAJour = CURDATE(),
+		loginInfosAJour = #loginInfosAJour#
+		WHERE idContact = #id#
+    </update>
+
+	<update id="updateContactDerniereConnexion">
+		UPDATE Contact SET
+		derniereConnexion=CURRENT_TIMESTAMP(),avantDerniereConnexion=#avantDerniereConnexion#
+		WHERE idContact = #id#
+    </update>
+
+	<update id="deleteComptesContactFromIdService">
+		UPDATE Contact SET login = NULL, mdp = NULL
+		WHERE idService = #idService#
+    </update>
+
+	<delete id="deleteContact">
+		DELETE FROM Contact WHERE idContact = #id#
+	</delete>
+
+	<delete id="deleteContactFromIdService">
+		DELETE FROM Contact WHERE idService = #idService#
+	</delete>
+
+</sqlMap>

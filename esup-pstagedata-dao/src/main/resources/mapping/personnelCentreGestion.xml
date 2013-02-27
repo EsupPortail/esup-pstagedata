@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PersonnelCentreGestion">
+	
+	<typeAlias alias="ClassPersonnelCentreGestion" type="org.esupportail.pstagedata.domain.beans.PersonnelCentreGestion"/>
+
+	<resultMap id="PersonnelCentreGestion"
+		class="ClassPersonnelCentreGestion">
+		<result property="id" column="idPersonnelCentreGestion" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="uidPersonnel" column="uidPersonnel" />
+		<result property="nom" column="nom" />
+		<result property="prenom" column="prenom" />
+		<result property="mail" column="mail" />
+		<result property="tel" column="telephone" />
+		<result property="fax" column="fax" />
+		<result property="fonction" column="fonction" />
+		<result property="idDroitAdmin" column="idDroitAdministration" />
+		<result property="idCivilite" column="idCivilite" />
+		<result property="impressionConvention" column="impressionConvention" />
+		<result property="codeUniversite" column="codeUniversite" />
+		<result property="typePersonne" column="typePersonne" />
+		<result property="campus" column="campus" />
+		<result property="batiment" column="batiment" />
+		<result property="bureau" column="bureau" />
+		<result property="loginCreation" column="loginCreation" />
+		<result property="dateCreation" column="dateCreation" />
+		<result property="loginModif" column="loginModif" />
+		<result property="dateModif" column="dateModif" />
+		<result property="codeAffectation" column="codeAffectation" />
+		<result property="codeUniversiteAffectation" column="codeUniversiteAffectation" />
+	</resultMap>
+
+	<statement id="getPersonnelCentreGestionList" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<statement id="getPersonnelCentreGestion" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE idPersonnelCentreGestion = #idPersonnelCentreGestion#
+	</statement>
+	
+	<!-- Récuperation des membres interlocuteurs du centre	-->
+	<statement id="getInterlocuteur" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE idCentreGestion = #idCentreGestion#
+		AND ImpressionConvention = 1
+	</statement>
+	
+	<statement id="getPersonnelCentreGestionFromIdAndCentre" resultMap="PersonnelCentreGestion"
+		parameterClass="java.util.HashMap">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE idPersonnelCentreGestion = #idPersonnelCentreGestion#
+		AND idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<statement id="getPersonnelCentreGestionFromUid" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE uidPersonnel = #uidPersonnel#
+		AND codeUniversite = #codeUniversite#
+	</statement>
+
+	<statement id="getPersonnelCentreGestionFromNom" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE nom = #nom#
+		AND codeUniversite = #codeUniversite#		
+	</statement>
+	
+	<statement id="getPersonnelCentreGestionFromType" resultMap="PersonnelCentreGestion">
+		SELECT * FROM PersonnelCentreGestion
+		WHERE fonction = #fonction#
+		AND codeUniversite = #codeUniversite#	
+	</statement>
+	
+	<statement id="getNombrePersonnelCentreGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM PersonnelCentreGestion
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<insert id="addPersonnelCentreGestion" >
+		INSERT INTO PersonnelCentreGestion (idPersonnelCentreGestion,idCentreGestion,uidPersonnel,nom,
+		prenom,mail,telephone,fax,fonction,idDroitAdministration,idCivilite,impressionConvention,codeUniversite,typePersonne,
+		campus,batiment,bureau,loginCreation,dateCreation,codeAffectation,codeUniversiteAffectation)
+		VALUES (#id#,#idCentreGestion#,#uidPersonnel#,#nom#,
+		#prenom#,#mail#,#tel#,#fax#,#fonction#,#idDroitAdmin#,#idCivilite#,#impressionConvention#,#codeUniversite#,#typePersonne#,
+		#campus#,#batiment#,#bureau#,#loginCreation#,CURRENT_TIMESTAMP(),#codeAffectation#,#codeUniversiteAffectation#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<update id="updatePersonnelCentreGestion">
+		UPDATE PersonnelCentreGestion SET idPersonnelCentreGestion=#id#,idCentreGestion=#idCentreGestion#,
+		uidPersonnel=#uidPersonnel#,nom=#nom#,prenom=#prenom#,mail=#mail#,telephone=#tel#,fax=#fax#,fonction=#fonction#,
+		idDroitAdministration=#idDroitAdmin#,idCivilite=#idCivilite#,impressionConvention=#impressionConvention#,
+		codeUniversite=#codeUniversite#,typePersonne=#typePersonne#,campus=#campus#,batiment=#batiment#,bureau=#bureau#,loginModif=#loginModif#,
+		dateModif=CURRENT_TIMESTAMP(),codeAffectation=#codeAffectation#, codeUniversiteAffectation=#codeUniversiteAffectation#
+		WHERE idPersonnelCentreGestion=#id#
+	</update>
+
+	<delete id="deletePersonnelCentreGestion">
+		DELETE FROM PersonnelCentreGestion 
+		WHERE idPersonnelCentreGestion=#idPersonnelCentreGestion#
+		AND idCentreGestion=#idCentreGestion#
+	</delete>
+	
+	<delete id="deletePersonnelsCentreGestion">
+		DELETE FROM PersonnelCentreGestion WHERE idCentreGestion=#idCentreGestion#
+	</delete>
+
+	<!--
+		recuperation des identifiants des offres pour lesquelles la personne
+		est référente
+	-->
+	<statement id="getOffresForPersonnelCentreGestion" resultClass="java.lang.String">
+		SELECT idOffre FROM Offre
+		WHERE idReferent = #idReferent#
+	</statement>
+</sqlMap>

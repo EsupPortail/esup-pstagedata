@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="OrigineStage">
+	<typeAlias alias="ClassOrigineStage" type="org.esupportail.pstagedata.domain.beans.OrigineStage"/>
+	<resultMap id="OrigineStage"
+		class="ClassOrigineStage">
+		<result property="id" column="idOrigineStage" />
+		<result property="libelle" column="libelleOrigineStage" />
+		<result property="temEnServ" column="temEnServOrigineStage" />
+	</resultMap>
+
+	<statement id="getOrigineStages" resultMap="OrigineStage">
+		SELECT * FROM OrigineStage
+		WHERE temEnServOrigineStage = 'O'
+	</statement>
+	
+	<statement id="getOrigineStageFromId" resultMap="OrigineStage">
+		SELECT * FROM OrigineStage
+		WHERE idOrigineStage = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

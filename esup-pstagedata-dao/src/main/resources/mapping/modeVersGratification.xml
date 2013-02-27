@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ModeVersGratification">
+	<typeAlias alias="ClassModeVersGratification" type="org.esupportail.pstagedata.domain.beans.ModeVersGratification"/>
+	<resultMap id="ModeVersGratification"
+		class="ClassModeVersGratification">
+		<result property="id" column="idModeVersGratification" />
+		<result property="libelle" column="libelleModeVersGratification" />
+		<result property="temEnServ" column="temEnServModeVersGrat" />
+	</resultMap>
+
+	<statement id="getModeVersGratifications" resultMap="ModeVersGratification">
+		SELECT * FROM ModeVersGratification
+		WHERE temEnServModeVersGrat = 'O'
+	</statement>
+	
+	<statement id="getModeVersGratificationFromId" resultMap="ModeVersGratification">
+		SELECT * FROM ModeVersGratification
+		WHERE idModeVersGratification = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

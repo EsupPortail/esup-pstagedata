@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Civilite">
+
+	<resultMap id="Civilite"
+		class="org.esupportail.pstagedata.domain.beans.Civilite">
+		<result property="id" column="idCivilite" />
+		<result property="libelle" column="libelleCivilite" />
+	</resultMap>
+
+	<statement id="getCivilites" resultMap="Civilite">
+		SELECT * FROM Civilite
+	</statement>
+	
+	<statement id="getCiviliteFromId" resultMap="Civilite">
+		SELECT * FROM Civilite
+		WHERE idCivilite = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

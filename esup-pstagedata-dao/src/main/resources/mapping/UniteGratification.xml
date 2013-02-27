@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UniteGratification">
+	<typeAlias alias="ClassUniteGratification" type="org.esupportail.pstagedata.domain.beans.UniteGratification"/>
+	<resultMap id="UniteGratification"
+		class="ClassUniteGratification">
+		<result property="id" column="idUniteGratification" />
+		<result property="libelle" column="libelleUniteGratification" />
+		<result property="temEnServ" column="temEnServGrat" />
+	</resultMap>
+
+	<statement id="getUniteGratifications" resultMap="UniteGratification">
+		SELECT * FROM UniteGratification
+		WHERE temEnServGrat = 'O'
+	</statement>
+	
+	<statement id="getUniteGratificationFromId" resultMap="UniteGratification">
+		SELECT * FROM UniteGratification
+		WHERE idUniteGratification = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

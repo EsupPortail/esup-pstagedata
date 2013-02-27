@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="NatureTravail">
+	<typeAlias alias="ClassNatureTravail" type="org.esupportail.pstagedata.domain.beans.NatureTravail"/>
+	<resultMap id="NatureTravail"
+		class="ClassNatureTravail">
+		<result property="id" column="idNatureTravail" />
+		<result property="libelle" column="libelleNatureTravail" />
+		<result property="temEnServ" column="temEnServNatTrav" />
+	</resultMap>
+
+	<statement id="getNatureTravails" resultMap="NatureTravail">
+		SELECT * FROM NatureTravail
+		WHERE temEnServNatTrav = 'O'
+		ORDER BY libelleNatureTravail ASC
+	</statement>
+	
+	<statement id="getNatureTravailFromId" resultMap="NatureTravail">
+		SELECT * FROM NatureTravail
+		WHERE idNatureTravail = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Assurance">
+	<typeAlias alias="ClassAssurance" type="org.esupportail.pstagedata.domain.beans.Assurance"/>
+	<resultMap id="Assurance"
+		class="ClassAssurance">
+		<result property="id" column="idAssurance" />
+		<result property="libelle" column="libelleAssurance" />
+		<result property="codeCtrl" column="codeCtrl" />
+		<result property="temEnServ" column="temEnServAss" />
+	</resultMap>
+
+	<statement id="getAssurances" resultMap="Assurance">
+		SELECT * FROM Assurance
+		WHERE temEnServAss = 'O'
+	</statement>
+	
+	<statement id="getAssuranceFromId" resultMap="Assurance">
+		SELECT * FROM Assurance
+		WHERE idAssurance = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

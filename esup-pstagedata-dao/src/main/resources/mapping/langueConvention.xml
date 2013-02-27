@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="LangueConvention">
+	<typeAlias alias="ClassLangueConvention" type="org.esupportail.pstagedata.domain.beans.LangueConvention"/>
+	<resultMap id="LangueConvention"
+		class="ClassLangueConvention">
+		<result property="code" column="codeLangueConvention" />
+		<result property="libelle" column="libelleLangueConvention" />
+		<result property="temEnServ" column="temEnServLangue" />
+	</resultMap>
+
+	<statement id="getLangueConventions" resultMap="LangueConvention">
+		SELECT * FROM LangueConvention
+		WHERE temEnServLangue = 'O'
+	</statement>
+	
+	<statement id="getLangueConventionFromId" resultMap="LangueConvention">
+		SELECT * FROM LangueConvention
+		WHERE codeLangueConvention = #code#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

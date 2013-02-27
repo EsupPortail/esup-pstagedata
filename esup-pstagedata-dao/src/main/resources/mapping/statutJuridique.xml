@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StatutJuridique">
+	
+	<typeAlias alias="ClassStatutJuridique" type="org.esupportail.pstagedata.domain.beans.StatutJuridique"/>
+	
+	<resultMap id="StatutJuridique"
+		class="ClassStatutJuridique">
+		<result property="id" column="idStatutJuridique" />
+		<result property="idParent" column="idTypeStructure" />
+		<result property="libelle" column="libelleStatutJuridique" />
+		<result property="temEnServ" column="temEnServStatut" />
+	</resultMap>
+
+	<statement id="getStatutsJuridiques" resultMap="StatutJuridique">
+		SELECT * FROM StatutJuridique
+		WHERE temEnServStatut = 'O'
+	</statement>
+	<statement id="getStatutJuridiqueFromTypeStructure" resultMap="StatutJuridique">
+		SELECT * FROM StatutJuridique
+		WHERE idTypeStructure = #id#
+		LIMIT 0,1
+	</statement>
+	<statement id="getStatutsJuridiquesFromId" resultMap="StatutJuridique">
+		SELECT * FROM StatutJuridique
+		WHERE idStatutJuridique=#id#
+		LIMIT 0,1
+	</statement>
+
+</sqlMap>

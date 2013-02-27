@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StatisticItem">
+
+<typeAlias alias="ClassStatisticItem" type="org.esupportail.pstagedata.domain.beans.StatisticItem"/>
+
+	<!--requetes pour creation des statistiques-->
+	
+		<!--annee universitaires des conventions pour le centre-->
+	<statement id="getYears" resultClass="java.lang.String">
+	SELECT DISTINCT c.annee FROM Convention c
+	WHERE c.idCentreGestion=#idCentreGestion#
+	AND c.validationConvention = 1
+	ORDER BY c.annee             
+	</statement>
+	
+		<!--annee universitaires des conventions validees  pour l'ensemble de l'universite-->
+	<statement id="getAllYears" resultClass="java.lang.String">
+	SELECT DISTINCT c.annee FROM Convention c
+	WHERE  c.validationConvention = 1
+	ORDER BY c.annee             
+	</statement>
+	
+	
+	
+		<!--nombre de conventions pour l'annee-->
+	<statement id="getNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.annee  AS id, c.annee AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c
+	WHERE c.idCentreGestion = #idCentreGestion#	
+	AND c.validationConvention = 1
+	GROUP BY  c.annee         
+	</statement>
+	
+		<!--nombre de conventions pour l'annee  pour l'ensemble de l'universite -->
+	<statement id="getAllNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.annee  AS id, c.annee AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c
+	WHERE  c.validationConvention = 1
+	GROUP BY  c.annee         
+	</statement>
+	
+		<!--nombre de conventions selon le type obligatoire/conseille -->
+	<statement id="getNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
+	FROM Convention c
+	JOIN TypeConvention tc
+	USING ( idTypeConvention )
+	WHERE c.idCentreGestion =#idCentreGestion#
+	AND c.annee = #annee#
+	AND c.validationConvention =1
+	GROUP BY lib
+	ORDER BY lib        
+	</statement>
+	
+			<!--nombre de conventions selon le type obligatoire/conseille  pour l'ensemble de l'universite -->
+	<statement id="getAllNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
+	FROM Convention c
+	JOIN TypeConvention tc
+	USING ( idTypeConvention )
+	WHERE  c.annee = #annee#
+	AND c.validationConvention =1
+	GROUP BY lib
+	ORDER BY lib        
+	</statement>
+	
+			<!--nombre de conventions selon la thematique du stage-->
+	<statement id="getNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT t.libelleTheme AS lib,	count( c.idConvention ) AS number
+	FROM Convention c, Theme t
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idTheme = t.idTheme
+	AND c.annee = #annee#		
+	AND c.validationConvention = 1	
+	GROUP BY lib  
+	ORDER BY lib	          
+	</statement>
+	
+	<!--nombre de conventions selon la thematique du stage pour l'ensemble de l'universite-->
+	<statement id="getAllNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT t.libelleTheme AS lib,	count( c.idConvention ) AS number
+	FROM Convention c, Theme t
+	WHERE c.idTheme = t.idTheme
+	AND c.annee = #annee#		
+	AND c.validationConvention = 1	
+	GROUP BY lib  
+	ORDER BY lib	          
+	</statement>
+	
+	<!--nombre de conventions selon la gratification -->
+	
+		<statement id="getNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT ind.libelleIndemnisation AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib             
+	</statement>
+	
+	<statement id="getAllNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT ind.libelleIndemnisation AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+	WHERE  c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib             
+	</statement>
+	
+	
+	<!--nombre de conventions selon la duree de travail-->
+	<statement id="getNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT tt.libelleTempsTravail AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c JOIN TempsTravail tt USING(idTempsTravail)
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib            
+	</statement>
+
+<!--nombre de conventions selon la duree de travail pour l'ensemble de l'universite-->
+	<statement id="getAllNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT tt.libelleTempsTravail AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c JOIN TempsTravail tt USING(idTempsTravail)
+	WHERE  c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib            
+	</statement>
+
+
+	<!--nombre de conventions selon la nb de jours de travail par semaine-->
+	<statement id="getNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT c.nbJoursHebdo AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c 
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib   	        
+		]]>		  
+	</statement>
+	
+		<!--nombre de conventions selon la nb de jours de travail par semaine-->
+	<statement id="getAllNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT c.nbJoursHebdo AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c 
+	WHERE  c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib   	        
+		]]>		  
+	</statement>
+	
+			
+					<!--nombre de conventions selon l'origine du stage-->
+	<statement id="getNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT os.libelleOrigineStage AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c  JOIN OrigineStage os USING(idOrigineStage)
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib   
+			]]>		          
+	</statement>
+						<!--nombre de conventions selon l'origine du stage pour l'ensemble de l'établissement-->
+	<statement id="getAllNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT os.libelleOrigineStage AS lib,
+	count( c.idConvention) AS number
+	FROM Convention c  JOIN OrigineStage os USING(idOrigineStage)
+	WHERE c.annee = #annee#	
+		AND c.validationConvention =1
+		GROUP BY lib
+		ORDER BY lib   
+			]]>		          
+	</statement>
+	
+
+					<!--nombre de conventions par enseignant-->
+	<statement id="getNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib, 
+	count( c.idConvention) AS number
+	FROM Convention c  JOIN Enseignant ens USING(idEnseignant)
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+	GROUP BY id
+	ORDER BY ens.nom
+			]]>		                
+	</statement>
+			
+	
+					<!--nombre de conventions par enseignant pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib, 
+	count( c.idConvention) AS number
+	FROM Convention c  JOIN Enseignant ens USING(idEnseignant)
+	WHERE  c.annee = #annee#	
+		AND c.validationConvention =1
+	GROUP BY id
+	ORDER BY ens.nom
+			]]>		                
+	</statement>
+	
+			<!--nombre de conventions par structure-->
+	<statement id="getNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT s.idStructure AS idStatisticItem, s.raisonSociale AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c  JOIN Structure s USING(idStructure)
+	WHERE c.idCentreGestion = #idCentreGestion#	
+		AND c.annee = #annee#	
+		AND c.validationConvention =1
+	GROUP BY idStatisticItem	                
+	ORDER BY lib
+	</statement>
+		
+				<!--nombre de conventions par structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT s.idStructure AS idStatisticItem, s.raisonSociale AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c  JOIN Structure s USING(idStructure)
+	WHERE  c.annee = #annee#	
+		AND c.validationConvention =1
+	GROUP BY idStatisticItem	                
+	ORDER BY lib
+	</statement>
+		
+	
+	<!--nombre de conventions selon le domaine d'activite de la structure-->
+	<statement id="getNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+	SELECT n1.codeNAF_N1 AS id, n1.LibelleNAF_N1 AS lib, count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
+	WHERE c.idCentreGestion = #idCentreGestion# 
+		AND c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.Annee = #annee#	
+		AND c.ValidationConvention = 1
+	GROUP BY  n1.codeNAF_N1
+	ORDER BY  n1.codeNAF_N1	  	
+	]]>	                  
+	</statement>
+	
+		<!--nombre de conventions selon le domaine d'activite de la structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+	SELECT n1.codeNAF_N1 AS id, n1.LibelleNAF_N1 AS lib, count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
+	WHERE c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.Annee = #annee#	
+		AND c.ValidationConvention = 1
+	GROUP BY  n1.codeNAF_N1
+	ORDER BY  n1.codeNAF_N1	    
+	]]>	         
+	</statement> 	
+		
+		<!--nombre de conventions selon le type de structure-->
+	<statement id="getNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT ts.libelleTypeStructure AS id, ts.libelleTypeStructure AS lib, 
+	count(c.idConvention ) AS number
+	FROM  Convention c  JOIN  Structure s   USING ( idStructure )   JOIN TypeStructure ts  USING ( idTypeStructure )
+	WHERE c.idCentreGestion =#idCentreGestion#
+		AND c.annee =#annee#
+		AND c.validationConvention =1
+    GROUP BY id 
+    ORDER BY id  
+	]]>	                
+	</statement>	
+	
+			
+		<!--nombre de conventions selon le type de structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	 <![CDATA[
+	SELECT ts.libelleTypeStructure AS id, ts.libelleTypeStructure AS lib, 
+	count(c.idConvention ) AS number
+	FROM  Convention c  JOIN  Structure s   USING ( idStructure )   JOIN TypeStructure ts  USING ( idTypeStructure )
+	WHERE  c.annee =#annee#
+		AND c.validationConvention =1
+    GROUP BY id 
+    ORDER BY id  
+	]]>	                
+	</statement>	
+				<!--nombre de conventions selon la taille de la structure-->
+	<statement id="getNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">	
+	SELECT ef.libelleEffectif AS id, ef.libelleEffectif AS lib, count( c.idConvention ) AS number
+		FROM Convention c
+			JOIN Structure s USING ( idStructure ) JOIN Effectif ef USING ( idEffectif )
+		WHERE c.idCentreGestion = #idCentreGestion#
+		      AND c.annee = #annee#
+			  AND c.validationConvention =1
+		GROUP BY id
+		ORDER BY id                
+	</statement>
+	
+					<!--nombre de conventions selon la taille de la structure  pour l'ensemble de l'etablissement -->
+	<statement id="getAllNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">	
+	SELECT ef.libelleEffectif AS id, ef.libelleEffectif AS lib, count( c.idConvention ) AS number
+		FROM Convention c
+			JOIN Structure s USING ( idStructure ) JOIN Effectif ef USING ( idEffectif )
+		WHERE c.annee = #annee#
+			  AND c.validationConvention =1
+		GROUP BY id
+		ORDER BY id                
+	</statement>
+
+
+				<!--nombre de conventions selon le departement du lieu de stage-->
+				
+	<statement id="getNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
+	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
+		WHERE c.idCentreGestion =  #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention =1
+        AND  UPPER(p.lib)=UPPER('france')
+		GROUP BY id
+	    ORDER BY id                
+	</statement>
+				
+	<statement id="getAllNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
+	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
+		WHERE c.annee = #annee#
+		AND c.validationConvention =1
+        AND  UPPER(p.lib)=UPPER('france')
+		GROUP BY id
+	    ORDER BY id             
+	</statement>
+
+
+					<!--nombre de conventions selon le pays du lieu de stage-->
+	<statement id="getNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT p.lib AS id, p.lib  AS lib,
+	count(c.idConvention) AS number
+	FROM Convention c JOIN Service sv USING (idService) JOIN Pays p USING (idPays)
+	WHERE c.idCentreGestion =#idCentreGestion#
+    AND c.annee =#annee#
+	AND c.validationConvention=1
+	GROUP BY lib
+ 	ORDER BY lib                
+	</statement>
+	
+						<!--nombre de conventions selon le pays du lieu de stage pour l'ensemble de l'etablissement -->
+	<statement id="getAllNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT p.lib AS id, p.lib  AS lib,
+	count(c.idConvention) AS number
+	FROM Convention c JOIN Service sv USING (idService) JOIN Pays p USING (idPays)
+	WHERE c.annee =#annee#
+	AND c.validationConvention=1
+	GROUP BY lib
+ 	ORDER BY lib                
+	</statement>
+
+	<!-- UFR -->
+
+	
+			<!--nombre de conventions par UFR-->
+	<statement id="getNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		 <![CDATA[ 
+		 SELECT uf.codeUFR AS id, uf.libelleUFR AS libPriorCriteria, count( c.idConvention ) AS number
+		FROM Convention c JOIN Ufr uf USING ( codeUFR )
+		WHERE c.idCentreGestion =#idCentreGestion#
+			AND c.annee=#annee#
+			AND c.validationConvention =1 
+		GROUP BY id    
+	]]>	     
+	</statement>
+	
+			<!--nombre de conventions par UFR pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		 <![CDATA[ 
+		 SELECT uf.codeUFR AS id, uf.libelleUFR AS libPriorCriteria, count( c.idConvention ) AS number
+		FROM Convention c JOIN Ufr uf USING ( codeUFR )
+		WHERE c.annee=#annee# AND c.validationConvention =1 
+		GROUP BY id    
+	]]>	     
+	</statement>
+	
+				<!--nombre de conventions par UFR et  type de convention-->
+	<statement id="getNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[ 
+		SELECT uf.codeUFR  AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR
+        JOIN  TypeConvention tc  on c.idTypeConvention = tc.idTypeConvention
+	WHERE   c.idCentreGestion =#idCentreGestion#
+			AND c.annee=#annee#
+			AND c.validationConvention =1 
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria   
+		]]>	                
+	</statement>
+	
+	  
+	<!--nombre de conventions par UFR et  type de convention pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[ 
+		SELECT uf.codeUFR  AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR
+        JOIN  TypeConvention tc  on c.idTypeConvention = tc.idTypeConvention
+	WHERE   c.annee=#annee# AND c.validationConvention =1 
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria   
+		]]>	                
+	</statement>
+	
+				<!--nombre de conventions par UFR et  gratification-->
+	<statement id="getNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+		SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	          ind.libelleIndemnisation AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR JOIN  Indemnisation  ind on ind.idIndemnisation = c.idIndemnisation
+	WHERE   c.idCentreGestion=#idCentreGestion#
+			AND c.annee =#annee#
+			AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	order by idPriorCriteria, lib  
+	]]>	           
+	</statement>
+	
+						<!--nombre de conventions par UFR et  gratification pour l'ensemble de l'etablissement -->
+	<statement id="getAllNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+		SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	          ind.libelleIndemnisation AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR JOIN  Indemnisation  ind on ind.idIndemnisation = c.idIndemnisation
+	WHERE   c.annee =#annee# AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	order by idPriorCriteria, lib  
+	]]>	           
+	</statement>
+	
+	
+	
+				<!--nombre de conventions par UFR et  nb jours travail-->
+	<statement id="getNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	c.nbJoursHebdo AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR 
+	WHERE  c.idCentreGestion=#idCentreGestion#
+			AND c.annee =#annee#
+			AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib        
+	</statement>
+	 
+	<statement id="getAllNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	c.nbJoursHebdo AS lib, count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR 
+	WHERE  c.idCentreGestion=#idCentreGestion#
+			AND c.annee =#annee#
+			AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib        
+	</statement>
+	 
+	<!--nombre de conventions par UFR et  origine du stage-->
+	<statement id="getNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		<![CDATA[
+	 SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+			os.libelleOrigineStage AS lib,count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf ON c.codeUFR = uf.codeUFR JOIN OrigineStage os ON os.idOrigineStage=c.idOrigineStage
+	WHERE c.idCentreGestion=#idCentreGestion#
+			AND c.annee =#annee#
+			AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib
+	]]>	     
+	</statement>
+	
+	<statement id="getAllNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		<![CDATA[
+	 SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+			os.libelleOrigineStage AS lib,count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf ON c.codeUFR = uf.codeUFR JOIN OrigineStage os ON os.idOrigineStage=c.idOrigineStage
+	WHERE c.idCentreGestion=#idCentreGestion#
+			AND c.annee =#annee#
+			AND c.validationConvention =1 
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib
+	]]>	     
+	</statement>	
+	
+	<!--nombre de conventions par UFR et enseignant-->
+	<statement id="getNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib,  count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf ON c.codeUFR = uf.codeUFR
+					  JOIN Enseignant ens ON ens.idEnseignant = c.idEnseignant
+	WHERE c.idCentreGestion=#idCentreGestion#
+		   AND c.annee =#annee#
+		   AND c.validationConvention =1 	
+	GROUP BY libPriorCriteria, id
+	ORDER BY libPriorCriteria, id
+	]]>	
+	</statement>
+	
+	<!--nombre de conventions par UFR et enseignant pour l'ensemble de l'etablissement -->
+	<statement id="getAllNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<![CDATA[
+	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib,  count( c.idConvention ) AS number
+	FROM Convention c JOIN  Ufr uf ON c.codeUFR = uf.codeUFR
+					  JOIN Enseignant ens ON ens.idEnseignant = c.idEnseignant
+	WHERE  c.annee =#annee#
+		   AND c.validationConvention =1 	
+	GROUP BY libPriorCriteria, id
+	ORDER BY libPriorCriteria, id
+	]]>	
+	</statement>
+	
+	<!--nombre de conventions par UFR et temps de travail-->
+	<statement id="getNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+		tt.libelleTempsTravail AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Ufr uf, TempsTravail tt
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1	
+		AND c.idTempsTravail = tt.idTempsTravail
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib          
+	</statement>
+	
+		<!--nombre de conventions par UFR et temps de travail pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+		tt.libelleTempsTravail AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Ufr uf, TempsTravail tt
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1	
+		AND c.idTempsTravail = tt.idTempsTravail
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib          
+	</statement>
+	
+		<!--nombre de conventions par UFR et Structure-->
+	<statement id="getNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		s.idStructure AS id, s.raisonSociale AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+			                
+		<!--nombre de conventions par UFR et Structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		s.idStructure AS id, s.raisonSociale AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+	
+			<!--nombre de conventions par UFR et l'activite de la structure-->
+	<statement id="getNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria,LibelleUFR AS libPriorCriteria,
+		n5.codeNAF_n1 AS id, n1.libelleNAF_n1 as lib, count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Ufr uf
+	WHERE c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1
+		AND c.codeUFR = uf.codeUFR
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+
+			<!--nombre de conventions par UFR et l'activite de la structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria,LibelleUFR AS libPriorCriteria,
+		n5.codeNAF_n1 AS id, n1.libelleNAF_n1 as lib, count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Ufr uf
+	WHERE c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1
+		AND c.codeUFR = uf.codeUFR
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+	
+			<!--nombre de conventions par UFR et type Structure-->
+	<statement id="getNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		ts.libelleTypeStructure AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf, TypeStructure ts
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND s.idTypeStructure = ts.idTypeStructure
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+	
+				<!--nombre de conventions par UFR et type Structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		ts.libelleTypeStructure AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf, TypeStructure ts
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND s.idTypeStructure = ts.idTypeStructure
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+
+			<!--nombre de conventions par UFR et taille Structure-->
+	<statement id="getNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		e.libelleEffectif AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf, Effectif e
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND s.idEffectif = e.idEffectif
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+	
+				<!--nombre de conventions par UFR et taille Structure pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		e.libelleEffectif AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Ufr uf, Effectif e
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idStructure = s.idStructure
+		AND s.idEffectif = e.idEffectif
+		AND c.validationConvention = 1	
+		AND Annee = #annee#	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib         
+	</statement>
+	
+				<!--nombre de conventions par UFR et departement du service-->
+	<statement id="getNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	 	SUBSTRING(s.codePostal,1,2) AS lib, count( c.idConvention ) AS number
+	FROM Convention c,Service s, Ufr uf, Pays p
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idService = s.idService
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+		AND UPPER(p.lib) = UPPER('france')	
+	GROUP BY c.codeUFR,SUBSTRING(codePostal,1,2)
+	ORDER BY c.codeUFR,SUBSTRING(CodePostal,1,2)       
+	</statement>
+	
+					<!--nombre de conventions par UFR et departement du service pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	 	SUBSTRING(s.codePostal,1,2) AS lib, count( c.idConvention ) AS number
+	FROM Convention c,Service s, Ufr uf, Pays p
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idService = s.idService
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+		AND UPPER(p.lib) = UPPER('france')	
+	GROUP BY c.codeUFR,SUBSTRING(codePostal,1,2)
+	ORDER BY c.codeUFR,SUBSTRING(CodePostal,1,2)       
+	</statement>
+	
+					<!--nombre de conventions par UFR et pays du service-->
+	<statement id="getNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	 	p.lib AS lib, count( c.idConvention ) AS number
+	FROM Convention c,Service s, Ufr uf, Pays p
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idService = s.idService
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib     
+	</statement>
+
+					<!--nombre de conventions par UFR et pays du service pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
+	 	p.lib AS lib, count( c.idConvention ) AS number
+	FROM Convention c,Service s, Ufr uf, Pays p
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idService = s.idService
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib     
+	</statement>
+
+			<!--nombre de conventions par UFR et  theme -->
+	<statement id="getNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		t.libelleTheme AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Ufr uf, Theme t
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idTheme = t.idTheme
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.Annee = #annee#	
+		AND c.validationConvention = 1	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib             
+	</statement>
+	
+				<!--nombre de conventions par UFR et  theme pour l'ensemble de l'etablissement-->
+	<statement id="getAllNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
+		t.libelleTheme AS lib, count( c.idConvention ) AS number
+	FROM Convention c, Ufr uf, Theme t
+	WHERE c.codeUFR = uf.codeUFR
+		AND c.idTheme = t.idTheme
+		AND c.Annee = #annee#	
+		AND c.validationConvention = 1	
+	GROUP BY idPriorCriteria, lib
+	ORDER by idPriorCriteria, lib             
+	</statement>
+	
+	<!-- DEPARTEMENT -->
+	
+	<!--nombre de conventions par Departement-->
+	<statement id="getNumberOfConventionsByDepartment" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria,
+	count( c.idConvention ) AS number
+	FROM Convention c
+	WHERE  c.idCentreGestion = #idCentreGestion#
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria
+	ORDER BY libPriorCriteria	                
+	</statement>
+	
+	<!--nombre de conventions par department et  type de convention-->
+	<statement id="getNumberOfConventionsByDepartmentAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, tc.libelleTypeConvention AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, TypeConvention tc
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idTypeConvention = tc.idTypeConvention
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	ORDER by libPriorCriteria,lib             
+	</statement>
+	
+	<!--nombre de conventions par department et  thematique de stage-->
+	<statement id="getNumberOfConventionsByDepartmentAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, t.libelleTheme AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Theme t
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idTheme = t.idTheme
+	AND c.Annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria, lib
+	order by libPriorCriteria, lib             
+	</statement>  
+	
+	<!--nombre de conventions par departement et  gratification-->
+	<statement id="getNumberOfConventionsByDepartmentAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, i.libelleIndemnisation AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Indemnisation i
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idIndemnisation = i.idIndemnisation
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+	<!--nombre de conventions par departement et  temps de travail-->
+	<statement id="getNumberOfConventionsByDepartmentAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, tt.libelleTempsTravail AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, TempsTravail tt
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idTempsTravail = tt.idTempsTravail
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+		<!--nombre de conventions par departement et  nb jours hebdos travaille-->
+	<statement id="getNumberOfConventionsByDepartmentAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, c.nbJoursHebdo AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+		<!--nombre de conventions par departement et  origine du stage-->
+	<statement id="getNumberOfConventionsByDepartmentAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, os.libelleOrigineStage AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, OrigineStage os
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idOrigineStage = os.idOrigineStage
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+
+		<!--nombre de conventions par departement et enseignant-tuteur-->
+	<statement id="getNumberOfConventionsByDepartmentAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, CONCAT(e.prenom," ",e.nom) AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Enseignant e
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idEnseignant = e.idEnseignant
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+
+		<!--nombre de conventions par departement et structure-->
+	<statement id="getNumberOfConventionsByDepartmentAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, s.raisonSociale AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Structure s
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idStructure = s.idStructure
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+			<!--nombre de conventions par departement et activite de la structure-->
+	<statement id="getNumberOfConventionsByDepartmentAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, n1.libelleNAF_n1 as lib, 
+		count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
+	WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1
+	GROUP BY libPriorCriteria, lib
+	ORDER by libPriorCriteria, lib              
+	</statement>
+
+		<!--nombre de conventions par departement et type structure-->
+	<statement id="getNumberOfConventionsByDepartmentAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, ts.libelleTypeStructure AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Structure s, TypeStructure ts
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idStructure = s.idStructure
+	AND s.idTypeStructure = ts.idTypeStructure
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib              
+	</statement>
+	
+			<!--nombre de conventions par departement et taille structure-->
+	<statement id="getNumberOfConventionsByDepartmentAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, e.libelleEffectif AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Structure s, Effectif e
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.idStructure = s.idStructure
+	AND s.idEffectif = e.idEffectif
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib              
+	</statement>
+	
+				<!--nombre de conventions par departement et departement du lieu de stage-->
+	<statement id="getNumberOfConventionsByDepartmentAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, SUBSTRING(se.codePostal,1,2) AS lib, 
+		count( c.idConvention ) AS number
+	FROM Convention c,Service se, Pays p
+	WHERE c.idService = se.idService
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND se.idPays = p.idPays
+		AND UPPER(p.lib) = UPPER('france')	
+	GROUP BY c.codeDepartement,SUBSTRING(codePostal,1,2)
+	ORDER BY c.codeDepartement,SUBSTRING(CodePostal,1,2)                
+	</statement>
+	
+				<!--nombre de conventions par departement et pays du lieu de stage -->
+	<statement id="getNumberOfConventionsByDepartmentAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT c.codeDepartement AS libPriorCriteria, p.lib AS lib, 
+		count( c.idConvention ) AS number
+	FROM Convention c,Service s, Pays p
+	WHERE c.idService = s.idService
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+	GROUP BY libPriorCriteria, lib
+	ORDER by libPriorCriteria, lib              
+	</statement>
+
+
+<!-- ETAPE -->
+	
+	<!--nombre de conventions par Step-->
+	<statement id="getNumberOfConventionsByStep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e
+	WHERE  c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria
+	ORDER BY libPriorCriteria	                
+	</statement>
+
+	<!--nombre de conventions par Step et  type de convention-->
+	<statement id="getNumberOfConventionsByStepAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, tc.libelleTypeConvention AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, TypeConvention tc
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idTypeConvention = tc.idTypeConvention
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	ORDER by libPriorCriteria,lib             
+	</statement>
+
+	<!--nombre de conventions par Step et  thematique de stage-->
+	<statement id="getNumberOfConventionsByStepAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, t.libelleTheme AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Theme t
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idTheme = t.idTheme
+	AND c.Annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria, lib
+	order by libPriorCriteria, lib             
+	</statement>  
+	
+	<!--nombre de conventions par Step et  gratification-->
+	<statement id="getNumberOfConventionsByStepAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, i.libelleIndemnisation AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Indemnisation i
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idIndemnisation = i.idIndemnisation
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+	<!--nombre de conventions par Step et  temps de travail-->
+	<statement id="getNumberOfConventionsByStepAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, tt.libelleTempsTravail AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, TempsTravail tt
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idTempsTravail = tt.idTempsTravail
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+	<!--nombre de conventions par Step et  nb jours hebdos travaille-->
+	<statement id="getNumberOfConventionsByStepAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, c.nbJoursHebdo AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c,  Etape e
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+	<!--nombre de conventions par Step et  origine du stage-->
+	<statement id="getNumberOfConventionsByStepAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, os.libelleOrigineStage AS lib,
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, OrigineStage os
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idOrigineStage = os.idOrigineStage
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+
+	<!--nombre de conventions par Step et enseignant-tuteur-->
+	<statement id="getNumberOfConventionsByStepAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, CONCAT(en.prenom," ",en.nom) AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Enseignant en
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idEnseignant = en.idEnseignant
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+
+	<!--nombre de conventions par Step et structure-->
+	<statement id="getNumberOfConventionsByStepAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, s.raisonSociale AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Structure s
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idStructure = s.idStructure
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib               
+	</statement>
+	
+	<!--nombre de conventions par Step et activite de la structure-->
+	<statement id="getNumberOfConventionsByStepAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, n1.libelleNAF_n1 as lib, 
+		count( c.idConvention ) AS number
+	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Etape e
+	WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.codeEtape = e.codeEtape
+		AND c.idStructure = s.idStructure
+		AND s.codeNAF_N5 = n5.codeNAF_N5
+		AND n5.codeNAF_N1 = n1.codeNAF_N1
+		AND c.annee = #annee#	
+		AND c.validationConvention = 1
+	GROUP BY libPriorCriteria, lib
+	ORDER by libPriorCriteria, lib              
+	</statement>
+
+	<!--nombre de conventions par Step et type structure-->
+	<statement id="getNumberOfConventionsByStepAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, ts.libelleTypeStructure AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Structure s, TypeStructure ts
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = e.codeEtape
+	AND c.idStructure = s.idStructure
+	AND s.idTypeStructure = ts.idTypeStructure
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib              
+	</statement>
+	
+	<!--nombre de conventions par Step et taille structure-->
+	<statement id="getNumberOfConventionsByStepAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT et.libelleEtape AS libPriorCriteria, e.libelleEffectif AS lib, 
+	count( c.idConvention ) AS number
+	FROM Convention c, Etape et, Structure s, Effectif e
+	WHERE c.idCentreGestion = #idCentreGestion#
+	AND c.codeEtape = et.codeEtape
+	AND c.idStructure = s.idStructure
+	AND s.idEffectif = e.idEffectif
+	AND c.annee = #annee#	
+	AND c.validationConvention = 1	
+	GROUP BY libPriorCriteria,lib
+	order by libPriorCriteria,lib              
+	</statement>
+	
+	<!--nombre de conventions par Step et departement du lieu de stage-->
+	<statement id="getNumberOfConventionsByStepAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, SUBSTRING(se.codePostal,1,2) AS lib, 
+		count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Service se, Pays p
+	WHERE c.idService = se.idService
+		AND c.codeEtape = e.codeEtape
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND se.idPays = p.idPays
+		AND UPPER(p.lib) = UPPER('france')	
+	GROUP BY e.libelleEtape,SUBSTRING(codePostal,1,2)
+	ORDER BY e.libelleEtape,SUBSTRING(CodePostal,1,2)                
+	</statement>
+	
+	<!--nombre de conventions par Step et pays du lieu de stage -->
+	<statement id="getNumberOfConventionsByStepAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT e.libelleEtape AS libPriorCriteria, p.lib AS lib, 
+		count( c.idConvention ) AS number
+	FROM Convention c, Etape e, Service s, Pays p
+	WHERE c.idService = s.idService
+		AND c.codeEtape = e.codeEtape
+		AND c.idCentreGestion = #idCentreGestion#
+		AND c.validationConvention = 1	
+		AND c.annee = #annee#	
+		AND s.idPays = p.idPays
+	GROUP BY libPriorCriteria, lib
+	ORDER by libPriorCriteria, lib              
+	</statement>
+
+
+
+</sqlMap>
+
+
