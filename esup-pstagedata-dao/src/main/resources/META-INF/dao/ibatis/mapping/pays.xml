@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Pays">
+	
+	<typeAlias alias="ClassPays" type="org.esupportail.pstagedata.domain.beans.Pays"/>
+	
+	<resultMap id="Pays"
+		class="ClassPays">
+		<result property="id" column="idPays" />
+		<result property="libelle" column="lib" />
+		<result property="actual" column="actual" />
+		<result property="cog" column="COG" />
+		<result property="crpay" column="CRPAY" />
+		<result property="iso2" column="ISO2" />
+		<result property="siretObligatoire" column="siretObligatoire" />
+	</resultMap>
+
+	<statement id="getPays" resultMap="Pays">
+		SELECT * FROM Pays
+	</statement>
+	<statement id="getPaysFromId" resultMap="Pays">
+		SELECT * FROM Pays
+		WHERE idPays = #id#
+		LIMIT 0,1
+	</statement>
+</sqlMap>

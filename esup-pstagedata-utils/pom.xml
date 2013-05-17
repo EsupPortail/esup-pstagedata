@@ -13,7 +13,7 @@
     	<dependency>
     		<groupId>org.esupportail</groupId>
     		<artifactId>esup-commons2-exceptionHandling</artifactId>
-    		<version>0.3.1</version>
+    		<version>${esupcommons.version}</version>
     	</dependency>
     </dependencies>
 </project>

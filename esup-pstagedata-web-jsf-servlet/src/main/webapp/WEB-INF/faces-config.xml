@@ -19,7 +19,7 @@
 		<message-bundle>properties.i18n.bundles.JsfMessages</message-bundle>
 
 	</application>
-	<factory>
-		<exception-handler-factory>org.esupportail.commons.exceptions.ExceptionHandlerFactory</exception-handler-factory>
-	</factory>
+<!-- 	<factory> -->
+<!-- 		<exception-handler-factory>org.esupportail.commons.exceptions.ExceptionHandlerFactory</exception-handler-factory> -->
+<!-- 	</factory> -->
 </faces-config>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<context:annotation-config />
+
+	<bean id="accordPartenariatDomainService"
+		class="org.esupportail.pstagedata.domain.AccordPartenariatDomainServiceImpl">
+		<property name="accordPartenariatDaoService" ref="accordPartenariatDaoService" />
+	</bean>
+	<bean id="adminStructureDomainService"
+		class="org.esupportail.pstagedata.domain.AdminStructureDomainServiceImpl">
+		<property name="adminStructureDaoService" ref="adminStructureDaoService" />
+	</bean>
+	<bean id="affectationDomainService"
+		class="org.esupportail.pstagedata.domain.AffectationDomainServiceImpl">
+		<property name="affectationDaoService" ref="affectationDaoService" />
+	</bean>
+	<bean id="avenantDomainService"
+		class="org.esupportail.pstagedata.domain.AvenantDomainServiceImpl">
+		<property name="avenantDaoService" ref="avenantDaoService" />
+	</bean>
+	<bean id="centreGestionDomainService"
+		class="org.esupportail.pstagedata.domain.CentreGestionDomainServiceImpl">
+		<property name="centreGestionDaoService" ref="centreGestionDaoService" />
+	</bean>
+	<bean id="centreGestionSuperviseurDomainService"
+		class="org.esupportail.pstagedata.domain.CentreGestionSuperviseurDomainServiceImpl">
+		<property name="centreGestionSuperviseurDaoService" ref="centreGestionSuperviseurDaoService" />
+	</bean>
+	<bean id="civiliteDomainService"
+		class="org.esupportail.pstagedata.domain.CiviliteDomainServiceImpl">
+		<property name="civiliteDaoService" ref="civiliteDaoService" />
+	</bean>
+	<bean id="confidentialiteDomainService"
+		class="org.esupportail.pstagedata.domain.ConfidentialiteDomainServiceImpl">
+		<property name="confidentialiteDaoService" ref="confidentialiteDaoService" />
+	</bean>
+	<bean id="contactDomainService"
+		class="org.esupportail.pstagedata.domain.ContactDomainServiceImpl">
+		<property name="contactDaoService" ref="contactDaoService" />
+		<property name="centreGestionDaoService" ref="centreGestionDaoService" />
+	</bean>
+	<bean id="contratDomainService"
+		class="org.esupportail.pstagedata.domain.ContratDomainServiceImpl">
+		<property name="contratDaoService" ref="contratDaoService" />
+	</bean>
+	<bean id="critereGestionDomainService"
+		class="org.esupportail.pstagedata.domain.CritereGestionDomainServiceImpl">
+		<property name="critereGestionDaoService" ref="critereGestionDaoService" />
+	</bean>
+	<bean id="droitAdministrationDomainService"
+		class="org.esupportail.pstagedata.domain.DroitAdministrationDomainServiceImpl">
+		<property name="droitAdministrationDaoService" ref="droitAdministrationDaoService" />
+	</bean>
+	<bean id="dureeDiffusionDomainService"
+		class="org.esupportail.pstagedata.domain.DureeDiffusionDomainServiceImpl">
+		<property name="dureeDiffusionDaoService" ref="dureeDiffusionDaoService" />
+	</bean>
+	<bean id="effectifDomainService"
+		class="org.esupportail.pstagedata.domain.EffectifDomainServiceImpl">
+		<property name="effectifDaoService" ref="effectifDaoService" />
+	</bean>
+	<bean id="fapN1DomainService"
+		class="org.esupportail.pstagedata.domain.FapN1DomainServiceImpl">
+		<property name="fapN1DaoService" ref="fapN1DaoService" />
+	</bean>
+	<bean id="fapN2DomainService"
+		class="org.esupportail.pstagedata.domain.FapN2DomainServiceImpl">
+		<property name="fapN2DaoService" ref="fapN2DaoService" />
+	</bean>
+	<bean id="fapN3DomainService"
+		class="org.esupportail.pstagedata.domain.FapN3DomainServiceImpl">
+		<property name="fapN3DaoService" ref="fapN3DaoService" />
+	</bean>
+	<bean id="fapQualificationDomainService"
+		class="org.esupportail.pstagedata.domain.FapQualificationDomainServiceImpl">
+		<property name="fapQualificationDaoService" ref="fapQualificationDaoService" />
+	</bean>
+	<bean id="fapQualificationSimplifieeDomainService"
+		class="org.esupportail.pstagedata.domain.FapQualificationSimplifieeDomainServiceImpl">
+		<property name="fapQualificationSimplifieeDaoService" ref="fapQualificationSimplifieeDaoService" />
+	</bean>
+	<bean id="modeCandidatureDomainService"
+		class="org.esupportail.pstagedata.domain.ModeCandidatureDomainServiceImpl">
+		<property name="modeCandidatureDaoService" ref="modeCandidatureDaoService" />
+	</bean>
+	<bean id="nafN1DomainService"
+		class="org.esupportail.pstagedata.domain.NafN1DomainServiceImpl">
+		<property name="nafN1DaoService" ref="nafN1DaoService" />
+	</bean>
+	<bean id="nafN5DomainService"
+		class="org.esupportail.pstagedata.domain.NafN5DomainServiceImpl">
+		<property name="nafN5DaoService" ref="nafN5DaoService" />
+	</bean>
+	<bean id="niveauCentreDomainService"
+		class="org.esupportail.pstagedata.domain.NiveauCentreDomainServiceImpl">
+		<property name="niveauCentreDaoService" ref="niveauCentreDaoService" />
+	</bean>
+	<bean id="niveauFormationDomainService"
+		class="org.esupportail.pstagedata.domain.NiveauFormationDomainServiceImpl">
+		<property name="niveauFormationDaoService" ref="niveauFormationDaoService" />
+	</bean>
+	<bean id="offreDiffusionDomainService"
+		class="org.esupportail.pstagedata.domain.OffreDiffusionDomainServiceImpl">
+		<property name="offreDiffusionDaoService" ref="offreDiffusionDaoService" />
+	</bean>
+	<bean id="offreDomainService"
+		class="org.esupportail.pstagedata.domain.OffreDomainServiceImpl">
+		<property name="offreDaoService" ref="offreDaoService" />
+		<property name="offreModeCandidatureDaoService" ref="offreModeCandidatureDaoService" />
+	</bean>
+	<bean id="fichierDomainService"
+		class="org.esupportail.pstagedata.domain.FichierDomainServiceImpl">
+		<property name="fichierDaoService" ref="fichierDaoService" />
+	</bean>
+	<bean id="offreModeCandidatureDomainService"
+		class="org.esupportail.pstagedata.domain.OffreModeCandidatureDomainServiceImpl">
+		<property name="offreModeCandidatureDaoService" ref="offreModeCandidatureDaoService" />
+	</bean>
+	<bean id="paysDomainService" class="org.esupportail.pstagedata.domain.PaysDomainServiceImpl">
+		<property name="paysDaoService" ref="paysDaoService" />
+	</bean>
+	<bean id="personnelCentreGestionDomainService"
+		class="org.esupportail.pstagedata.domain.PersonnelCentreGestionDomainServiceImpl">
+		<property name="personnelCentreGestionDaoService" ref="personnelCentreGestionDaoService" />
+	</bean>
+	<bean id="serviceDomainService"
+		class="org.esupportail.pstagedata.domain.ServiceDomainServiceImpl">
+		<property name="serviceDaoService" ref="serviceDaoService" />
+	</bean>
+	<bean id="statutJuridiqueDomainService"
+		class="org.esupportail.pstagedata.domain.StatutJuridiqueDomainServiceImpl">
+		<property name="statutJuridiqueDaoService" ref="statutJuridiqueDaoService" />
+	</bean>
+	<bean id="structureDomainService"
+		class="org.esupportail.pstagedata.domain.StructureDomainServiceImpl">
+		<property name="structureDaoService" ref="structureDaoService" />
+	</bean>
+	<bean id="tempsTravailDomainService"
+		class="org.esupportail.pstagedata.domain.TempsTravailDomainServiceImpl">
+		<property name="tempsTravailDaoService" ref="tempsTravailDaoService" />
+	</bean>
+	<bean id="typeOffreDomainService"
+		class="org.esupportail.pstagedata.domain.TypeOffreDomainServiceImpl">
+		<property name="typeOffreDaoService" ref="typeOffreDaoService" />
+	</bean>
+	<bean id="typeStructureDomainService"
+		class="org.esupportail.pstagedata.domain.TypeStructureDomainServiceImpl">
+		<property name="typeStructureDaoService" ref="typeStructureDaoService" />
+	</bean>
+	<bean id="uniteDureeDomainService"
+		class="org.esupportail.pstagedata.domain.UniteDureeDomainServiceImpl">
+		<property name="uniteDureeDaoService" ref="uniteDureeDaoService" />
+	</bean>
+
+	<!-- Convention -->
+
+	<bean id="assuranceDomainService"
+		class="org.esupportail.pstagedata.domain.AssuranceDomainServiceImpl">
+		<property name="assuranceDaoService" ref="assuranceDaoService" />
+	</bean>
+	<bean id="caisseRegimeDomainService"
+		class="org.esupportail.pstagedata.domain.CaisseRegimeDomainServiceImpl">
+		<property name="caisseRegimeDaoService" ref="caisseRegimeDaoService" />
+	</bean>
+	<bean id="conventionDomainService"
+		class="org.esupportail.pstagedata.domain.ConventionDomainServiceImpl">
+		<property name="conventionDaoService" ref="conventionDaoService" />
+		<property name="ufrDaoService" ref="ufrDaoService" />
+		<property name="etapeDaoService" ref="etapeDaoService" />
+	</bean>
+	<bean id="enseignantDomainService"
+		class="org.esupportail.pstagedata.domain.EnseignantDomainServiceImpl">
+		<property name="enseignantDaoService" ref="enseignantDaoService" />
+	</bean>
+	<bean id="etapeDomainService"
+		class="org.esupportail.pstagedata.domain.EtapeDomainServiceImpl">
+		<property name="etapeDaoService" ref="etapeDaoService" />
+	</bean>
+	<bean id="etudiantDomainService"
+		class="org.esupportail.pstagedata.domain.EtudiantDomainServiceImpl">
+		<property name="etudiantDaoService" ref="etudiantDaoService" />
+	</bean>
+	<bean id="indemnisationDomainService"
+		class="org.esupportail.pstagedata.domain.IndemnisationDomainServiceImpl">
+		<property name="indemnisationDaoService" ref="indemnisationDaoService" />
+	</bean>
+	<bean id="langueConventionDomainService"
+		class="org.esupportail.pstagedata.domain.LangueConventionDomainServiceImpl">
+		<property name="langueConventionDaoService" ref="langueConventionDaoService" />
+	</bean>
+	<bean id="modeValidationStageDomainService"
+		class="org.esupportail.pstagedata.domain.ModeValidationStageDomainServiceImpl">
+		<property name="modeValidationStageDaoService" ref="modeValidationStageDaoService" />
+	</bean>
+	<bean id="modeVersGratificationDomainService"
+		class="org.esupportail.pstagedata.domain.ModeVersGratificationDomainServiceImpl">
+		<property name="modeVersGratificationDaoService" ref="modeVersGratificationDaoService" />
+	</bean>
+	<bean id="natureTravailDomainService"
+		class="org.esupportail.pstagedata.domain.NatureTravailDomainServiceImpl">
+		<property name="natureTravailDaoService" ref="natureTravailDaoService" />
+	</bean>
+	<bean id="themeDomainService"
+		class="org.esupportail.pstagedata.domain.ThemeDomainServiceImpl">
+		<property name="themeDaoService" ref="themeDaoService" />
+	</bean>
+	<bean id="typeConventionDomainService"
+		class="org.esupportail.pstagedata.domain.TypeConventionDomainServiceImpl">
+		<property name="typeConventionDaoService" ref="typeConventionDaoService" />
+	</bean>
+	<bean id="ufrDomainService" class="org.esupportail.pstagedata.domain.UfrDomainServiceImpl">
+		<property name="ufrDaoService" ref="ufrDaoService" />
+	</bean>
+	<bean id="uniteGratificationDomainService"
+		class="org.esupportail.pstagedata.domain.UniteGratificationDomainServiceImpl">
+		<property name="uniteGratificationDaoService" ref="uniteGratificationDaoService" />
+	</bean>
+	<bean id="origineStageDomainService"
+		class="org.esupportail.pstagedata.domain.OrigineStageDomainServiceImpl">
+		<property name="origineStageDaoService" ref="origineStageDaoService" />
+	</bean>
+
+	<bean id="ticketStructureDomainService"
+		class="org.esupportail.pstagedata.domain.TicketStructureDomainServiceImpl">
+		<property name="ticketStructureDaoService" ref="ticketStructureDaoService" />
+	</bean>
+
+	<!-- ############################################## Debut statistiques ################################################################################################# -->
+	<bean id="critereDomainService"
+		class="org.esupportail.pstagedata.domain.CritereDomainServiceImpl">
+		<property name="critereDaoService" ref="critereDaoService" />
+		<property name="critereDTOManager" ref="critereDTOManager" />
+	</bean>
+	<bean id="critereDTOManager" class="org.esupportail.pstagedata.domain.CritereDTOManager" />
+	<bean id="critereDTOFactory" factory-bean="critereDTOManager"
+		factory-method="createCritereDTO" />
+
+	<bean id="statisticsDtoManager"
+		class="org.esupportail.pstagedata.domain.StatisticsDtoManagerImpl" />
+	<bean id="statisticsDtoFactory" factory-bean="statisticsDtoManager"
+		factory-method="createStatisticItemDTO" />
+
+
+	<bean id="abstractOffreStatsDomaine" abstract="true"
+		init-method="initOffreStatsDomaine">
+		<property name="statisticsDtoManager" ref="statisticsDtoManager" />
+	</bean>
+
+	<!-- createur de **StatsdomaineService pour les offres -->
+	<bean id="offreStatsDomaineManager"
+		class="org.esupportail.pstagedata.domain.OffreStatsDomaineManagerImpl"
+		lazy-init="true">
+		<property name="offreStatsDomaineServices">
+			<map>
+				<entry key="${offre.etat.sans}">
+					<bean
+						class="org.esupportail.pstagedata.domain.OffreStatsDomaineServiceImpl"
+						parent="abstractOffreStatsDomaine">
+						<property name="offreStatsDaoService" ref="offreStatsDaoService" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="offreStatsDomaineService" factory-bean="offreStatsDomaineManager"
+		factory-method="create">
+		<constructor-arg value="${offre.etat.sans}" />
+	</bean>
+
+
+	<!-- createur de **StatsdomaineService pour les conventions -->
+
+	<bean id="conventionStatsDomaineManager"
+		class="org.esupportail.pstagedata.domain.ConventionStatsDomaineManagerImpl"
+		lazy-init="true">
+		<property name="cvtsDomaineServices">
+			<map>
+				<entry key="${convention.pour.cdg}">
+					<bean
+						class="org.esupportail.pstagedata.domain.ConventionStatsDomaineServiceImpl">
+						<property name="conventionStatsDaoService" ref="centreGestionConventionStatsDaoService" />
+						<property name="statisticsDtoManager" ref="statisticsDtoManager" />
+					</bean>
+				</entry>
+				<entry key="${convention.pour.toute.univ}">
+					<bean
+						class="org.esupportail.pstagedata.domain.ConventionStatsDomaineServiceImpl">
+						<property name="conventionStatsDaoService" ref="globalConventionStatsDaoService" />
+						<property name="statisticsDtoManager" ref="statisticsDtoManager" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="centreGestionCvtStatsDomaineService" factory-bean="conventionStatsDomaineManager"
+		factory-method="creer">
+		<constructor-arg value="${convention.pour.cdg}" />
+	</bean>
+	<bean id="globalConventionStatsDomaineService" factory-bean="conventionStatsDomaineManager"
+		factory-method="creer">
+		<constructor-arg value="${convention.pour.toute.univ}" />
+	</bean>
+
+	<!-- ############################################## Fin statistiques ############################################## -->
+
+
+	<bean id="domainService" class="org.esupportail.pstagedata.domain.DomainServiceImpl" />
+
+</beans>

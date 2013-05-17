@@ -16,11 +16,11 @@ public class AdresseDTO extends ObjetMetiersDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 
 	/**
-	 * Batiment/R�sidence/Z.I./Immeuble
+	 * Batiment/Residence/Z.I./Immeuble
 	 */
 	private String batimentResidence;
 	/**
@@ -31,6 +31,7 @@ public class AdresseDTO extends ObjetMetiersDTO implements Serializable {
 	 * Commune
 	 */
 	private String commune;
+
 	/**
 	 * Code postal
 	 */
@@ -42,9 +43,9 @@ public class AdresseDTO extends ObjetMetiersDTO implements Serializable {
 	/**
 	 * Code commune
 	 */
-	private int codeCommune;
+	private String codeCommune;
 	/**
-	 * Libell� Cedex
+	 * Libelle Cedex
 	 */
 	private String libCedex;
 	/* **
@@ -162,21 +163,6 @@ public class AdresseDTO extends ObjetMetiersDTO implements Serializable {
 	public void setIdPays(int idPays) {
 		this.idPays = idPays;
 	}
-
-	/**
-	 * @return the codeCommune
-	 */
-	public int getCodeCommune() {
-		return codeCommune;
-	}
-
-	/**
-	 * @param codeCommune the codeCommune to set
-	 */
-	public void setCodeCommune(int codeCommune) {
-		this.codeCommune = codeCommune;
-	}
-
 	/**
 	 * @return the libCedex
 	 */
@@ -191,6 +177,19 @@ public class AdresseDTO extends ObjetMetiersDTO implements Serializable {
 		this.libCedex = libCedex;
 	}
 
+	/**
+	 * @return the codeCommune
+	 */
+	public String getCodeCommune() {
+		return codeCommune;
+	}
+
+	/**
+	 * @param codeCommune the codeCommune to set
+	 */
+	public void setCodeCommune(String codeCommune) {
+		this.codeCommune = codeCommune;
+	}
 	/**
 	 * @return the pays
 	 */

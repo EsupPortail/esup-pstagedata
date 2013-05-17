@@ -15,7 +15,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	/**
 	 * ID de la structure
@@ -34,11 +34,11 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	private int idEffectif;
 	/**
-	 * Code identifiant dans le pays de l�entreprise
+	 * Code identifiant dans le pays de leentreprise
 	 */
 	private String codeEtab;
 	/**
-	 * numéro Siret
+	 * Numero Siret
 	 */
 	private String numeroSiret;
 	/**
@@ -50,11 +50,11 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	private String codeNAF_N5;
 	/**
-	 * Activit� principale
+	 * Activite principale
 	 */
 	private String activitePrincipale;
 	/**
-	 * T�l�phone
+	 * Telephone
 	 */
 	private String telephone;
 	/**
@@ -78,15 +78,15 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	private String logo;
 	/**
-	 * vrai si valid�e
+	 * vrai si validee
 	 */
 	private boolean estValidee;
 	/**
-	 * Derni�re Date indiquant que les infos sont � jour
+	 * Derniere Date indiquant que les infos sont e jour
 	 */
 	private Date infosAJour;
 	/**
-	 * Login de la personne ayant confirm� que les infos sont � jour
+	 * Login de la personne ayant confirme que les infos sont e jour
 	 */
 	private String loginInfosAJour;	
 	/**
@@ -94,15 +94,15 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	private Date dateValidation;
 	/**
-	 * Login de la personne ayant valid�
+	 * Login de la personne ayant valide
 	 */
 	private String loginValidation;
 	/**
-	 * Date de d�-validation 
+	 * Date de de-validation 
 	 */
 	private Date dateStopValidation;
 	/**
-	 * Login de la personne ayant stopp� la validation
+	 * Login de la personne ayant stoppe la validation
 	 */
 	private String loginStopValidation;
 	/* **
@@ -181,7 +181,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	}
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 
 	/**
@@ -238,7 +238,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		((super.getCommune()==null||super.getCommune().isEmpty())?"/":super.getCommune())+", "+
 		((super.getCodePostal()==null||super.getCodePostal().isEmpty())?"/":super.getCodePostal())+",\r\n "+
 		((super.getLibCedex()==null||super.getLibCedex().isEmpty())?"/":super.getLibCedex())+",\r\n "+
-		"Code Commune : "+(super.getCodeCommune()>0?super.getCodeCommune():"/")+", "+
+		"Code Commune : "+((super.getCodeCommune()!=null&&!super.getCodeCommune().equals("0"))?super.getCodeCommune():"/")+", "+
 		(super.getPays()!=null?super.getPays().getLibelle():"/");
 	}
 

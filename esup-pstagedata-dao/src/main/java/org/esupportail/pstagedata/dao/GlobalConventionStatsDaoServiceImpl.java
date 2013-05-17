@@ -425,6 +425,26 @@ public class GlobalConventionStatsDaoServiceImpl extends AbstractIBatisDaoServic
 		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getAllNumberOfConventionsByStepAndTheme");
 	}
 	
-	
-	
+
+	/*Ajout duree*/
+	public List<StatisticItem> getNumberOfConventionsByNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getAllNumberOfConventionsByNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByDepartmentAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getAllNumberOfConventionsByDepartmentAndNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByStudyAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getAllNumberOfConventionsByStudyAndNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByStepAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getAllNumberOfConventionsByStepAndNbWeeks");
+	}
 }

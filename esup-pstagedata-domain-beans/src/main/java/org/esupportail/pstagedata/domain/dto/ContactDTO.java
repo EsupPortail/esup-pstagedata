@@ -16,7 +16,7 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	private static final long serialVersionUID = 1L;
 	
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	
 	/**
@@ -32,11 +32,11 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	 */
 	private String fonction;
 	/**
-	 * Derniere date indiquant que les informations sont � jour
+	 * Derniere date indiquant que les informations sont e jour
 	 */
 	private Date infosAJour;
 	/**
-	 * Login de la personne ayant confirm� que les infos sont � jour
+	 * Login de la personne ayant confirme que les infos sont e jour
 	 */
 	private String loginInfosAJour;	
 	/**
@@ -51,6 +51,9 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	 * Commentaire
 	 */
 	private String commentaire;
+	
+	@SuppressWarnings("unused")
+	private String print;
 	/* **
 	 * 
 	 * Objets
@@ -114,11 +117,26 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	/**
 	 * @return un string contenant les infos du Contact
 	 */
+	public String getPrint(){
+		return
+		"Civilite : "+(super.getCivilite()==null?"/":super.getCivilite().getLibelle())+", "+
+		"Nom : "+((super.getNom()==null||super.getNom().isEmpty())?"/":super.getNom())+", "+
+		"Prenom : "+((super.getPrenom()==null||super.getPrenom().isEmpty())?"/":super.getPrenom())+", "+
+		"Tel : "+((super.getTel()==null||super.getTel().isEmpty())?"/":super.getTel())+", "+
+		"Fax : "+((super.getFax()==null||super.getFax().isEmpty())?"/":super.getFax())+", "+
+		"Mail : "+((super.getMail()==null||super.getMail().isEmpty())?"/":super.getMail())+", "+
+		"Nom du service : "+(this.service==null?"/":this.service.getNom())+", "+
+		"Fonction : "+((this.fonction==null||this.fonction.isEmpty())?"/":this.fonction)
+		;
+	}
+	/**
+	 * @return un string contenant les infos du Contact
+	 */
 	public String print(){
 		return
-		"Civilit� : "+(super.getCivilite()==null?"/":super.getCivilite().getLibelle())+", "+
+		"Civilite : "+(super.getCivilite()==null?"/":super.getCivilite().getLibelle())+", "+
 		"Nom : "+((super.getNom()==null||super.getNom().isEmpty())?"/":super.getNom())+", "+
-		"Pr�nom : "+((super.getPrenom()==null||super.getPrenom().isEmpty())?"/":super.getPrenom())+", "+
+		"Prenom : "+((super.getPrenom()==null||super.getPrenom().isEmpty())?"/":super.getPrenom())+", "+
 		"Tel : "+((super.getTel()==null||super.getTel().isEmpty())?"/":super.getTel())+", "+
 		"Fax : "+((super.getFax()==null||super.getFax().isEmpty())?"/":super.getFax())+", "+
 		"Mail : "+((super.getMail()==null||super.getMail().isEmpty())?"/":super.getMail())+", "+
@@ -296,6 +314,13 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	 */
 	public void setCentreGestion(CentreGestionDTO centreGestion) {
 		this.centreGestion = centreGestion;
+	}
+
+	/**
+	 * @param print the print to set
+	 */
+	public void setPrint(String print) {
+		this.print = print;
 	}
 	
 	

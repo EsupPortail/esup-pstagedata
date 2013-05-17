@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ModeCandidature">
+
+	<resultMap id="ModeCandidature"
+		class="org.esupportail.pstagedata.domain.beans.ModeCandidature">
+		<result property="id" column="idModeCandidature" />
+		<result property="libelle" column="libelleModeCandidature" />
+		<result property="codeCtrl" column="codeCtrl" />
+		<result property="temEnServ" column="temEnServModeCandidature" />
+	</resultMap>
+
+	<statement id="getModesCandidature" resultMap="ModeCandidature">
+		SELECT * FROM ModeCandidature
+		WHERE temEnServModeCandidature = 'O'
+	</statement>
+	
+	<statement id="getModeCandidatureFromId" resultMap="ModeCandidature">
+		SELECT * FROM ModeCandidature
+		WHERE idModeCandidature = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

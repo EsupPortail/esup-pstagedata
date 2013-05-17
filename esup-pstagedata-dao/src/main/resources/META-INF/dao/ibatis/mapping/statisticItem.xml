@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StatisticItem">
+
+
+	<!--requêtes pour création des statistiques-->
+
+	<!--annee de debut des offres pour le centre-->
+	<statement id="getOfferYears" resultClass="java.lang.String">
+		SELECT DISTINCT	o.anneeUniversitaire
+		FROM Offre o
+		WHERE o.idCentreGestion =#idCenter# 
+		ORDER BY o.anneeUniversitaire              
+	</statement>
+
+	<!--nombre d'offres-->
+	<statement id="getNumberOfOffers"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT o.anneeUniversitaire AS lib,	count( o.idOffre ) AS number
+		FROM Offre o
+		WHERE o.idCentreGestion	=#idCenter# 
+		GROUP BY lib
+		ORDER BY lib          
+	</statement>
+
+	<!--nombre de offres selon le domaine d'activité-->
+	<statement id="getNumberOfOffersByActivity"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT NAF_N1.libelleNAF_N1 as	lib, count(Offre.idOffre) AS number
+		FROM NAF_N5, NAF_N1, Structure,	Offre
+		WHERE Offre.idStructure = Structure.idStructure
+			AND	Structure.codeNAF_N5 = NAF_N5.codeNAF_N5
+			AND NAF_N5.codeNAF_N1 =	NAF_N1.codeNAF_N1
+			AND Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee#
+		GROUP BY lib
+		ORDER BY lib 	                
+	</statement>
+
+		<!--nombre de offres selon le domaine d'activité et validation-->
+	<statement id="getNumberOfOffersByActivityAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria, NAF_N1.libelleNAF_N1 as	lib,
+			count(Offre.idOffre) AS number
+		FROM NAF_N5, NAF_N1, Structure,	Offre
+		WHERE Offre.idStructure = Structure.idStructure
+			AND	Structure.codeNAF_N5 = NAF_N5.codeNAF_N5
+			AND NAF_N5.codeNAF_N1 =	NAF_N1.codeNAF_N1
+			AND Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee#
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	 
+	</statement>
+	
+			<!--nombre de offres selon le domaine d'activité et publication-->
+	<statement id="getNumberOfOffersByActivityAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, NAF_N1.libelleNAF_N1 as	lib,
+			count(Offre.idOffre) AS number
+		FROM NAF_N5, NAF_N1, Structure,	Offre
+		WHERE Offre.idStructure = Structure.idStructure
+			AND	Structure.codeNAF_N5 = NAF_N5.codeNAF_N5
+			AND NAF_N5.codeNAF_N1 =	NAF_N1.codeNAF_N1
+			AND Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee#
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	
+	</statement>
+
+
+	<!--nombre d'offres par type d'offre-->
+	<statement id="getNumberOfOffersByType"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT TypeOffre.libelleType AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, TypeOffre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idTypeOffre = TypeOffre.idTypeOffre
+		GROUP BY lib
+		ORDER BY lib         
+	</statement>
+
+	<statement id="getNumberOfOffersByTypeAndValidation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria,TypeOffre.libelleType AS lib,
+			count( Offre.idOffre ) AS number
+		FROM Offre, TypeOffre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idTypeOffre = TypeOffre.idTypeOffre
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	       
+	</statement>
+
+	<statement id="getNumberOfOffersByTypeAndPublication"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, TypeOffre.libelleType AS lib,
+			count( Offre.idOffre ) AS number
+		FROM Offre, TypeOffre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee#
+			AND	Offre.idTypeOffre = TypeOffre.idTypeOffre
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	     
+	</statement>
+
+	<!-- nombre d'offres par structure  -->
+	<statement id="getNumberOfOffersByStructure"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT s.raisonSociale AS lib, count( o.idOffre) AS number
+		FROM Offre o JOIN  Structure s USING (idStructure)
+		WHERE  o.idCentreGestion = #idCentreGestion#
+			AND o.anneeUniversitaire = #annee#
+		GROUP BY lib
+		ORDER BY lib
+	</statement>
+	
+	<!--nombre d'offres par structure et publication-->
+	<statement id="getNumberOfOffersByStructureAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT Offre.estDiffusee AS libPriorCriteria, Structure.raisonSociale AS lib, 
+		count( Offre.idOffre ) AS number
+	FROM Offre, Structure
+	WHERE Offre.IdStructure = Structure.idStructure
+		AND Offre.idCentreGestion =#idCentreGestion#
+		AND Offre.anneeUniversitaire =#annee#
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	 
+	</statement>
+		
+		<!--nombre d'offres par structure et validation-->
+	<statement id="getNumberOfOffersByStructureAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT Offre.estValidee AS libPriorCriteria, Structure.raisonSociale AS lib, 
+		count( Offre.idOffre ) AS number
+	FROM Offre, Structure
+	WHERE Offre.IdStructure = Structure.idStructure
+		AND Offre.idCentreGestion =#idCentreGestion#
+		AND Offre.anneeUniversitaire=#annee#
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	
+	</statement>
+	
+
+	<!--nombre de offres selon le type de structure-->
+	<statement id="getNumberOfOffersByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT ts.libelleTypeStructure AS lib, count( o.idOffre ) AS number
+	FROM Offre o, Structure s, TypeStructure ts
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire = #annee#
+		AND o.idStructure = s.idStructure
+		AND s.idTypeStructure = ts.idTypeStructure
+	GROUP BY lib
+	ORDER BY lib           
+	</statement>
+
+	<!--nombre de offres selon le type de structure et la validation de l'offre-->
+	<statement id="getNumberOfOffersByStructureTypeAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estValidee AS libPriorCriteria ts.libelleTypeStructure AS lib, 
+		count( o.idOffre ) AS number
+	FROM Offre o, Structure s, TypeStructure ts
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire = #annee#
+		AND o.idStructure = s.idStructure
+		AND s.idTypeStructure = ts.idTypeStructure
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	    
+	</statement>
+	
+	<statement id="getNumberOfOffersByStructureTypeAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estDiffusee AS libPriorCriteria, ts.libelleTypeStructure AS idStatisticItem, count( o.idOffre ) AS number
+	FROM Offre o, Structure s, TypeStructure ts
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire = #annee#
+		AND o.idStructure = s.idStructure
+		AND s.idTypeStructure = ts.idTypeStructure
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	 
+	</statement>
+
+
+	<!--Par la taille de la structure-->
+	<!--nombre d'offres selon la taille de la structure-->
+	<statement id="getNumberOfOffersByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT s.idEffectif AS lib,	count( o.idOffre) AS number
+	FROM Offre o JOIN Structure s USING (idStructure)
+	WHERE  o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire = #annee#
+	GROUP BY lib
+	ORDER BY lib		                
+	</statement>
+
+
+<!--nombre d'offres selon la taille de la structure et publication de l'offre-->
+	<statement id="getNumberOfOffersByStructureSizeAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estDiffusee AS libPriorCriteria, s.idEffectif AS lib, count( o.idOffre )AS number
+	FROM Offre o JOIN Structure s USING (idStructure) 
+	WHERE   o.idCentreGestion = #idCentreGestion# 
+		AND o.anneeUniversitaire =#annee#  
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib		                
+	</statement>
+	
+	<!--nombre d'offres selon la taille de la structure et validation de l'offre-->
+	<statement id="getNumberOfOffersByStructureSizeAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estValidee AS libPriorCriteria, s.idEffectif AS lib, count( o.idOffre )AS number
+	FROM  Offre o JOIN Structure s USING (idStructure) 
+	WHERE   o.idCentreGestion = #idCentreGestion# 
+		AND o.anneeUniversitaire =#annee#  
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib			  	                
+	</statement>
+
+	<!--nombre d'offres par niveau de formation-->
+	<statement id="getNumberOfOffersByLevel" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT f.libelleNiveauFormation AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, NiveauFormation f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idNiveauFormation = f.idNiveauFormation
+		GROUP BY lib
+		ORDER BY lib  
+	</statement>
+
+	
+	<!--nombre d'offres par niveau de formation et publication-->
+	<statement id="getNumberOfOffersByLevelAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, f.libelleNiveauFormation AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, NiveauFormation f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idNiveauFormation = f.idNiveauFormation
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	
+	</statement>
+	
+	<!--nombre d'offres par niveau de formation et validation-->
+	<statement id="getNumberOfOffersByLevelAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria, f.libelleNiveauFormation AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, NiveauFormation f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idNiveauFormation = f.idNiveauFormation
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib	 
+	</statement>
+
+
+	<!--nombre d'offres par validation-->
+	<statement id="getNumberOfOffersByValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT Offre.estValidee AS libPriorCriteria, count(Offre.idOffre ) AS number
+	FROM Offre
+	WHERE Offre.idCentreGestion = #idCentreGestion#
+		AND Offre.anneeUniversitaire = #annee#
+	GROUP BY libPriorCriteria
+	ORDER BY libPriorCriteria
+	</statement>
+
+
+	<!--nombre d'offres par publication-->
+	<statement id="getNumberOfOffersByPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT Offre.estDiffusee AS libPriorCriteria, count(Offre.idOffre) AS number
+	FROM Offre
+	WHERE Offre.idCentreGestion =#idCentreGestion#
+		AND Offre.anneeUniversitaire =#annee#
+	GROUP BY libPriorCriteria
+	ORDER BY libPriorCriteria
+	</statement>
+	
+		<!--nombre d'offres selon le pays du lieu de stage-->
+	<statement id="getNumberOfOffersByStructureCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT s.idPays AS idStatisticItem, p.lib AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s ON p.idPays = s.idPays)
+		JOIN Offre o ON o.idStructure = s.idStructure
+	WHERE o.idCentreGestion =#idCentreGestion#
+		AND o.anneeUniversitaire =#annee#
+	GROUP BY p.lib
+	ORDER BY p.lib	
+	</statement>
+	
+	
+	<statement id="getNumberOfOffersByStructureCountryAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estDiffusee AS libPriorCriteria, p.lib AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s ON p.idPays = s.idPays ) JOIN Offre o ON o.idStructure = s.idStructure
+	WHERE o.idCentreGestion =#idCentreGestion#
+		  AND o.anneeUniversitaire =#annee#
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib	 
+	</statement>
+
+	<!--nombre d'offres selon le pays du lieu de stage et validation de l'offre-->
+	<statement id="getNumberOfOffersByStructureCountryAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estValidee AS libPriorCriteria, p.lib AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s ON p.idPays = s.idPays) JOIN Offre o ON o.idStructure = s.idStructure
+	WHERE o.idCentreGestion =#idCentreGestion#
+		AND o.anneeUniversitaire =#annee#
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib	 
+	</statement>
+	
+		<!--nombre d'offres selon le departement du lieu de stage-->
+	<statement id="getNumberOfOffersByStructureDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">		
+	SELECT SUBSTRING( s.codePostal, 1, 2 ) AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s USING ( idPays )) JOIN Offre o USING ( idStructure )
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire =#annee#  
+		AND p.lib  LIKE 'FRANCE'
+	GROUP BY SUBSTRING( s.codePostal, 1, 2 )
+	ORDER BY SUBSTRING( s.codePostal, 1, 2 )
+	</statement>
+	
+	<!--nombre d'offres selon le departement du lieu de stage et la publication de l'offre-->
+	<statement id="getNumberOfOffersByStructureDepAndPublication" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estDiffusee AS libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 ) AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s USING ( idPays )) JOIN Offre o USING ( idStructure )
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire =#annee#  
+		AND p.lib  LIKE 'FRANCE'
+	GROUP BY libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 )
+	ORDER BY libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 )
+	</statement>
+	
+	
+	<!--nombre d'offres selon le departement du lieu de stage et la validation de l'offre-->
+	<statement id="getNumberOfOffersByStructureDepAndValidation" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	SELECT o.estValidee AS libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 ) AS lib, count( o.idOffre ) AS number
+	FROM (Pays p JOIN Structure s USING ( idPays )) JOIN Offre o USING ( idStructure )
+	WHERE o.idCentreGestion = #idCentreGestion#
+		AND o.anneeUniversitaire =#annee#  
+		AND p.lib  LIKE 'FRANCE'
+	GROUP BY libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 )
+	ORDER BY libPriorCriteria, SUBSTRING( s.codePostal, 1, 2 )	
+	</statement>		
+	
+	<!--nombre d'offres par fonction-->
+	<statement id="getNumberOfOffersByFunction"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT q.libelleQualification AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_QualificationSimplifiee q
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idQualificationSimplifiee = q.idQualificationSimplifiee
+		GROUP BY lib
+		ORDER BY lib         
+	</statement>
+	
+	<!--nombre d'offres par fonction et la validation de l'offre-->
+	<statement id="getNumberOfOffersByFunctionAndValidation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria, q.libelleQualification AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_QualificationSimplifiee q
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idQualificationSimplifiee = q.idQualificationSimplifiee 
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib	           
+	</statement>
+	
+	<!--nombre d'offres par fonction et la diffusion de l'offre-->
+	<statement id="getNumberOfOffersByFunctionAndPublication"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, q.libelleQualification AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_QualificationSimplifiee q
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.idQualificationSimplifiee = q.idQualificationSimplifiee
+	GROUP BY libPriorCriteria, lib
+	ORDER BY libPriorCriteria, lib       
+	</statement>
+	
+	<!--nombre d'offres par formation-->
+	<statement id="getNumberOfOffersByFormation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT f.libelle AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_N3 f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.codeFAP_N3 = f.codeFAP_N3
+		GROUP BY lib
+		ORDER BY lib         
+	</statement>
+	
+		<!--nombre d'offres par formation et offre validée-->
+	<statement id="getNumberOfOffersByFormationAndValidation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee libPriorCriteria, AS f.libelle AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_N3 f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.codeFAP_N3 = f.codeFAP_N3
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib        
+	</statement>
+	
+			<!--nombre d'offres par formation et offre diffusée-->
+	<statement id="getNumberOfOffersByFormationAndPublication"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, f.libelle AS lib, count( Offre.idOffre ) AS number
+		FROM Offre, FAP_N3 f
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND	Offre.codeFAP_N3 = f.codeFAP_N3
+			AND Offre.estDiffusee=1  
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib     
+	</statement>
+	
+	<!--nombre d'offres pourvues-->
+	<statement id="getNumberOfOffersByCandidateFound"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estPourvue AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+		GROUP BY lib
+		ORDER BY lib         
+	</statement>
+	
+	<!--nombre d'offres pourvues et validées-->
+	<statement id="getNumberOfOffersByCandidateFoundAndValidation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria, Offre.estPourvue AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib         
+	</statement>
+	
+		<!--nombre d'offres pourvues et diffusées-->
+	<statement id="getNumberOfOffersByCandidateFoundAndPublication"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, Offre.estPourvue AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib       
+	</statement>
+	
+		<!--nombre d'offres par origine d'un candidat-->
+	<statement id="getNumberOfOffersByLocalStudent"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.offrePourvueEtudiantLocal AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+		GROUP BY lib
+		ORDER BY lib     
+	</statement>
+	
+			<!--nombre d'offres par origine d'un candidat et validées-->
+	<statement id="getNumberOfOffersByLocalStudentAndValidation"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estValidee AS libPriorCriteria, Offre.offrePourvueEtudiantLocal AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib     
+	</statement>
+	
+				<!--nombre d'offres par origine d'un candidat et diffusées-->
+	<statement id="getNumberOfOffersByLocalStudentAndPublication"	resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		SELECT Offre.estDiffusee AS libPriorCriteria, Offre.offrePourvueEtudiantLocal AS lib, count( Offre.idOffre ) AS number
+		FROM Offre
+		WHERE Offre.idCentreGestion = #idCentreGestion#
+			AND	Offre.anneeUniversitaire = #annee# 
+			AND Offre.estDiffusee=1 
+		GROUP BY libPriorCriteria, lib
+		ORDER BY libPriorCriteria, lib     
+	</statement>
+	
+	
+	
+	
+</sqlMap>

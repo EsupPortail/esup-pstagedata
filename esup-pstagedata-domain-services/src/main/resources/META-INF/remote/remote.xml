@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	
+	<bean id="remoteServicesService"
+		class="org.esupportail.pstagedata.remote.RemoteServicesImpl">
+		<!-- properties -->
+		<property name="accordPartenariatDomainService" ref="accordPartenariatDomainService"/>
+		<property name="adminStructureDomainService" ref="adminStructureDomainService"/>
+		<property name="affectationDomainService" ref="affectationDomainService"/>
+		<property name="avenantDomainService" ref="avenantDomainService"/>
+		<property name="centreGestionDomainService" ref="centreGestionDomainService"/>
+		<property name="centreGestionSuperviseurDomainService" ref="centreGestionSuperviseurDomainService"/>
+		<property name="civiliteDomainService" ref="civiliteDomainService"/>
+		<property name="confidentialiteDomainService" ref="confidentialiteDomainService"/>
+		<property name="contactDomainService" ref="contactDomainService"/>
+		<property name="contratDomainService" ref="contratDomainService"/>
+		<property name="conventionDomainService" ref="conventionDomainService"/>
+		<property name="critereGestionDomainService" ref="critereGestionDomainService"/>
+		<property name="droitAdministrationDomainService" ref="droitAdministrationDomainService"/>
+		<property name="dureeDiffusionDomainService" ref="dureeDiffusionDomainService"/>
+		<property name="effectifDomainService" ref="effectifDomainService"/>
+		<property name="enseignantDomainService" ref="enseignantDomainService"/>
+		<property name="etudiantDomainService" ref="etudiantDomainService"/>
+		<property name="fapN1DomainService" ref="fapN1DomainService"/>
+		<property name="fapN2DomainService" ref="fapN2DomainService"/>
+		<property name="fapN3DomainService" ref="fapN3DomainService"/>
+		<property name="fapQualificationDomainService" ref="fapQualificationDomainService"/>
+		<property name="fapQualificationSimplifieeDomainService" ref="fapQualificationSimplifieeDomainService"/>
+		<property name="modeCandidatureDomainService" ref="modeCandidatureDomainService"/>
+		<property name="niveauCentreDomainService" ref="niveauCentreDomainService"/>
+		<property name="nafN1DomainService" ref="nafN1DomainService"/>
+		<property name="nafN5DomainService" ref="nafN5DomainService"/>
+		<property name="niveauFormationDomainService" ref="niveauFormationDomainService"/>
+		<property name="offreDiffusionDomainService" ref="offreDiffusionDomainService"/>
+		<property name="offreDomainService" ref="offreDomainService"/>
+		<property name="fichierDomainService" ref="fichierDomainService"/>
+		<property name="offreModeCandidatureDomainService" ref="offreModeCandidatureDomainService"/>
+		<property name="paysDomainService" ref="paysDomainService"/>
+		<property name="personnelCentreGestionDomainService" ref="personnelCentreGestionDomainService"/>
+		<property name="serviceDomainService" ref="serviceDomainService"/>
+		<property name="statutJuridiqueDomainService" ref="statutJuridiqueDomainService"/>
+		<property name="structureDomainService" ref="structureDomainService"/>
+		<property name="tempsTravailDomainService" ref="tempsTravailDomainService"/>
+		<property name="typeOffreDomainService" ref="typeOffreDomainService"/>
+		<property name="typeStructureDomainService" ref="typeStructureDomainService"/>
+		<property name="uniteDureeDomainService" ref="uniteDureeDomainService"/>
+		<property name="assuranceDomainService" ref="assuranceDomainService"/>
+		<property name="caisseRegimeDomainService" ref="caisseRegimeDomainService"/>
+		<property name="indemnisationDomainService" ref="indemnisationDomainService"/>
+		<property name="langueConventionDomainService" ref="langueConventionDomainService"/>
+		<property name="modeValidationStageDomainService" ref="modeValidationStageDomainService"/>
+		<property name="modeVersGratificationDomainService" ref="modeVersGratificationDomainService"/>
+		<property name="natureTravailDomainService" ref="natureTravailDomainService"/>
+		<property name="themeDomainService" ref="themeDomainService"/>
+		<property name="typeConventionDomainService" ref="typeConventionDomainService"/>
+		<property name="uniteGratificationDomainService" ref="uniteGratificationDomainService"/>
+		<property name="ufrDomainService" ref="ufrDomainService"/>
+		<property name="etapeDomainService" ref="etapeDomainService"/>
+		<property name="origineStageDomainService" ref="origineStageDomainService"/>
+		<property name="ticketStructureDomainService" ref="ticketStructureDomainService"/>
+		
+		<property name="critereDomainService" ref="critereDomainService"/>
+		<property name="conventionStatsDomaineManager" ref="conventionStatsDomaineManager"/>
+		<property name="offreStatsDomaineManager" ref="offreStatsDomaineManager"/>
+		
+	</bean>
+
+	<!-- Configuration CXF -->
+ 
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> 
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+ 
+	<!-- Endpoint -->
+	<jaxws:endpoint id="remoteServices" implementor="#remoteServicesService"
+		address="/RemoteServices" />
+	
+	<!-- /Configuration CXF -->
+	
+	<!-- HTTP Invoker -->
+<!-- 	<bean name="RemoteServicesExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" scope="session"> -->
+<!-- 	    <property name="service" ref="remoteServicesService"/> -->
+<!-- 	    <property name="serviceInterface" value="org.esupportail.pstagedata.remote.RemoteServices"/> -->
+<!-- 	</bean> -->
+	<!-- /HTTP Invoker  -->
+</beans>

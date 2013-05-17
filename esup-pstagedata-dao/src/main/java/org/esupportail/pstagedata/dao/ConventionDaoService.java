@@ -63,7 +63,8 @@ public interface ConventionDaoService extends Serializable {
 	 * @param id
 	 * @return Convention pour export
 	 */
-	public Convention getConventionFromExport(int id);
+//	public Convention getConventionFromExport(int id);
+	public List<Convention> getConventionsFromExport(List<Integer> idsConventionsExport);
 	
 	/**
 	 * @param identEtudiant

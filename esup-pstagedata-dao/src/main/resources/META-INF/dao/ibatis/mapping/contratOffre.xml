@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ContratOffre">
+
+	<resultMap id="ContratOffre"
+		class="org.esupportail.pstagedata.domain.beans.ContratOffre">
+		<result property="id" column="idContratOffre" />
+		<result property="idParent" column="idTypeOffre" />
+		<result property="libelle" column="libelleContratOffre" />
+		<result property="codeCtrl" column="codeCtrl" />
+		<result property="temEnServ" column="temEnServContratOffre" />
+	</resultMap>
+
+	<statement id="getContratsOffre" resultMap="ContratOffre">
+		SELECT * FROM ContratOffre
+		WHERE temEnServContratOffre = 'O'
+	</statement>
+	
+	<statement id="getContratOffreFromId" resultMap="ContratOffre">
+		SELECT * FROM ContratOffre
+		WHERE idContratOffre = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

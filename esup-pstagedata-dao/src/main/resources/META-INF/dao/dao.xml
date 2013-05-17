@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+
+<!-- 	<context:annotation-config /> -->
+	<!-- /properties/dao/dao.xml The configuration file for Data Access Object. 
+		This file should not be modified but by the developers. This file is referenced 
+		by /properties/applicationContext.xml. -->
+
+	<bean id="accordPartenariatDaoService"
+		class="org.esupportail.pstagedata.dao.AccordPartenariatDaoServiceImpl"
+		parent="abstractIBatisDaoService"/>
+	<bean id="adminStructureDaoService"
+		class="org.esupportail.pstagedata.dao.AdminStructureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="affectationDaoService"
+		class="org.esupportail.pstagedata.dao.AffectationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="avenantDaoService" class="org.esupportail.pstagedata.dao.AvenantDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="civiliteDaoService" class="org.esupportail.pstagedata.dao.CiviliteDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="centreGestionDaoService"
+		class="org.esupportail.pstagedata.dao.CentreGestionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="centreGestionSuperviseurDaoService"
+		class="org.esupportail.pstagedata.dao.CentreGestionSuperviseurDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="confidentialiteDaoService"
+		class="org.esupportail.pstagedata.dao.ConfidentialiteDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="contactDaoService" class="org.esupportail.pstagedata.dao.ContactDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="contratDaoService" class="org.esupportail.pstagedata.dao.ContratDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="critereGestionDaoService"
+		class="org.esupportail.pstagedata.dao.CritereGestionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="droitAdministrationDaoService"
+		class="org.esupportail.pstagedata.dao.DroitAdministrationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="dureeDiffusionDaoService"
+		class="org.esupportail.pstagedata.dao.DureeDiffusionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="effectifDaoService" class="org.esupportail.pstagedata.dao.EffectifDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="fapN1DaoService" class="org.esupportail.pstagedata.dao.FapN1DaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="fapN2DaoService" class="org.esupportail.pstagedata.dao.FapN2DaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="fapN3DaoService" class="org.esupportail.pstagedata.dao.FapN3DaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="fapQualificationDaoService"
+		class="org.esupportail.pstagedata.dao.FapQualificationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="fapQualificationSimplifieeDaoService"
+		class="org.esupportail.pstagedata.dao.FapQualificationSimplifieeDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="modeCandidatureDaoService"
+		class="org.esupportail.pstagedata.dao.ModeCandidatureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="nafN1DaoService" class="org.esupportail.pstagedata.dao.NafN1DaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="nafN5DaoService" class="org.esupportail.pstagedata.dao.NafN5DaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="niveauCentreDaoService"
+		class="org.esupportail.pstagedata.dao.NiveauCentreDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="niveauFormationDaoService"
+		class="org.esupportail.pstagedata.dao.NiveauFormationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="offreDaoService" class="org.esupportail.pstagedata.dao.OffreDaoServiceImpl"
+		parent="abstractIBatisDaoService">
+		<property name="centreGestionDaoService" ref="centreGestionDaoService" />
+	</bean>
+	<bean id="fichierDaoService" class="org.esupportail.pstagedata.dao.FichierDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="offreModeCandidatureDaoService"
+		class="org.esupportail.pstagedata.dao.OffreModeCandidatureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="offreDiffusionDaoService"
+		class="org.esupportail.pstagedata.dao.OffreDiffusionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="paysDaoService" class="org.esupportail.pstagedata.dao.PaysDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="personnelCentreGestionDaoService"
+		class="org.esupportail.pstagedata.dao.PersonnelCentreGestionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="serviceDaoService" class="org.esupportail.pstagedata.dao.ServiceDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="statutJuridiqueDaoService"
+		class="org.esupportail.pstagedata.dao.StatutJuridiqueDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="structureDaoService" class="org.esupportail.pstagedata.dao.StructureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="tempsTravailDaoService"
+		class="org.esupportail.pstagedata.dao.TempsTravailDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="typeOffreDaoService" class="org.esupportail.pstagedata.dao.TypeOffreDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="typeStructureDaoService"
+		class="org.esupportail.pstagedata.dao.TypeStructureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="uniteDureeDaoService" class="org.esupportail.pstagedata.dao.UniteDureeDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+
+	<bean id="ticketStructureDaoService"
+		class="org.esupportail.pstagedata.dao.TicketStructureDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+
+
+	<!-- convention -->
+
+	<bean id="assuranceDaoService" class="org.esupportail.pstagedata.dao.AssuranceDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="caisseRegimeDaoService"
+		class="org.esupportail.pstagedata.dao.CaisseRegimeDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="conventionDaoService" class="org.esupportail.pstagedata.dao.ConventionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="enseignantDaoService" class="org.esupportail.pstagedata.dao.EnseignantDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="etapeDaoService" class="org.esupportail.pstagedata.dao.EtapeDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="etudiantDaoService" class="org.esupportail.pstagedata.dao.EtudiantDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="indemnisationDaoService"
+		class="org.esupportail.pstagedata.dao.IndemnisationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="langueConventionDaoService"
+		class="org.esupportail.pstagedata.dao.LangueConventionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="modeValidationStageDaoService"
+		class="org.esupportail.pstagedata.dao.ModeValidationStageDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="modeVersGratificationDaoService"
+		class="org.esupportail.pstagedata.dao.ModeVersGratificationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="natureTravailDaoService"
+		class="org.esupportail.pstagedata.dao.NatureTravailDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="themeDaoService" class="org.esupportail.pstagedata.dao.ThemeDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="typeConventionDaoService"
+		class="org.esupportail.pstagedata.dao.TypeConventionDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="ufrDaoService" class="org.esupportail.pstagedata.dao.UfrDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="uniteGratificationDaoService"
+		class="org.esupportail.pstagedata.dao.UniteGratificationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+	<bean id="origineStageDaoService"
+		class="org.esupportail.pstagedata.dao.OrigineStageDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
+
+
+	<!-- ############################################################################################### 
+		Début partie Statistiques ############################################################################################### -->
+
+	<bean id="critereDaoService"
+		class="org.esupportail.pstagedata.dao.CritereDaoServiceImpl"
+		parent="abstractIBatisDaoService" lazy-init="true"/>
+
+	<!-- ######################### statistiques pour les offres ###################### -->
+	<bean id="offreStatsDaoService"
+		class="org.esupportail.pstagedata.dao.OffreStatsDaoServiceImpl"
+		parent="abstractIBatisDaoService" lazy-init="true"/>
+
+	<!-- ######################### statistiques pour les conventions ###################### -->
+	<bean id="statsParTypeService"
+		class="org.esupportail.pstagedata.dao.StatsParTypeServiceImpl"
+		parent="abstractIBatisDaoService" lazy-init="true"/>
+
+<!-- 	<bean id="centreGestionCvtStatsDaoService" class="org.springframework.aop.framework.ProxyFactoryBean"> -->
+<!-- 		<property name="proxyInterfaces"> -->
+<!-- 			<value>org.esupportail.pstagedata.dao.ConventionStatsDaoService -->
+<!-- 			</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="target" ref="cvtStatsTarget"/> -->
+<!-- 	</bean> -->
+
+	<bean id="centreGestionConventionStatsDaoService"
+		class="org.esupportail.pstagedata.dao.CentreGestionConventionStatsDaoServiceImpl"
+		parent="abstractIBatisDaoService">
+		<property name="statsParTypeService" ref="statsParTypeService"/>
+	</bean>
+
+	<bean id="globalConventionStatsDaoService"
+		class="org.esupportail.pstagedata.dao.GlobalConventionStatsDaoServiceImpl"
+		parent="abstractIBatisDaoService">
+		<property name="statsParTypeService" ref="statsParTypeService"/>
+	</bean>
+
+<!-- 	<bean id="globalConventionStatsDaoService" class="org.springframework.aop.framework.ProxyFactoryBean"> -->
+<!-- 		<property name="proxyInterfaces"> -->
+<!-- 			<value>org.esupportail.pstagedata.dao.ConventionStatsDaoService -->
+<!-- 			</value> -->
+<!-- 		</property> -->
+<!-- 		<property name="target"> -->
+<!-- 			<bean -->
+<!-- 				class="org.esupportail.pstagedata.dao.GlobalConventionStatsDaoServiceImpl" -->
+<!-- 				parent="abstractIBatisDaoService"> -->
+<!-- 				<property name="statsParTypeService" ref="statsParTypeService"/> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!-- ############################################################################################### 
+		Fin partie Statistiques ############################################################################################### -->
+
+	<bean id="abstractIBatisDaoService" class="org.esupportail.pstagedata.dao.AbstractIBatisDaoService"
+		abstract="true" lazy-init="true">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+
+	<bean id="daoService" class="org.esupportail.pstagedata.dao.IBatisDaoServiceImpl"
+		parent="abstractIBatisDaoService" lazy-init="true">
+	</bean>
+
+	<bean id="dataSourceJdbc"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+
+<!-- 	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean" -->
+<!-- 		lazy-init="true"> -->
+<!-- 		<property name="jndiName" value="${jndi.name}" /> -->
+<!-- 	</bean> -->
+	<jee:jndi-lookup id="JNDIDataSource" jndi-name="${jndi.name}" lookup-on-startup="false" expected-type="javax.sql.DataSource"/>
+
+
+	<bean id="sqlMapClientTemplate" lazy-init="true"
+		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="sqlMapClient" lazy-init="true"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:/META-INF/dao/ibatis/ibatis.config.xml" />
+		<property name="dataSource" ref="${dataSource.bean}" />
+
+	</bean>
+
+	<bean id="transactionManager" lazy-init="true"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="${dataSource.bean}" />
+	</bean>
+</beans>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CentreGestion">
+	
+	<typeAlias alias="ClassCentreGestion" type="org.esupportail.pstagedata.domain.beans.CentreGestion"/>
+
+	<resultMap id="CentreGestion"
+		class="ClassCentreGestion">
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="nomCentre" column="nomCentre" />
+		<result property="idNiveauCentre" column="idNiveauCentre" />
+		<result property="batimentResidence" column="adresse" />
+		<result property="voie" column="voie" />
+		<result property="commune" column="commune" />
+		<result property="codePostal" column="codePostal" />
+		<result property="siteWeb" column="siteWeb" />
+		<result property="mail" column="mail" />
+		<result property="telephone" column="telephone" />
+		<result property="fax" column="fax" />
+		<result property="commentaire" column="commentaire" />
+		<result property="presenceTuteurEns" column="presenceTuteurEns" />
+		<result property="presenceTuteurPro" column="presenceTuteurPro" />
+		<result property="saisieTuteurProParEtudiant" column="saisieTuteurProParEtudiant" />
+		<result property="choixAnneeAvantDebutAnnee" column="choixAnneeAvantDebutAnnee" />
+		<result property="choixAnneeApresDebutAnnee" column="choixAnneeApresDebutAnnee" />
+		<result property="depotAnonyme" column="depotAnonyme" />
+		<result property="codeUniversite" column="codeUniversite" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginCreation" column="loginCreation" />
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif"/>
+		<result property="nomViseur" column="nomViseur" />
+		<result property="prenomViseur" column="prenomViseur" />
+		<result property="urlPageInstruction" column="urlPageInstruction" />
+		<result property="idCentreGestionSuperViseur" column="idCentreGestionSuperViseur" nullValue="0"/>
+		<result property="codeConfidentialite" column="codeConfidentialite" />
+		<result property="autoriserImpressionConvention" column="autoriserImpressionConvention" />
+		<result property="idFichier" column="idFichier" nullValue="0"/>
+	</resultMap>
+	
+	<resultMap id="CentreGestionSuperLight"	class="ClassCentreGestion">
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="nomCentre" column="nomCentre" />
+	</resultMap>
+	
+	<statement id="getCentreGestionSuperLightFromId" resultMap="CentreGestionSuperLight">
+		SELECT C.idCentreGestion, C.nomCentre FROM CentreGestion C
+		WHERE C.idCentreGestion = #idCentreGestion#
+		LIMIT 0,1
+	</statement>
+	
+	<!--	Récupération des centres sans confidentialité pour l'université "codeUniversité" -->
+	<statement id="getIdsCentreGestionSansConfidentialiteFromCodeUniversite" resultClass="java.lang.Integer">
+		SELECT idCentreGestion FROM CentreGestion
+		WHERE codeUniversite = #codeUniversite#
+		AND codeConfidentialite = '0'
+		AND (
+			idNiveauCentre = '3' OR idNiveauCentre = '4'
+		)
+	</statement>
+	
+	<!--	Récupération de tous les centres-->
+	<statement id="getCentreGestionList" resultMap="CentreGestion">
+		SELECT * FROM CentreGestion
+		WHERE codeUniversite = #codeUniversite#
+	</statement>
+	
+	<!--	Récupération d'un centre-->
+	<statement id="getCentreGestion" resultMap="CentreGestion">
+		SELECT * FROM CentreGestion
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<!--	Récupération d'un centre via son nom-->
+	<statement id="getCentreGestionFromNomCentre" resultMap="CentreGestion">
+		SELECT * FROM CentreGestion 
+		WHERE nomCentre LIKE CONCAT('%',#nomCentre#,'%')
+		AND codeUniversite=#codeUniversite# 
+	</statement>
+	
+	<!--	Récupération du nombre de centres -->
+	<statement id="getNombreCentreGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM CentreGestion
+		WHERE codeUniversite = #codeUniversite#
+	</statement>
+	
+	<!--	Récupération des centres de gestion d'une personne qui a les droits en ecriture ou admin -->
+	<statement id="getCentreDroitEcriture" resultMap="CentreGestion">
+		SELECT C.* FROM CentreGestion as C, PersonnelCentreGestion as p, DroitAdministration as d
+		WHERE C.idCentreGestion = p.idCentreGestion
+		AND p.uidPersonnel=#uidPersonnel#
+		AND (p.idDroitAdministration = 2 OR p.idDroitAdministration= 3)
+		<isNotNull property="codeUniversite" prepend="AND">
+			p.codeUniversite=#codeUniversite# 
+		</isNotNull>
+	</statement>
+	
+	<!--	Récupération des centres de gestion d'une personne qui a des droits pour ce centre-->
+	<statement id="getCentreFromUid" resultMap="CentreGestion">
+		SELECT DISTINCT C.* FROM CentreGestion as C
+		INNER JOIN PersonnelCentreGestion as p
+		ON C.idCentreGestion = p.idCentreGestion
+		WHERE p.uidPersonnel = #uidPersonnel#
+		<isNotNull property="codeUniversite" prepend="AND">
+			p.codeUniversite=#codeUniversite#
+		</isNotNull> 
+	</statement>
+	
+	<!--	Récupération du centre ENTREPRISE-->
+	<statement id="getCentreEntreprise" resultMap="CentreGestion">
+		SELECT C.* FROM CentreGestion as C
+		INNER JOIN NiveauCentre as n
+		ON C.idNiveauCentre = n.idNiveauCentre
+		WHERE libelleNiveauCentre = 'ENTREPRISE'
+		LIMIT 0 ,1
+	</statement>
+	
+	<!--	Récupération du centre ETABLISSEMENT-->
+	<statement id="getCentreEtablissement" resultMap="CentreGestion">
+		SELECT C.* FROM CentreGestion as C
+		INNER JOIN NiveauCentre as n
+		ON C.idNiveauCentre = n.idNiveauCentre
+		WHERE libelleNiveauCentre = 'ETABLISSEMENT'
+		AND codeUniversite=#codeUniversite#
+		LIMIT 0 ,1
+	</statement>
+	
+	<!--	Récupération du centre ETABLISSEMENT-->
+	<statement id="getCentresEtablissement" resultMap="CentreGestion">
+		SELECT C.* FROM CentreGestion C
+		INNER JOIN NiveauCentre N
+		ON C.idNiveauCentre = N.idNiveauCentre
+		WHERE N.libelleNiveauCentre = 'ETABLISSEMENT'
+		<isNotNull property="codeUniversite" prepend="AND">
+			C.codeUniversite=#codeUniversite# 
+		</isNotNull>
+	</statement>
+	
+	<!--recherche des centres selon l'identifiant d'un critere -->
+	<statement id="getCentreFromCritere" resultMap="CentreGestion">
+	 SELECT C.* FROM CentreGestion C 
+	INNER JOIN CritereGestion Cri
+	ON C.idCentreGestion=Cri.idCentreGestion 
+	WHERE Cri.codeCritere= #codeCritere# AND C.codeUniversite=#codeUniversite#
+	</statement>
+	
+	
+	<!--	Ajout d'un centre-->
+	<insert id="addCentreGestion" >
+		INSERT INTO CentreGestion (idCentreGestion,nomCentre,idNiveauCentre,adresse,voie,commune,
+		codePostal,siteWeb,mail,telephone,fax,commentaire,presenceTuteurEns,presenceTuteurPro,
+		saisieTuteurProParEtudiant,choixAnneeAvantDebutAnnee,choixAnneeApresDebutAnnee,depotAnonyme,
+		codeUniversite,dateCreation,loginCreation,nomViseur,prenomViseur,urlPageInstruction,
+		idCentreGestionSuperViseur,codeConfidentialite,autoriserImpressionConvention)
+		VALUES (#idCentreGestion#,#nomCentre#,#idNiveauCentre#,#batimentResidence#,#voie#,#commune#,
+		#codePostal#,#siteWeb#,#mail#,#telephone#,#fax#,#commentaire#,#presenceTuteurEns#,#presenceTuteurPro#,
+		#saisieTuteurProParEtudiant#,#choixAnneeAvantDebutAnnee#,#choixAnneeApresDebutAnnee#,#depotAnonyme#,#codeUniversite#,
+		CURRENT_TIMESTAMP(),#loginCreation#,#nomViseur#,#prenomViseur#,#urlPageInstruction#,
+		#idCentreGestionSuperViseur#,#codeConfidentialite#,#autoriserImpressionConvention#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<!--	Modification d'un centre-->
+	<update id="updateCentreGestion">
+		UPDATE CentreGestion SET nomCentre=#nomCentre#,idNiveauCentre=#idNiveauCentre#,adresse=#batimentResidence#,
+		voie=#voie#,commune=#commune#,codePostal=#codePostal#,siteWeb=#siteWeb#,mail=#mail#,
+		telephone=#telephone#,fax=#fax#,commentaire=#commentaire#,presenceTuteurEns=#presenceTuteurEns#,
+		presenceTuteurPro=#presenceTuteurPro#,saisieTuteurProParEtudiant=#saisieTuteurProParEtudiant#,
+		choixAnneeAvantDebutAnnee=#choixAnneeAvantDebutAnnee#,choixAnneeApresDebutAnnee=#choixAnneeApresDebutAnnee#,
+		depotAnonyme=#depotAnonyme#,codeUniversite=#codeUniversite#,dateModif=CURRENT_TIMESTAMP(),loginModif=#loginModif#,
+		nomViseur=#nomViseur#,prenomViseur=#prenomViseur#,urlPageInstruction=#urlPageInstruction#,idCentreGestionSuperViseur=#idCentreGestionSuperViseur#,
+		codeConfidentialite=#codeConfidentialite#,autoriserImpressionConvention=#autoriserImpressionConvention#
+		WHERE idCentreGestion=#idCentreGestion#
+	</update>
+	
+	<update id="updateIdFichier">
+		UPDATE CentreGestion SET idFichier=#idFichier#
+		WHERE idCentreGestion=#idCentreGestion#
+	</update>
+	
+	<update id="setIdFichierNull">
+		UPDATE CentreGestion SET idFichier=null
+		WHERE idCentreGestion=#idCentreGestion#
+	</update>
+	
+	<delete id="deleteCentreGestion">
+		DELETE FROM CentreGestion WHERE idCentreGestion=#idCentreGestion#
+	</delete>
+
+</sqlMap>

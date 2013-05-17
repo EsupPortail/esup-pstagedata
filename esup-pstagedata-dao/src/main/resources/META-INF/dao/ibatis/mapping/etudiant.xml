@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Etudiant">
+
+	<typeAlias alias="ClassEtudiant" type="org.esupportail.pstagedata.domain.beans.Etudiant"/>
+	
+	<resultMap id="Etudiant" class="ClassEtudiant">
+        <result property="id" column="idEtudiant" />
+		<result property="identEtudiant" column="identEtudiant"/>
+		<result property="nom" column="nom"/>
+		<result property="nomMarital" column="nomMarital"/>
+		<result property="prenom" column="prenom"/>
+		<result property="mail" column="mail"/>
+		<result property="numEtudiant" column="numEtudiant"/>		
+		<result property="codeUniversite" column="codeUniversite"/>
+		<result property="codeSexe" column="codeSexe"/>
+		<result property="dateNais" column="dateNais"/>
+		<result property="loginCreation" column="loginCreation"/>
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif"/>
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+     </resultMap>
+     
+     <resultMap id="EtudiantLight" class="ClassEtudiant">
+        <result property="id" column="idEtudiant" />
+		<result property="nom" column="nom"/>
+		<result property="prenom" column="prenom"/>
+     </resultMap>
+     
+      <resultMap id="EtudiantExport" class="ClassEtudiant">
+        <result property="id" column="idEtudiant" />
+		<result property="nom" column="nom"/>
+		<result property="prenom" column="prenom"/>
+		<result property="mail" column="mail"/>
+		<result property="numEtudiant" column="numEtudiant"/>
+     </resultMap>
+ 
+    <statement id="getEtudiants" resultMap="Etudiant">
+		SELECT * FROM Etudiant
+	</statement>
+  
+    <statement id="getEtudiantFromId"  resultMap="Etudiant">
+        SELECT * FROM Etudiant WHERE idEtudiant=#id#
+        LIMIT 0,1
+    </statement>
+    
+    <statement id="getEtudiantLightFromId"  resultMap="EtudiantLight">
+        SELECT E.idEtudiant, E.nom, E.prenom FROM Etudiant E WHERE idEtudiant=#id#
+        LIMIT 0,1
+    </statement>
+    
+    <statement id="getEtudiantExportFromId"  resultMap="EtudiantExport">
+        SELECT E.idEtudiant, E.nom, E.prenom, E.mail, E.numEtudiant FROM Etudiant E WHERE idEtudiant=#id#
+        LIMIT 0,1
+    </statement>
+    
+    <statement id="getEtudiantFromUid" resultMap="Etudiant">
+		SELECT * FROM Etudiant
+		WHERE identEtudiant = #identEtudiant#
+		AND codeUniversite = #codeUniversite#
+		LIMIT 0,1
+	</statement>
+    
+    <insert id="addEtudiant">
+        INSERT INTO Etudiant 
+        ( idEtudiant,identEtudiant,nom,nomMarital,prenom,mail,numEtudiant,codeUniversite,codeSexe,dateNais,
+        	loginCreation,dateCreation)
+         
+  		VALUES 
+  		( #id#,#identEtudiant#,#nom#,#nomMarital#,#prenom#,#mail#,#numEtudiant#,#codeUniversite#,#codeSexe#,#dateNais#,
+        	#loginCreation#,CURRENT_TIMESTAMP())
+		
+		<selectKey resultClass="java.lang.Integer">
+         SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+    
+    <update id="updateEtudiant">
+        UPDATE Etudiant SET
+         idEtudiant = #id#,identEtudiant = #identEtudiant#,nom = #nom#,nomMarital = #nomMarital#,
+         prenom = #prenom#,mail = #mail#,numEtudiant = #numEtudiant#,
+  		 codeUniversite = #codeUniversite#,codeSexe = #codeSexe#,dateNais = #dateNais#,loginModif = #loginModif#,
+  		 dateModif = CURRENT_TIMESTAMP()
+  		WHERE idEtudiant = #id#
+    </update>
+    
+    <delete id="deleteEtudiant">
+    	 DELETE FROM Etudiant WHERE idEtudiant = #id#
+    </delete>
+      	
+</sqlMap>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TempsTravail">
+
+	<resultMap id="TempsTravail"
+		class="org.esupportail.pstagedata.domain.beans.TempsTravail">
+		<result property="id" column="idTempsTravail" />
+		<result property="libelle" column="libelleTempsTravail" />
+		<result property="codeCtrl" column="codeCtrl" />
+		<result property="temEnServ" column="temEnServTempsTravail" />
+	</resultMap>
+
+	<statement id="getTempsTravail" resultMap="TempsTravail">
+		SELECT * FROM TempsTravail
+		WHERE temEnServTempsTravail = 'O'
+	</statement>
+	
+	<statement id="getTempsTravailFromId" resultMap="TempsTravail">
+		SELECT * FROM TempsTravail
+		WHERE idTempsTravail = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

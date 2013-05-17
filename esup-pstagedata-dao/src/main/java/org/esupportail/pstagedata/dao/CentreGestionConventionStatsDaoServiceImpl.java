@@ -409,4 +409,25 @@ public class CentreGestionConventionStatsDaoServiceImpl extends
 	}
 	
 	
+	/*Ajout duree*/
+	public List<StatisticItem> getNumberOfConventionsByNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getNumberOfConventionsByNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByDepartmentAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getNumberOfConventionsByDepartmentAndNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByStudyAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getNumberOfConventionsByStudyAndNbWeeks");
+	}
+	public List<StatisticItem> getNumberOfConventionsByStepAndNbWeeks(
+			Integer idCentreGestion, String annee)
+			throws DataAccessDaoException {
+		return statsParTypeService.findItemsParType(idCentreGestion, annee, "getNumberOfConventionsByStepAndNbWeeks");
+	}
 }

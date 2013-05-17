@@ -27,8 +27,9 @@ public interface OffreDaoService extends Serializable {
 
 	/**
 	 * @return int
+	 * @param idsCentreGestion
 	 */
-	public int countOffreADiffuser();
+	public int countOffreADiffuser(List<Integer> idsCentreGestion);
 	/**
 	 * @return List<String>
 	 */

@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Convention">
+
+	<typeAlias alias="ClassConvention" type="org.esupportail.pstagedata.domain.beans.Convention"/>
+	
+	<resultMap id="Convention" class="ClassConvention">
+        <result property="idConvention" column="idConvention" />
+		<result property="idEtudiant" column="idEtudiant"/>
+		<result property="idCentreGestion" column="idCentreGestion"/>
+		<result property="codeUFR" column="codeUFR"/>
+		<result property="codeUniversiteUFR" column="codeUniversiteUFR"/>
+		<result property="codeDepartement" column="codeDepartement"/>
+		<result property="codeEtape" column="codeEtape"/>
+		<result property="codeUniversiteEtape" column="codeUniversiteEtape"/>
+		<result property="idEnseignant" column="idEnseignant" nullValue="0"/>
+		<result property="idStructure" column="idStructure" nullValue="0"/>
+		<result property="idService" column="idService" nullValue="0"/>
+		<result property="idContact" column="idContact" nullValue="0"/>
+		<result property="idSignataire" column="idSignataire" nullValue="0"/>
+		<result property="idTypeConvention" column="idTypeConvention"/>
+		<result property="idOffre" column="idOffre" nullValue="0"/>
+		<result property="sujetStage" column="sujetStage"/>
+		<result property="dateDebutStage" column="dateDebutStage"/>
+		<result property="dateFinStage" column="dateFinStage"/>
+		<result property="interruptionStage" column="interruptionStage"/>
+		<result property="dateDebutInterruption" column="dateDebutInterruption"/>
+		<result property="dateFinInterruption" column="dateFinInterruption"/>
+		<result property="nbJoursHebdo" column="nbJoursHebdo"/>
+		<result property="idTempsTravail" column="idTempsTravail"/>
+		<result property="commentaireDureeTravail" column="commentaireDureeTravail"/>
+		<result property="codeLangueConvention" column="codeLangueConvention"/>
+		<result property="idOrigineStage" column="idOrigineStage" nullValue="0"/>
+		<result property="idTheme" column="idTheme"/>
+		<result property="conventionStructure" column="conventionStructure"/>
+		<result property="validationConvention" column="validationConvention"/>
+		<result property="conversionEnContrat" column="conversionEnContrat"/>
+		<result property="commentaireStage" column="commentaireStage"/>
+		<result property="adresseEtudiant" column="adresseEtudiant"/>
+		<result property="codePostalEtudiant" column="codePostalEtudiant"/>
+		<result property="villeEtudiant" column="villeEtudiant"/>
+		<result property="paysEtudiant" column="paysEtudiant"/>
+		<result property="courrielPersoEtudiant" column="courrielPersoEtudiant"/>
+		<result property="telEtudiant" column="telEtudiant"/>
+		<result property="telPortableEtudiant" column="telPortableEtudiant"/>
+		<result property="idIndemnisation" column="idIndemnisation"/>
+		<result property="montantGratification" column="montantGratification"/>
+		<result property="fonctionsEtTaches" column="fonctionsEtTaches"/>
+		<result property="details" column="details"/>
+		<result property="annee" column="annee"/>
+		<result property="idAssurance" column="idAssurance"/>
+		<result property="insee" column="insee"/>
+		<result property="codeCaisse" column="codeCaisse"/>
+		<result property="temConfSujetTeme" column="temConfSujetTeme"/>
+		<result property="nbHeuresHebdo" column="nbHeuresHebdo"/>
+		<result property="quotiteTravail" column="quotiteTravail"/>
+		<result property="modeEncadreSuivi" column="modeEncadreSuivi"/>
+		<result property="idModeVersGratification" column="idModeVersGratification"/>
+		<result property="avantagesNature" column="avantagesNature"/>
+		<result property="idNatureTravail" column="idNatureTravail"/>
+		<result property="idModeValidationStage" column="idModeValidationStage"/>
+		<result property="codeElp" column="codeElp"/>
+		<result property="libelleELP" column="libelleELP"/>
+		<result property="creditECTS" column="creditECTS"/>
+		<result property="travailNuitFerie" column="travailNuitFerie"/>
+		<result property="dureeStage" column="dureeStage"/>
+		<result property="nomEtabRef" column="nomEtabRef"/>
+		<result property="adresseEtabRef" column="adresseEtabRef"/>
+		<result property="nomSignataireComposante" column="nomSignataireComposante"/>
+		<result property="qualiteSignataire" column="qualiteSignataire"/>
+		<result property="libelleCPAM" column="libelleCPAM"/>
+		<result property="dureeExceptionnelle" column="dureeExceptionnelle"/>
+		<result property="idUniteDureeExceptionnelle" column="idUniteDureeExceptionnelle" nullValue="0"/>
+		<result property="idUniteGratification" column="idUniteGratification" nullValue="0"/>
+		<result property="codeFinalite" column="codeFinalite"/>
+		<result property="libelleFinalite" column="libelleFinalite"/>
+		<result property="codeCursusLMD" column="codeCursusLMD"/>
+		<result property="priseEnChargeFraisMission" column="priseEnChargeFraisMission"/>
+		<result property="idFicheEvaluation" column="idFicheEvaluation" nullValue="0"/>
+		<result property="codeRGI" column="codeRGI"/>
+		<result property="loginCreation" column="loginCreation"/>
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif"/>
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginValidation" column="loginValidation"/>
+		<result property="dateValidation" column="dateValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginSignature" column="loginSignature"/>
+		<result property="dateSignature" column="dateSignature" javaType="java.util.Date" jdbcType="DATETIME"/>
+     </resultMap>
+     
+     <resultMap id="ConventionLight" class="ClassConvention">
+        <result property="idConvention" column="idConvention" />
+		<result property="dateDebutStage" column="dateDebutStage"/>
+		<result property="dateFinStage" column="dateFinStage"/>
+		<result property="validationConvention" column="validationConvention"/>
+		<result property="annee" column="annee"/>
+		<result property="codeUFR" column="codeUFR"/>
+		<result property="codeEtape" column="codeEtape"/>
+		<result property="codeUniversiteUFR" column="codeUniversiteUFR"/>
+		<result property="codeUniversiteEtape" column="codeUniversiteEtape"/>
+		
+		<result property="structure" column="idStructure" select="getStructureSuperLightFromId"/>
+		<result property="etudiant" column="idEtudiant" select="getEtudiantLightFromId"/>
+		<result property="nbAvenant" column="idConvention" select="getNombreAvenant"/>
+     </resultMap>
+     
+     <resultMap id="ConventionSuperLight" class="ClassConvention">
+        <result property="idConvention" column="idConvention" />
+     </resultMap>
+     
+      <resultMap id="ConventionExport" class="ClassConvention">
+        <result property="idConvention" column="idConvention" />
+		<result property="dateDebutStage" column="dateDebutStage" />
+		<result property="dateFinStage" column="dateFinStage"/>
+		<result property="validationConvention" column="validationConvention"/>
+		<result property="interruptionStage" column="interruptionStage"/>
+		<result property="dateDebutInterruption" column="dateDebutInterruption"/>
+		<result property="dateFinInterruption" column="dateFinInterruption"/>
+		<result property="nbJoursHebdo" column="nbJoursHebdo"/>
+		<result property="idTempsTravail" column="idTempsTravail"/>
+		<result property="dureeStage" column="dureeStage"/>
+		<result property="sujetStage" column="sujetStage"/>
+		<result property="fonctionsEtTaches" column="fonctionsEtTaches"/>
+		<result property="details" column="details"/>
+		<result property="idTheme" column="idTheme"/>
+		<result property="courrielPersoEtudiant" column="courrielPersoEtudiant"/>
+		<result property="telEtudiant" column="telEtudiant"/>
+		<result property="telPortableEtudiant" column="telPortableEtudiant"/>
+		<result property="montantGratification" column="montantGratification"/>
+		<result property="idUniteGratification" column="idUniteGratification" />
+		<result property="codeDepartement" column="codeDepartement"/>
+		<result property="dureeExceptionnelle" column="dureeExceptionnelle"/>
+		<result property="idUniteDureeExceptionnelle" column="idUniteDureeExceptionnelle" />
+		<result property="annee" column="annee"/>
+		<result property="idTypeConvention" column="idTypeConvention"/>
+		<result property="codeUFR" column="codeUFR"/>
+		<result property="codeEtape" column="codeEtape"/>
+		<result property="codeUniversiteUFR" column="codeUniversiteUFR"/>
+		<result property="codeUniversiteEtape" column="codeUniversiteEtape"/>
+		<result property="commentaireStage" column="commentaireStage"/>
+		<result property="commentaireDureeTravail" column="commentaireDureeTravail"/>
+		<result property="idIndemnisation" column="idIndemnisation"/>
+		<result property="codeElp" column="codeElp"/>
+		<result property="libelleELP" column="libelleELP"/>
+		
+		<result property="structure" column="idStructure" select="getStructureExportFromId"/>
+		<result property="etudiant" column="idEtudiant" select="getEtudiantExportFromId"/>
+		<result property="service" column="idService" select="getServiceExportFromId"/>
+		<result property="enseignant" column="idEnseignant" select="getEnseignantExportFromId"/>
+		<result property="contact" column="idContact" select="getContactExportFromId"/>
+		<result property="signataire" column="idSignataire" select="getContactExportFromId"/>
+		<result property="nbAvenant" column="idConvention" select="getNombreAvenant"/>
+     </resultMap>
+     
+    <statement id="getConventions" resultMap="Convention">
+		SELECT DISTINCT * FROM Convention C
+		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite">
+				CG.codeUniversite = #codeUniversite#
+			</isNotNull>
+		</dynamic>
+	</statement>
+  
+    <statement id="getConventionFromId"  resultMap="Convention">
+        SELECT * FROM Convention WHERE idConvention=#idConvention#
+        LIMIT 0,1
+    </statement>
+    
+	<statement id="getConventionsEtudiant" resultMap="ConventionLight">
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+        C.codeUniversiteUFR, C.codeUniversiteEtape
+         FROM Convention C
+         INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+         INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+         INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape)
+         LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+         WHERE ET.identEtudiant = #identEtudiant#
+         <isNotNull property="codeUniversite" prepend="AND">
+         	ET.codeUniversite = #codeUniversite#
+         </isNotNull>
+    </statement>
+    
+    <statement id="getConventionsByEnseignant" resultMap="ConventionLight">
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+        C.codeUniversiteUFR, C.codeUniversiteEtape
+         FROM Convention C
+         INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+         INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+         INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape)
+         INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+         WHERE ES.idEnseignant = #idEnseignant# and C.annee LIKE CONCAT('%',#annee#,'%')
+    </statement>
+    
+    <statement id="getAnneesConvention" resultClass="java.lang.String">
+        SELECT DISTINCT C.annee FROM Convention C
+        INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion 
+        <dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite">
+        		CG.codeUniversite = #codeUniversite#
+        	</isNotNull>
+        </dynamic>
+        ORDER BY C.annee DESC
+    </statement>
+    
+    <statement id="getConventionsFromCriteres" resultMap="ConventionLight">
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+        C.codeUniversiteUFR, C.codeUniversiteEtape
+        FROM Convention C
+		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
+        INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+        LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+        INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
+        <isNull property="idC">
+	        <isNotNull property="idTC">
+	       		INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention
+	        </isNotNull>
+	        <isNotNull property="idTH">
+	        	INNER JOIN Theme TH ON C.idTheme = TH.idTheme
+	        </isNotNull>
+	        <isNotNull property="idI">
+	        	INNER JOIN Indemnisation I ON C.idIndemnisation = I.idIndemnisation
+	        </isNotNull>
+	        <isNotNull property="idTT">
+	        	INNER JOIN TempsTravail TT ON C.idTempsTravail = TT.idTempsTravail
+	        </isNotNull>
+	        <isNotNull property="idLC">
+	       		INNER JOIN LangueConvention LC ON C.codeLangueConvention = LC.codeLangueConvention
+	        </isNotNull>
+	        <isNotNull property="idO">
+	        	INNER JOIN Offre O ON C.idOffre = O.idOffre
+	        </isNotNull> 
+	        INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idP">
+				 INNER JOIN Pays P ON S.idPays = P.idPays
+			</isNotNull>
+	        <isNotNull property="idTS">
+				INNER JOIN TypeStructure TS ON S.idTypeStructure = TS.idTypeStructure
+				<isNotNull property="idSJ">
+					INNER JOIN StatutJuridique SJ ON S.idStatutJuridique = SJ.idStatutJuridique
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="idEF">
+				INNER JOIN Effectif E ON S.idEffectif = E.idEffectif
+			</isNotNull>
+			<isNotNull property="nafN1">
+				INNER JOIN NAF_N5 N5 ON N5.codeNAF_N5 = S.codeNAF_N5
+				INNER JOIN NAF_N1 N1 ON N1.codeNAF_N1 = N5.codeNAF_N1
+			</isNotNull>
+		</isNull>
+		<dynamic prepend="WHERE">
+			<isNotNull property="idsCG">
+				<iterate prepend="AND" property="idsCG" conjunction="OR" open="(" close=")">
+					C.idCentreGestion = #idsCG[]#
+				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="idC">
+				C.idConvention = #idC#
+			</isNotNull>
+			<isNull property="idC">
+				<isNotNull prepend="AND" property="numET">
+					ET.numEtudiant LIKE CONCAT('%',#numET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nET">
+					ET.nom LIKE CONCAT('%',#nET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pET">
+					ET.prenom LIKE CONCAT('%',#pET#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="sC">
+					C.sujetStage LIKE CONCAT('%',#sC#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTC">
+					C.idTypeConvention = #idTC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTH">
+					C.idTheme = #idTH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nbJH">
+					C.nbJoursHebdo = #nbJH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idI">
+					C.idIndemnisation = #idI#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTT">
+					C.idTempsTravail = #idTT#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idLC">
+					C.codeLangueConvention = #idLC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cV">
+					C.validationConvention = #cV#
+				</isNotNull>
+				<isNotNull property="dS">
+					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ >= ]]> CURDATE())
+						AND C.dateFinStage <![CDATA[ <= ]]> CURDATE())
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ > ]]> CURDATE()
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+7 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+15 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+31 ))
+					</isEqual>
+				</isNotNull>
+				<isNotNull prepend="AND" property="aU">
+					C.annee LIKE CONCAT('%',#aU#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idO">
+					C.idOffre = #idO#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nE">
+					ES.nom LIKE CONCAT('%',#nE#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pE">
+					ES.prenom LIKE CONCAT('%',#pE#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="rsS">
+					S.raisonSociale LIKE CONCAT('%',#rsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nsS">
+					S.numeroSiret LIKE CONCAT('%',#nsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cmS">
+					S.commune LIKE CONCAT('%',#cmS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cpS">
+					S.codePostal LIKE CONCAT('%',#cpS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idP">
+					S.idPays = #idP#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTS">
+					S.idTypeStructure = #idTS#
+					<isNotNull prepend="AND" property="idSJ">
+						S.idStatutJuridique = #idSJ#
+					</isNotNull>
+				</isNotNull>
+				<isNotNull prepend="AND" property="idE">
+					S.idEffectif = #idE#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nafN1">
+					N1.codeNAF_N1 = #nafN1#
+				</isNotNull>
+			</isNull>
+		</dynamic>
+		ORDER BY C.dateCreation DESC
+		<isNotNull property="isLimit">
+			<isEqual property="isLimit" compareValue="1">
+        		LIMIT 0,200
+        	</isEqual>
+        </isNotNull>
+    </statement>
+    
+	<statement id="getConventionsFromCriteresByEnseignantTuteur" resultMap="ConventionLight">
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+        C.codeUniversiteUFR, C.codeUniversiteEtape
+        FROM Convention C
+		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
+        INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+        INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant       
+        <isNull property="idC">
+	        <isNotNull property="idTC">
+	       		INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention
+	        </isNotNull>
+	        <isNotNull property="idTH">
+	        	INNER JOIN Theme TH ON C.idTheme = TH.idTheme
+	        </isNotNull>
+	        <isNotNull property="idI">
+	        	INNER JOIN Indemnisation I ON C.idIndemnisation = I.idIndemnisation
+	        </isNotNull>
+	        <isNotNull property="idTT">
+	        	INNER JOIN TempsTravail TT ON C.idTempsTravail = TT.idTempsTravail
+	        </isNotNull>
+	        <isNotNull property="idLC">
+	       		INNER JOIN LangueConvention LC ON C.codeLangueConvention = LC.codeLangueConvention
+	        </isNotNull>
+	        <isNotNull property="idO">
+	        	INNER JOIN Offre O ON C.idOffre = O.idOffre
+	        </isNotNull> 
+	        INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idP">
+				 INNER JOIN Pays P ON S.idPays = P.idPays
+			</isNotNull>
+	        <isNotNull property="idTS">
+				INNER JOIN TypeStructure TS ON S.idTypeStructure = TS.idTypeStructure
+				<isNotNull property="idSJ">
+					INNER JOIN StatutJuridique SJ ON S.idStatutJuridique = SJ.idStatutJuridique
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="idEF">
+				INNER JOIN Effectif E ON S.idEffectif = E.idEffectif
+			</isNotNull>
+			<isNotNull property="nafN1">
+				INNER JOIN NAF_N5 N5 ON N5.codeNAF_N5 = S.codeNAF_N5
+				INNER JOIN NAF_N1 N1 ON N1.codeNAF_N1 = N5.codeNAF_N1
+			</isNotNull>
+		</isNull>
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="idEnseignant">
+				ES.idEnseignant = #idEnseignant# 
+			</isNotNull>
+			<isNotNull prepend="AND" property="idC">
+				C.idConvention = #idC#
+			</isNotNull>
+			<isNull property="idC">
+				<isNotNull prepend="AND" property="numET">
+					ET.numEtudiant LIKE CONCAT('%',#numET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nET">
+					ET.nom LIKE CONCAT('%',#nET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pET">
+					ET.prenom LIKE CONCAT('%',#pET#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="sC">
+					C.sujetStage LIKE CONCAT('%',#sC#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTC">
+					C.idTypeConvention = #idTC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTH">
+					C.idTheme = #idTH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nbJH">
+					C.nbJoursHebdo = #nbJH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idI">
+					C.idIndemnisation = #idI#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTT">
+					C.idTempsTravail = #idTT#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idLC">
+					C.codeLangueConvention = #idLC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cV">
+					C.validationConvention = #cV#
+				</isNotNull>
+				<isNotNull property="dS">
+					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ >= ]]> CURDATE())
+						AND C.dateFinStage <![CDATA[ <= ]]> CURDATE())
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ > ]]> CURDATE()
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+7 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+15 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+31 ))
+					</isEqual>
+				</isNotNull>
+				<isNotNull prepend="AND" property="aU">
+					C.annee LIKE CONCAT('%',#aU#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idO">
+					C.idOffre = #idO#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nE">
+					ES.nom LIKE CONCAT('%',#nE#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pE">
+					ES.prenom LIKE CONCAT('%',#pE#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="rsS">
+					S.raisonSociale LIKE CONCAT('%',#rsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nsS">
+					S.numeroSiret LIKE CONCAT('%',#nsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cmS">
+					S.commune LIKE CONCAT('%',#cmS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cpS">
+					S.codePostal LIKE CONCAT('%',#cpS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idP">
+					S.idPays = #idP#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTS">
+					S.idTypeStructure = #idTS#
+					<isNotNull prepend="AND" property="idSJ">
+						S.idStatutJuridique = #idSJ#
+					</isNotNull>
+				</isNotNull>
+				<isNotNull prepend="AND" property="idE">
+					S.idEffectif = #idE#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nafN1">
+					N1.codeNAF_N1 = #nafN1#
+				</isNotNull>
+			</isNull>
+		</dynamic>
+		<isNotNull property="isLimit">
+			<isEqual property="isLimit" compareValue="1">
+        		LIMIT 0,200
+        	</isEqual>
+        </isNotNull>
+    </statement>
+  
+    <statement id="getConventionsFromCriteresExport" resultMap="ConventionSuperLight">
+        SELECT DISTINCT C.idConvention
+        FROM Convention C
+		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
+        INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+        LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+        INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
+        <isNull property="idC">
+	        <isNotNull property="idTC">
+	       		INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention
+	        </isNotNull>
+	        <isNotNull property="idTH">
+	        	INNER JOIN Theme TH ON C.idTheme = TH.idTheme
+	        </isNotNull>
+	        <isNotNull property="idI">
+	        	INNER JOIN Indemnisation I ON C.idIndemnisation = I.idIndemnisation
+	        </isNotNull>
+	        <isNotNull property="idTT">
+	        	INNER JOIN TempsTravail TT ON C.idTempsTravail = TT.idTempsTravail
+	        </isNotNull>
+	        <isNotNull property="idLC">
+	       		INNER JOIN LangueConvention LC ON C.codeLangueConvention = LC.codeLangueConvention
+	        </isNotNull>
+	        <isNotNull property="idO">
+	        	INNER JOIN Offre O ON C.idOffre = O.idOffre
+	        </isNotNull> 
+	        INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idP">
+				 INNER JOIN Pays P ON S.idPays = P.idPays
+			</isNotNull>
+	        <isNotNull property="idTS">
+				INNER JOIN TypeStructure TS ON S.idTypeStructure = TS.idTypeStructure
+				<isNotNull property="idSJ">
+					INNER JOIN StatutJuridique SJ ON S.idStatutJuridique = SJ.idStatutJuridique
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="idEF">
+				INNER JOIN Effectif E ON S.idEffectif = E.idEffectif
+			</isNotNull>
+			<isNotNull property="nafN1">
+				INNER JOIN NAF_N5 N5 ON N5.codeNAF_N5 = S.codeNAF_N5
+				INNER JOIN NAF_N1 N1 ON N1.codeNAF_N1 = N5.codeNAF_N1
+			</isNotNull>
+		</isNull>
+		<dynamic prepend="WHERE">
+			<isNotNull property="idsCG">
+				<iterate prepend="AND" property="idsCG" conjunction="OR" open="(" close=")">
+					C.idCentreGestion = #idsCG[]#
+				</iterate>
+			</isNotNull>
+			<isNotNull prepend="AND" property="idC">
+				C.idConvention = #idC#
+			</isNotNull>
+			<isNull property="idC">
+				<isNotNull prepend="AND" property="numET">
+					ET.numEtudiant LIKE CONCAT('%',#numET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nET">
+					ET.nom LIKE CONCAT('%',#nET#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pET">
+					ET.prenom LIKE CONCAT('%',#pET#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="sC">
+					C.sujetStage LIKE CONCAT('%',#sC#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTC">
+					C.idTypeConvention = #idTC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTH">
+					C.idTheme = #idTH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nbJH">
+					C.nbJoursHebdo = #nbJH#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idI">
+					C.idIndemnisation = #idI#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTT">
+					C.idTempsTravail = #idTT#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idLC">
+					C.codeLangueConvention = #idLC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cV">
+					C.validationConvention = #cV#
+				</isNotNull>
+				<isNotNull property="dS">
+					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ >= ]]> CURDATE())
+						AND C.dateFinStage <![CDATA[ <= ]]> CURDATE())
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ > ]]> CURDATE()
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+7 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+15 ))
+					</isEqual>
+					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+						(C.dateDebutStage <![CDATA[ >= ]]> ( CURDATE( ))
+						AND C.dateDebutStage <![CDATA[ <= ]]> ( CURDATE( )+31 ))
+					</isEqual>
+				</isNotNull>
+				<isNotNull prepend="AND" property="aU">
+					C.annee LIKE CONCAT('%',#aU#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idO">
+					C.idOffre = #idO#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nE">
+					ES.nom LIKE CONCAT('%',#nE#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="pE">
+					ES.prenom LIKE CONCAT('%',#pE#,'%')
+				</isNotNull>
+				<isNotNull property="idsUfrs">
+					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
+						C.codeUfr = #idsUfrs[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull property="idsEtapes">
+					<iterate prepend="AND" property="idsEtapes" conjunction="OR" open="(" close=")">
+						C.codeEtape = #idsEtapes[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="rsS">
+					S.raisonSociale LIKE CONCAT('%',#rsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="nsS">
+					S.numeroSiret LIKE CONCAT('%',#nsS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cmS">
+					S.commune LIKE CONCAT('%',#cmS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="cpS">
+					S.codePostal LIKE CONCAT('%',#cpS#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idP">
+					S.idPays = #idP#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTS">
+					S.idTypeStructure = #idTS#
+					<isNotNull prepend="AND" property="idSJ">
+						S.idStatutJuridique = #idSJ#
+					</isNotNull>
+				</isNotNull>
+				<isNotNull prepend="AND" property="idE">
+					S.idEffectif = #idE#
+				</isNotNull>
+				<isNotNull prepend="AND" property="nafN1">
+					N1.codeNAF_N1 = #nafN1#
+				</isNotNull>
+			</isNull>
+		</dynamic>
+		<isNotNull property="isLimit">
+			<isEqual property="isLimit" compareValue="1">
+        		LIMIT 0,3500
+        	</isEqual>
+        </isNotNull>
+    </statement>
+    
+    
+    <statement id="getConventionsFromExport" resultMap="ConventionExport">
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        C.validationConvention, C.interruptionStage, C.dateDebutInterruption, C.dateFinInterruption,
+        C.nbJoursHebdo, C.idTempsTravail, C.dureeStage, C.sujetStage,
+        C.fonctionsEtTaches, C.details, C.idTheme,
+        C.courrielPersoEtudiant, C.telEtudiant, C.telPortableEtudiant,
+        C.montantGratification, C.idUniteGratification,
+        C.dureeExceptionnelle, C.idUniteDureeExceptionnelle,
+        C.idStructure, C.idEtudiant, C.codeDepartement, 
+        C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire , C.idTypeConvention,
+        C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp, C.libelleElp,
+        C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation
+        FROM Convention C
+		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
+        INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+        LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+        INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="idsConventionsExport" open="(" close=")">
+				<iterate property="idsConventionsExport" conjunction="OR">
+					C.idConvention = #idsConventionsExport[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+		ORDER BY C.idConvention
+    </statement>
+    
+    
+    <statement id="getNombreConventionByCentreGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Convention C
+		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+		WHERE CG.idCentreGestion = #idCentreGestion#
+		<isNotNull property="codeUniversite" prepend="AND">
+			CG.codeUniversite = #codeUniversite#
+		</isNotNull>
+	</statement>
+	
+    <insert id="addConvention">
+        INSERT INTO Convention 
+         (idConvention,idEtudiant,idCentreGestion,codeUFR,codeUniversiteUFR,codeDepartement,codeEtape,codeUniversiteEtape,
+  		 idEnseignant,idStructure,idService,idContact,idSignataire,idTypeConvention,idOffre,
+  		 sujetStage,dateDebutStage,dateFinStage,interruptionStage,dateDebutInterruption,dateFinInterruption,
+  		 nbJoursHebdo,idTempsTravail,commentaireDureeTravail,codeLangueConvention,idOrigineStage,idTheme,conventionStructure,
+  		 validationConvention,conversionEnContrat,commentaireStage,adresseEtudiant,codePostalEtudiant,villeEtudiant,paysEtudiant,courrielPersoEtudiant,telEtudiant,telPortableEtudiant,
+  		 idIndemnisation,montantGratification,fonctionsEtTaches,details,annee,idAssurance,insee,codeCaisse,temConfSujetTeme,nbHeuresHebdo,quotiteTravail,
+  		 modeEncadreSuivi,idModeVersGratification,avantagesNature,idNatureTravail,idModeValidationStage,codeElp,libelleELP,creditECTS,travailNuitFerie,
+  		 dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
+  		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,idFicheEvaluation,codeRGI,
+  		 loginCreation,dateCreation)
+  		VALUES 
+		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeUniversiteEtape#,
+  		 #idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
+  		 #sujetStage#,#dateDebutStage#,#dateFinStage#,#interruptionStage#,#dateDebutInterruption#,#dateFinInterruption#,
+  		 #nbJoursHebdo#,#idTempsTravail#,#commentaireDureeTravail#,#codeLangueConvention#,#idOrigineStage#,#idTheme#,#conventionStructure#,
+  		 #validationConvention#,#conversionEnContrat#,#commentaireStage#,#adresseEtudiant#,#codePostalEtudiant#,#villeEtudiant#,#paysEtudiant#,#courrielPersoEtudiant#,#telEtudiant#,#telPortableEtudiant#,
+  		 #idIndemnisation#,#montantGratification#,#fonctionsEtTaches#,#details#,#annee#,#idAssurance#,#insee#,#codeCaisse#,#temConfSujetTeme#,#nbHeuresHebdo#,#quotiteTravail#,
+  		 #modeEncadreSuivi#,#idModeVersGratification#,#avantagesNature#,#idNatureTravail#,#idModeValidationStage#,#codeElp#,#libelleELP#,#creditECTS#,#travailNuitFerie#,
+  		 #dureeStage#,#nomEtabRef#,#adresseEtabRef#,#nomSignataireComposante#,#qualiteSignataire#,#libelleCPAM#,#dureeExceptionnelle#,#idUniteDureeExceptionnelle#,#idUniteGratification#,
+  		 #codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#idFicheEvaluation#,#codeRGI#,
+  		 #loginCreation#,CURRENT_TIMESTAMP())
+		<selectKey resultClass="java.lang.Integer">
+         SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+    
+    <update id="updateConvention">               
+        UPDATE Convention SET
+         idConvention = #idConvention#,idEtudiant = #idEtudiant#,idCentreGestion = #idCentreGestion#,codeUFR = #codeUFR#,codeUniversiteUFR = #codeUniversiteUFR#,
+         codeDepartement = #codeDepartement#,codeEtape = #codeEtape#, codeUniversiteEtape = #codeUniversiteEtape#,
+  		 idEnseignant = #idEnseignant#,idStructure = #idStructure#,idService = #idService#,idContact = #idContact#,idSignataire = #idSignataire#,idTypeConvention = #idTypeConvention#,idOffre = #idOffre#,
+  		 sujetStage = #sujetStage#,dateDebutStage = #dateDebutStage#,dateFinStage = #dateFinStage#,interruptionStage = #interruptionStage#,dateDebutInterruption = #dateDebutInterruption#,dateFinInterruption = #dateFinInterruption#,
+  		 nbJoursHebdo = #nbJoursHebdo#,idTempsTravail = #idTempsTravail#,commentaireDureeTravail = #commentaireDureeTravail#,
+  		 codeLangueConvention = #codeLangueConvention#,idOrigineStage = #idOrigineStage#,idTheme = #idTheme#,conventionStructure = #conventionStructure#,
+  		 validationConvention = #validationConvention#,conversionEnContrat = #conversionEnContrat#,commentaireStage = #commentaireStage#,
+  		 adresseEtudiant = #adresseEtudiant#,codePostalEtudiant = #codePostalEtudiant#,villeEtudiant = #villeEtudiant#,
+  		 paysEtudiant = #paysEtudiant#,courrielPersoEtudiant = #courrielPersoEtudiant#,telEtudiant = #telEtudiant#,telPortableEtudiant = #telPortableEtudiant#,
+  		 idIndemnisation = #idIndemnisation#,montantGratification = #montantGratification#,fonctionsEtTaches = #fonctionsEtTaches#,details = #details#,annee = #annee#,
+  		 idAssurance = #idAssurance#,insee = #insee#,codeCaisse = #codeCaisse#,temConfSujetTeme = #temConfSujetTeme#,nbHeuresHebdo = #nbHeuresHebdo#,quotiteTravail = #quotiteTravail#,
+  		 modeEncadreSuivi = #modeEncadreSuivi#,idModeVersGratification = #idModeVersGratification#,avantagesNature = #avantagesNature#,
+  		 idNatureTravail = #idNatureTravail#,idModeValidationStage = #idModeValidationStage#,codeElp = #codeElp#,libelleELP = #libelleELP#,creditECTS = #creditECTS#,travailNuitFerie = #travailNuitFerie#,
+  		 dureeStage = #dureeStage#,nomEtabRef = #nomEtabRef#,adresseEtabRef = #adresseEtabRef#,nomSignataireComposante = #nomSignataireComposante#,
+  		 qualiteSignataire = #qualiteSignataire#,libelleCPAM = #libelleCPAM#,dureeExceptionnelle = #dureeExceptionnelle#,idUniteDureeExceptionnelle = #idUniteDureeExceptionnelle#,idUniteGratification = #idUniteGratification#,
+  		 codeFinalite = #codeFinalite#,libelleFinalite = #libelleFinalite#,codeCursusLMD = #codeCursusLMD#,priseEnChargeFraisMission = #priseEnChargeFraisMission#,idFicheEvaluation = #idFicheEvaluation#,
+  		 codeRGI=#codeRGI#,
+  		 loginModif = #loginModif#,dateModif = CURRENT_TIMESTAMP(),loginValidation = #loginValidation#,dateValidation = #dateValidation#,loginSignature = #loginSignature#,dateSignature = #dateSignature#
+  		WHERE idConvention = #idConvention#
+    </update>
+    
+    <statement id="getCodeUFRFromCodeEtape" resultClass="java.lang.String">
+        SELECT DISTINCT C.codeUFR FROM Convention C
+        INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+  		WHERE C.codeEtape=#codeEtape#
+  		<isNotNull property="codeUniversite" prepend="AND">
+  			C.codeUniversiteEtape = #codeUniversite# 
+  		</isNotNull>
+		LIMIT 0,1
+    </statement>
+    
+	<update id="updateCentreConventionByUfr">
+        UPDATE Convention C 
+        INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+        SET C.idCentreGestion = #idCentreGestion#
+  		WHERE C.codeUFR=#code#
+  		<isNotNull property="codeUniversite" prepend="AND">
+  			C.codeUniversiteUFR = #codeUniversite# 
+  		</isNotNull>
+    </update>
+    
+    <update id="updateCentreConventionByEtape">
+        UPDATE Convention C 
+        INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+        SET C.idCentreGestion = #idCentreGestion#
+  		WHERE C.codeEtape=#code#  		
+  		<isNotNull property="codeUniversite" prepend="AND">
+  			C.codeUniversiteEtape = #codeUniversite# 
+  		</isNotNull>
+    </update>
+    
+    <delete id="deleteConvention">
+    	 DELETE FROM Convention WHERE idConvention = #idConvention#
+    </delete>
+      	
+</sqlMap>

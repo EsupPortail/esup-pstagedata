@@ -14,7 +14,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010
- * 
+ *
  */
 public class DomainServiceImpl implements DomainService, InitializingBean {
 
@@ -52,14 +52,14 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public User getUser(String uid) {
 		User user = null;
 		for (User userInList : users) {
-			if (userInList.getLogin().equals(uid)) {
+			if (userInList.getId().equals(uid)) {
 				user = userInList;
 				break;
 			}
 		}
 		if (user == null) {
 			user = new User();
-			user.setLogin(uid);
+			user.setId(uid);
 			// On cree l'utilisateur, son nom complet prend la valeur de
 			// l'Uid.
 			user.setDisplayName(uid);

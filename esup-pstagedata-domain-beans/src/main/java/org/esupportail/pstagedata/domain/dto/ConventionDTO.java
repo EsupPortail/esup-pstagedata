@@ -19,7 +19,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * 
 	 */
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	/**
 	 * idConvention
@@ -331,7 +331,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	private Date dateSignature;
 
 
-
 	/* **
 	 * Objets
 	 */
@@ -450,12 +449,12 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * langueConvention
 	 */
 	private LangueConventionDTO langueConvention;
-	
+
 	/**
 	 * nombre avenant
 	 */
 	private int nbAvenant;
-	
+
 	/**
 	 * variable pour la listCheckBox de validation en masse
 	 */
@@ -531,7 +530,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				this.montantGratification=c.getMontantGratification();
 				this.fonctionsEtTaches=c.getFonctionsEtTaches();
 				this.details=c.getDetails();
-				
+
 				this.idAssurance=c.getIdAssurance();
 				this.insee=c.getInsee();
 				this.codeCaisse=c.getCodeCaisse();
@@ -566,6 +565,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				this.dateValidation=c.getDateValidation();
 				this.loginSignature=c.getLoginSignature();
 				this.dateSignature=c.getDateSignature();
+				this.nbAvenant = c.getNbAvenant();
 				if (c.getStructure() != null) {
 					this.structure=new StructureDTO(c.getStructure(),false);
 				}
@@ -601,86 +601,194 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	}
 
 	/**
+	 * Constructeur pour l'export excel
+	 * @param c
+	 */
+	public ConventionDTO(Convention c){
+		super(c);
+		if(c!=null){
+			this.idEtudiant=c.getIdEtudiant();
+			this.idStructure=c.getIdStructure();
+			this.idConvention=c.getIdConvention();
+			this.dateDebutStage=c.getDateDebutStage();
+			this.dateFinStage=c.getDateFinStage();
+			this.validationConvention=c.isValidationConvention();
+			this.annee=c.getAnnee();
+			this.codeUFR=c.getCodeUFR();
+			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
+			this.codeEtape=c.getCodeEtape();
+			this.codeUniversiteEtape=c.getCodeUniversiteEtape();
+			this.codeDepartement=c.getCodeDepartement();
+			this.idEnseignant=c.getIdEnseignant();
+			this.idService=c.getIdService();
+			this.idContact=c.getIdContact();
+			this.idSignataire=c.getIdSignataire();
+			this.idTypeConvention=c.getIdTypeConvention();
+			this.sujetStage=c.getSujetStage();
+			this.interruptionStage=c.isInterruptionStage();
+			this.dateDebutInterruption=c.getDateDebutInterruption();
+			this.dateFinInterruption=c.getDateFinInterruption();
+			this.nbJoursHebdo=c.getNbJoursHebdo();
+			this.idTempsTravail=c.getIdTempsTravail();
+			this.commentaireDureeTravail=c.getCommentaireDureeTravail();
+			this.commentaireStage=c.getCommentaireStage();
+			this.idTheme=c.getIdTheme();
+//			this.adresseEtudiant=c.getAdresseEtudiant();
+//			this.codePostalEtudiant=c.getCodePostalEtudiant();
+//			this.villeEtudiant=c.getVilleEtudiant();
+//			this.paysEtudiant=c.getPaysEtudiant();
+			this.courrielPersoEtudiant=c.getCourrielPersoEtudiant();
+			this.telEtudiant=c.getTelEtudiant();
+			this.telPortableEtudiant=c.getTelPortableEtudiant();
+			this.idIndemnisation=c.getIdIndemnisation();
+			this.montantGratification=c.getMontantGratification();
+			this.fonctionsEtTaches=c.getFonctionsEtTaches();
+			this.details=c.getDetails();
+//			this.idAssurance=c.getIdAssurance();
+//			this.insee=c.getInsee();
+//			this.codeCaisse=c.getCodeCaisse();
+//			this.temConfSujetTeme=c.getTemConfSujetTeme();
+//			this.nbHeuresHebdo=c.getNbHeuresHebdo();
+//			this.quotiteTravail=c.getQuotiteTravail();
+//			this.modeEncadreSuivi=c.getModeEncadreSuivi();
+//			this.idModeVersGratification=c.getIdModeVersGratification();
+//			this.avantagesNature=c.getAvantagesNature();
+//			this.idNatureTravail=c.getIdNatureTravail();
+//			this.idModeValidationStage=c.getIdModeValidationStage();
+			this.codeElp=c.getCodeElp();
+			this.libelleELP=c.getLibelleELP();
+//			this.creditECTS=c.getCreditECTS();
+//			this.travailNuitFerie=c.getTravailNuitFerie();
+			this.dureeStage=c.getDureeStage();
+//			this.nomEtabRef=c.getNomEtabRef();
+//			this.adresseEtabRef=c.getAdresseEtabRef();
+//			this.nomSignataireComposante=c.getNomSignataireComposante();
+//			this.qualiteSignataire=c.getQualiteSignataire();
+//			this.libelleCPAM=c.getLibelleCPAM();
+			this.dureeExceptionnelle=c.getDureeExceptionnelle();
+			this.idUniteDureeExceptionnelle=c.getIdUniteDureeExceptionnelle();
+			this.idUniteGratification=c.getIdUniteGratification();
+//			this.codeFinalite=c.getCodeFinalite();
+//			this.libelleFinalite=c.getLibelleFinalite();
+//			this.codeCursusLMD=c.getCodeCursusLMD();
+//			this.priseEnChargeFraisMission=c.isPriseEnChargeFraisMission();
+//			this.idFicheEvaluation=c.getIdFicheEvaluation();
+//			this.codeRGI=c.getCodeRGI();
+//			this.loginValidation=c.getLoginValidation();
+//			this.dateValidation=c.getDateValidation();
+//			this.loginSignature=c.getLoginSignature();
+//			this.dateSignature=c.getDateSignature();
+//			this.verificationConvention=c.isVerificationConvention();
+			this.nbAvenant = c.getNbAvenant();
+			if (c.getStructure() != null) {
+				this.structure=new StructureDTO(c.getStructure(),false);
+			}
+			if (c.getEtudiant() != null) {
+				this.etudiant = new EtudiantDTO(c.getEtudiant(),false);
+			}
+			if (c.getUfr() != null) {
+				this.ufr = new UfrDTO(c.getUfr());
+			}
+			if (c.getEtape() != null) {
+				this.etape = new EtapeDTO(c.getEtape());
+			}
+			if (c.getService() != null) {
+				this.service = new ServiceDTO(c.getService());
+			}
+			if (c.getEnseignant() != null) {
+				this.enseignant = new EnseignantDTO(c.getEnseignant());
+			}
+			if (c.getContact() != null) {
+				this.contact = new ContactDTO(c.getContact());
+			}
+			if (c.getSignataire() != null) {
+				this.signataire = new ContactDTO(c.getSignataire());
+			}
+		}
+	}
+
+
+	/**
 	 * @see org.esupportail.pstagedata.domain.dto.ObjetMetiersDTO#toString()
 	 */
 	@Override
 	public String toString(){
 		return 
-		"idConvention : "+idConvention+", "+
-		"idEtudiant : "+idEtudiant+", "+
-		"idCentreGestion : "+idCentreGestion+", "+
-		"codeUFR : "+codeUFR+", "+
-		"codeDepartement : "+codeDepartement+", "+
-		"codeEtape : "+codeEtape+", "+
-		"idStructure : "+idStructure+", "+
-		"idService: "+idService+", "+
-		"idContact : "+idContact+", "+
-		"idSignataire : "+idSignataire+", "+
-		"idTypeConvention : "+idTypeConvention+", "+
-		"idOffre : "+idOffre+", "+
-		"sujetStage : "+sujetStage+", "+
-		"dateDebutStage : "+dateDebutStage+", "+
-		"dateFinStage : "+dateFinStage+", "+
-		"interruptionStage : "+interruptionStage+", "+
-		"dateDebutInterruption : "+dateDebutInterruption+", "+
-		"dateFinInterruption : "+dateFinInterruption+", "+
-		"nbJoursHebdo : "+nbJoursHebdo+", "+
-		"idTempsTravail : "+idTempsTravail+", "+
-		"commentaireDureeTravail : "+commentaireDureeTravail+", "+
-		"codeLangueConvention : "+codeLangueConvention+", "+
-		"idOrigineStage : "+idOrigineStage+", "+
-		"idTheme : "+idTheme+", "+
-		"conventionStructure : "+conventionStructure+", "+
-		"validationConvention : "+validationConvention+", "+
-		"conversionEnContrat : "+conversionEnContrat+", "+
-		"commentaireStage : "+commentaireStage+", "+
-		"adresseEtudiant : "+adresseEtudiant+", "+
-		"codePostalEtudiant : "+codePostalEtudiant+", "+
-		"villeEtudiant : "+villeEtudiant+", "+
-		"paysEtudiant : "+paysEtudiant+", "+
-		"courrielPersoEtudiant : "+courrielPersoEtudiant+", "+
-		"telEtudiant : "+telEtudiant+", "+
-		"telPortableEtudiant : "+telPortableEtudiant+", "+
-		"idIndemnisation : "+idIndemnisation+", "+
-		"montantGratification : "+montantGratification+", "+
-		"fonctionsEtTaches : "+fonctionsEtTaches+", "+
-		"details : "+details+", "+
-		"annee : "+annee+", "+
-		"idAssurance : "+idAssurance+", "+
-		"insee : "+insee+", "+
-		"codeCaisse : "+codeCaisse+", "+
-		"temConfSujetTeme : "+temConfSujetTeme+", "+
-		"nbHeuresHebdo : "+nbHeuresHebdo+", "+
-		"quotiteTravail : "+quotiteTravail+", "+
-		"modeEncadreSuivi : "+modeEncadreSuivi+", "+
-		"idModeVersGratification : "+idModeVersGratification+", "+
-		"avantagesNature : "+avantagesNature+", "+
-		"idNatureTravail : "+idNatureTravail+", "+
-		"idModeValidationStage : "+idModeValidationStage+", "+
-		"codeElp : "+codeElp+", "+
-		"libelleELP : "+libelleELP+", "+
-		"creditECTS : "+creditECTS+", "+
-		"travailNuitFerie : "+travailNuitFerie+", "+
-		"dureeStage : "+dureeStage+", "+
-		"nomEtabRef : "+nomEtabRef+", "+
-		"adresseEtabRef : "+adresseEtabRef+", "+
-		"nomSignataireComposante : "+nomSignataireComposante+", "+
-		"qualiteSignataire : "+qualiteSignataire+", "+
-		"libelleCPAM: "+libelleCPAM+", "+
-		"dureeExceptionnelle : "+dureeExceptionnelle+", "+
-		"idUniteDureeExceptionnelle : "+idUniteDureeExceptionnelle+", "+
-		"idUniteGratification : "+idUniteGratification+", "+
-		"codeFinalite : "+codeFinalite+", "+
-		"libelleFinalite : "+libelleFinalite+", "+
-		"codeCursusLMD : "+codeCursusLMD+", "+
-		"priseEnChargeFraisMission : "+priseEnChargeFraisMission+", "+
-		"idFicheEvaluation : "+idFicheEvaluation+", "+
-		"codeRGI : "+codeRGI+", "+
-		"loginValidation : "+loginValidation+", "+
-		"dateValidation : "+dateValidation+", "+
-		"loginSignature : "+loginSignature+", "+
-		"dateSignature : "+dateSignature+", "+
-		", "+super.toString();
+				"idConvention : "+idConvention+", "+
+				"idEtudiant : "+idEtudiant+", "+
+				"idCentreGestion : "+idCentreGestion+", "+
+				"codeUFR : "+codeUFR+", "+
+				"codeDepartement : "+codeDepartement+", "+
+				"codeEtape : "+codeEtape+", "+
+				"idStructure : "+idStructure+", "+
+				"idService: "+idService+", "+
+				"idContact : "+idContact+", "+
+				"idSignataire : "+idSignataire+", "+
+				"idTypeConvention : "+idTypeConvention+", "+
+				"idOffre : "+idOffre+", "+
+				"sujetStage : "+sujetStage+", "+
+				"dateDebutStage : "+dateDebutStage+", "+
+				"dateFinStage : "+dateFinStage+", "+
+				"interruptionStage : "+interruptionStage+", "+
+				"dateDebutInterruption : "+dateDebutInterruption+", "+
+				"dateFinInterruption : "+dateFinInterruption+", "+
+				"nbJoursHebdo : "+nbJoursHebdo+", "+
+				"idTempsTravail : "+idTempsTravail+", "+
+				"commentaireDureeTravail : "+commentaireDureeTravail+", "+
+				"codeLangueConvention : "+codeLangueConvention+", "+
+				"idOrigineStage : "+idOrigineStage+", "+
+				"idTheme : "+idTheme+", "+
+				"conventionStructure : "+conventionStructure+", "+
+				"validationConvention : "+validationConvention+", "+
+				"conversionEnContrat : "+conversionEnContrat+", "+
+				"commentaireStage : "+commentaireStage+", "+
+				"adresseEtudiant : "+adresseEtudiant+", "+
+				"codePostalEtudiant : "+codePostalEtudiant+", "+
+				"villeEtudiant : "+villeEtudiant+", "+
+				"paysEtudiant : "+paysEtudiant+", "+
+				"courrielPersoEtudiant : "+courrielPersoEtudiant+", "+
+				"telEtudiant : "+telEtudiant+", "+
+				"telPortableEtudiant : "+telPortableEtudiant+", "+
+				"idIndemnisation : "+idIndemnisation+", "+
+				"montantGratification : "+montantGratification+", "+
+				"fonctionsEtTaches : "+fonctionsEtTaches+", "+
+				"details : "+details+", "+
+				"annee : "+annee+", "+
+				"idAssurance : "+idAssurance+", "+
+				"insee : "+insee+", "+
+				"codeCaisse : "+codeCaisse+", "+
+				"temConfSujetTeme : "+temConfSujetTeme+", "+
+				"nbHeuresHebdo : "+nbHeuresHebdo+", "+
+				"quotiteTravail : "+quotiteTravail+", "+
+				"modeEncadreSuivi : "+modeEncadreSuivi+", "+
+				"idModeVersGratification : "+idModeVersGratification+", "+
+				"avantagesNature : "+avantagesNature+", "+
+				"idNatureTravail : "+idNatureTravail+", "+
+				"idModeValidationStage : "+idModeValidationStage+", "+
+				"codeElp : "+codeElp+", "+
+				"libelleELP : "+libelleELP+", "+
+				"creditECTS : "+creditECTS+", "+
+				"travailNuitFerie : "+travailNuitFerie+", "+
+				"dureeStage : "+dureeStage+", "+
+				"nomEtabRef : "+nomEtabRef+", "+
+				"adresseEtabRef : "+adresseEtabRef+", "+
+				"nomSignataireComposante : "+nomSignataireComposante+", "+
+				"qualiteSignataire : "+qualiteSignataire+", "+
+				"libelleCPAM: "+libelleCPAM+", "+
+				"dureeExceptionnelle : "+dureeExceptionnelle+", "+
+				"idUniteDureeExceptionnelle : "+idUniteDureeExceptionnelle+", "+
+				"idUniteGratification : "+idUniteGratification+", "+
+				"codeFinalite : "+codeFinalite+", "+
+				"libelleFinalite : "+libelleFinalite+", "+
+				"codeCursusLMD : "+codeCursusLMD+", "+
+				"priseEnChargeFraisMission : "+priseEnChargeFraisMission+", "+
+				"idFicheEvaluation : "+idFicheEvaluation+", "+
+				"codeRGI : "+codeRGI+", "+
+				"loginValidation : "+loginValidation+", "+
+				"dateValidation : "+dateValidation+", "+
+				"loginSignature : "+loginSignature+", "+
+				"dateSignature : "+dateSignature+", "+
+				", "+super.toString();
 
 	}
 
@@ -694,7 +802,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-		+ ((idConvention == null) ? 0 : idConvention.hashCode());
+				+ ((idConvention == null) ? 0 : idConvention.hashCode());
 		return result;
 	}
 
@@ -722,7 +830,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	/* ***************************************************************
 	 * Methodes pour export , boolean
 	 ****************************************************************/	
-	
+
 	/**
 	 * @return isInterruptionStage
 	 */
@@ -2209,7 +2317,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public boolean isSelected() {
 		return selected;
 	}
-
 
 
 }

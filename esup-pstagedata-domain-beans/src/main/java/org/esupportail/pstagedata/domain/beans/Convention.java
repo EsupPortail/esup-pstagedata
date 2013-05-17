@@ -18,7 +18,7 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 * 
 	 */
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	/**
 	 * idConvention
@@ -1627,6 +1627,5 @@ public class Convention extends ObjetMetiers implements Serializable{
 	public void setNbAvenant(int nbAvenant) {
 		this.nbAvenant = nbAvenant;
 	}
-
 
 }

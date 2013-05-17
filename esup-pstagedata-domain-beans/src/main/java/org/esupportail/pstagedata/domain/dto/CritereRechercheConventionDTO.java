@@ -15,7 +15,7 @@ public class CritereRechercheConventionDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	/**
 	 * List ID Centre gestion
@@ -66,11 +66,15 @@ public class CritereRechercheConventionDTO implements Serializable{
 	 */
 	private LangueConventionDTO langueConvention;
 	/**
+	 * estVerifiee
+	 */
+	private Boolean estVerifiee;
+	/**
 	 * estValidee
 	 */
 	private Boolean estValidee;
 	/**
-	 * Stage en cours, termin�, ...
+	 * Stage en cours, termine, ...
 	 */
 	private String dateStage;
 	/**
@@ -134,7 +138,7 @@ public class CritereRechercheConventionDTO implements Serializable{
 	 */
 	private NafN1DTO nafN1;
 	/**
-	 * Requete limit�e � 200 r�sultats
+	 * Requete limitee a 200 resultats
 	 */
 	private boolean isLimit=true;
 	
@@ -617,6 +621,20 @@ public class CritereRechercheConventionDTO implements Serializable{
 	 */
 	public void setNbRechercheMaxi(String nbRechercheMaxi) {
 		this.nbRechercheMaxi = nbRechercheMaxi;
+	}
+
+	/**
+	 * @return the estVerifiee
+	 */
+	public Boolean getEstVerifiee() {
+		return estVerifiee;
+	}
+
+	/**
+	 * @param estVerifiee the estVerifiee to set
+	 */
+	public void setEstVerifiee(Boolean estVerifiee) {
+		this.estVerifiee = estVerifiee;
 	}
 
 	

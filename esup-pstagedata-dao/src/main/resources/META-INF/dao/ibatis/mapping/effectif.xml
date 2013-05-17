@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Effectif">
+
+	<resultMap id="Effectif"
+		class="org.esupportail.pstagedata.domain.beans.Effectif">
+		<result property="id" column="idEffectif" />
+		<result property="libelle" column="libelleEffectif" />
+		<result property="temEnServ" column="temEnServEffectif" />
+	</resultMap>
+
+	<statement id="getEffectifs" resultMap="Effectif">
+		SELECT * FROM Effectif
+		WHERE temEnServEffectif = 'O'
+	</statement>
+	
+	<statement id="getEffectifFromId" resultMap="Effectif">
+		SELECT * FROM Effectif
+		WHERE idEffectif = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

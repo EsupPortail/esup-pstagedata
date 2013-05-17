@@ -158,6 +158,8 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("idTT",null);
 			if(critereRechercheConvention.getLangueConvention()!=null) parameterMap.put("idLC", critereRechercheConvention.getLangueConvention().getCode());
 			else parameterMap.put("idLC",null);
+			if(critereRechercheConvention.getEstVerifiee()!=null) parameterMap.put("cVerif", critereRechercheConvention.getEstVerifiee().booleanValue()?"1":"0");
+			else parameterMap.put("cVerif", null);
 			if(critereRechercheConvention.getEstValidee()!=null) parameterMap.put("cV", critereRechercheConvention.getEstValidee().booleanValue()?"1":"0");
 			else parameterMap.put("cV", null);
 			parameterMap.put("dS", StringUtils.hasText(critereRechercheConvention.getDateStage())?critereRechercheConvention.getDateStage():null);
@@ -224,6 +226,8 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("idTT",null);
 			if(critereRechercheConvention.getLangueConvention()!=null) parameterMap.put("idLC", critereRechercheConvention.getLangueConvention().getCode());
 			else parameterMap.put("idLC",null);
+			if(critereRechercheConvention.getEstVerifiee()!=null) parameterMap.put("cVerif", critereRechercheConvention.getEstVerifiee().booleanValue()?"1":"0");
+			else parameterMap.put("cVerif", null);
 			if(critereRechercheConvention.getEstValidee()!=null) parameterMap.put("cV", critereRechercheConvention.getEstValidee().booleanValue()?"1":"0");
 			else parameterMap.put("cV", null);
 			parameterMap.put("dS", StringUtils.hasText(critereRechercheConvention.getDateStage())?critereRechercheConvention.getDateStage():null);
@@ -290,6 +294,8 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("idTT",null);
 			if(critereRechercheConvention.getLangueConvention()!=null) parameterMap.put("idLC", critereRechercheConvention.getLangueConvention().getCode());
 			else parameterMap.put("idLC",null);
+			if(critereRechercheConvention.getEstVerifiee()!=null) parameterMap.put("cVerif", critereRechercheConvention.getEstVerifiee().booleanValue()?"1":"0");
+			else parameterMap.put("cVerif", null);
 			if(critereRechercheConvention.getEstValidee()!=null) parameterMap.put("cV", critereRechercheConvention.getEstValidee().booleanValue()?"1":"0");
 			else parameterMap.put("cV", null);
 			parameterMap.put("dS", critereRechercheConvention.getDateStage());
@@ -330,10 +336,16 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 
 
 	/**
-	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionFromExport(int)
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionFromExport(java.util.List)
 	 */
-	public Convention getConventionFromExport(int id) {
-		return (Convention) getSqlMapClientTemplate().queryForObject("getConventionFromExport",id);
+//	public Convention getConventionFromExport(int id) {
+//		return (Convention) getSqlMapClientTemplate().queryForObject("getConventionFromExport",id);
+//	}
+	@SuppressWarnings("unchecked")
+	public List<Convention> getConventionsFromExport(List<Integer> idsConventionsExport) {
+		HashMap<String, Object> parameterMap = new HashMap<String,Object>();
+		parameterMap.put("idsConventionsExport", idsConventionsExport);
+		return getSqlMapClientTemplate().queryForList("getConventionsFromExport", parameterMap);
 	}
 
 	/**

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Niveau">
+	
+	<typeAlias alias="ClassNiveau" type="org.esupportail.pstagedata.domain.beans.Niveau"/>
+	
+	<resultMap id="resultNiveau" class="ClassNiveau">
+		<result property="idNiveau" column="idNiveau" />	
+		<result property="valeur" column="valeur" />
+		<result property="criteres" select="getCriteresByNiveau" column="idNiveau" />
+	</resultMap>
+
+
+	<statement id="niveauParValeur" resultMap="resultNiveau">
+		SELECT * FROM Niveau where  valeur=#value#
+	</statement>
+	
+	
+</sqlMap>

@@ -39,16 +39,19 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	/**
 	 * @see org.esupportail.pstagedata.dao.OffreDaoService#countOffreADiffuser()
 	 */
-	public int countOffreADiffuser(){
+	public int countOffreADiffuser(List<Integer> idsCentreGestion){
 		int i=0;
-		int idCgEntr;
-		
-		// On recherche le cg entreprise
-		CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();
+
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();		
 		if(cgEntr!=null && cgEntr.getIdCentreGestion()>0){
-			idCgEntr = cgEntr.getIdCentreGestion();
-			i = (Integer)getSqlMapClientTemplate().queryForObject("countOffreADiffuser",idCgEntr);
+			if(idsCentreGestion==null)idsCentreGestion = new ArrayList<Integer>();
+			if(!idsCentreGestion.contains(cgEntr.getIdCentreGestion())){
+				idsCentreGestion.add(cgEntr.getIdCentreGestion());
+			}
 		}
+		parameterMap.put("idsCG", idsCentreGestion);
+		i = (Integer)getSqlMapClientTemplate().queryForObject("countOffreADiffuser",parameterMap);
 		
 		return i;
 	}
@@ -121,14 +124,7 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 					idsCentreGestion.remove(cgEntr.getIdCentreGestion());
 				}
 				parameterMap.put("idCGEntr", cgEntr.getIdCentreGestion());
-				/*if(!l.contains(cgEntr.getIdCentreGestion())){
-					idsCentreGestion.add(cgEntr.getIdCentreGestion());
-				}*/
-			}/*else{
-				// Sinon on l'ajoute
-				idsCentreGestion = new ArrayList<Integer>();
-				idsCentreGestion.add(cgEntr.getIdCentreGestion());
-			}*/
+			}
 		}else{
 			parameterMap.put("idCGEntr", 0);
 		}
@@ -156,42 +152,27 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 			if(critereRechercheOffre.getIdsCentreGestion()!=null && !critereRechercheOffre.getIdsCentreGestion().isEmpty()){
 				if(critereRechercheOffre.isInclureOffresEntreprise()){
 					CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();	
-					ArrayList<Integer> l = (ArrayList<Integer>) critereRechercheOffre.getIdsCentreGestion();		
 					if(cgEntr!=null && cgEntr.getIdCentreGestion()>0){
-						//Si centre entreprise n'est pas dans la liste
-						if(l.size()>1 && l.contains(cgEntr.getIdCentreGestion())){
-							critereRechercheOffre.getIdsCentreGestion().remove(cgEntr.getIdCentreGestion());
-						}
+						
 						parameterMap.put("idCGEntr", cgEntr.getIdCentreGestion());
-						/*if(!l.contains(cgEntr.getIdCentreGestion())){
-							critereRechercheOffre.getIdsCentreGestion().add(cgEntr.getIdCentreGestion());
-						}*/
-						/*else{
-						// Sinon on l'ajoute
-						ArrayList<Integer> ali = new ArrayList<Integer>();
-						ali.add(cgEntr.getIdCentreGestion());
-						critereRechercheOffre.setIdsCentreGestion(ali);
-						}*/
 						
 						HashMap<String, Object> parameterMapIdsOffre = new HashMap<String, Object>();
 						parameterMapIdsOffre.put("idsCG", critereRechercheOffre.getIdsCentreGestion());
-						if(l.size()>1 && l.contains(cgEntr.getIdCentreGestion())){
-							List<Integer> idsOffreAExclure = getSqlMapClientTemplate().queryForList("getIdOffresEntrepriseCiblees", parameterMapIdsOffre);
-							//checking 
-							parameterMapIdsOffre = new HashMap<String, Object>();
-							parameterMapIdsOffre.put("idsCGCheck", critereRechercheOffre.getIdsCentreGestion());
-							List<Integer> idsOffreValides = getSqlMapClientTemplate().queryForList("getIdOffresEntrepriseCiblees", parameterMapIdsOffre);
-							if(idsOffreValides!=null && !idsOffreValides.isEmpty()){
-								if(idsOffreAExclure!=null && !idsOffreAExclure.isEmpty()){
-									for(int id : idsOffreValides){
-										if(idsOffreAExclure.contains(id)){
-											idsOffreAExclure.remove((Object)id);
-										}
+						List<Integer> idsOffreAExclure = getSqlMapClientTemplate().queryForList("getIdOffresEntrepriseCiblees", parameterMapIdsOffre);
+						//checking 
+						parameterMapIdsOffre = new HashMap<String, Object>();
+						parameterMapIdsOffre.put("idsCGCheck", critereRechercheOffre.getIdsCentreGestion());
+						List<Integer> idsOffreValides = getSqlMapClientTemplate().queryForList("getIdOffresEntrepriseCiblees", parameterMapIdsOffre);
+						if(idsOffreValides!=null && !idsOffreValides.isEmpty()){
+							if(idsOffreAExclure!=null && !idsOffreAExclure.isEmpty()){
+								for(int id : idsOffreValides){
+									if(idsOffreAExclure.contains(id)){
+										idsOffreAExclure.remove((Object)id);
 									}
 								}
 							}
-							if(idsOffreAExclure!=null && !idsOffreAExclure.isEmpty())parameterMap.put("idsOffreAExclure", idsOffreAExclure);
 						}
+						if(idsOffreAExclure!=null && !idsOffreAExclure.isEmpty())parameterMap.put("idsOffreAExclure", idsOffreAExclure);
 					}
 				}else{
 					parameterMap.put("idCGEntr", 0);
@@ -235,10 +216,10 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 			if(critereRechercheOffre.getTypeStructure()!=null)parameterMap.put("idTS", critereRechercheOffre.getTypeStructure().getId());
 			else parameterMap.put("idTS", null);
 			parameterMap.put("idO", critereRechercheOffre.getIdOffre());
-			//Si recherche d'un admin sur les offres supprimées, critere de suppression prend le dessus sur les criteres de diffusion
+			//Si recherche d'un admin sur les offres supprimees, critere de suppression prend le dessus sur les criteres de diffusion
 			/*if(!critereRechercheOffre.isEstSupprimee()){
-				//Si recherche d'un admin sur les offres dont la diffusion est terminée, 
-				//critere de diffusionTerminee prend le dessus sur le critere de validité de la diffusion
+				//Si recherche d'un admin sur les offres dont la diffusion est terminee, 
+				//critere de diffusionTerminee prend le dessus sur le critere de validite de la diffusion
 				if(!critereRechercheOffre.isDiffusionTerminee()){
 					parameterMap.put("oD", critereRechercheOffre.isEstDiffusee()?"1":"0");
 				}else{
@@ -252,13 +233,13 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 			parameterMap.put("oD", critereRechercheOffre.isEstDiffusee()?"1":"0");
 			parameterMap.put("oDT", critereRechercheOffre.isDiffusionTerminee()?"1":"0");
 			parameterMap.put("oS", critereRechercheOffre.isEstSupprimee()?"1":"0");
-			//Si true récupération uniquement des offres AccessERQTH + PrioERQTH
+			//Si true recuperation uniquement des offres AccessERQTH + PrioERQTH
 			if(critereRechercheOffre.isEstAccessERQTH()){
 				parameterMap.put("oAE", critereRechercheOffre.isEstAccessERQTH()?"1":"0");
 			}else{
 				parameterMap.put("oAE",null);
 			}
-			//Si true récupération uniquement des offres PrioERQTH
+			//Si true recuperation uniquement des offres PrioERQTH
 			if(critereRechercheOffre.isEstPrioERQTH()){
 				parameterMap.put("oPE", critereRechercheOffre.isEstPrioERQTH()?"1":"0");
 				parameterMap.put("oAE", null);

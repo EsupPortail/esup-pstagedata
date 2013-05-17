@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Categorie">
+	
+	<typeAlias alias="ClassCategorie" type="org.esupportail.pstagedata.domain.beans.Categorie"/>
+	
+	<resultMap id="resultCategorie" class="ClassCategorie">
+		<result property="idCategorie" column="idCategorie" />	
+		<result property="typeCategorie" column="typeCategorie" />
+		<result property="criteres" select="criteresParCategorie" column="idCategorie" />
+	</resultMap>
+
+
+	<statement id="categorieParType" resultMap="resultCategorie">
+		SELECT * FROM Categorie where  typeCategorie=#value#
+	</statement>
+	
+	
+</sqlMap>

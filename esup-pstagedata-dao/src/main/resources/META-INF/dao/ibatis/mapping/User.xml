@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="pstagedata_user">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="user" type="org.esupportail.pstagedata.domain.beans.User"/>
+
+  <resultMap id="userResult" class="user">
+    <result property="id" column="id"/>  
+    <result property="displayName" column="disp_name"/>
+    <result property="admin" column="admi"/>    
+    <result property="language" column="lang"/>    
+  </resultMap>         
+
+  <cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">
+		<flushInterval hours="24"/>
+		<property name="cache-size" value="1000" />
+  </cacheModel>
+  <select id="getUserById" parameterClass="string" resultMap="userResult">
+    select * from pstagedata_user where id = #id#
+  </select>  
+  <select id="getAllUsers" resultMap="userResult">
+      select * from pstagedata_user
+  </select>
+  <select id="getAllAdmins" resultMap="userResult">
+    select * from pstagedata_user where admi=1 order by disp_name asc
+  </select>      
+  <insert id="insertUser" parameterClass="user">
+  	insert into pstagedata_user (disp_name,admi,lang) values (#displayName#,#admin#,#language#)
+  </insert>
+
+  <delete id="deleteUser" parameterClass="user">
+  	delete pstagedata_user where id = #id#
+  </delete>
+  
+  <update id="updateUser" parameterClass="user">
+  	update pstagedata_user set disp_name=#displayName#,admi = #admin#
+  	where id = #id#
+  </update>
+  
+  
+</sqlMap>

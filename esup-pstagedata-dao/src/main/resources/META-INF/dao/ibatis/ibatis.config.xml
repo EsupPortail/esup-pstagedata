@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<!-- <settings useStatementNamespaces="true"/> -->
+
+	<sqlMap resource="META-INF/dao/ibatis/mapping/accordPartenariat.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/adminStructure.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/affectation.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/avenant.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/assurance.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/caisseRegime.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/centreGestion.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/centreGestionSuperviseur.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/civilite.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/confidentialite.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/contact.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/contratOffre.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/convention.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/critereGestion.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/droitAdministration.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/dureeDiffusion.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/effectif.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/enseignant.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/etape.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/etudiant.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fap_n1.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fap_n2.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fap_n3.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fap_qualification.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fap_qualificationSimplifiee.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/indemnisation.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/langueConvention.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/modeCandidature.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/modeValidationStage.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/modeVersGratification.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/naf_n1.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/naf_n5.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/natureTravail.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/niveauCentre.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/niveauFormation.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/offre.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/fichiers.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/offreModeCandidature.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/offreDiffusion.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/pays.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/personnelCentreGestion.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/service.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/statutJuridique.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/structure.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/tempsTravail.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/ticketStructure.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/theme.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/typeConvention.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/typeOffre.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/typeStructure.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/ufr.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/uniteDuree.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/UniteGratification.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/User.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/VersionManager.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/origineStage.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/critere.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/niveau.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/categorie.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/statisticItem.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/conventionStatisticItem.xml"/>
+	
+</sqlMapConfig>

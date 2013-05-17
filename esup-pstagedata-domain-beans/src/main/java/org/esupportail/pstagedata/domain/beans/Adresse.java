@@ -14,11 +14,11 @@ public class Adresse extends ObjetMetiers implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	
 	/**
-	 * Batiment/R�sidence/Z.I./Immeuble
+	 * Batiment/Residence/Z.I./Immeuble
 	 */
 	private String batimentResidence;
 	/**
@@ -40,9 +40,9 @@ public class Adresse extends ObjetMetiers implements Serializable {
 	/**
 	 * Code commune
 	 */
-	private Integer codeCommune;
+	private String codeCommune;
 	/**
-	 * Libell� Cedex
+	 * Libelle Cedex
 	 */
 	private String libCedex;
 	
@@ -128,20 +128,6 @@ public class Adresse extends ObjetMetiers implements Serializable {
 	}
 
 	/**
-	 * @return the codeCommune
-	 */
-	public Integer getCodeCommune() {
-		return codeCommune;
-	}
-
-	/**
-	 * @param codeCommune the codeCommune to set
-	 */
-	public void setCodeCommune(Integer codeCommune) {
-		this.codeCommune = codeCommune;
-	}
-
-	/**
 	 * @return the libCedex
 	 */
 	public String getLibCedex() {
@@ -153,6 +139,20 @@ public class Adresse extends ObjetMetiers implements Serializable {
 	 */
 	public void setLibCedex(String libCedex) {
 		this.libCedex = libCedex;
+	}
+
+	/**
+	 * @return the codeCommune
+	 */
+	public String getCodeCommune() {
+		return codeCommune;
+	}
+
+	/**
+	 * @param codeCommune the codeCommune to set
+	 */
+	public void setCodeCommune(String codeCommune) {
+		this.codeCommune = codeCommune;
 	}
 		
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Indemnisation">
+	<typeAlias alias="ClassIndemnisation" type="org.esupportail.pstagedata.domain.beans.Indemnisation"/>
+	<resultMap id="Indemnisation"
+		class="ClassIndemnisation">
+		<result property="id" column="idIndemnisation" />
+		<result property="libelle" column="libelleIndemnisation" />
+		<result property="temEnServ" column="temEnServIndem" />
+	</resultMap>
+
+	<statement id="getIndemnisations" resultMap="Indemnisation">
+		SELECT * FROM Indemnisation
+		WHERE temEnServIndem = 'O'
+	</statement>
+	
+	<statement id="getIndemnisationFromId" resultMap="Indemnisation">
+		SELECT * FROM Indemnisation
+		WHERE idIndemnisation = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	
+</sqlMap>

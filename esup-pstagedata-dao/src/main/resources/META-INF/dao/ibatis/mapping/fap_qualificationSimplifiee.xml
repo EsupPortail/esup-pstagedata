@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Fap_QualificationSimplifiee">
+	
+	<typeAlias alias="ClassFapQualificationSimplifiee" type="org.esupportail.pstagedata.domain.beans.FapQualificationSimplifiee"/>
+	
+	<resultMap id="FapQualificationSimplifiee"
+		class="ClassFapQualificationSimplifiee">
+		<result property="id" column="idQualificationSimplifiee" />
+		<result property="libelle" column="libelleQualification" />
+	</resultMap>
+
+	<statement id="getFapQualificationsSimplifiees" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+		SELECT * FROM FAP_QualificationSimplifiee
+	</statement>
+	
+	<statement id="getFapQualificationSimplifieeFromId" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+		SELECT * FROM FAP_QualificationSimplifiee
+		WHERE idQualificationSimplifiee = #id#
+		LIMIT 0, 1
+	</statement>
+	
+	<statement id="getFapQualificationSimplifieeFromNumFapQualification" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+		SELECT * FROM FAP_QualificationSimplifiee fqs
+		INNER JOIN FAP_Qualification fq ON fq.idQualificationSimplifiee = fqs.idQualificationSimplifiee
+		WHERE numFap_Qualification = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

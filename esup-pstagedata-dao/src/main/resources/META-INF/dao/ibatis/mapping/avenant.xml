@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Avenant">
+	
+	<typeAlias alias="ClassAvenant" type="org.esupportail.pstagedata.domain.beans.Avenant"/>
+
+	<resultMap id="Avenant"
+		class="ClassAvenant">
+		<result property="idAvenant" column="idAvenant" />
+		<result property="idConvention" column="idConvention" />
+		<result property="motifAvenant" column="motifAvenant" />
+		<result property="rupture" column="rupture" />
+		<result property="modificationPeriode" column="modificationPeriode" />
+		<result property="dateDebutStage" column="dateDebutStage" />
+		<result property="dateFinStage" column="dateFinStage" />
+		<result property="interruptionStage" column="interruptionStage" />
+		<result property="dateDebutInterruption" column="dateDebutInterruption" />
+		<result property="dateFinInterruption" column="dateFinInterruption" />
+		<result property="modificationLieu" column="modificationLieu" />
+		<result property="idService" column="idService" nullValue="0" />
+		<result property="modificationSujet" column="modificationSujet" />
+		<result property="sujetStage" column="sujetStage" />
+		<result property="modificationEnseignant" column="modificationEnseignant" />
+		<result property="idEnseignant" column="idEnseignant" nullValue="0"/>
+		<result property="modificationSalarie" column="modificationSalarie" />
+		<result property="idContact" column="idContact" nullValue="0"/>
+		<result property="modificationMontantGratification" column="modificationMontantGratification" />
+		<result property="idUniteGratification" column="idUniteGratification" nullValue="0" />
+		<result property="montantGratification" column="montantGratification" />
+		<result property="validationAvenant" column="validationAvenant" />
+		<result property="loginCreation" column="loginCreation"/>
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginModif" column="loginModif"/>
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+	</resultMap>
+
+	<statement id="getAvenant" resultMap="Avenant">
+		SELECT * FROM Avenant
+		WHERE idConvention = #idConvention#
+	</statement>
+	
+	<!--	Récupération du nombre d'Avenants pour une convention donnée -->
+	<statement id="getNombreAvenant" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Avenant
+		WHERE idConvention = #idConvention#
+	</statement>
+	
+	<insert id="addAvenant" >
+		INSERT INTO Avenant (idConvention, motifAvenant, rupture, modificationPeriode, dateDebutStage,
+		dateFinStage, interruptionStage, dateDebutInterruption, dateFinInterruption, modificationLieu,
+		idService, modificationSujet, sujetStage, modificationEnseignant, idEnseignant, modificationSalarie, 
+		idContact,modificationMontantGratification, idUniteGratification, montantGratification,
+		validationAvenant, loginCreation, dateCreation) 
+		VALUES (#idConvention#,#motifAvenant#,#rupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
+		#interruptionStage#,#dateDebutInterruption#, #dateFinInterruption#,#modificationLieu#, #idService#,
+		#modificationSujet#,#sujetStage#, #modificationEnseignant#,#idEnseignant#,#modificationSalarie#, 
+		#idContact#,#modificationMontantGratification#,#idUniteGratification#,#montantGratification#,
+		#validationAvenant#,#loginCreation#,CURRENT_TIMESTAMP());
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<update id="updateAvenant">
+		UPDATE Avenant SET idConvention=#idConvention#,motifAvenant=#motifAvenant#,rupture=#rupture#,
+		modificationPeriode=#modificationPeriode#,dateDebutStage=#dateDebutStage#,dateFinStage=#dateFinStage#,
+		interruptionStage=#interruptionStage#,dateDebutInterruption=#dateDebutInterruption#,
+		dateFinInterruption=#dateFinInterruption#,modificationLieu=#modificationLieu#,idService=#idService#,
+		modificationSujet=#modificationSujet#,sujetStage=#sujetStage#,modificationEnseignant=#modificationEnseignant#,
+		idEnseignant=#idEnseignant#,modificationSalarie=#modificationSalarie#,idContact=#idContact#,
+		modificationMontantGratification=#modificationMontantGratification#,idUniteGratification=#idUniteGratification#,
+		montantGratification=#montantGratification#, validationAvenant=#validationAvenant#,
+		loginModif=#loginModif#,dateModif=CURRENT_TIMESTAMP()
+		WHERE idAvenant=#idAvenant#
+	</update>
+	
+	<delete id="deleteAvenant">
+		DELETE FROM Avenant WHERE idAvenant=#idAvenant#
+	</delete>
+</sqlMap>

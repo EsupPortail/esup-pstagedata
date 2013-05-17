@@ -21,10 +21,21 @@ public class StatsParTypeServiceImpl  extends AbstractIBatisDaoService  implemen
 			parametres.put("idCentreGestion", idCentreGestion);
 			parametres.put("annee", annee);
 			List<StatisticItem> liste = null;
-			
+
 			try {
-				liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList(requete, parametres);
-				
+				if (requete.contains("Indemnity")){
+					if (requete.contains("Study")){
+						liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList("getNumberOfConventionsByStudyAndIndemnitySlices", parametres);
+					} else if (requete.contains("Department")){
+						liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList("getNumberOfConventionsByDepartmentAndIndemnitySlices", parametres);
+					} else if (requete.contains("Step")){
+						liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList("getNumberOfConventionsByStepAndIndemnitySlices", parametres);
+					} else {
+						liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList("getNumberOfConventionsByIndemnitySlices", parametres);
+					}
+				} else {
+					liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList(requete, parametres);
+				}
 			} catch (DataAccessException dataAe) {
 				StringBuilder sb = new StringBuilder();
 				sb.append(" Dans ");

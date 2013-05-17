@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AccordPartenariat">
+
+	<typeAlias alias="ClassAccordPartenariat" type="org.esupportail.pstagedata.domain.beans.AccordPartenariat"/>
+	
+	<resultMap id="AccordPartenariat" class="ClassAccordPartenariat">
+        <result property="idAccordPartenariat" column="idAccordPartenariat" />
+		<result property="idStructure" column="idStructure"/>
+		<result property="idContact" column="idContact"/>
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginCreation" column="loginCreation"/>
+		<result property="dateValidation" column="dateValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginValidation" column="loginValidation"/>		
+		<result property="estValide" column="estValide"/>
+		<result property="comptesSupprimes" column="comptesSupprimes"/>
+		<result property="raisonSuppressionComptes" column="raisonSuppressionComptes"/>
+		<result property="dateSuppressionComptes" column="dateSuppressionComptes"/>		
+		<result property="loginSuppressionComptes" column="loginSuppressionComptes"/>
+     </resultMap>
+     
+     <resultMap id="AccordPartenariatAvecContact" class="ClassAccordPartenariat" extends="AccordPartenariat">				
+		<result property="contact" column="idContact" select="getContactFromIdSimple"/>
+     </resultMap>
+
+    <statement id="getAccordsNonValides"  resultMap="AccordPartenariat">
+        SELECT * FROM AccordPartenariat WHERE estValide=false ORDER BY dateCreation ASC
+    </statement>
+    <statement id="getAccordFromId"  resultMap="AccordPartenariat">
+        SELECT * FROM AccordPartenariat WHERE idAccordPartenariat=#idAccord#
+        LIMIT 0,1
+    </statement>
+    <statement id="getAccordFromIdStructure"  resultMap="AccordPartenariat">
+        SELECT * FROM AccordPartenariat WHERE idStructure=#idStructure#
+        LIMIT 0,1
+    </statement>    
+    <statement id="getAccordFromIdContact"  resultMap="AccordPartenariat">
+        SELECT * FROM AccordPartenariat WHERE idContact = #idContact#
+        LIMIT 0,1
+    </statement>    
+    <statement id="countAccordAValider" resultClass="java.lang.Integer">
+        SELECT COUNT(*) FROM AccordPartenariat WHERE estValide = false
+    </statement>
+    
+    <insert id="addAccord">
+        INSERT INTO AccordPartenariat (idStructure, idContact, dateCreation, loginCreation) 
+        VALUES (#idStructure#, #idContact#, CURRENT_TIMESTAMP(), #loginCreation#)
+		<selectKey resultClass="java.lang.Integer">
+         SELECT LAST_INSERT_ID()
+     	</selectKey>
+    </insert>
+    
+    <update id="updateAccord">
+        UPDATE AccordPartenariat SET estValide = #estValide#, dateValidation = CURRENT_TIMESTAMP(), loginValidation = #loginValidation#,
+        comptesSupprimes = #comptesSupprimes#, raisonSuppressionComptes=#raisonSuppressionComptes#, dateSuppressionComptes=#dateSuppressionComptes#,  
+        loginSuppressionComptes = #loginSuppressionComptes#
+        WHERE idAccordPartenariat = #idAccordPartenariat#
+    </update>
+    
+    <delete id="deleteAccord">
+    	 DELETE FROM AccordPartenariat WHERE idAccordPartenariat = #idAccordPartenariat#
+    </delete>
+      	
+</sqlMap>

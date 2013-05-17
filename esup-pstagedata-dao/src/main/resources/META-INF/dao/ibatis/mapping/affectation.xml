@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Affectation">
+	
+	<typeAlias alias="ClassAffectation" type="org.esupportail.pstagedata.domain.beans.Affectation"/>
+
+	<resultMap id="Affectation"
+		class="ClassAffectation">
+		<result property="code" column="CodeAffectation" />
+		<result property="libelle" column="libelleAffectation" />
+		<result property="codeUniversite" column="codeUniversite" />
+	</resultMap>
+
+	<statement id="getAffectation" resultMap="Affectation">
+		SELECT * FROM Affectation
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite">
+				codeUniversite = #codeUniversite#
+			</isNotNull>
+		</dynamic>
+	</statement>
+	
+	<statement id="getAffectationFromCodeAffectation" resultMap="Affectation">
+		SELECT * FROM Affectation
+		WHERE codeAffectation = #codeAffectation#
+		<isNotNull property="codeUniversite" prepend="AND">
+			codeUniversite = #codeUniversite#
+		</isNotNull>
+		LIMIT 0,1
+	</statement>
+	
+	<!--	Récupération du nombre d'affectations -->
+	<statement id="getNombreAffectation" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Affectation
+	</statement>
+	
+	<insert id="addAffectation" >
+		INSERT INTO Affectation (CodeAffectation,libelleAffectation, codeUniversite)
+		VALUES (#code#,#libelle#, #codeUniversite#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+</sqlMap>

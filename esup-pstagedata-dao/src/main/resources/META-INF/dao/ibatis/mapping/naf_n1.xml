@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="NAF_N1">
+	
+	<typeAlias alias="ClassNafN1" type="org.esupportail.pstagedata.domain.beans.NafN1"/>
+	
+	<resultMap id="NafN1"
+		class="ClassNafN1">
+		<result property="code" column="codeNaf_N1" />
+		<result property="libelle" column="libelleNaf_N1" />
+	</resultMap>
+
+	<statement id="getNafN1" resultMap="NafN1">
+		SELECT * FROM NAF_N1
+	</statement>
+	<statement id="getNafN1FromCodeNafN1" parameterClass="java.lang.String" resultMap="NafN1">
+		SELECT * FROM NAF_N1
+		WHERE codeNaf_N1 = #id#
+		LIMIT 0,1
+	</statement>
+	<statement id="getNafN1FromCodeNafN5" parameterClass="java.lang.String" resultMap="NafN1">
+		SELECT * FROM NAF_N1 n1
+		INNER JOIN NAF_N5 n5 ON n1.codeNaf_N1 = n5.codeNAF_N1
+		WHERE n5.codeNaf_N5 = #id#
+		LIMIT 0,1
+    </statement>
+
+
+</sqlMap>

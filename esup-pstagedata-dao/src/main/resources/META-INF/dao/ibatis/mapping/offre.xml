@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Offre">
+	
+	<typeAlias alias="ClassOffre" type="org.esupportail.pstagedata.domain.beans.Offre"/>
+
+	<resultMap id="Offre"
+		class="ClassOffre">
+		<result property="idOffre" column="idOffre" />
+		<result property="idTypeOffre" column="idTypeOffre" />
+		<result property="idContratOffre" column="idContratOffre" nullValue="0"/>
+		<result property="idUniteDuree" column="idUniteDuree" nullValue="0"/>
+		<result property="idQualificationSimplifiee" column="idQualificationSimplifiee" />
+		<result property="codeFAP_N3" column="codeFAP_N3" />
+		<result property="idLieuPays" column="idLieuPays"/>
+		<result property="idTempsTravail" column="idTempsTravail" nullValue="0"/>
+		<result property="idNiveauFormation" column="idNiveauFormation" nullValue="0"/>
+		<result property="idStructure" column="idStructure" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="idContactCand" column="idContactCand" nullValue="0"/>
+		<result property="idContactInfo" column="idContactInfo" nullValue="0"/>
+		<result property="idContactProprio" column="idContactProprio" nullValue="0"/>
+		<result property="idReferent" column="idReferent" nullValue="0"/>
+		<result property="moisDebut" column="moisDebut" />
+		<result property="anneeDebut" column="anneeDebut" />
+		<result property="precisionDebut" column="precisionDebut" />
+		<result property="duree" column="duree" nullValue="0"/>
+		<result property="intitule" column="intitule" />
+		<result property="description" column="description" />
+		<result property="lieuCommune" column="lieuCommune" />
+		<result property="codeCommune" column="codeCommune" />
+		<result property="lieuCodePostal" column="lieuCodePostal" nullValue="0"/>
+		<result property="deplacement" column="deplacement" />
+		<result property="permis" column="permis" />
+		<result property="voiture" column="voiture" />
+		<result property="remuneration" column="remuneration" />
+		<result property="avantages" column="avantages" />
+		<result property="precisionRemuneration" column="precisionRemuneration" />
+		<result property="quotiteTravail" column="quotiteTravail" />
+		<result property="commentaireTempsTravail" column="commentaireTempsTravail" />
+		<result property="observations" column="observations" />
+		<result property="competences" column="competences" />
+		<result property="referenceOffreEtablissement" column="referenceOffreEtablissement" />
+		<result property="dateDiffusion" column="dateDiffusion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="dateFinDiffusion" column="dateFinDiffusion" />
+		<result property="dateValidation" column="dateValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginDiffusion" column="loginDiffusion" />
+		<result property="loginStopDiffusion" column="loginStopDiffusion" />
+		<result property="dateStopDiffusion" column="dateStopDiffusion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="loginValidation" column="loginValidation" />
+		<result property="loginStopValidation" column="loginStopValidation" />
+		<result property="loginRejetValidation" column="loginRejetValidation" />
+		<result property="dateStopValidation" column="dateStopValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="estPourvue" column="estPourvue" />
+		<result property="estDiffusee" column="estDiffusee" />
+		<result property="estValidee" column="estValidee" />
+		<result property="etatValidation" column="etatValidation" />
+		<result property="estSupprimee" column="estSupprimee" />
+		<result property="estAccessERQTH" column="estAccessERQTH" />
+		<result property="estPrioERQTH" column="estPrioERQTH" />
+		<result property="precisionHandicap" column="precisionHandicap" />
+		<result property="lienAttache" column="lienAttache" />
+		<result property="idFichier" column="idFichier" nullValue="0"/>
+		<result property="avecFichier" column="avecFichier" />
+		<result property="avecLien" column="avecLien" />
+		<result property="loginCreation" column="loginCreation" />
+		<result property="loginModif" column="loginModif" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="cacherTelContactCand" column="cacherTelContactCand" />
+		<result property="cacherFaxContactCand" column="cacherFaxContactCand" />
+		<result property="cacherMailContactCand" column="cacherMailContactCand" />
+		<result property="cacherNomContactCand" column="cacherNomContactCand" />
+		<result property="cacherTelContactInfo" column="cacherTelContactInfo" />
+		<result property="cacherFaxContactInfo" column="cacherFaxContactInfo" />
+		<result property="cacherMailContactInfo" column="cacherMailContactInfo" />
+		<result property="cacherNomContactInfo" column="cacherNomContactInfo" />
+		<result property="cacherEtablissement" column="cacherEtablissement" />
+		<result property="anneeUniversitaire" column="anneeUniversitaire" />
+		
+		<result property="idsModeCandidature" column="idOffre" select="getOffreIdsModeCandidatureFromIdOffre"/>
+		<result property="fichier" column="idFichier" select="getFichierFromIdFichier"/>
+		<result property="contactCand" column="idContactCand" select="getContactFromId"/>
+		<result property="contactInfo" column="idContactInfo" select="getContactFromId"/>
+	</resultMap>
+	
+	<resultMap id="OffreLight"
+		class="ClassOffre">
+		<result property="idOffre" column="idOffre" />
+		<result property="idStructure" column="idStructure" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="idTypeOffre" column="idTypeOffre" />
+		<result property="idContratOffre" column="idContratOffre" nullValue="0"/>
+		<result property="idLieuPays" column="idLieuPays" />
+		<result property="intitule" column="intitule" />
+		<result property="lieuCommune" column="lieuCommune" />
+		<result property="lieuCodePostal" column="lieuCodePostal" />
+		<result property="dateDiffusion" column="dateDiffusion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="estAccessERQTH" column="estAccessERQTH" />
+		<result property="estPrioERQTH" column="estPrioERQTH" />
+		<result property="avecFichier" column="avecFichier" />
+		<result property="avecLien" column="avecLien" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="dateFinDiffusion" column="dateFinDiffusion" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="estDiffusee" column="estDiffusee" />
+		<result property="estValidee" column="estValidee" />
+		<result property="etatValidation" column="etatValidation" />
+		<result property="estSupprimee" column="estSupprimee" />
+		
+		<result property="structure" column="idStructure" select="getStructureSuperLightFromId"/>
+		<result property="centreGestion" column="idCentreGestion" select="getCentreGestionSuperLightFromId"/>
+	</resultMap>
+	
+	<statement id="countOffreADiffuser" resultClass="java.lang.Integer">
+        SELECT COUNT(*) FROM Offre O
+		WHERE O.estDiffusee=false
+		AND O.estSupprimee=false
+		<isNotNull prepend="AND" property="idsCG" open="(" close=")">
+			<iterate property="idsCG" conjunction="OR">
+				O.idCentreGestion = #idsCG[]#
+			</iterate>
+		</isNotNull>
+    </statement>
+    
+	<statement id="getOffreFromId" resultMap="Offre">
+		SELECT O.* FROM Offre O
+		WHERE O.idOffre = #idOffre#
+		LIMIT 0, 1
+	</statement>
+
+	<statement id="getOffresFromIdStructureAndIdsCentreGestion" resultMap="Offre">
+		SELECT DISTINCT O.*
+		FROM Offre O
+		INNER JOIN CentreGestion CG ON CG.idCentreGestion = O.idCentreGestion
+		LEFT OUTER JOIN OffreDiffusion OD ON OD.idOffre = O.idOffre
+		WHERE O.idStructure = #idStructure# 		
+		<isNull property="etudiant">
+			<isNotNull prepend="AND" property="idsCG" open="(" close=")">
+				<iterate property="idsCG" conjunction="OR">
+					O.idCentreGestion = #idsCG[]# OR OD.idCentreGestion = #idsCG[]#
+				</iterate>
+				<isNotNull prepend="OR" property="idCGEntr">
+					(O.idCentreGestion = #idCGEntr# 
+					AND (
+						O.estDiffusee = true
+						AND O.dateFinDiffusion <![CDATA[ >= ]]> CURDATE()
+					))
+				</isNotNull>
+			</isNotNull>
+		</isNull>
+		<isNotNull property="etudiant">
+			<isEqual property="etudiant" compareValue="1">
+				<isNotNull prepend="AND" property="idsCG" open="(" close=")">
+					<iterate property="idsCG" conjunction="OR">
+						O.idCentreGestion = #idsCG[]# OR OD.idCentreGestion = #idsCG[]#
+					</iterate>				
+					<isNotNull prepend="OR" property="idCGEntr">
+						O.idCentreGestion = #idCGEntr#
+					</isNotNull>
+				</isNotNull>
+			</isEqual>
+			<isEqual prepend="AND" property="etudiant" compareValue="1">
+				(O.estDiffusee = true
+				AND O.dateFinDiffusion <![CDATA[ >= ]]> CURDATE())
+			</isEqual>
+		</isNotNull>
+		AND O.estSupprimee=false
+		ORDER BY intitule ASC
+	</statement>
+	
+	<statement id="getIdOffresEntrepriseCiblees" resultClass="java.lang.Integer">
+		SELECT DISTINCT OD.idOffre
+		FROM OffreDiffusion OD
+		LEFT OUTER JOIN Offre O ON O.idOffre = OD.idOffre
+		INNER JOIN CentreGestion CG ON O.idCentreGestion = CG.idCentreGestion
+		INNER JOIN NiveauCentre NV ON CG.idNiveauCentre = NV.idNiveauCentre	
+		WHERE NV.libelleNiveauCentre = 'ENTREPRISE'
+		<isNotNull property="idsCG">
+			<iterate prepend="AND" property="idsCG" conjunction="AND" open="(" close=")">
+				OD.idCentreGestion != #idsCG[]#
+			</iterate>
+		</isNotNull>
+		<isNotNull property="idsCGCheck">
+			<iterate prepend="AND" property="idsCGCheck" conjunction="OR" open="(" close=")">
+				OD.idCentreGestion = #idsCGCheck[]#
+			</iterate>
+		</isNotNull>
+	</statement>
+	
+	<statement id="getOffresFromCriteres" resultMap="OffreLight">
+		SELECT DISTINCT O.idOffre,O.idStructure,O.idCentreGestion,O.intitule,O.idTypeOffre,O.idContratOffre,O.lieuCodePostal,O.lieuCommune,O.idLieuPays,O.dateDiffusion,
+		O.estAccessERQTH,O.estPrioERQTH,O.avecFichier,O.avecLien,O.dateCreation,O.dateFinDiffusion,
+		O.estDiffusee,O.estValidee,O.etatValidation,O.estSupprimee,O.anneeUniversitaire
+		FROM Offre O
+		INNER JOIN Structure S ON O.idStructure = S.idStructure
+		INNER JOIN CentreGestion CG ON O.idCentreGestion = CG.idCentreGestion
+		<isNull property="idO">
+			<isNotNull property="idTO">
+				INNER JOIN TypeOffre T ON O.idTypeOffre = T.idTypeOffre
+				<isNotNull property="idCO">
+					INNER JOIN ContratOffre CO ON O.idContratOffre = CO.idContratOffre
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="idLP">
+				INNER JOIN Pays P ON O.idLieuPays = P.idPays
+			</isNotNull>
+			<isNotNull property="useFAP">
+				INNER JOIN FAP_N1 FN1 ON FN1.codeFAP_N1 = O.codeFAP_N3
+			</isNotNull>
+			<isNotNull property="cNAF_N1">
+				INNER JOIN NAF_N5 NN5 ON S.codeNAF_N5 = NN5.codeNAF_N5
+				INNER JOIN NAF_N1 NN1 ON NN5.codeNAF_N1 = NN1.codeNAF_N1
+			</isNotNull>
+			<isNotNull property="idNF">
+				INNER JOIN NiveauFormation NF ON O.idNiveauFormation = NF.idNiveauFormation
+			</isNotNull>
+			<isNotNull property="idTS">
+				INNER JOIN TypeStructure TS ON S.idTypeStructure = TS.idTypeStructure
+			</isNotNull>
+		</isNull>
+		LEFT OUTER JOIN OffreDiffusion OD ON OD.idOffre = O.idOffre
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND" property="idsCG" open="(" close=")">
+				<iterate property="idsCG" conjunction="OR">
+					O.idCentreGestion = #idsCG[]# OR OD.idCentreGestion = #idsCG[]#
+				</iterate>				
+				<isNotNull prepend="OR" property="idCGEntr">
+					O.idCentreGestion = #idCGEntr#
+				</isNotNull>
+			</isNotNull>
+			<isNotNull prepend="AND" property="idO">
+				O.idOffre = #idO#
+			</isNotNull>
+			<isNull property="idO">
+				<isNotNull prepend="AND" property="idTO">
+					O.idTypeOffre = #idTO#				
+					<isNotNull prepend="AND" property="idCO">
+						O.idContratOffre = #idCO#
+					</isNotNull>
+				</isNotNull>
+				<isNotNull prepend="AND" property="int">
+					O.intitule LIKE CONCAT('%',#int#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="aU">
+					O.anneeUniversitaire LIKE CONCAT('%',#aU#,'%')
+				</isNotNull>
+				<isNotNull prepend="AND" property="idLP" open="(" close=")">
+						O.idLieuPays = #idLP#										
+					<isNotNull property="oFRANCE" >
+						<isEqual property="oFRANCE" compareValue="1" prepend="OR" open="(" close=")">
+							 P.COG = 99100
+						</isEqual>						
+					</isNotNull>
+				</isNotNull>
+				<isNotNull prepend="AND" property="lC">
+					O.lieuCommune LIKE CONCAT('%',#lC#,'%')
+				</isNotNull>
+				<isNotNull property="lCsP">
+					<iterate prepend="AND" property="lCsP" conjunction="OR" open="(" close=")">
+						O.lieuCodePostal LIKE CONCAT(#lCsP[]#,'%')
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="cFAP_S">
+					O.idQualificationSimplifiee = #cFAP_S#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cFAP_N1">
+					FN1.codeFAP_N1 = #cFAP_N1#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cFAP_N2">
+					FN2.codeFAP_N2 = #cFAP_N2#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cFAP_N3">
+					O.codeFAP_N3 = #cFAP_N3#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cNAF_N1">
+					NN1.codeNAF_N1 = #cNAF_N1#
+				</isNotNull>
+				<isNotNull prepend="AND" property="idNF">
+					O.idNiveauFormation = #idNF#
+				</isNotNull>
+				<isNotNull property="oAE">
+					<isEqual prepend="AND" property="oAE" compareValue="1">
+						O.estAccessERQTH = true
+					</isEqual>
+				</isNotNull>
+				<isNotNull property="oPE">
+					<isEqual prepend="AND" property="oPE" compareValue="1">
+						O.estPrioERQTH = true 
+					</isEqual>
+				</isNotNull>
+				<isNotNull property="msC" prepend="AND" open="(" close=")" removeFirstPrepend="true">
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.description LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.avantages LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.precisionRemuneration LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.commentaireTempsTravail LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.observations LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.competences LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						O.referenceOffreEtablissement LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						S.raisonSociale LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						S.activitePrincipale LIKE CONCAT('%',#msC[]#,'%')
+					</iterate>
+					<iterate prepend="OR" property="msC" conjunction="OR" open="(" close=")">
+						S.numeroSiret = #msC[]#
+					</iterate>
+				</isNotNull>
+				<isNotNull prepend="AND" property="idTS">
+					S.idTypeStructure = #idTS#
+				</isNotNull>
+			</isNull>
+			<isNotNull prepend="AND" property="oD" open="(" close=")">
+				<isEqual property="oD" compareValue="1" open="(" close=")">
+					O.estDiffusee = true
+					AND O.dateFinDiffusion <![CDATA[ >= ]]> CURDATE()
+				</isEqual>
+				<isEqual property="oD" compareValue="0">
+					<isEqual property="oS" compareValue="0">
+						(O.estDiffusee = false) 
+					</isEqual>
+				</isEqual>
+				<isEqual property="oDT" compareValue="1">
+					<isEqual property="oD" compareValue="1">
+						OR
+					</isEqual>
+					<isEqual property="oD" compareValue="0">
+						<isEqual property="oS" compareValue="0">
+							<isEqual property="oD" compareValue="0">
+								OR
+							</isEqual>
+						</isEqual>
+					</isEqual>
+					(O.estDiffusee = true
+					AND O.dateFinDiffusion <![CDATA[ < ]]> CURDATE()
+					)
+				</isEqual>
+				<isEqual property="oS" compareValue="1">
+					<isEqual property="oDT" compareValue="0">
+						<isEqual property="oD" compareValue="1">
+							OR
+						</isEqual>
+						<isEqual property="oD" compareValue="0">
+							<isEqual property="oS" compareValue="0">
+								<isEqual property="oD" compareValue="0">
+									OR
+								</isEqual>
+							</isEqual>
+						</isEqual>
+					</isEqual>
+					<isEqual property="oDT" compareValue="1">
+						OR
+					</isEqual>
+					(O.estSupprimee = #oS#)
+				</isEqual>
+				<isEqual property="oS" compareValue="0">
+					AND O.estSupprimee = #oS#
+				</isEqual>
+			</isNotNull>
+			<isNotNull property="idsOffreAExclure">
+				<iterate prepend="AND" property="idsOffreAExclure" conjunction="AND" open="(" close=")">
+					O.idOffre != #idsOffreAExclure[]# 
+				</iterate>
+			</isNotNull>
+		</dynamic>
+		ORDER BY O.dateCreation DESC		
+		LIMIT 0, 200
+	</statement>
+	
+	<statement id="getAnneesUnivOffre" resultClass="java.lang.String">
+        SELECT DISTINCT anneeUniversitaire FROM Offre ORDER BY anneeUniversitaire DESC
+    </statement>
+    
+	<statement id="getNombreOffreByCentreGestion" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM Offre
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+	
+	<insert id="addOffre" >
+		INSERT INTO Offre (idTypeOffre,idContratOffre,idUniteDuree,idQualificationSimplifiee,
+		codeFAP_N3,idLieuPays,idTempsTravail,idNiveauFormation,idStructure,
+		idCentreGestion,idContactCand,idContactInfo,idContactProprio,idReferent,moisDebut,
+		anneeDebut,precisionDebut,duree,intitule,description,lieuCommune,codeCommune,lieuCodePostal,
+		deplacement,permis,voiture,remuneration,avantages,precisionRemuneration,quotiteTravail,commentaireTempsTravail,
+		observations,competences,referenceOffreEtablissement,
+		estAccessERQTH,estPrioERQTH,lienAttache,idFichier,avecFichier,avecLien,
+		loginCreation,dateCreation,
+		cacherTelContactCand,cacherFaxContactCand,cacherMailContactCand,cacherNomContactCand,
+		cacherTelContactInfo,cacherFaxContactInfo,cacherMailContactInfo,cacherNomContactInfo,cacherEtablissement,
+		anneeUniversitaire)
+		VALUES (#idTypeOffre#,#idContratOffre#,#idUniteDuree#,#idQualificationSimplifiee#,
+		#codeFAP_N3#,#idLieuPays#,#idTempsTravail#,#idNiveauFormation#,#idStructure#,
+		#idCentreGestion#,#idContactCand#,#idContactInfo#,#idContactProprio#,#idReferent#,#moisDebut#,
+		#anneeDebut#,#precisionDebut#,#duree#,#intitule#,#description#,#lieuCommune#,#codeCommune#,#lieuCodePostal#,
+		#deplacement#,#permis#,#voiture#,#remuneration#,#avantages#,#precisionRemuneration#,#quotiteTravail#,#commentaireTempsTravail#,
+		#observations#,#competences#,#referenceOffreEtablissement#,
+		#estAccessERQTH#,#estPrioERQTH#,#lienAttache#,#idFichier#,#avecFichier#,#avecLien#,
+		#loginCreation#,CURRENT_TIMESTAMP(),
+		#cacherTelContactCand#,#cacherFaxContactCand#,#cacherMailContactCand#,#cacherNomContactCand#,
+		#cacherTelContactInfo#,#cacherFaxContactInfo#,#cacherMailContactInfo#,#cacherNomContactInfo#,#cacherEtablissement#,
+		#anneeUniversitaire#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<update id="updateOffre">
+		UPDATE Offre SET idTypeOffre=#idTypeOffre#,idContratOffre=#idContratOffre#,
+		idUniteDuree=#idUniteDuree#,idQualificationSimplifiee=#idQualificationSimplifiee#,
+		codeFAP_N3=#codeFAP_N3#,idLieuPays=#idLieuPays#,idTempsTravail=#idTempsTravail#,
+		idNiveauFormation=#idNiveauFormation#,idStructure=#idStructure#,
+		idCentreGestion=#idCentreGestion#,idContactCand=#idContactCand#,idContactInfo=#idContactInfo#,
+		idContactProprio=#idContactProprio#,idReferent=#idReferent#,moisDebut=#moisDebut#,
+		anneeDebut=#anneeDebut#,precisionDebut=#precisionDebut#,duree=#duree#,intitule=#intitule#,
+		description=#description#,lieuCommune=#lieuCommune#,codeCommune=#codeCommune#,lieuCodePostal=#lieuCodePostal#,
+		deplacement=#deplacement#,permis=#permis#,voiture=#voiture#,remuneration=#remuneration#,avantages=#avantages#,
+		precisionRemuneration=#precisionRemuneration#,quotiteTravail=#quotiteTravail#,commentaireTempsTravail=#commentaireTempsTravail#,
+		observations=#observations#,competences=#competences#,referenceOffreEtablissement=#referenceOffreEtablissement#,
+		estAccessERQTH=#estAccessERQTH#,estPrioERQTH=#estPrioERQTH#,
+		lienAttache=#lienAttache#,idFichier=#idFichier#,avecFichier=#avecFichier#,avecLien=#avecLien#,
+		loginModif=#loginModif#,dateModif=CURRENT_TIMESTAMP(),
+		cacherTelContactCand=#cacherTelContactCand#,cacherFaxContactCand=#cacherFaxContactCand#,
+		cacherMailContactCand=#cacherMailContactCand#,cacherNomContactCand=#cacherNomContactCand#,cacherTelContactInfo=#cacherTelContactInfo#,
+		cacherFaxContactInfo=#cacherFaxContactInfo#,cacherMailContactInfo=#cacherMailContactInfo#,cacherNomContactInfo=#cacherNomContactInfo#,
+		cacherEtablissement=#cacherEtablissement#,anneeUniversitaire=#anneeUniversitaire#
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="deleteOffreLogique">
+		UPDATE Offre SET estDiffusee=false, estSupprimee=true, idContactCand=NULL, idContactInfo=NULL,dateValidation=CURRENT_TIMESTAMP(),
+		idContactProprio=NULL, idReferent=NULL
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateValidationOffre">
+		UPDATE Offre SET loginValidation=#loginValidation#,dateValidation=CURRENT_TIMESTAMP(),
+		dateStopValidation=NULL, estValidee=true, etatValidation=1
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateStopValidationOffre">
+		UPDATE Offre SET loginStopValidation=#loginStopValidation#,dateStopValidation=CURRENT_TIMESTAMP(),
+		dateValidation=NULL, estValidee=false, etatValidation=0
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateDiffusionOffre">
+		UPDATE Offre SET loginDiffusion=#loginDiffusion#,dateDiffusion=CURDATE(),
+		dateFinDiffusion=#dateFinDiffusion#, dateStopDiffusion=NULL, estDiffusee=true
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateStopDiffusionOffre">
+		UPDATE Offre SET loginStopDiffusion=#loginStopDiffusion#,dateDiffusion=NULL,
+		dateFinDiffusion=NULL, dateStopDiffusion=CURRENT_TIMESTAMP(), estDiffusee=false
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateRejetOffre">
+		UPDATE Offre SET loginRejetValidation=#loginRejetValidation#,dateDiffusion=NULL,
+		dateFinDiffusion=NULL, dateStopDiffusion=NULL, estDiffusee=false,
+		etatValidation=3
+		WHERE idOffre=#idOffre#
+	</update>
+	
+	<update id="updateOffrePourvue">
+		UPDATE Offre SET loginModif=#loginModif#,dateModif=CURRENT_TIMESTAMP(), estPourvue=#estPourvue#
+		<isEqual property="estPourvue" compareValue="1">
+			,dateDiffusion=NULL,
+			dateFinDiffusion=NULL, dateStopDiffusion=NULL, estDiffusee=false,
+			etatValidation=0
+		</isEqual>
+		WHERE idOffre=#idOffre#
+	</update>
+
+</sqlMap>

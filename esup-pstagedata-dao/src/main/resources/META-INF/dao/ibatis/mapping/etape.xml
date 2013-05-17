@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Etape">
+	<typeAlias alias="ClassEtape" type="org.esupportail.pstagedata.domain.beans.Etape"/>
+	<resultMap id="Etape"
+		class="ClassEtape">
+		<result property="code" column="codeEtape" />
+		<result property="libelle" column="libelleEtape" />
+		<result property="codeUniversite" column="codeUniversite" />
+	</resultMap>
+
+	<statement id="getEtapes" resultMap="Etape">
+		SELECT * FROM Etape
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite">
+				codeUniversite = #codeUniversite#
+			</isNotNull>
+		</dynamic>
+	</statement>
+	
+	<statement id="getEtapesFromIdsCentreGestion" resultMap="Etape">	
+		SELECT DISTINCT E.*
+		FROM Etape E
+		INNER JOIN Convention C ON E.codeEtape = C.codeEtape
+		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
+		<dynamic prepend="WHERE">
+			<isNotNull property="codeUniversite" prepend="AND">
+				E.codeUniversite = #codeUniversite#
+			</isNotNull>
+			<isNotNull property="idsCG">
+				<iterate prepend="AND" property="idsCG" conjunction="OR" open="(" close=")">
+					C.idCentreGestion = #idsCG[]#
+				</iterate>
+			</isNotNull>
+		</dynamic>
+	</statement>
+	
+	<statement id="getEtapeFromId" resultMap="Etape">
+		SELECT * FROM Etape
+		WHERE codeEtape = #code#
+		<isNotNull property="codeUniversite" prepend="AND">
+			codeUniversite = #codeUniversite#
+		</isNotNull>
+		LIMIT 0, 1
+	</statement>
+
+	<insert id="addEtape" >
+        INSERT INTO Etape (codeEtape, libelleEtape, codeUniversite)
+		VALUES (#code#, #libelle#, #codeUniversite#);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+   </insert>
+</sqlMap>

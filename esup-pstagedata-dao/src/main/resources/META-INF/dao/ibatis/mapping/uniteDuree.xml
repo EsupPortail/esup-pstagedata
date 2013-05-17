@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UniteDuree">
+
+	<resultMap id="UniteDuree"
+		class="org.esupportail.pstagedata.domain.beans.UniteDuree">
+		<result property="id" column="idUniteDuree" />
+		<result property="libelle" column="libelleUniteDuree" />
+		<result property="temEnServ" column="temEnServUniteDuree" />
+	</resultMap>
+
+	<statement id="getUnitesDurees" resultMap="UniteDuree">
+		SELECT * FROM UniteDuree
+		WHERE temEnServUniteDuree = 'O'
+	</statement>
+	
+	<statement id="getUniteDureeFromId" resultMap="UniteDuree">
+		SELECT * FROM UniteDuree
+		WHERE idUniteDuree = #id#
+		LIMIT 0, 1
+	</statement>
+
+</sqlMap>

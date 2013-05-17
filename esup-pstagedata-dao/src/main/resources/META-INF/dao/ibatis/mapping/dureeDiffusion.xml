@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DureeDiffusion">
+	
+	<typeAlias alias="ClassDureeDiffusion" type="org.esupportail.pstagedata.domain.beans.DureeDiffusion"/>
+
+	<resultMap id="DureeDiffusion"
+		class="ClassDureeDiffusion">
+		<result property="id" column="idDureeDiffusion" />
+		<result property="libelle" column="libelleDureeDiffusion" />
+		<result property="adminSeulement" column="adminSeulement" />
+	</resultMap>
+
+	<statement id="getDureeDiffusion" resultMap="DureeDiffusion">
+		SELECT * FROM DureeDiffusion
+	</statement>
+	
+	<statement id="getDureeDiffusionFromIdDureeDiffusion" resultMap="DureeDiffusion">
+		SELECT * FROM DureeDiffusion
+		WHERE idDureeDiffusion = #idDureeDiffusion#
+		LIMIT 0,1
+	</statement>
+
+</sqlMap>

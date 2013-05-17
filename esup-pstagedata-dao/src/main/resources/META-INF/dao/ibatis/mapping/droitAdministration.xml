@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DroitAdministration">
+
+	<resultMap id="DroitAdministration"
+		class="org.esupportail.pstagedata.domain.beans.DroitAdministration">
+		<result property="id" column="idDroitAdministration" />
+		<result property="libelle" column="libelleDroitAdministration" />
+		<result property="temEnServ" column="temEnServDroitAdmin" />
+	</resultMap>
+
+	<statement id="getDroitAdministration" resultMap="DroitAdministration">
+		SELECT * FROM DroitAdministration
+	</statement>
+
+	<statement id="getDroitAdministrationFromId" resultMap="DroitAdministration">
+		SELECT * FROM DroitAdministration
+		WHERE idDroitAdministration = #idDroitAdministration#
+		LIMIT 0, 1
+	</statement>
+</sqlMap>

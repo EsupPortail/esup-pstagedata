@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Fichiers">
+
+	<typeAlias alias="ClassFichier"
+		type="org.esupportail.pstagedata.domain.beans.Fichier" />
+
+	<resultMap id="Fichier" class="ClassFichier">
+		<result property="idFichier" column="idFichier" />
+		<result property="nomFichier" column="nomFichier" />
+		<result property="nomReel" column="nomReel" />
+	</resultMap>
+
+	<statement id="getFichierFromIdFichier" resultMap="Fichier">
+		SELECT *
+		FROM Fichiers
+		WHERE idFichier = #idFichier#
+	</statement>
+
+	<insert id="addFichier">
+		INSERT INTO Fichiers (nomFichier,nomReel)
+		VALUES (#nomFichier#,#nomReel#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+     	</selectKey>
+	</insert>
+	
+	<update id="updateFichier">
+		UPDATE Fichiers SET nomFichier = #nomFichier#, nomReel = #nomReel#
+		WHERE idFichier = #idFichier#
+    </update>
+
+	<delete id="deleteFichier">
+		DELETE FROM Fichiers WHERE idFichier = #idFichier#
+	</delete>
+	
+	<update id="cleanFichiers">
+		DELETE FROM Fichiers WHERE nomFichier=''
+	</update>
+
+</sqlMap>

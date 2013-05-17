@@ -16,7 +16,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
-	 * Propriétés
+	 * Proprietes
 	 ****************************************************************/
 	/**
 	 * ID offre
@@ -31,11 +31,11 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private int idContratOffre;
 	/**
-	 * ID Unit� de la dur�e
+	 * ID Unite de la duree
 	 */
 	private int idUniteDuree;
 	/**
-	 * ID niveau de qualification (FAP 4�me caract�re) 
+	 * ID niveau de qualification (FAP 4eme caractere) 
 	 */
 	private int idQualificationSimplifiee;
 	/**
@@ -83,27 +83,27 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private int idContactProprio;
 	/**
-	 * ID du personnel r�f�rent
+	 * ID du personnel referent
 	 */
 	private int idReferent;
 	/**
-	 * Mois de d�but
+	 * Mois de debut
 	 */
 	private String moisDebut;
 	/**
-	 * Ann�e de d�but
+	 * Annee de debut
 	 */
 	private String anneeDebut;
 	/**
-	 * Pr�cision sur ledébutde la mission
+	 * Precision sur le debut de la mission
 	 */
 	private String precisionDebut;
 	/**
-	 * Dur�e du contrat si CDD
+	 * Duree du contrat si CDD
 	 */
 	private int duree;
 	/**
-	 * Intitul� de l'offre
+	 * Intitule de l'offre
 	 */
 	private String intitule;
 	/**
@@ -117,13 +117,13 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	/**
 	 * Code commune
 	 */
-	private int codeCommune;
+	private String codeCommune;
 	/**
 	 * Code postal du lieu de la mission principale
 	 */
 	private String lieuCodePostal;
 	/**
-	 * vrai si d�placement � pr�voir
+	 * vrai si deplacement e prevoir
 	 */
 	private boolean deplacement;
 	/**
@@ -135,11 +135,11 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private boolean voiture;
 	/**
-	 * R�mun�ration
+	 * Remuneration
 	 */
 	private boolean remuneration;
 	/**
-	 * Pr�cision sur la r�mun�ration
+	 * Precision sur la remuneration
 	 */
 	private String precisionRemuneration;
 	/**
@@ -147,7 +147,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private String avantages;
 	/**
-	 * Quotit� de travail
+	 * Quotite de travail
 	 */
 	private String quotiteTravail;
 	/**
@@ -159,11 +159,11 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private String observations;
 	/**
-	 * Comp�tences
+	 * Competences
 	 */
 	private String competences;
 	/**
-	 * R�f�rence de l'offre au sein de l'�tablissement
+	 * Reference de l'offre au sein de l'etablissement
 	 */
 	private String referenceOffreEtablissement;
 	/**
@@ -179,15 +179,15 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private Date dateValidation;
 	/**
-	 * Date de stopage/d�validation de l'offre
+	 * Date de stopage/devalidation de l'offre
 	 */
 	private Date dateStopValidation;
 	/**
-	 * login de la personne ayant diffus�e l'offre
+	 * login de la personne ayant diffusee l'offre
 	 */
 	private String loginDiffusion;
 	/**
-	 * login de la personne ayant arr�t�e la diffusion
+	 * login de la personne ayant arretee la diffusion
 	 */
 	private String loginStopDiffusion;
 	/**
@@ -195,15 +195,15 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private Date dateStopDiffusion;
 	/**
-	 * login de la personne ayant valid�e
+	 * login de la personne ayant validee
 	 */
 	private String loginValidation;
 	/**
-	 * login de la personne ayant stop�/d�valid� l'offre
+	 * login de la personne ayant stope/devalide l'offre
 	 */
 	private String loginStopValidation;
 	/**
-	 * login de la personne ayant rejet� l'offre � la validation
+	 * login de la personne ayant rejete l'offre e la validation
 	 */
 	private String loginRejetValidation;
 	/**
@@ -211,45 +211,45 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private boolean estPourvue;
 	/**
-	 * vrai si l'offre est diffus�e
+	 * vrai si l'offre est diffusee
 	 */
 	private boolean estDiffusee;
 	/**
-	 * vrai si l'offre est valid�e
+	 * vrai si l'offre est validee
 	 */
 	private boolean estValidee;
 	/**
 	 * Etat de la validation (si validation des offres)
-	 * 0 : non valid�e
-	 * 1 : valid�e
+	 * 0 : non validee
+	 * 1 : validee
 	 * 2 : en cours
-	 * 3 : refus�e
+	 * 3 : refusee
 	 */
 	private int etatValidation;
 	/**
-	 * vrai si supprim�e
+	 * vrai si supprimee
 	 */
 	private boolean estSupprimee;
 	/**
-	 * Indiquer si l�offre est accessible ou non aux �tudiants ayant une Reconnaissance 
-	 * de Qualification de Travailleur Handicap� (RQTH)
+	 * Indiquer si leoffre est accessible ou non aux etudiants ayant une Reconnaissance 
+	 * de Qualification de Travailleur Handicape (RQTH)
 	 */
 	private boolean estAccessERQTH;
 	/**
-	 * Indiquer si l�offre est prioritaire ou non aux �tudiants ayant une Reconnaissance 
-	 * de Qualification de Travailleur Handicap� (RQTH)
+	 * Indiquer si leoffre est prioritaire ou non aux etudiants ayant une Reconnaissance 
+	 * de Qualification de Travailleur Handicape (RQTH)
 	 */
 	private boolean estPrioERQTH;
 	/**
-	 * Pr�cision sur le handicapes
+	 * Precision sur le handicapes
 	 */
 	private String precisionHandicap;
 	/**
-	 * Lien attach� 
+	 * Lien attache 
 	 */
 	private String lienAttache;
 	/**
-	 * ID Fichier attach�
+	 * ID Fichier attache
 	 */
 	private int idFichier;
 	/**
@@ -261,43 +261,43 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private boolean avecLien;
 	/**
-	 * vrai si le t�l�phone du contact pour candidature doit �tre cach�
+	 * vrai si le telephone du contact pour candidature doit etre cache
 	 */
 	private boolean cacherTelContactCand;
 	/**
-	 * vrai si le fax du contact pour candidature doit �tre cach�
+	 * vrai si le fax du contact pour candidature doit etre cache
 	 */
 	private boolean cacherFaxContactCand;
 	/**
-	 * vrai si le mail du contact pour candidature doit �tre cach�
+	 * vrai si le mail du contact pour candidature doit etre cache
 	 */
 	private boolean cacherMailContactCand;
 	/**
-	 * vrai si le t�l�phone du contact pour information doit �tre cach�
+	 * vrai si le telephone du contact pour information doit etre cache
 	 */
 	private boolean cacherTelContactInfo;
 	/**
-	 * vrai si le fax du contact pour information doit �tre cach�
+	 * vrai si le fax du contact pour information doit etre cache
 	 */
 	private boolean cacherFaxContactInfo;
 	/**
-	 * vrai si le mail du contact pour information doit �tre cach�
+	 * vrai si le mail du contact pour information doit etre cache
 	 */
 	private boolean cacherMailContactInfo;
 	/**
-	 * vrai si le nom du contact pour candidature doit �tre cach�
+	 * vrai si le nom du contact pour candidature doit etre cache
 	 */
 	private boolean cacherNomContactCand;
 	/**
-	 * vrai si le nom du contact pour information doit �tre cach�
+	 * vrai si le nom du contact pour information doit etre cache
 	 */
 	private boolean cacherNomContactInfo;
 	/**
-	 * vrai si les coordonn�es de l'�tablissement sont cach�es (Raison Sociale, Adresse + Nom de Service)
+	 * vrai si les coordonnees de l'etablissement sont cachees (Raison Sociale, Adresse + Nom de Service)
 	 */
 	private boolean cacherEtablissement;
 	/**
-	 * Ann�e universtaire
+	 * Annee universtaire
 	 */
 	private String anneeUniversitaire;
 	/* **
@@ -314,11 +314,11 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private ContratOffreDTO contratOffre;
 	/**
-	 * Unit� dur�e
+	 * Unite duree
 	 */
 	private UniteDureeDTO uniteDuree;
 	/**
-	 * Qualification simplif�e
+	 * Qualification simplifee
 	 */
 	private FapQualificationSimplifieeDTO fapQualificationSimplifiee;
 	/**
@@ -362,7 +362,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	private ContactDTO contactProprio;
 	/**
-	 * Fichier Attach�
+	 * Fichier Attache
 	 */
 	private FichierDTO fichier;
 	/**
@@ -384,7 +384,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	/**
 	 * Constructeur
 	 * @param o 
-	 * @param light : donn�es minimales
+	 * @param light : donnees minimales
 	 */
 	public OffreDTO(Offre o, boolean light){
 		super(o);
@@ -421,7 +421,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 			if(!light){
 				if(o.getCodeCommune()!=null){
 					codeCommune=o.getCodeCommune();
-				}else codeCommune=0;
+				}else codeCommune="0";
 				if(o.getIdUniteDuree()!=null)idUniteDuree=o.getIdUniteDuree();
 				else idUniteDuree=0;
 				if(o.getIdQualificationSimplifiee()!=null){
@@ -890,18 +890,6 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	public void setLieuCommune(String lieuCommune) {
 		this.lieuCommune = lieuCommune;
-	}
-	/**
-	 * @return the codeCommune
-	 */
-	public int getCodeCommune() {
-		return codeCommune;
-	}
-	/**
-	 * @param codeCommune the codeCommune to set
-	 */
-	public void setCodeCommune(int codeCommune) {
-		this.codeCommune = codeCommune;
 	}
 	/**
 	 * @return the lieuCodePostal
@@ -1699,6 +1687,20 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 */
 	public void setOffresDiffusion(List<OffreDiffusionDTO> offresDiffusion) {
 		this.offresDiffusion = offresDiffusion;
+	}
+
+	/**
+	 * @return the codeCommune
+	 */
+	public String getCodeCommune() {
+		return codeCommune;
+	}
+
+	/**
+	 * @param codeCommune the codeCommune to set
+	 */
+	public void setCodeCommune(String codeCommune) {
+		this.codeCommune = codeCommune;
 	}
 	
 }

@@ -104,14 +104,14 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		String lang = currentUser.getLanguage();
 		if (lang == null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("language not set for user '" + currentUser.getLogin() 
+				logger.debug("language not set for user '" + currentUser.getId() 
 						+ "', return null");
 			}
 			return null;
 		}
 		Locale locale = new Locale(lang);
 		if (logger.isDebugEnabled()) {
-			logger.debug("language for user '" + currentUser.getLogin() + "' is '" + locale + "'");
+			logger.debug("language for user '" + currentUser.getId() + "' is '" + locale + "'");
 		}
 		return locale;
 	}
