@@ -104,6 +104,10 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * idFichier
 	 */
 	private int idFichier;
+	/**
+	 * true si l'universite utilise la validation pedadogique
+	 */
+	private boolean validationPedagogique;
 	
 	/* ***************************************************************
 	 * Objets
@@ -154,6 +158,7 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 			nomViseur=cg.getNomViseur();
 			prenomViseur=cg.getPrenomViseur();
 			urlPageInstruction=cg.getUrlPageInstruction();
+			validationPedagogique=cg.isValidationPedagogique();
 			if (cg.getIdCentreGestionSuperViseur() != null) {
 				idCentreGestionSuperViseur=cg.getIdCentreGestionSuperViseur();
 			}
@@ -559,5 +564,19 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	public FichierDTO getFichier() {
 		return fichier;
+	}
+
+	/**
+	 * @return the validationPedagogique
+	 */
+	public boolean isValidationPedagogique() {
+		return validationPedagogique;
+	}
+
+	/**
+	 * @param validationPedagogique the validationPedagogique to set
+	 */
+	public void setValidationPedagogique(boolean validationPedagogique) {
+		this.validationPedagogique = validationPedagogique;
 	}
 }

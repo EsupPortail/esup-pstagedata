@@ -167,10 +167,6 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("idO", critereRechercheConvention.getIdOffre());
 			parameterMap.put("nE", critereRechercheConvention.getNomEnseignant());
 			parameterMap.put("pE", critereRechercheConvention.getPrenomEnseignant());
-			if(critereRechercheConvention.getIdsUfrs()!=null) parameterMap.put("idsUfrs", critereRechercheConvention.getIdsUfrs());
-			else parameterMap.put("idsUfrs",null);
-			if(critereRechercheConvention.getIdsEtapes()!=null) parameterMap.put("idsEtapes", critereRechercheConvention.getIdsEtapes());
-			else parameterMap.put("idsEtapes",null);
 			parameterMap.put("rsS", StringUtils.hasText(critereRechercheConvention.getRaisonSociale())?critereRechercheConvention.getRaisonSociale():null);
 			parameterMap.put("nsS", StringUtils.hasText(critereRechercheConvention.getNumeroSiret())?critereRechercheConvention.getNumeroSiret():null);
 			parameterMap.put("cmS", StringUtils.hasText(critereRechercheConvention.getCommune())?critereRechercheConvention.getCommune():null);
@@ -235,10 +231,6 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("idO", StringUtils.hasText(critereRechercheConvention.getIdOffre())?critereRechercheConvention.getIdOffre():null);
 			parameterMap.put("nE", StringUtils.hasText(critereRechercheConvention.getNomEnseignant())?critereRechercheConvention.getNomEnseignant():null);
 			parameterMap.put("pE", StringUtils.hasText(critereRechercheConvention.getPrenomEnseignant())?critereRechercheConvention.getPrenomEnseignant():null);
-			if(critereRechercheConvention.getIdsUfrs()!=null) parameterMap.put("idsUfrs", critereRechercheConvention.getIdsUfrs());
-			else parameterMap.put("idsUfrs",null);
-			if(critereRechercheConvention.getIdsEtapes()!=null) parameterMap.put("idsEtapes", critereRechercheConvention.getIdsEtapes());
-			else parameterMap.put("idsEtapes",null);
 			parameterMap.put("rsS", StringUtils.hasText(critereRechercheConvention.getRaisonSociale())?critereRechercheConvention.getRaisonSociale():null);
 			parameterMap.put("nsS", StringUtils.hasText(critereRechercheConvention.getNumeroSiret())?critereRechercheConvention.getNumeroSiret():null);
 			parameterMap.put("cmS", StringUtils.hasText(critereRechercheConvention.getCommune())?critereRechercheConvention.getCommune():null);
@@ -303,10 +295,6 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("idO", critereRechercheConvention.getIdOffre());
 			parameterMap.put("nE", critereRechercheConvention.getNomEnseignant());
 			parameterMap.put("pE", critereRechercheConvention.getPrenomEnseignant());
-			if(critereRechercheConvention.getIdsUfrs()!=null) parameterMap.put("idsUfrs", critereRechercheConvention.getIdsUfrs());
-			else parameterMap.put("idsUfrs",null);
-			if(critereRechercheConvention.getIdsEtapes()!=null) parameterMap.put("idsEtapes", critereRechercheConvention.getIdsEtapes());
-			else parameterMap.put("idsEtapes",null);
 			parameterMap.put("rsS", critereRechercheConvention.getRaisonSociale());
 			parameterMap.put("nsS", critereRechercheConvention.getNumeroSiret());
 			parameterMap.put("cmS", critereRechercheConvention.getCommune());

@@ -90,12 +90,14 @@
 		<result property="dateValidation" column="dateValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
 		<result property="loginSignature" column="loginSignature"/>
 		<result property="dateSignature" column="dateSignature" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="validationPedagogique" column="validationPedagogique"/>
      </resultMap>
      
      <resultMap id="ConventionLight" class="ClassConvention">
         <result property="idConvention" column="idConvention" />
 		<result property="dateDebutStage" column="dateDebutStage"/>
 		<result property="dateFinStage" column="dateFinStage"/>
+		<result property="validationPedagogique" column="validationPedagogique"/>
 		<result property="validationConvention" column="validationConvention"/>
 		<result property="annee" column="annee"/>
 		<result property="codeUFR" column="codeUFR"/>
@@ -172,7 +174,7 @@
     </statement>
     
 	<statement id="getConventionsEtudiant" resultMap="ConventionLight">
-        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
         C.codeUniversiteUFR, C.codeUniversiteEtape
          FROM Convention C
@@ -187,7 +189,7 @@
     </statement>
     
     <statement id="getConventionsByEnseignant" resultMap="ConventionLight">
-        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
         C.codeUniversiteUFR, C.codeUniversiteEtape
          FROM Convention C
@@ -210,7 +212,7 @@
     </statement>
     
     <statement id="getConventionsFromCriteres" resultMap="ConventionLight">
-        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
         C.codeUniversiteUFR, C.codeUniversiteEtape
         FROM Convention C
@@ -306,6 +308,9 @@
 				<isNotNull prepend="AND" property="idLC">
 					C.codeLangueConvention = #idLC#
 				</isNotNull>
+				<isNotNull prepend="AND" property="cVerif">
+					C.validationPedagogique = #cVerif#
+				</isNotNull>
 				<isNotNull prepend="AND" property="cV">
 					C.validationConvention = #cV#
 				</isNotNull>
@@ -390,7 +395,7 @@
     </statement>
     
 	<statement id="getConventionsFromCriteresByEnseignantTuteur" resultMap="ConventionLight">
-        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
+        SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
         C.codeUniversiteUFR, C.codeUniversiteEtape
         FROM Convention C
@@ -482,6 +487,9 @@
 				</isNotNull>
 				<isNotNull prepend="AND" property="idLC">
 					C.codeLangueConvention = #idLC#
+				</isNotNull>
+				<isNotNull prepend="AND" property="cVerif">
+					C.validationPedagogique = #cVerif#
 				</isNotNull>
 				<isNotNull prepend="AND" property="cV">
 					C.validationConvention = #cV#
@@ -660,6 +668,9 @@
 				<isNotNull prepend="AND" property="idLC">
 					C.codeLangueConvention = #idLC#
 				</isNotNull>
+				<isNotNull prepend="AND" property="cVerif">
+					C.validationPedagogique = #cVerif#
+				</isNotNull>
 				<isNotNull prepend="AND" property="cV">
 					C.validationConvention = #cV#
 				</isNotNull>
@@ -786,24 +797,22 @@
          (idConvention,idEtudiant,idCentreGestion,codeUFR,codeUniversiteUFR,codeDepartement,codeEtape,codeUniversiteEtape,
   		 idEnseignant,idStructure,idService,idContact,idSignataire,idTypeConvention,idOffre,
   		 sujetStage,dateDebutStage,dateFinStage,interruptionStage,dateDebutInterruption,dateFinInterruption,
-  		 nbJoursHebdo,idTempsTravail,commentaireDureeTravail,codeLangueConvention,idOrigineStage,idTheme,conventionStructure,
+  		 nbJoursHebdo,idTempsTravail,commentaireDureeTravail,codeLangueConvention,idOrigineStage,idTheme,conventionStructure,validationPedagogique,
   		 validationConvention,conversionEnContrat,commentaireStage,adresseEtudiant,codePostalEtudiant,villeEtudiant,paysEtudiant,courrielPersoEtudiant,telEtudiant,telPortableEtudiant,
   		 idIndemnisation,montantGratification,fonctionsEtTaches,details,annee,idAssurance,insee,codeCaisse,temConfSujetTeme,nbHeuresHebdo,quotiteTravail,
   		 modeEncadreSuivi,idModeVersGratification,avantagesNature,idNatureTravail,idModeValidationStage,codeElp,libelleELP,creditECTS,travailNuitFerie,
   		 dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
-  		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,idFicheEvaluation,codeRGI,
-  		 loginCreation,dateCreation)
+  		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,idFicheEvaluation,codeRGI,loginCreation,dateCreation)
   		VALUES 
 		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeUniversiteEtape#,
   		 #idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
   		 #sujetStage#,#dateDebutStage#,#dateFinStage#,#interruptionStage#,#dateDebutInterruption#,#dateFinInterruption#,
-  		 #nbJoursHebdo#,#idTempsTravail#,#commentaireDureeTravail#,#codeLangueConvention#,#idOrigineStage#,#idTheme#,#conventionStructure#,
+  		 #nbJoursHebdo#,#idTempsTravail#,#commentaireDureeTravail#,#codeLangueConvention#,#idOrigineStage#,#idTheme#,#conventionStructure#,#validationPedagogique#,
   		 #validationConvention#,#conversionEnContrat#,#commentaireStage#,#adresseEtudiant#,#codePostalEtudiant#,#villeEtudiant#,#paysEtudiant#,#courrielPersoEtudiant#,#telEtudiant#,#telPortableEtudiant#,
   		 #idIndemnisation#,#montantGratification#,#fonctionsEtTaches#,#details#,#annee#,#idAssurance#,#insee#,#codeCaisse#,#temConfSujetTeme#,#nbHeuresHebdo#,#quotiteTravail#,
   		 #modeEncadreSuivi#,#idModeVersGratification#,#avantagesNature#,#idNatureTravail#,#idModeValidationStage#,#codeElp#,#libelleELP#,#creditECTS#,#travailNuitFerie#,
   		 #dureeStage#,#nomEtabRef#,#adresseEtabRef#,#nomSignataireComposante#,#qualiteSignataire#,#libelleCPAM#,#dureeExceptionnelle#,#idUniteDureeExceptionnelle#,#idUniteGratification#,
-  		 #codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#idFicheEvaluation#,#codeRGI#,
-  		 #loginCreation#,CURRENT_TIMESTAMP())
+  		 #codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#idFicheEvaluation#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP())
 		<selectKey resultClass="java.lang.Integer">
          SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -816,7 +825,7 @@
   		 idEnseignant = #idEnseignant#,idStructure = #idStructure#,idService = #idService#,idContact = #idContact#,idSignataire = #idSignataire#,idTypeConvention = #idTypeConvention#,idOffre = #idOffre#,
   		 sujetStage = #sujetStage#,dateDebutStage = #dateDebutStage#,dateFinStage = #dateFinStage#,interruptionStage = #interruptionStage#,dateDebutInterruption = #dateDebutInterruption#,dateFinInterruption = #dateFinInterruption#,
   		 nbJoursHebdo = #nbJoursHebdo#,idTempsTravail = #idTempsTravail#,commentaireDureeTravail = #commentaireDureeTravail#,
-  		 codeLangueConvention = #codeLangueConvention#,idOrigineStage = #idOrigineStage#,idTheme = #idTheme#,conventionStructure = #conventionStructure#,
+  		 codeLangueConvention = #codeLangueConvention#,idOrigineStage = #idOrigineStage#,idTheme = #idTheme#,conventionStructure = #conventionStructure#,validationPedagogique=#validationPedagogique#,
   		 validationConvention = #validationConvention#,conversionEnContrat = #conversionEnContrat#,commentaireStage = #commentaireStage#,
   		 adresseEtudiant = #adresseEtudiant#,codePostalEtudiant = #codePostalEtudiant#,villeEtudiant = #villeEtudiant#,
   		 paysEtudiant = #paysEtudiant#,courrielPersoEtudiant = #courrielPersoEtudiant#,telEtudiant = #telEtudiant#,telPortableEtudiant = #telPortableEtudiant#,

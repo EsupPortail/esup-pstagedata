@@ -1,0 +1,23 @@
+
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('A','Agriculture, marine, pêche');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('B','Bâtiment, travaux publics');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('C','Electricité, électronique');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('D','Mécanique, travail des métaux');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('E','Industries de process');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('F','Matériaux souples, bois, industries graphiques');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('G','Maintenance');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('H','Ingénieurs et cadres de l''industrie');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('J','Transports, logistique et tourisme');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('K','Artisanat');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('L','Gestion, administration des entreprises');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('M','Informatique et télécommunications');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('N','Etudes et recherche');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('P','Administration publique, professions juridiques, armée et police');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('Q','Banque et assurances');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('R','Commerce');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('S','Hôtellerie, restauration, alimentation');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('T','Services aux particuliers et aux collectivités');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('U','Communication, information, art et spectacle');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('V','Santé, action sociale, culturelle et sportive');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('W','Enseignement, formation');
+insert into `FAP_N1`(`codeFAP_N1`,`libelle`) values ('X','Politique, religion');

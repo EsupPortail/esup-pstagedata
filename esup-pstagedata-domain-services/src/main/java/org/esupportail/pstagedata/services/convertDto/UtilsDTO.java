@@ -128,7 +128,7 @@ import org.springframework.util.StringUtils;
 public class UtilsDTO {
 
 	/* ***************************************************************
-	 * Propri�t�s
+	 * Propriétés
 	 ****************************************************************/
 
 	/**
@@ -333,6 +333,7 @@ public class UtilsDTO {
 			c.setCodeConfidentialite(cd.getCodeConfidentialite());
 			if (cd.getIdFichier() >= 0)
 				c.setIdFichier(cd.getIdFichier());
+			c.setValidationPedagogique(cd.isValidationPedagogique());
 		}
 		return c;
 	}
@@ -897,6 +898,7 @@ public class UtilsDTO {
 			pg.setIdDroitAdmin(pd.getIdDroitAdmin());
 			pg.setIdCivilite(pd.getIdCivilite());
 			pg.setImpressionConvention(pd.getImpressionConvention());
+			pg.setAlertesMail(pd.isAlertesMail());
 			pg.setCodeUniversite(pd.getCodeUniversite());
 			pg.setCampus(pd.getCampus());
 			pg.setBatiment(pd.getBatiment());
@@ -1376,6 +1378,7 @@ public class UtilsDTO {
 			o.setTemConfSujetTeme(oDTO.getTemConfSujetTeme());
 			o.setTravailNuitFerie(oDTO.getTravailNuitFerie());
 			o.setValidationConvention(oDTO.isValidationConvention());
+			o.setValidationPedagogique(oDTO.isValidationPedagogique());
 			o.setVilleEtudiant(oDTO.getVilleEtudiant());
 			
 		}

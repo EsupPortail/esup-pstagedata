@@ -56,6 +56,10 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 	 * codeUniversite
 	 */
 	private String codeUniversiteAffectation;
+	/**
+	 * alertes mail
+	 */
+	private boolean alertesMail;
 	
 	/* ***************************************************************
 	 * Objets
@@ -98,7 +102,8 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 		"campus : "+campus+", "+
 		"fonction : "+fonction+", "+
 		"codeAffectation : "+codeAffectation+", "+
-		"impressionConvention : "+impressionConvention+", "+super.toString();
+		"impressionConvention : "+impressionConvention+", "+
+		"alertesMail : "+alertesMail+", "+super.toString();
 	}
 	
 	/* ***************************************************************
@@ -283,5 +288,19 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 	 */
 	public Civilite getCivilite() {
 		return civilite;
+	}
+
+	/**
+	 * @return the alertesMail
+	 */
+	public boolean isAlertesMail() {
+		return alertesMail;
+	}
+
+	/**
+	 * @param alertesMail the alertesMail to set
+	 */
+	public void setAlertesMail(boolean alertesMail) {
+		this.alertesMail = alertesMail;
 	}
 }

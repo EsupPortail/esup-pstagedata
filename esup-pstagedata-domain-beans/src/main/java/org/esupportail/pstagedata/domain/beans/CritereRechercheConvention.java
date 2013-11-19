@@ -96,11 +96,11 @@ public class CritereRechercheConvention implements Serializable{
 	/**
 	 * ufrs
 	 */
-	private List<Integer> idsUfrs;
+	private List<String> idsUfrs;
 	/**
 	 * etapes
 	 */
-	private List<Integer> idsEtapes;
+	private List<String> idsEtapes;
 	/**
 	 * raisonSociale
 	 */
@@ -449,36 +449,6 @@ public class CritereRechercheConvention implements Serializable{
 	}
 
 	/**
-	 * @return the idsUfrs
-	 */
-	public List<Integer> getIdsUfrs() {
-		if(idsUfrs==null || idsUfrs.isEmpty()) idsUfrs=null;
-		return idsUfrs;
-	}
-
-	/**
-	 * @param idsUfrs the idsUfrs to set
-	 */
-	public void setIdsUfrs(List<Integer> idsUfrs) {
-		this.idsUfrs = idsUfrs;
-	}
-
-	/**
-	 * @return the idsEtapes
-	 */
-	public List<Integer> getIdsEtapes() {
-		if(idsEtapes==null || idsEtapes.isEmpty()) idsEtapes=null;
-		return idsEtapes;
-	}
-
-	/**
-	 * @param idsEtapes the idsEtapes to set
-	 */
-	public void setIdsEtapes(List<Integer> idsEtapes) {
-		this.idsEtapes = idsEtapes;
-	}
-
-	/**
 	 * @param raisonSociale the raisonSociale to set
 	 */
 	public void setRaisonSociale(String raisonSociale) {
@@ -645,6 +615,34 @@ public class CritereRechercheConvention implements Serializable{
 	 */
 	public void setEstVerifiee(Boolean estVerifiee) {
 		this.estVerifiee = estVerifiee;
+	}
+
+	/**
+	 * @return the idsUfrs
+	 */
+	public List<String> getIdsUfrs() {
+		return idsUfrs;
+	}
+
+	/**
+	 * @param idsUfrs the idsUfrs to set
+	 */
+	public void setIdsUfrs(List<String> idsUfrs) {
+		this.idsUfrs = idsUfrs;
+	}
+
+	/**
+	 * @return the idsEtapes
+	 */
+	public List<String> getIdsEtapes() {
+		return idsEtapes;
+	}
+
+	/**
+	 * @param idsEtapes the idsEtapes to set
+	 */
+	public void setIdsEtapes(List<String> idsEtapes) {
+		this.idsEtapes = idsEtapes;
 	}
 
 }

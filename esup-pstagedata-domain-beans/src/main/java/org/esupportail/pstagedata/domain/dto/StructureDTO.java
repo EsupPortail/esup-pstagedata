@@ -153,7 +153,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 			raisonSociale=s.getRaisonSociale();
 			if(!superLight){
 				idTypeStructure=s.getIdTypeStructure();
-				idStatutJuridique=s.getIdStatutJuridique();
+				if(s.getIdStatutJuridique()!=null) idStatutJuridique=s.getIdStatutJuridique();
 				idEffectif=s.getIdEffectif();
 				codeEtab=s.getCodeEtab();
 				numeroSiret=s.getNumeroSiret();
@@ -172,9 +172,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 				loginValidation=s.getLoginValidation();
 				dateStopValidation=s.getDateStopValidation();
 				loginStopValidation=s.getLoginStopValidation();
-				if (s.getIdAccordPartenariat() != null) {
-					idAccordPartenariat=s.getIdAccordPartenariat();
-				}
+				if (s.getIdAccordPartenariat() != null) idAccordPartenariat=s.getIdAccordPartenariat();
 				if(s.getAccordPartenariat()!=null) accordPartenariat=new AccordPartenariatDTO(s.getAccordPartenariat());
 			}
 		}

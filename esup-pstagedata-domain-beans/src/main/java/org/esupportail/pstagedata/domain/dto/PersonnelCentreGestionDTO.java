@@ -56,6 +56,10 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	 * codeUniversite
 	 */
 	private String codeUniversiteAffectation;
+	/**
+	 * alertes mail
+	 */
+	private boolean alertesMail;
 	/* **
 	 * 
 	 * Objets
@@ -95,6 +99,7 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 			if(p.getIdDroitAdmin() != null )
 				idDroitAdmin=p.getIdDroitAdmin();
 			impressionConvention=p.getImpressionConvention();
+			alertesMail=p.isAlertesMail();
 			campus=p.getCampus();
 			batiment=p.getBatiment();
 			bureau=p.getBureau();
@@ -121,6 +126,7 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 		"campus : "+campus+", "+
 		"fonction : "+fonction+", "+
 		"codeAffectation : "+codeAffectation+", "+
+		"alertesMail : "+alertesMail+", "+
 		"impressionConvention : "+impressionConvention+", "+super.toString();
 	}
 	
@@ -302,6 +308,20 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	 */
 	public void setCodeUniversiteAffectation(String codeUniversiteAffectation) {
 		this.codeUniversiteAffectation = codeUniversiteAffectation;
+	}
+
+	/**
+	 * @return the alertesMail
+	 */
+	public boolean isAlertesMail() {
+		return alertesMail;
+	}
+
+	/**
+	 * @param alertesMail the alertesMail to set
+	 */
+	public void setAlertesMail(boolean alertesMail) {
+		this.alertesMail = alertesMail;
 	}
 	
 	

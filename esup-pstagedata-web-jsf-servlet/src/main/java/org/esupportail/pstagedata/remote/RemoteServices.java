@@ -986,6 +986,13 @@ public interface RemoteServices extends Serializable{
 	/* ****************************************************************************
 	 * STRUCTURE
 	 *****************************************************************************/
+	// Ajout moderation Entreprise
+	/**
+	 * @param estValidee
+	 * @return List<StructureDTO>
+	 */
+	public List<StructureDTO> getStructuresFromVerification(boolean estValidee);
+	
 	/**
 	 * @param id
 	 * @return StructureDTO
@@ -997,20 +1004,20 @@ public interface RemoteServices extends Serializable{
 	 */
 	public StructureDTO getStructureFromIdService(int id);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromRaisonSociale(String raisonSociale);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale
 	 * @param cog : peut �tre vide (==0)
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromRaisonSocialeEtPays(String raisonSociale, int cog);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale
 	 * @return List<StructureDTO>
 	 */
@@ -1023,7 +1030,7 @@ public interface RemoteServices extends Serializable{
 	/**
 	 * Retourne les structures dont les contacts associ�s au centre ENTREPRISE
 	 * ont l'adresse mail �gale � "mail" 
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param mail
 	 * @return List<StructureDTO>
 	 */
@@ -1034,26 +1041,26 @@ public interface RemoteServices extends Serializable{
 	 */
 	public StructureDTO getStructureAvecAccordFromId(int id);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale
 	 * @param departement : peut �tre vide
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromRaisonSocialeEtDepartement(String raisonSociale, String departement);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param numSiren
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromNumSiren(String numSiren);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param telephone
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromTelephone(String telephone);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param fax
 	 * @return List<StructureDTO>
 	 */
@@ -1064,14 +1071,14 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<StructureDTO> getStructuresFromAdresse(CritereRechercheStructureAdresseDTO c);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param nomService
 	 * @param departement : peut �tre vide
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromNomServiceEtDepartement(String nomService, String departement);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param typeStructure
 	 * @param nafN1
 	 * @param departement : peut �tre vide
@@ -1079,7 +1086,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<StructureDTO> getStructuresFromTypeStructureNafN1EtDepartement(int typeStructure, String nafN1, String departement);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale : peut �tre vide
 	 * @param dateDebut 
 	 * @param dateFin 
@@ -1087,7 +1094,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<StructureDTO> getStructuresAvecAccordAValiderFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale : peut �tre vide
 	 * @param dateDebut 
 	 * @param dateFin 
@@ -1095,7 +1102,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<StructureDTO> getStructuresAvecAccordValidesFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin);
 	/**
-	 * Limit�e � 200 r�sultats
+	 * Limitée à 200 résultats
 	 * @param raisonSociale
 	 * @return List<StructureDTO>
 	 */

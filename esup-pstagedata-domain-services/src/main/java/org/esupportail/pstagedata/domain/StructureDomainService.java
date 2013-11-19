@@ -24,6 +24,14 @@ import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
  *
  */
 public interface StructureDomainService extends Serializable {
+	
+	// Ajout moderation Entreprise
+	/**
+	 * @param estValidee
+	 * @return List<StructureDTO>
+	 */
+	public List<StructureDTO> getStructuresFromVerification(boolean estValidee);
+	
 	/**
 	 * @param id
 	 * @return StructureDTO

@@ -33,7 +33,16 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	// Ajout moderation Entreprise
+	/**
+	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
+	 */
+	@SuppressWarnings({ "unchecked", "cast" })
+	public List<Structure> getStructuresFromVerification(boolean estValidee){
+		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromVerification", estValidee);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.dao.StructureDaoService#addStructure(org.esupportail.pstagedata.domain.beans.Structure)
 	 */

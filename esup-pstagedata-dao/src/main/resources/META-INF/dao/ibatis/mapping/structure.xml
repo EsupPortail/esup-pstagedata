@@ -33,7 +33,7 @@
 		<result property="siteWeb" column="siteWeb" />
 		<result property="groupe" column="groupe" />
 		<result property="logo" column="logo" />
-		<result property="estValidee" column="estValidee" />		
+		<result property="estValidee" column="estValidee" />
 		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
 		<result property="loginCreation" column="loginCreation" />
 		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
@@ -77,7 +77,28 @@
 		<result property="mail" column="mail" />
 		<result property="siteWeb" column="siteWeb" />
 	</resultMap>
-
+	
+	<resultMap id="StructureLightVerif"	class="ClassStructure">
+		<result property="idStructure" column="idStructure" />
+		<result property="raisonSociale" column="raisonSociale" />
+		<result property="numeroSiret" column="numeroSiret" />
+		<result property="voie" column="voie" />
+		<result property="commune" column="commune" />
+		<result property="codePostal" column="codePostal" />
+		<result property="idPays" column="idPays" />
+		<result property="estValidee" column="estValidee" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
+	</resultMap>
+	
+	<statement id="getStructuresFromVerification" resultMap="StructureLightVerif">
+		SELECT DISTINCT S.idStructure, S.raisonSociale, S.numeroSiret,
+		S.voie, S.commune, S.codePostal, S.idPays, S.estValidee, S.dateCreation
+		FROM Structure S
+		WHERE S.estValidee = #estValidee#
+		ORDER BY S.dateCreation DESC
+		LIMIT 0, 50
+	</statement>
+	
 	<statement id="getStructureFromId" resultMap="Structure">
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure

@@ -475,11 +475,11 @@ public class RemoteServicesImpl implements RemoteServices{
 				AccordPartenariatDTO tmp = null;
 				tmp=this.accordPartenariatDomainService.getAccordFromIdStructure(accord.getIdStructure());
 				if(tmp!=null){
-					throw new AccordAlreadyExistingForStructureException("Accord d�j� existant pour cette structure : "+accord.getIdStructure());
+					throw new AccordAlreadyExistingForStructureException("Accord déjà existant pour cette structure : "+accord.getIdStructure());
 				}
 				tmp=this.accordPartenariatDomainService.getAccordFromIdContact(accord.getIdContact());
 				if(tmp!=null){
-					throw new AccordAlreadyExistingForContactException("Accord d�j� existant pour ce contact : "+accord.getIdContact());
+					throw new AccordAlreadyExistingForContactException("Accord déjà existant pour ce contact : "+accord.getIdContact());
 				}
 				b = this.accordPartenariatDomainService.addAccord(accord);
 			}
@@ -497,11 +497,11 @@ public class RemoteServicesImpl implements RemoteServices{
 				AccordPartenariatDTO tmp = null;
 				tmp=this.accordPartenariatDomainService.getAccordFromIdStructure(accord.getIdStructure());
 				if(tmp!=null && !tmp.equals(accord)){
-					throw new AccordAlreadyExistingForStructureException("Accord d�j� existant pour cette structure : "+accord.getIdStructure());
+					throw new AccordAlreadyExistingForStructureException("Accord déjà existant pour cette structure : "+accord.getIdStructure());
 				}
 				tmp=this.accordPartenariatDomainService.getAccordFromIdContact(accord.getIdContact());
 				if(tmp!=null && !tmp.equals(accord)){
-					throw new AccordAlreadyExistingForContactException("Accord d�j� existant pour ce contact : "+accord.getIdContact());
+					throw new AccordAlreadyExistingForContactException("Accord déjà existant pour ce contact : "+accord.getIdContact());
 				}
 				b = this.accordPartenariatDomainService.updateAccord(accord);
 			}
@@ -574,7 +574,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				AdminStructureDTO tmp=null;
 				tmp=this.adminStructureDomainService.getAdminStructureFromLogin(admin.getLogin());
 				if(tmp!=null){
-					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login d�j� utilis� : "+admin.getLogin());
+					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login déjà utilisé : "+admin.getLogin());
 					a.setLogin(true);
 					a.setEppn(false);
 					throw a;
@@ -584,7 +584,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				AdminStructureDTO tmp=null;
 				tmp=this.adminStructureDomainService.getAdminStructureFromEppn(admin.getEppn());
 				if(tmp!=null){
-					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN d�j� utilis� : "+admin.getEppn());
+					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN déjà utilisé : "+admin.getEppn());
 					a.setLogin(false);
 					a.setEppn(true);
 					throw a;
@@ -609,7 +609,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				AdminStructureDTO tmp=null;
 				tmp=this.adminStructureDomainService.getAdminStructureFromLogin(admin.getLogin());
 				if(tmp!=null && !tmp.equals(admin)){
-					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login d�j� utilis� : "+admin.getLogin());
+					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login déjà utilisé : "+admin.getLogin());
 					a.setLogin(true);
 					a.setEppn(false);
 					throw a;
@@ -619,7 +619,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				AdminStructureDTO tmp=null;
 				tmp=this.adminStructureDomainService.getAdminStructureFromEppn(admin.getEppn());
 				if(tmp!=null && !tmp.equals(admin)){
-					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN d�j� utilis� : "+admin.getEppn());
+					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN déjà utilisé : "+admin.getEppn());
 					a.setLogin(false);
 					a.setEppn(true);
 					throw a;
@@ -691,7 +691,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAffectation(org.esupportail.pstagedata.domain.dto.AffectationDTO)
 	 */
-	public int addAffectation(AffectationDTO a) throws DataAddException,WebServiceDataBaseException{
+	public int addAffectation(AffectationDTO a) throws DataAddException,WebServiceDataBaseException,AffectationAlreadyExistingForCodeException{
 		int b=0;
 		if(a!=null){
 			
@@ -894,7 +894,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			CentreGestionDTO tmp = getCentreEtablissement(cg.getCodeUniversite());
 			if( tmp != null
 					&& cg.getIdNiveauCentre() == tmp.getIdNiveauCentre()){
-				throw new CentreEtablissementDejaExistantException("Centre Etablissement d�j� existant : " + tmp);
+				throw new CentreEtablissementDejaExistantException("Centre Etablissement déjà existant : " + tmp);
 			}
 			b = this.centreGestionDomainService.addCentreGestion(cg);
 		}
@@ -910,7 +910,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			if(tmp != null
 					&& cg.getIdNiveauCentre() == tmp.getIdNiveauCentre()
 					&& cg.getIdCentreGestion() != tmp.getIdCentreGestion()){
-				throw new CentreEtablissementDejaExistantException("Centre Etablissement d�j� existant : " + tmp);
+				throw new CentreEtablissementDejaExistantException("Centre Etablissement déjà existant : " + tmp);
 			}
 			b = this.centreGestionDomainService.updateCentreGestion(cg);
 		}
@@ -1113,7 +1113,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				StructureDTO s = this.structureDomainService.getStructureFromIdService(c.getIdService());
 				ContactDTO tmpC = this.contactDomainService.getContactEntrepriseAvecCompteFromMailAndIdStructure(c.getMail(), s.getIdStructure());
 				if(tmpC!=null && !c.equals(tmpC)){
-					throw new AccountAlreadyExistingForCoupleMailStructureException("Ce mail est d�j� utilis� pour un autre contact.");
+					throw new AccountAlreadyExistingForCoupleMailStructureException("Ce mail est déjà utilisé pour un autre contact.");
 				}
 			}
 			b = this.contactDomainService.updateCompteContact(c);
@@ -1154,7 +1154,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			AccordPartenariatDTO a = this.accordPartenariatDomainService.getAccordFromIdContact(idContact);
 			ContactDTO c = this.contactDomainService.getContactFromId(idContact);
 			if(nbRefOffre>0 || nbRefConvention>0 || a!=null || (StringUtils.hasText(c.getLogin()) && StringUtils.hasText(c.getMdp()))){
-				throw new ContactDeleteException("Suppression impossible, contact r�f�renc�.", StringUtils.hasText(c.getLogin()) && StringUtils.hasText(c.getMdp()),
+				throw new ContactDeleteException("Suppression impossible, contact référencé.", StringUtils.hasText(c.getLogin()) && StringUtils.hasText(c.getMdp()),
 						a!=null, nbRefOffre>0, nbRefConvention>0);
 			}
 			b = this.contactDomainService.deleteContact(idContact);
@@ -1557,7 +1557,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEtape(org.esupportail.pstagedata.domain.dto.EtapeDTO)
 	 */
-	public int addEtape(EtapeDTO etape) throws DataAddException, WebServiceDataBaseException {
+	public int addEtape(EtapeDTO etape) throws DataAddException, WebServiceDataBaseException,EtapeAlreadyExistingForCodeException {
 		int b=0;
 		if(etape!=null){
 			try {
@@ -1622,7 +1622,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEtudiant(org.esupportail.pstagedata.domain.dto.EtudiantDTO)
 	 */
-	public int addEtudiant(EtudiantDTO etudiant) throws DataAddException,WebServiceDataBaseException  {
+	public int addEtudiant(EtudiantDTO etudiant) throws DataAddException,WebServiceDataBaseException,EtudiantAlreadyExistingForNumEtuCodeUnivException{
 		int b=0;
 		if(etudiant!=null){
 			try {
@@ -2169,12 +2169,12 @@ public class RemoteServicesImpl implements RemoteServices{
 					for(int i=0; i<tmp.size();i++){
 						if(pg.getUidPersonnel().equals(tmp.get(i).getUidPersonnel())
 								&& pg.getIdCentreGestion() == tmp.get(i).getIdCentreGestion()){
-							throw new PersonalAlreadyExistingForCentreException("Personnel d�j� rattach� : " + tmp);
+							throw new PersonalAlreadyExistingForCentreException("Personnel déjàrattaché : " + tmp);
 						}
 					}
 				}
 			} catch (NullPointerException npe){
-				// En cas de npe, le personnel n'est pas d�j� rattach�, on continue donc l'ajout normalement.
+				// En cas de npe, le personnel n'est pas déjà rattaché, on continue donc l'ajout normalement.
 			}
 			b = this.personnelCentreGestionDomainService.addPersonnelCentreGestion(pg);
 		}
@@ -2282,7 +2282,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			int nbCompteContact = this.serviceDomainService.countContactAvecCompte(idService);
 			int nbContactAccord = this.serviceDomainService.countContactRefAccord(idService);
 			if(nbContactRefOffre>0 || nbContactRefConvention>0 || nbCompteContact>0 || nbContactAccord>0){
-				throw new ServiceDeleteException("Suppression impossible, un ou plusieurs contacts sont r�f�renc�s.", nbCompteContact>0, nbContactAccord>0, nbContactRefOffre>0, nbContactRefConvention>0);
+				throw new ServiceDeleteException("Suppression impossible, un ou plusieurs contacts sont référencés.", nbCompteContact>0, nbContactAccord>0, nbContactRefOffre>0, nbContactRefConvention>0);
 			}
 			b = this.serviceDomainService.deleteService(idService);
 		}
@@ -2304,6 +2304,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * STRUCTURE
 	 *****************************************************************************/
 
+	// Ajout moderation Entreprise
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromVerification(boolean)
+	 */
+	public List<StructureDTO> getStructuresFromVerification(boolean estValidee){
+		return this.structureDomainService.getStructuresFromVerification(estValidee);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructureFromId(int)
 	 */
@@ -2678,7 +2686,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addUfr(org.esupportail.pstagedata.domain.dto.UfrDTO)
 	 */
-	public int addUfr(UfrDTO ufr) throws DataAddException,WebServiceDataBaseException {
+	public int addUfr(UfrDTO ufr) throws DataAddException,WebServiceDataBaseException,UfrAlreadyExistingForCodeException {
 		int b=0;
 		if(ufr!=null){
 			try {

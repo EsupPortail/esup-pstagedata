@@ -138,6 +138,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private boolean validationConvention;
 	/**
+	 * validationPedagogique
+	 */
+	private boolean validationPedagogique;
+	/**
 	 * conversionEnContrat
 	 */
 	private boolean conversionEnContrat;
@@ -492,6 +496,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.dateDebutStage=c.getDateDebutStage();
 			this.dateFinStage=c.getDateFinStage();
 			this.validationConvention=c.isValidationConvention();
+			this.validationPedagogique=c.isValidationPedagogique();
 			this.annee=c.getAnnee();
 			this.codeUFR=c.getCodeUFR();
 			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
@@ -740,6 +745,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				"idTheme : "+idTheme+", "+
 				"conventionStructure : "+conventionStructure+", "+
 				"validationConvention : "+validationConvention+", "+
+				"validationPedagogique : "+validationPedagogique+", "+
 				"conversionEnContrat : "+conversionEnContrat+", "+
 				"commentaireStage : "+commentaireStage+", "+
 				"adresseEtudiant : "+adresseEtudiant+", "+
@@ -2316,6 +2322,22 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public boolean isSelected() {
 		return selected;
+	}
+
+
+	/**
+	 * @return the validationPedagogique
+	 */
+	public boolean isValidationPedagogique() {
+		return validationPedagogique;
+	}
+
+
+	/**
+	 * @param validationPedagogique the validationPedagogique to set
+	 */
+	public void setValidationPedagogique(boolean validationPedagogique) {
+		this.validationPedagogique = validationPedagogique;
 	}
 
 

@@ -137,6 +137,10 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	private boolean validationConvention;
 	/**
+	 * validationPedagogique
+	 */
+	private boolean validationPedagogique;
+	/**
 	 * conversionEnContrat
 	 */
 	private boolean conversionEnContrat;
@@ -1626,6 +1630,22 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setNbAvenant(int nbAvenant) {
 		this.nbAvenant = nbAvenant;
+	}
+
+
+	/**
+	 * @return the validationPedagogique
+	 */
+	public boolean isValidationPedagogique() {
+		return validationPedagogique;
+	}
+
+
+	/**
+	 * @param validationPedagogique the validationPedagogique to set
+	 */
+	public void setValidationPedagogique(boolean validationPedagogique) {
+		this.validationPedagogique = validationPedagogique;
 	}
 
 }

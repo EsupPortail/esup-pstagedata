@@ -53,6 +53,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 		this.structureDaoService = structureDaoService;
 	}
 	
+	// Ajout moderation Entreprise
+	/**
+	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
+	 */
+	public List<StructureDTO> getStructuresFromVerification(boolean estValidee){
+		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresFromVerification(estValidee));
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#addStructure(org.esupportail.pstagedata.domain.dto.StructureDTO)
 	 */

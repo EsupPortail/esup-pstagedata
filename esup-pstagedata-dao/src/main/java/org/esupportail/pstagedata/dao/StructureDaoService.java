@@ -24,6 +24,14 @@ import org.esupportail.pstagedata.domain.beans.Structure;
  *
  */
 public interface StructureDaoService extends Serializable {
+
+	// Ajout moderation Entreprise
+	/**
+	 * @param estValidee
+	 * @return List<Structure>
+	 */
+	public List<Structure> getStructuresFromVerification(boolean estValidee);
+	
 	/**
 	 * @param id
 	 * @return Structure

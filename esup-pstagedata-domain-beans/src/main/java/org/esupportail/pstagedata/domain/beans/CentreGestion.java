@@ -59,11 +59,11 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private boolean saisieTuteurProParEtudiant;
 	/**
-	 * true si choix d'ann�e possible avant ledébutde la nouvelle ann�e
+	 * true si choix d'année possible avant le début de la nouvelle année
 	 */
 	private boolean choixAnneeAvantDebutAnnee;
 	/**
-	 * true si choix d'ann�e possible apr�s ledébutde la nouvelle ann�e
+	 * true si choix d'année possible après ledébutde la nouvelle année
 	 */
 	private boolean choixAnneeApresDebutAnnee;
 	/**
@@ -71,7 +71,7 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private boolean depotAnonyme;
 	/**
-	 * Code Universit�
+	 * Code Université
 	 */
 	private String codeUniversite;
 	/**
@@ -91,7 +91,7 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private Integer idCentreGestionSuperViseur;
 	/**
-	 * code confidentialit�
+	 * code confidentialité
 	 */
 	private String codeConfidentialite;
 	/**
@@ -102,6 +102,10 @@ public class CentreGestion extends Adresse implements Serializable{
 	 * idFichier
 	 */
 	private int idFichier;
+	/**
+	 * true si l'universite utilise la validation pedadogique
+	 */
+	private boolean validationPedagogique;
 	
 	/* ***************************************************************
 	 * Objets
@@ -468,5 +472,19 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public int getIdFichier() {
 		return idFichier;
+	}
+
+	/**
+	 * @return the validationPedagogique
+	 */
+	public boolean isValidationPedagogique() {
+		return validationPedagogique;
+	}
+
+	/**
+	 * @param validationPedagogique the validationPedagogique to set
+	 */
+	public void setValidationPedagogique(boolean validationPedagogique) {
+		this.validationPedagogique = validationPedagogique;
 	}
 }
