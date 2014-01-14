@@ -57,23 +57,23 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	private boolean presenceTuteurPro;
 	/**
-	 * true si le tuteur pro peut �tre saisi par un etudiant
+	 * true si le tuteur pro peut être saisi par un etudiant
 	 */
 	private boolean saisieTuteurProParEtudiant;
 	/**
-	 * true si choix d'ann�e possible avant ledébutde la nouvelle ann�e
+	 * true si choix d'année possible avant le début de la nouvelle année
 	 */
 	private boolean choixAnneeAvantDebutAnnee;
 	/**
-	 * true si choix d'ann�e possible apr�s ledébutde la nouvelle ann�e
+	 * true si choix d'année possible après le début de la nouvelle année
 	 */
 	private boolean choixAnneeApresDebutAnnee;
 	/**
-	 * true si choix d'ann�e possible apr�s ledébutde la nouvelle ann�e
+	 * true si choix d'année possible après ledébutde la nouvelle année
 	 */
 	private boolean depotAnonyme;
 	/**
-	 * Code Universit�
+	 * Code Université
 	 */
 	private String codeUniversite;
 	/**
@@ -109,6 +109,14 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	private boolean validationPedagogique;
 	
+	/**
+	 * true si les etudiants du centre ont le droit de creer leurs conventions
+	 */
+	private boolean autorisationEtudiantCreationConvention;
+	/**
+	 * mode d'évaluation des stages
+	 */
+	private int idModeValidationStage;
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -124,6 +132,10 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * Fichier du centre
 	 */
 	private FichierDTO fichier;
+	/**
+	 * Mode d'évaludation des stages du centre
+	 */
+	private ModeValidationStageDTO modeValidationStage;
 	
 	/**
 	 * Constructeur
@@ -169,11 +181,14 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 			if(cg.getNiveauCentre()!=null) niveauCentre=new NiveauCentreDTO(cg.getNiveauCentre());
 			if(cg.getConfidentialite()!=null) confidentialite=new ConfidentialiteDTO(cg.getConfidentialite());
 			if(cg.getFichier()!=null) fichier=new FichierDTO(cg.getFichier());
+			autorisationEtudiantCreationConvention=cg.isAutorisationEtudiantCreationConvention();
+			if(cg.getIdModeValidationStage()>0) idModeValidationStage=cg.getIdModeValidationStage();
+			if(cg.getModeValidationStage()!=null) modeValidationStage=new ModeValidationStageDTO(cg.getModeValidationStage());
 		}
 	}
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Méthodes
 	 ****************************************************************/
 	
 	/**
@@ -579,4 +594,48 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	public void setValidationPedagogique(boolean validationPedagogique) {
 		this.validationPedagogique = validationPedagogique;
 	}
+
+	/**
+	 * @return the autorisationEtudiantCreationConvention
+	 */
+	public boolean isAutorisationEtudiantCreationConvention() {
+		return autorisationEtudiantCreationConvention;
+	}
+
+	/**
+	 * @param autorisationEtudiantCreationConvention the autorisationEtudiantCreationConvention to set
+	 */
+	public void setAutorisationEtudiantCreationConvention(
+			boolean autorisationEtudiantCreationConvention) {
+		this.autorisationEtudiantCreationConvention = autorisationEtudiantCreationConvention;
+	}
+
+	/**
+	 * @return the idModeValidationStage
+	 */
+	public int getIdModeValidationStage() {
+		return idModeValidationStage;
+	}
+
+	/**
+	 * @param idModeValidationStage the idModeValidationStage to set
+	 */
+	public void setIdModeValidationStage(int idModeValidationStage) {
+		this.idModeValidationStage = idModeValidationStage;
+	}
+
+	/**
+	 * @return the modeValidationStage
+	 */
+	public ModeValidationStageDTO getModeValidationStage() {
+		return modeValidationStage;
+	}
+
+	/**
+	 * @param modeValidationStage the modeValidationStage to set
+	 */
+	public void setModeValidationStage(ModeValidationStageDTO modeValidationStage) {
+		this.modeValidationStage = modeValidationStage;
+	}
+
 }

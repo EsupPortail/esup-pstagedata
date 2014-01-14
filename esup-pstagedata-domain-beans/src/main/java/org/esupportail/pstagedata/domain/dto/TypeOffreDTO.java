@@ -18,6 +18,10 @@ public class TypeOffreDTO extends NomenclatureIdDTO implements Serializable{
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	/**
 	 * Constructeur
 	 */
 	public TypeOffreDTO(){
@@ -30,6 +34,7 @@ public class TypeOffreDTO extends NomenclatureIdDTO implements Serializable{
 	 */
 	public TypeOffreDTO(TypeOffre t){
 		super(t);
+		this.modifiable = t.getModifiable();
 	}
 	
 	/* ***************************************************************
@@ -46,6 +51,20 @@ public class TypeOffreDTO extends NomenclatureIdDTO implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

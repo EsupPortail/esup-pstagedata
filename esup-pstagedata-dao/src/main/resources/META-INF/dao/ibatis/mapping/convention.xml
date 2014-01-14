@@ -402,7 +402,7 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
         INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
-        INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant       
+        LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant       
         <isNull property="idC">
 	        <isNotNull property="idTC">
 	       		INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention

@@ -85,6 +85,7 @@ INSERT INTO `Civilite` (`idCivilite`, `libelleCivilite`) VALUES (2, 'Mme');
 
 INSERT INTO `Civilite` (`idCivilite`, `libelleCivilite`) VALUES (3, 'Mr');
 
+INSERT INTO `Civilite` (`idCivilite`, `libelleCivilite`) VALUES (4, '');
 
 
 COMMIT;

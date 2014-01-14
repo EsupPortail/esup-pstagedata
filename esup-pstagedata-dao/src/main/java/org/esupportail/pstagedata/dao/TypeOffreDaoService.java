@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.TypeOffre;
+import org.esupportail.pstagedata.exceptions.DataAddException;
+import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataUpdateException;
+import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
 
 /**
  * TypeOffre DAO service interface.
@@ -22,5 +26,23 @@ public interface TypeOffreDaoService extends Serializable {
 	 * @return List<TypeOffre>
 	 */
 	public List<TypeOffre> getTypesOffre();
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addTypeOffre(TypeOffre to) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateTypeOffre(TypeOffre to) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteTypeOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
 
 }

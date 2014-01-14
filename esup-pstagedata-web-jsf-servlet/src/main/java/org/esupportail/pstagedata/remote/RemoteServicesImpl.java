@@ -4817,6 +4817,309 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
+
+	  /***********************************/
+	 /*** AJOUTS/UPDATES/SUPPRESSIONS ***/
+	/***********************************/
+	@Override
+	public int addCaisseRegime(CaisseRegimeDTO cr) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(cr!=null){
+			b = this.caisseRegimeDomainService.addCaisseRegime(cr);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateCaisseRegime(CaisseRegimeDTO cr, String codeCaisse)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(cr!=null){
+			b = this.caisseRegimeDomainService.updateCaisseRegime(cr, codeCaisse);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteCaisseRegime(String codeCaisse)
+			throws DataDeleteException, WebServiceDataBaseException {
+		boolean b=false;
+		if(codeCaisse!=null){
+			b = this.caisseRegimeDomainService.deleteCaisseRegime(codeCaisse);
+		}
+		return b;
+	}
+
+	@Override
+	public int addNiveauFormation(NiveauFormationDTO nf)
+			throws DataAddException, WebServiceDataBaseException {
+		int b=0;
+		if(nf!=null){
+			b = this.niveauFormationDomainService.addNiveauFormation(nf);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateNiveauFormation(NiveauFormationDTO nf)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(nf!=null){
+			b = this.niveauFormationDomainService.updateNiveauFormation(nf);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteNiveauFormation(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.niveauFormationDomainService.deleteNiveauFormation(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addEffectif(EffectifDTO ef) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(ef!=null){
+			b = this.effectifDomainService.addEffectif(ef);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateEffectif(EffectifDTO ef) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(ef!=null){
+			b = this.effectifDomainService.updateEffectif(ef);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteEffectif(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.effectifDomainService.deleteEffectif(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addTempsTravail(TempsTravailDTO tt) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(tt!=null){
+			b = this.tempsTravailDomainService.addTempsTravail(tt);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateTempsTravail(TempsTravailDTO tt)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(tt!=null){
+			b = this.tempsTravailDomainService.updateTempsTravail(tt);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteTempsTravail(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.tempsTravailDomainService.deleteTempsTravail(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addOrigineStage(OrigineStageDTO os) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(os!=null){
+			b = origineStageDomainService.addOrigineStage(os);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateOrigineStage(OrigineStageDTO os)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(os!=null){
+			b = this.origineStageDomainService.updateOrigineStage(os);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteOrigineStage(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.origineStageDomainService.deleteOrigineStage(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addTypeConvention(TypeConventionDTO tc) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(tc!=null){
+			b = this.typeConventionDomainService.addTypeConvention(tc);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateTypeConvention(TypeConventionDTO tc)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(tc!=null){
+			b = this.typeConventionDomainService.updateTypeConvention(tc);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteTypeConvention(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.typeConventionDomainService.deleteTypeConvention(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addTypeStructure(TypeStructureDTO ts) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(ts!=null){
+			b = this.typeStructureDomainService.addTypeStructure(ts);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateTypeStructure(TypeStructureDTO ts)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(ts!=null){
+			b = this.typeStructureDomainService.updateTypeStructure(ts);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteTypeStructure(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.typeStructureDomainService.deleteTypeStructure(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addStatutJuridique(StatutJuridiqueDTO sj)
+			throws DataAddException, WebServiceDataBaseException {
+		int b=0;
+		if(sj!=null){
+			b = this.statutJuridiqueDomainService.addStatutJuridique(sj);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateStatutJuridique(StatutJuridiqueDTO sj)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(sj!=null){
+			b = this.statutJuridiqueDomainService.updateStatutJuridique(sj);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteStatutJuridique(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.statutJuridiqueDomainService.deleteStatutJuridique(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addTypeOffre(TypeOffreDTO to) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(to!=null){
+			b = this.typeOffreDomainService.addTypeOffre(to);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateTypeOffre(TypeOffreDTO to) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(to!=null){
+			b = this.typeOffreDomainService.updateTypeOffre(to);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteTypeOffre(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.typeOffreDomainService.deleteTypeOffre(id);
+		}
+		return b;
+	}
+
+	@Override
+	public int addContratOffre(ContratOffreDTO co) throws DataAddException,
+			WebServiceDataBaseException {
+		int b=0;
+		if(co!=null){
+			b = this.contratDomainService.addContratOffre(co);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateContratOffre(ContratOffreDTO co)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(co!=null){
+			b = this.contratDomainService.updateContratOffre(co);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteContratOffre(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.contratDomainService.deleteContratOffre(id);
+		}
+		return b;
+	}
 	
 	
 }

@@ -18,6 +18,10 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	/**
 	 * Constructeur
 	 */
 	public NiveauFormationDTO(){
@@ -30,6 +34,7 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 	 */
 	public NiveauFormationDTO(NiveauFormation n){
 		super(n);
+		this.modifiable = n.getModifiable();
 	}
 	
 	/* ***************************************************************
@@ -37,7 +42,7 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 	 ****************************************************************/	
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -46,6 +51,20 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

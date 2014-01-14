@@ -1031,23 +1031,6 @@ public class Convention extends ObjetMetiers implements Serializable{
 		this.insee = insee;
 	}
 
-
-	/**
-	 * @return the codeCaisse
-	 */
-	public String getCodeCaisse() {
-		return codeCaisse;
-	}
-
-
-	/**
-	 * @param codeCaisse the codeCaisse to set
-	 */
-	public void setCodeCaisse(String codeCaisse) {
-		this.codeCaisse = codeCaisse;
-	}
-
-
 	/**
 	 * @return the temConfSujetTeme
 	 */
@@ -1646,6 +1629,22 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setValidationPedagogique(boolean validationPedagogique) {
 		this.validationPedagogique = validationPedagogique;
+	}
+
+
+	/**
+	 * @return the codeCaisse
+	 */
+	public String getCodeCaisse() {
+		return codeCaisse;
+	}
+
+
+	/**
+	 * @param codeCaisse the codeCaisse to set
+	 */
+	public void setCodeCaisse(String codeCaisse) {
+		this.codeCaisse = codeCaisse;
 	}
 
 }

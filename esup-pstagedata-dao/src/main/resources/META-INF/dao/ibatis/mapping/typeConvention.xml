@@ -12,6 +12,7 @@
 		<result property="libelle" column="libelleTypeConvention" />
 		<result property="codeCtrl" column="codeCtrl" />
 		<result property="temEnServ" column="temEnServTypeConvention" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getTypeConventions" resultMap="TypeConvention">
@@ -24,5 +25,21 @@
 		WHERE idTypeConvention = #id#
 		LIMIT 0, 1
 	</statement>
+	
+	<insert id="addTypeConvention">
+		INSERT INTO TypeConvention (libelleTypeConvention,modifiable,codeCtrl)
+		VALUES (#libelle#,1,'');
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateTypeConvention">
+		UPDATE TypeConvention SET libelleTypeConvention=#libelle#
+		WHERE idTypeConvention=#id#
+	</update>
 
+	<delete id="deleteTypeConvention">
+		DELETE FROM TypeConvention WHERE idTypeConvention=#id#
+	</delete>
 </sqlMap>

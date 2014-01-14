@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.esupportail.pstagedata.dao.exceptions.DataAccessDaoException;
 import org.esupportail.pstagedata.domain.beans.StatisticItem;
-import org.esupportail.pstagedata.domain.dto.StatisticItemDTO;
-import org.esupportail.pstagedata.exceptions.RemoteException;
 /**
  * gestion des statistiques pour les offre 
  *

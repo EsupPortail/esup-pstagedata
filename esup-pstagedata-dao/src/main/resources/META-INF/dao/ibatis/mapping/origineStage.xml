@@ -11,6 +11,7 @@
 		<result property="id" column="idOrigineStage" />
 		<result property="libelle" column="libelleOrigineStage" />
 		<result property="temEnServ" column="temEnServOrigineStage" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getOrigineStages" resultMap="OrigineStage">
@@ -24,5 +25,20 @@
 		LIMIT 0, 1
 	</statement>
 	
+	<insert id="addOrigineStage">
+		INSERT INTO OrigineStage (libelleOrigineStage,modifiable)
+		VALUES (#libelle#,1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
 	
+	<update id="updateOrigineStage">
+		UPDATE OrigineStage SET libelleOrigineStage=#libelle#
+		WHERE idOrigineStage=#id#
+	</update>
+
+	<delete id="deleteOrigineStage">
+		DELETE FROM OrigineStage WHERE idOrigineStage=#id#
+	</delete>
 </sqlMap>

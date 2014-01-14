@@ -1498,23 +1498,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public void setInsee(String insee) {
 		this.insee = insee;
 	}
-
-
-
-	/**
-	 * @return the codeCaisse
-	 */
-	public String getCodeCaisse() {
-		return codeCaisse;
-	}
-
-	/**
-	 * @param codeCaisse the codeCaisse to set
-	 */
-	public void setCodeCaisse(String codeCaisse) {
-		this.codeCaisse = codeCaisse;
-	}
-
+	
 	/**
 	 * @return the temConfSujetTeme
 	 */
@@ -2338,6 +2322,22 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setValidationPedagogique(boolean validationPedagogique) {
 		this.validationPedagogique = validationPedagogique;
+	}
+
+
+	/**
+	 * @return the codeCaisse
+	 */
+	public String getCodeCaisse() {
+		return codeCaisse;
+	}
+
+
+	/**
+	 * @param codeCaisse the codeCaisse to set
+	 */
+	public void setCodeCaisse(String codeCaisse) {
+		this.codeCaisse = codeCaisse;
 	}
 
 

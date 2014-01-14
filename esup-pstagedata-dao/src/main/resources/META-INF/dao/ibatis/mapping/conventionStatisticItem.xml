@@ -331,23 +331,27 @@
 				
 	<statement id="getNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
 	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
-	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
+	FROM Convention c JOIN Service sv USING ( idService )
 		WHERE c.idCentreGestion =  #idCentreGestion#
 		AND c.annee = #annee#
 		AND c.validationConvention =1
-        AND  UPPER(p.lib)=UPPER('france')
+		AND (idPays=7 OR idPays=82 OR idPays=92 OR idPays=100
+		OR idPays=148 OR idPays=151 OR idPays=170 OR idPays=187 OR idPays=191
+		OR idPays=197 OR idPays=202 OR idPays=203 OR idPays=231 OR idPays=248)
 		GROUP BY id
 	    ORDER BY id                
 	</statement>
 				
 	<statement id="getAllNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
 	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
-	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
+	FROM Convention c JOIN Service sv USING ( idService )
 		WHERE c.annee = #annee#
 		AND c.validationConvention =1
-        AND  UPPER(p.lib)=UPPER('france')
+		AND (idPays=7 OR idPays=82 OR idPays=92 OR idPays=100
+		OR idPays=148 OR idPays=151 OR idPays=170 OR idPays=187 OR idPays=191
+		OR idPays=197 OR idPays=202 OR idPays=203 OR idPays=231 OR idPays=248)
 		GROUP BY id
-	    ORDER BY id             
+	    ORDER BY id
 	</statement>
 
 
@@ -689,7 +693,9 @@
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
 		AND s.idPays = p.idPays
-		AND UPPER(p.lib) = UPPER('france')	
+		AND (s.idPays=7 OR s.idPays=82 OR s.idPays=92 OR s.idPays=100
+		OR s.idPays=148 OR s.idPays=151 OR s.idPays=170 OR s.idPays=187 OR s.idPays=191
+		OR s.idPays=197 OR s.idPays=202 OR s.idPays=203 OR s.idPays=231 OR s.idPays=248)
 	GROUP BY c.codeUFR,SUBSTRING(codePostal,1,2)
 	ORDER BY c.codeUFR,SUBSTRING(CodePostal,1,2)       
 	</statement>
@@ -704,7 +710,9 @@
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
 		AND s.idPays = p.idPays
-		AND UPPER(p.lib) = UPPER('france')	
+		AND (s.idPays=7 OR s.idPays=82 OR s.idPays=92 OR s.idPays=100
+		OR s.idPays=148 OR s.idPays=151 OR s.idPays=170 OR s.idPays=187 OR s.idPays=191
+		OR s.idPays=197 OR s.idPays=202 OR s.idPays=203 OR s.idPays=231 OR s.idPays=248)
 	GROUP BY c.codeUFR,SUBSTRING(codePostal,1,2)
 	ORDER BY c.codeUFR,SUBSTRING(CodePostal,1,2)       
 	</statement>
@@ -935,7 +943,9 @@
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
 		AND se.idPays = p.idPays
-		AND UPPER(p.lib) = UPPER('france')	
+		AND (se.idPays=7 OR se.idPays=82 OR se.idPays=92 OR se.idPays=100
+		OR se.idPays=148 OR se.idPays=151 OR se.idPays=170 OR se.idPays=187 OR se.idPays=191
+		OR se.idPays=197 OR se.idPays=202 OR se.idPays=203 OR se.idPays=231 OR se.idPays=248)
 	GROUP BY c.codeDepartement,SUBSTRING(codePostal,1,2)
 	ORDER BY c.codeDepartement,SUBSTRING(CodePostal,1,2)                
 	</statement>
@@ -1138,7 +1148,9 @@
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
 		AND se.idPays = p.idPays
-		AND UPPER(p.lib) = UPPER('france')	
+		AND (se.idPays=7 OR se.idPays=82 OR se.idPays=92 OR se.idPays=100
+		OR se.idPays=148 OR se.idPays=151 OR se.idPays=170 OR se.idPays=187 OR se.idPays=191
+		OR se.idPays=197 OR se.idPays=202 OR se.idPays=203 OR se.idPays=231 OR se.idPays=248)
 	GROUP BY e.libelleEtape,SUBSTRING(codePostal,1,2)
 	ORDER BY e.libelleEtape,SUBSTRING(CodePostal,1,2)                
 	</statement>

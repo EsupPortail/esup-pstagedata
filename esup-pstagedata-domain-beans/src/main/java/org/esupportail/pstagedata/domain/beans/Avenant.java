@@ -31,6 +31,10 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 */
 	private Integer idEnseignant;
 	/**
+	 * titreAvenant
+	 */
+	private String titreAvenant;
+	/**
 	 * motifAvenant
 	 */
 	private String motifAvenant;
@@ -608,6 +612,22 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 */
 	public void setConvention(Convention convention) {
 		this.convention = convention;
+	}
+
+
+	/**
+	 * @return the titreAvenant
+	 */
+	public String getTitreAvenant() {
+		return titreAvenant;
+	}
+
+
+	/**
+	 * @param titreAvenant the titreAvenant to set
+	 */
+	public void setTitreAvenant(String titreAvenant) {
+		this.titreAvenant = titreAvenant;
 	}
 	
 	

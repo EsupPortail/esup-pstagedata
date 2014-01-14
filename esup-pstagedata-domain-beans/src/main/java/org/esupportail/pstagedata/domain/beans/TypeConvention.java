@@ -18,6 +18,12 @@ public class TypeConvention extends NomenclatureId implements Serializable{
 	 * code controle 
 	 */
 	private  String codeCtrl;
+	
+	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
 	/**
 	 * Constructeur
 	 */
@@ -44,7 +50,7 @@ public class TypeConvention extends NomenclatureId implements Serializable{
 	
 	
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -53,6 +59,20 @@ public class TypeConvention extends NomenclatureId implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 
 	

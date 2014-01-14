@@ -18,6 +18,11 @@ public class TypeStructure extends NomenclatureId implements Serializable{
 	 * Vrai si le numéro SIRET est obligatoire
 	 */
 	private boolean siretObligatoire;
+
+	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
 	/**
 	 * Constructeur
 	 */
@@ -44,7 +49,7 @@ public class TypeStructure extends NomenclatureId implements Serializable{
 	}
 	
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -53,6 +58,20 @@ public class TypeStructure extends NomenclatureId implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

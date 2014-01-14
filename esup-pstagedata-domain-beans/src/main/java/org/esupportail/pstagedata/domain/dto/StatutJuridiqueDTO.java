@@ -18,6 +18,16 @@ public class StatutJuridiqueDTO extends NomenclatureIdEnfantDTO implements Seria
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
+	/**
+	 * TypeStructure
+	 */
+	private TypeStructureDTO typeStructure;
+	
+	/**
 	 * Constructeur
 	 */
 	public StatutJuridiqueDTO(){
@@ -30,14 +40,11 @@ public class StatutJuridiqueDTO extends NomenclatureIdEnfantDTO implements Seria
 	 */
 	public StatutJuridiqueDTO(StatutJuridique s){
 		super(s);
+		this.modifiable = s.getModifiable();
 	}
-	
-	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -46,6 +53,37 @@ public class StatutJuridiqueDTO extends NomenclatureIdEnfantDTO implements Seria
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/* ***************************************************************
+	 * Getters / Setters
+	 ****************************************************************/	
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
+	}
+
+	/**
+	 * @return the typeStructure
+	 */
+	public TypeStructureDTO getTypeStructure() {
+		return typeStructure;
+	}
+
+	/**
+	 * @param typeStructure the typeStructure to set
+	 */
+	public void setTypeStructure(TypeStructureDTO typeStructure) {
+		this.typeStructure = typeStructure;
 	}
 	
 }

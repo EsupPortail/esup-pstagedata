@@ -12,6 +12,7 @@
 		<result property="libelle" column="libelleTempsTravail" />
 		<result property="codeCtrl" column="codeCtrl" />
 		<result property="temEnServ" column="temEnServTempsTravail" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getTempsTravail" resultMap="TempsTravail">
@@ -24,5 +25,21 @@
 		WHERE idTempsTravail = #id#
 		LIMIT 0, 1
 	</statement>
+	
+	<insert id="addTempsTravail">
+		INSERT INTO TempsTravail (libelleTempsTravail,codeCtrl,modifiable)
+		VALUES (#libelle#,'',1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateTempsTravail">
+		UPDATE TempsTravail SET libelleTempsTravail=#libelle#
+		WHERE idTempsTravail=#id#
+	</update>
 
+	<delete id="deleteTempsTravail">
+		DELETE FROM TempsTravail WHERE idTempsTravail=#id#
+	</delete>
 </sqlMap>

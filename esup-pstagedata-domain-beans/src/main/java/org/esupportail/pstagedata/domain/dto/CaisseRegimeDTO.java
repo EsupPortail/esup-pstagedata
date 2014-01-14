@@ -20,6 +20,11 @@ public class CaisseRegimeDTO extends NomenclatureCodeDTO implements Serializable
 	 * infoCaisse
 	 */
 	private String infoCaisse;
+
+	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
 	/**
 	 * Constructeur
 	 */
@@ -35,6 +40,7 @@ public class CaisseRegimeDTO extends NomenclatureCodeDTO implements Serializable
 		super(c);
 		if(c!=null){
 			this.infoCaisse = c.getInfoCaisse();
+			this.modifiable = c.getModifiable();
 		}
 	}
 	
@@ -66,6 +72,22 @@ public class CaisseRegimeDTO extends NomenclatureCodeDTO implements Serializable
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 
 	

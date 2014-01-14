@@ -143,7 +143,7 @@ public class UtilsDTO {
 	 ****************************************************************/	
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 
 	/* ***************************************************************
@@ -285,6 +285,8 @@ public class UtilsDTO {
 				a.setMontantGratification(ad.getMontantGratification());
 			if (ad.getMotifAvenant() != null)
 				a.setMotifAvenant(ad.getMotifAvenant());
+			if (ad.getTitreAvenant() != null)
+				a.setTitreAvenant(ad.getTitreAvenant());
 			a.setRupture(ad.isRupture());
 			if (ad.getSujetStage() != null)
 				a.setSujetStage(ad.getSujetStage());
@@ -334,6 +336,8 @@ public class UtilsDTO {
 			if (cd.getIdFichier() >= 0)
 				c.setIdFichier(cd.getIdFichier());
 			c.setValidationPedagogique(cd.isValidationPedagogique());
+			c.setAutorisationEtudiantCreationConvention(cd.isAutorisationEtudiantCreationConvention());
+			if(cd.getIdModeValidationStage()>=0) c.setIdModeValidationStage(cd.getIdModeValidationStage());
 		}
 		return c;
 	}
@@ -422,6 +426,7 @@ public class UtilsDTO {
 			c.setId(cd.getId());
 			c.setIdParent(cd.getIdParent());
 			c.setLibelle(cd.getLibelle());
+			c.setModifiable(cd.getModifiable());
 		}
 		return c;
 	}
@@ -594,6 +599,7 @@ public class UtilsDTO {
 		if(ed!=null){
 			e.setId(ed.getId());
 			e.setLibelle(ed.getLibelle());
+			e.setModifiable(ed.getModifiable());
 		}
 		return e;
 	}
@@ -730,6 +736,7 @@ public class UtilsDTO {
 		if(nd!=null){
 			n.setId(nd.getId());
 			n.setLibelle(nd.getLibelle());
+			n.setModifiable(nd.getModifiable());
 		}
 		return n;
 	}
@@ -952,6 +959,7 @@ public class UtilsDTO {
 			s.setId(sd.getId());
 			s.setIdParent(sd.getIdParent());
 			s.setLibelle(sd.getLibelle());
+			s.setModifiable(sd.getModifiable());
 		}
 		return s;
 	}
@@ -1015,6 +1023,7 @@ public class UtilsDTO {
 			t.setId(td.getId());
 			t.setLibelle(td.getLibelle());
 			t.setCodeCtrl(td.getCodeCtrl());
+			t.setModifiable(td.getModifiable());
 		}
 		return t;
 	}
@@ -1044,6 +1053,7 @@ public class UtilsDTO {
 		if(td!=null){
 			t.setId(td.getId());
 			t.setLibelle(td.getLibelle());
+			t.setModifiable(td.getModifiable());
 		}
 		return t;
 	}
@@ -1058,6 +1068,7 @@ public class UtilsDTO {
 			t.setId(td.getId());
 			t.setLibelle(td.getLibelle());
 			t.setSiretObligatoire(td.isSiretObligatoire());
+			t.setModifiable(td.getModifiable());
 		}
 		return t;
 	}
@@ -1099,6 +1110,7 @@ public class UtilsDTO {
 			o.setCode(oDTO.getCode());
 			o.setLibelle(oDTO.getLibelle());
 			o.setInfoCaisse(oDTO.getInfoCaisse());
+			o.setModifiable(oDTO.getModifiable());
 		}
 		return o;
 	}
@@ -1213,6 +1225,7 @@ public class UtilsDTO {
 			o.setId(oDTO.getId());
 			o.setLibelle(oDTO.getLibelle());
 			o.setCodeCtrl(oDTO.getCodeCtrl());
+			o.setModifiable(oDTO.getModifiable());
 		}
 		return o;
 	}
@@ -1424,6 +1437,7 @@ public class UtilsDTO {
 		if(oDTO!=null){
 			o.setId(oDTO.getId());
 			o.setLibelle(oDTO.getLibelle());
+			o.setModifiable(oDTO.getModifiable());
 		}
 		return o;
 	}

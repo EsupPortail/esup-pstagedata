@@ -106,6 +106,14 @@ public class CentreGestion extends Adresse implements Serializable{
 	 * true si l'universite utilise la validation pedadogique
 	 */
 	private boolean validationPedagogique;
+	/**
+	 * true si les etudiants du centre ont le droit de creer leurs conventions
+	 */
+	private boolean autorisationEtudiantCreationConvention;
+	/**
+	 * mode d'évaluation des stages
+	 */
+	private int idModeValidationStage;
 	
 	/* ***************************************************************
 	 * Objets
@@ -122,6 +130,10 @@ public class CentreGestion extends Adresse implements Serializable{
 	 * Fichier du centre
 	 */
 	private Fichier fichier;
+	/**
+	 * Mode d'évaludation des stages du centre
+	 */
+	private ModeValidationStage modeValidationStage;
 
 	/**
 	 * Constructeur
@@ -486,5 +498,48 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public void setValidationPedagogique(boolean validationPedagogique) {
 		this.validationPedagogique = validationPedagogique;
+	}
+
+	/**
+	 * @return the autorisationEtudiantCreationConvention
+	 */
+	public boolean isAutorisationEtudiantCreationConvention() {
+		return autorisationEtudiantCreationConvention;
+	}
+
+	/**
+	 * @param autorisationEtudiantCreationConvention the autorisationEtudiantCreationConvention to set
+	 */
+	public void setAutorisationEtudiantCreationConvention(
+			boolean autorisationEtudiantCreationConvention) {
+		this.autorisationEtudiantCreationConvention = autorisationEtudiantCreationConvention;
+	}
+
+	/**
+	 * @return the idModeValidationStage
+	 */
+	public int getIdModeValidationStage() {
+		return idModeValidationStage;
+	}
+
+	/**
+	 * @param idModeValidationStage the idModeValidationStage to set
+	 */
+	public void setIdModeValidationStage(int idModeValidationStage) {
+		this.idModeValidationStage = idModeValidationStage;
+	}
+
+	/**
+	 * @return the modeValidationStage
+	 */
+	public ModeValidationStage getModeValidationStage() {
+		return modeValidationStage;
+	}
+
+	/**
+	 * @param modeValidationStage the modeValidationStage to set
+	 */
+	public void setModeValidationStage(ModeValidationStage modeValidationStage) {
+		this.modeValidationStage = modeValidationStage;
 	}
 }

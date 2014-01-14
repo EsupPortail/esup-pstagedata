@@ -4,9 +4,18 @@
  */
 package org.esupportail.pstagedata.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
+import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
+import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.domain.beans.TempsTravail;
+import org.esupportail.pstagedata.exceptions.DataAddException;
+import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataUpdateException;
+import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.springframework.dao.DataAccessException;
 
 /**
  * TempsTravail DAO service impl.
@@ -16,7 +25,7 @@ import org.esupportail.pstagedata.domain.beans.TempsTravail;
  *
  */
 public class TempsTravailDaoServiceImpl extends AbstractIBatisDaoService implements TempsTravailDaoService {
-	
+
 	/**
 	 * 
 	 */
@@ -30,5 +39,59 @@ public class TempsTravailDaoServiceImpl extends AbstractIBatisDaoService impleme
 		return getSqlMapClientTemplate().queryForList("getTempsTravail");
 	}
 
-	
+	@Override
+	public int addTempsTravail(TempsTravail tt) throws DataAddException,
+	WebServiceDataBaseException {
+		int tmp=0;
+		try{
+			tmp = (Integer) getSqlMapClientTemplate().insert("addTempsTravail",tt);
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return tmp;
+	}
+
+	@Override
+	public boolean updateTempsTravail(TempsTravail tt)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("updateTempsTravail",tt)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteTempsTravail(int id) throws DataDeleteException,
+	WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().delete("deleteTempsTravail",id)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1451) {//Cannot delete or update
+				throw new DataDeleteDaoException(e.getMessage());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+
 }

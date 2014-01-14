@@ -11,6 +11,7 @@
 		<result property="id" column="idNiveauFormation" />
 		<result property="libelle" column="libelleNiveauFormation" />
 		<result property="temEnServ" column="temEnServNiveauForm" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getNiveauxFormation" resultMap="NiveauFormation">
@@ -25,4 +26,20 @@
 		LIMIT 0, 1
 	</statement>
 
+	<insert id="addNiveauFormation">
+		INSERT INTO NiveauFormation (libelleNiveauFormation,modifiable)
+		VALUES (#libelle#,1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateNiveauFormation">
+		UPDATE NiveauFormation SET libelleNiveauFormation=#libelle#
+		WHERE idNiveauFormation=#id#
+	</update>
+
+	<delete id="deleteNiveauFormation">
+		DELETE FROM NiveauFormation WHERE idNiveauFormation=#id#
+	</delete>
 </sqlMap>

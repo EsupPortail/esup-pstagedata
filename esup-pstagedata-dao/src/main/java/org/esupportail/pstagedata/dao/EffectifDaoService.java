@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.Effectif;
+import org.esupportail.pstagedata.exceptions.DataAddException;
+import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataUpdateException;
+import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
 
 
 
@@ -19,7 +23,25 @@ import org.esupportail.pstagedata.domain.beans.Effectif;
  *
  */
 public interface EffectifDaoService extends Serializable {
-	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addEffectif(Effectif ef) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateEffectif(Effectif ef) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteEffectif(int id) throws DataDeleteException,WebServiceDataBaseException;
+
 	/**
 	 * @return List<Effectif>
 	 */

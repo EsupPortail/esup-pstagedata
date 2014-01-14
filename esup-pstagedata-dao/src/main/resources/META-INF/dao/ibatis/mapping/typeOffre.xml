@@ -12,6 +12,7 @@
 		<result property="libelle" column="libelleType" />
 		<result property="codeCtrl" column="codeCtrl" />
 		<result property="temEnServ" column="temEnServTypeOffre" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getTypesOffre" resultMap="TypeOffre">
@@ -25,4 +26,20 @@
 		LIMIT 0, 1
 	</statement>
 
+	<insert id="addTypeOffre">
+		INSERT INTO TypeOffre (libelleType,codeCtrl,modifiable)
+		VALUES (#libelle#,'',1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateTypeOffre">
+		UPDATE TypeOffre SET libelleType=#libelle#
+		WHERE idTypeOffre=#id#
+	</update>
+
+	<delete id="deleteTypeOffre">
+		DELETE FROM TypeOffre WHERE idTypeOffre=#id#
+	</delete>
 </sqlMap>

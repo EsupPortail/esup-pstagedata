@@ -20,6 +20,10 @@ public class CaisseRegime extends NomenclatureCode implements Serializable{
 	 */
 	private String infoCaisse;
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	/**
 	 * Constructeur
 	 */
 	public CaisseRegime(){
@@ -55,6 +59,20 @@ public class CaisseRegime extends NomenclatureCode implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

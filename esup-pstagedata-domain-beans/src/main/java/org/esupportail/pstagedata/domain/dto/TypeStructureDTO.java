@@ -20,6 +20,11 @@ public class TypeStructureDTO extends NomenclatureIdDTO implements Serializable{
 	 * Vrai si le numéro SIRET est obligatoire
 	 */
 	private boolean siretObligatoire;
+
+	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
 	/**
 	 * Constructeur
 	 */
@@ -34,6 +39,7 @@ public class TypeStructureDTO extends NomenclatureIdDTO implements Serializable{
 	public TypeStructureDTO(TypeStructure t){
 		super(t);
 		this.siretObligatoire=t.isSiretObligatoire();
+		this.modifiable = t.getModifiable();
 	}
 	
 	/* ***************************************************************
@@ -64,6 +70,20 @@ public class TypeStructureDTO extends NomenclatureIdDTO implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

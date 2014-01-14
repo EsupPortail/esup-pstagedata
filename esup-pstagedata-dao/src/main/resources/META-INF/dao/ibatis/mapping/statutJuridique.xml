@@ -14,15 +14,16 @@
 		<result property="idParent" column="idTypeStructure" />
 		<result property="libelle" column="libelleStatutJuridique" />
 		<result property="temEnServ" column="temEnServStatut" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getStatutsJuridiques" resultMap="StatutJuridique">
 		SELECT * FROM StatutJuridique
 		WHERE temEnServStatut = 'O'
 	</statement>
-	<statement id="getStatutJuridiqueFromTypeStructure" resultMap="StatutJuridique">
+	<statement id="getStatutJuridiqueFromStatutJuridique" resultMap="StatutJuridique">
 		SELECT * FROM StatutJuridique
-		WHERE idTypeStructure = #id#
+		WHERE idStatutJuridique = #id#
 		LIMIT 0,1
 	</statement>
 	<statement id="getStatutsJuridiquesFromId" resultMap="StatutJuridique">
@@ -31,4 +32,20 @@
 		LIMIT 0,1
 	</statement>
 
+	<insert id="addStatutJuridique">
+		INSERT INTO StatutJuridique (libelleStatutJuridique,modifiable,idTypeStructure)
+		VALUES (#libelle#,1,#idParent#);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateStatutJuridique">
+		UPDATE StatutJuridique SET libelleStatutJuridique=#libelle#,idTypeStructure=#idParent#
+		WHERE idStatutJuridique=#id#
+	</update>
+
+	<delete id="deleteStatutJuridique">
+		DELETE FROM StatutJuridique WHERE idStatutJuridique=#id#
+	</delete>
 </sqlMap>

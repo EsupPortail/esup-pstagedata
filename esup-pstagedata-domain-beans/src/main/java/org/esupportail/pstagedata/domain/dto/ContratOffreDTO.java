@@ -18,6 +18,16 @@ public class ContratOffreDTO extends NomenclatureIdEnfantDTO implements Serializ
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
+	/**
+	 * TypeOffre
+	 */
+	private TypeOffreDTO typeOffre;
+	
+	/**
 	 * Constructeur
 	 */
 	public ContratOffreDTO(){
@@ -30,14 +40,11 @@ public class ContratOffreDTO extends NomenclatureIdEnfantDTO implements Serializ
 	 */
 	public ContratOffreDTO(ContratOffre co){
 		super(co);
+		this.modifiable = co.getModifiable();
 	}
-	
-	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -46,6 +53,38 @@ public class ContratOffreDTO extends NomenclatureIdEnfantDTO implements Serializ
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/* ***************************************************************
+	 * Getters / Setters
+	 ****************************************************************/
+	
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
+	}
+
+	/**
+	 * @return the typeOffre
+	 */
+	public TypeOffreDTO getTypeOffre() {
+		return typeOffre;
+	}
+
+	/**
+	 * @param typeOffre the typeOffre to set
+	 */
+	public void setTypeOffre(TypeOffreDTO typeOffre) {
+		this.typeOffre = typeOffre;
 	}
 	
 }

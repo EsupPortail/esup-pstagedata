@@ -96,6 +96,200 @@ import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
  */
 @WebService
 public interface RemoteServices extends Serializable{
+
+	/* ****************************************************************************
+	 * NOMENCLATURES
+	 *****************************************************************************/
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addCaisseRegime(CaisseRegimeDTO cr) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean updateCaisseRegime(CaisseRegimeDTO cr, String codeCaisse) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteCaisseRegime(String codeCaisse) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addNiveauFormation(NiveauFormationDTO nf) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateNiveauFormation(NiveauFormationDTO nf) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteNiveauFormation(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addEffectif(EffectifDTO ef) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateEffectif(EffectifDTO ef) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteEffectif(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addTempsTravail(TempsTravailDTO tt) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateTempsTravail(TempsTravailDTO tt) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteTempsTravail(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addOrigineStage(OrigineStageDTO os) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateOrigineStage(OrigineStageDTO os) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteOrigineStage(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addTypeConvention(TypeConventionDTO tc) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateTypeConvention(TypeConventionDTO tc) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteTypeConvention(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addTypeStructure(TypeStructureDTO ts) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateTypeStructure(TypeStructureDTO ts) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteTypeStructure(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addStatutJuridique(StatutJuridiqueDTO sj) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateStatutJuridique(StatutJuridiqueDTO sj) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteStatutJuridique(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addTypeOffre(TypeOffreDTO to) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateTypeOffre(TypeOffreDTO to) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteTypeOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addContratOffre(ContratOffreDTO co) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateContratOffre(ContratOffreDTO co) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteContratOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
 	/* ****************************************************************************
 	 * ACCORD PARTENARIAT
 	 *****************************************************************************/

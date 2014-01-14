@@ -32,7 +32,10 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 * idEnseignant
 	 */
 	private Integer idEnseignant;
-
+	/**
+	 * titreAvenant
+	 */
+	private String titreAvenant;
 	/**
 	 * motifAvenant
 	 */
@@ -151,6 +154,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		if(a!=null){
 			this.idAvenant=a.getIdAvenant();
 			this.idConvention= a.getIdConvention();
+			this.titreAvenant=a.getTitreAvenant();
 			this.motifAvenant = a.getMotifAvenant();
 			this.rupture=a.isRupture();
 			this.modificationPeriode=a.isModificationPeriode();
@@ -181,7 +185,6 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 				setUniteGratification(new UniteGratificationDTO(a.getUniteGratification()));
 			if (a.getConvention() != null) {
 				setConvention(new ConventionDTO(a.getConvention(),false));
-				
 			}
 			
 		}
@@ -195,6 +198,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		return 
 		"idAvenant : "+idAvenant+", "+
 		"idConvention : "+idConvention+", "+
+		"titreAvenant : "+titreAvenant+", "+
 		"motifAvenant : "+motifAvenant+", "+
 		"rupture : "+rupture+", "+
 		"modificationPeriode : "+modificationPeriode+", "+
@@ -668,6 +672,20 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setConvention(ConventionDTO convention) {
 		this.convention = convention;
+	}
+
+	/**
+	 * @return the titreAvenant
+	 */
+	public String getTitreAvenant() {
+		return titreAvenant;
+	}
+
+	/**
+	 * @param titreAvenant the titreAvenant to set
+	 */
+	public void setTitreAvenant(String titreAvenant) {
+		this.titreAvenant = titreAvenant;
 	}
 	
 	

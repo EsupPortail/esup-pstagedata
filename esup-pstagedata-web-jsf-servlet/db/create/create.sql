@@ -17,6 +17,8 @@ CREATE  TABLE IF NOT EXISTS `Effectif` (
 
   `temEnServEffectif` VARCHAR(1) NOT NULL DEFAULT 'O' ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idEffectif`) )
 
 ENGINE = InnoDB
@@ -48,6 +50,8 @@ CREATE  TABLE IF NOT EXISTS `TypeStructure` (
 
   `temEnServTypeStructure` VARCHAR(1) NOT NULL DEFAULT 'O' ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idTypeStructure`) )
 
 ENGINE = InnoDB
@@ -75,6 +79,8 @@ CREATE  TABLE IF NOT EXISTS `StatutJuridique` (
   `idTypeStructure` INT NOT NULL ,
 
   `temEnServStatut` VARCHAR(1) NOT NULL DEFAULT 'O' ,
+
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`idStatutJuridique`))
 ENGINE = InnoDB
@@ -508,6 +514,12 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
 
   `idFichier` INT NULL ,
 
+  `validationPedagogique` TINYINT NULL DEFAULT 0 ,
+
+  `autorisationEtudiantCreationConvention` TINYINT(1) NOT NULL DEFAULT 1,
+
+  `idModeValidationStage` INT(11) NOT NULL,
+
   PRIMARY KEY (`idCentreGestion`)) 
 
 ENGINE = InnoDB
@@ -626,6 +638,8 @@ CREATE  TABLE IF NOT EXISTS `TempsTravail` (
 
   `codeCtrl` VARCHAR(20) NOT NULL ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idTempsTravail`) )
 
 ENGINE = InnoDB
@@ -653,6 +667,8 @@ CREATE  TABLE IF NOT EXISTS `NiveauFormation` (
   `libelleNiveauFormation` VARCHAR(45) NOT NULL ,
 
   `temEnServNiveauForm` VARCHAR(1) NOT NULL DEFAULT 'O' ,
+
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`idNiveauFormation`) )
 
@@ -684,6 +700,8 @@ CREATE  TABLE IF NOT EXISTS `TypeOffre` (
 
   `codeCtrl` VARCHAR(20) NOT NULL ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idTypeOffre`) )
 
 ENGINE = InnoDB
@@ -713,6 +731,8 @@ CREATE  TABLE IF NOT EXISTS `ContratOffre` (
   `temEnServContratOffre` VARCHAR(1) NOT NULL DEFAULT 'O' ,
 
   `codeCtrl` VARCHAR(20) NOT NULL ,
+
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`idContratOffre`))
 
@@ -830,6 +850,8 @@ CREATE  TABLE IF NOT EXISTS `PersonnelCentreGestion` (
   `codeAffectation` VARCHAR(10) NOT NULL ,
 
   `codeUniversiteAffectation` VARCHAR(50) NOT NULL ,
+
+  `alertesMail` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`idPersonnelCentreGestion`))
 
@@ -1338,6 +1360,8 @@ CREATE  TABLE IF NOT EXISTS `TypeConvention` (
 
   `temEnServTypeConvention` VARCHAR(1) NOT NULL DEFAULT 'O' ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idTypeConvention`) )
 
 ENGINE = InnoDB
@@ -1745,13 +1769,15 @@ DROP TABLE IF EXISTS `CaisseRegime` ;
 
 CREATE  TABLE IF NOT EXISTS `CaisseRegime` (
 
-  `codeCaisse` VARCHAR(5) NOT NULL ,
+  `codeCaisse` `codeCaisse` VARCHAR(5) NULL ,
 
   `libelleCaisse` VARCHAR(100) NOT NULL ,
 
   `infoCaisse` VARCHAR(100) NOT NULL ,
 
   `temEnServCaisse` VARCHAR(1) NOT NULL DEFAULT 'O' ,
+
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`codeCaisse`) )
 
@@ -1775,11 +1801,13 @@ DROP TABLE IF EXISTS `OrigineStage` ;
 
 CREATE  TABLE IF NOT EXISTS `OrigineStage` (
 
-  `idOrigineStage` INT NOT NULL ,
+  `idOrigineStage` INT NOT NULL  AUTO_INCREMENT,
 
   `libelleOrigineStage` VARCHAR(45) NOT NULL ,
 
   `temEnServOrigineStage` VARCHAR(1) NOT NULL DEFAULT 'O' ,
+
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
 
   PRIMARY KEY (`idOrigineStage`) )
 
@@ -2019,6 +2047,8 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
   `idAvenant` INT NOT NULL AUTO_INCREMENT ,
 
   `idConvention` INT NOT NULL ,
+
+  `titreAvenant` VARCHAR(50) NULL DEFAULT '' ,
 
   `motifAvenant` TEXT NOT NULL ,
 

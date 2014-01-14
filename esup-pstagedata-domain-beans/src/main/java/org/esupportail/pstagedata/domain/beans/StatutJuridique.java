@@ -16,6 +16,11 @@ public class StatutJuridique extends NomenclatureIdEnfant implements Serializabl
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
+	/**
 	 * Constructeur
 	 */
 	public StatutJuridique(){
@@ -36,6 +41,20 @@ public class StatutJuridique extends NomenclatureIdEnfant implements Serializabl
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

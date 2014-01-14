@@ -19,7 +19,7 @@ public class NomenclatureId implements Serializable{
 	 */
 	private Integer id;
 	/**
-	 * Libell�
+	 * Libellé
 	 */
 	private String libelle;	
 	/**

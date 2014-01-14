@@ -10,7 +10,7 @@
 
 	<resultMap id="Affectation"
 		class="ClassAffectation">
-		<result property="code" column="CodeAffectation" />
+		<result property="code" column="codeAffectation" />
 		<result property="libelle" column="libelleAffectation" />
 		<result property="codeUniversite" column="codeUniversite" />
 	</resultMap>

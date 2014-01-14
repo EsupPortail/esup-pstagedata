@@ -13,6 +13,7 @@
 		<result property="libelle" column="libelleContratOffre" />
 		<result property="codeCtrl" column="codeCtrl" />
 		<result property="temEnServ" column="temEnServContratOffre" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getContratsOffre" resultMap="ContratOffre">
@@ -26,4 +27,20 @@
 		LIMIT 0, 1
 	</statement>
 
+	<insert id="addContratOffre">
+		INSERT INTO ContratOffre (libelleContratOffre,modifiable,idTypeOffre,codeCtrl)
+		VALUES (#libelle#,1,#idParent#,'');
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateContratOffre">
+		UPDATE ContratOffre SET libelleContratOffre=#libelle#, idTypeOffre=#idParent#
+		WHERE idContratOffre=#id#
+	</update>
+
+	<delete id="deleteContratOffre">
+		DELETE FROM ContratOffre WHERE idContratOffre=#id#
+	</delete>
 </sqlMap>

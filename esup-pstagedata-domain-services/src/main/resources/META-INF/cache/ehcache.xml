@@ -3,7 +3,7 @@
 	<!-- /properties/cache/ehcache.xml The configuration file for EhCache. This 
 		file is referenced from /properties/cache/cache.xml. -->
 
-	<diskStore path="${cache.path}" />
+	<diskStore path="tmp" />
 
 	<!-- Note: EhCache is disabled by default in hibernate.cfg.xml. -->
 

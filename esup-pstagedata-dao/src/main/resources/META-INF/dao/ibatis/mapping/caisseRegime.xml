@@ -5,24 +5,43 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CaisseRegime">
-	<typeAlias alias="ClassCaisseRegime" type="org.esupportail.pstagedata.domain.beans.CaisseRegime"/>
-	<resultMap id="CaisseRegime"
-		class="ClassCaisseRegime">
+	<typeAlias alias="ClassCaisseRegime"
+		type="org.esupportail.pstagedata.domain.beans.CaisseRegime" />
+	<resultMap id="CaisseRegime" class="ClassCaisseRegime">
 		<result property="code" column="codeCaisse" />
 		<result property="libelle" column="libelleCaisse" />
 		<result property="infoCaisse" column="infoCaisse" />
 		<result property="temEnServ" column="temEnServCaisse" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getCaisseRegimes" resultMap="CaisseRegime">
-		SELECT * FROM CaisseRegime
+		SELECT * FROM
+		CaisseRegime
 		WHERE temEnServCaisse = 'O'
 	</statement>
-	
+
 	<statement id="getCaisseRegimeFromId" resultMap="CaisseRegime">
-		SELECT * FROM CaisseRegime
+		SELECT * FROM
+		CaisseRegime
 		WHERE codeCaisse = #code#
 		LIMIT 0, 1
 	</statement>
 
+	<insert id="addCaisseRegime">
+		INSERT INTO CaisseRegime (codeCaisse, libelleCaisse, infoCaisse,modifiable)
+		VALUES (#code#, #libelle#, #infoCaisse#,1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateCaisseRegime">
+		UPDATE CaisseRegime SET codeCaisse=#code#, libelleCaisse=#libelle#, infoCaisse=#infoCaisse#
+		WHERE codeCaisse=#codeCaisse#
+	</update>
+
+	<delete id="deleteCaisseRegime">
+		DELETE FROM CaisseRegime WHERE codeCaisse=#codeCaisse#
+	</delete>
 </sqlMap>

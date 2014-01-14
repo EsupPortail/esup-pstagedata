@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
+import org.esupportail.pstagedata.exceptions.DataAddException;
+import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataUpdateException;
+import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
 
 /**
  * UniteDuree Domain service interface.
@@ -22,5 +26,23 @@ public interface OrigineStageDomainService extends Serializable {
 	 * @return List<OrigineStageDTO>
 	 */
 	public List<OrigineStageDTO> getOrigineStages();
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addOrigineStage(OrigineStageDTO os) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateOrigineStage(OrigineStageDTO os) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteOrigineStage(int id) throws DataDeleteException,WebServiceDataBaseException;
 
 }

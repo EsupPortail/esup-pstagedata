@@ -12,6 +12,7 @@
 		class="ClassAvenant">
 		<result property="idAvenant" column="idAvenant" />
 		<result property="idConvention" column="idConvention" />
+		<result property="titreAvenant" column="titreAvenant" />
 		<result property="motifAvenant" column="motifAvenant" />
 		<result property="rupture" column="rupture" />
 		<result property="modificationPeriode" column="modificationPeriode" />
@@ -50,12 +51,12 @@
 	</statement>
 	
 	<insert id="addAvenant" >
-		INSERT INTO Avenant (idConvention, motifAvenant, rupture, modificationPeriode, dateDebutStage,
+		INSERT INTO Avenant (titreAvenant, idConvention, motifAvenant, rupture, modificationPeriode, dateDebutStage,
 		dateFinStage, interruptionStage, dateDebutInterruption, dateFinInterruption, modificationLieu,
 		idService, modificationSujet, sujetStage, modificationEnseignant, idEnseignant, modificationSalarie, 
 		idContact,modificationMontantGratification, idUniteGratification, montantGratification,
 		validationAvenant, loginCreation, dateCreation) 
-		VALUES (#idConvention#,#motifAvenant#,#rupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
+		VALUES (#titreAvenant#,#idConvention#,#motifAvenant#,#rupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
 		#interruptionStage#,#dateDebutInterruption#, #dateFinInterruption#,#modificationLieu#, #idService#,
 		#modificationSujet#,#sujetStage#, #modificationEnseignant#,#idEnseignant#,#modificationSalarie#, 
 		#idContact#,#modificationMontantGratification#,#idUniteGratification#,#montantGratification#,
@@ -66,7 +67,7 @@
 	</insert>
 	
 	<update id="updateAvenant">
-		UPDATE Avenant SET idConvention=#idConvention#,motifAvenant=#motifAvenant#,rupture=#rupture#,
+		UPDATE Avenant SET titreAvenant=#titreAvenant#,idConvention=#idConvention#,motifAvenant=#motifAvenant#,rupture=#rupture#,
 		modificationPeriode=#modificationPeriode#,dateDebutStage=#dateDebutStage#,dateFinStage=#dateFinStage#,
 		interruptionStage=#interruptionStage#,dateDebutInterruption=#dateDebutInterruption#,
 		dateFinInterruption=#dateFinInterruption#,modificationLieu=#modificationLieu#,idService=#idService#,

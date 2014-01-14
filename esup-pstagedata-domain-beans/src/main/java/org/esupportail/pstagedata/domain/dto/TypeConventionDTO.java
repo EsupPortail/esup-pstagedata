@@ -16,7 +16,11 @@ public class TypeConventionDTO extends NomenclatureIdDTO implements Serializable
 	/* ***************************************************************
 	 * Propriétés
 	 ****************************************************************/
-	
+
+	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
 	/**
 	 * Constructeur
 	 */
@@ -30,6 +34,7 @@ public class TypeConventionDTO extends NomenclatureIdDTO implements Serializable
 	 */
 	public TypeConventionDTO(TypeConvention t){
 		super(t);
+		this.modifiable = t.getModifiable();
 	}
 	
 	/* ***************************************************************
@@ -46,6 +51,20 @@ public class TypeConventionDTO extends NomenclatureIdDTO implements Serializable
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean getModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 
 	
