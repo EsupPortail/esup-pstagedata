@@ -4,15 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.esupportail.pstagedata.dao.AbstractIBatisDaoService;
 import org.esupportail.pstagedata.domain.beans.Critere;
 import org.esupportail.pstagedata.domain.beans.Niveau;
 
 public class CritereDaoServiceImpl extends AbstractIBatisDaoService implements CritereDaoService {
 
-	private Logger logger = Logger.getLogger(CritereDaoServiceImpl.class);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Critere> getCriteres() {
 		
@@ -27,6 +26,7 @@ public class CritereDaoServiceImpl extends AbstractIBatisDaoService implements C
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Critere> getCriteresByNiveau(Integer niveau) {
 		 List<Critere> list = (List<Critere>)getSqlMapClientTemplate().queryForList("getCriteresByNiveau",niveau);
@@ -34,6 +34,7 @@ public class CritereDaoServiceImpl extends AbstractIBatisDaoService implements C
 		 return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Niveau> getNiveauParValeur(Integer val) {
 	//
@@ -43,6 +44,7 @@ public class CritereDaoServiceImpl extends AbstractIBatisDaoService implements C
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Critere> getCriteresParCategorie(Integer categorie) {
 		 List<Critere> list =(List<Critere>)getSqlMapClientTemplate().queryForList("criteresParCategorie",categorie);

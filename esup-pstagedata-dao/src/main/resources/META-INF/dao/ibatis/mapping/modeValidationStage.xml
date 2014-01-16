@@ -11,6 +11,7 @@
 		<result property="id" column="idModeValidationStage" />
 		<result property="libelle" column="libelleModeValidationStage" />
 		<result property="temEnServ" column="temEnServModeValid" />
+		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
 	<statement id="getModeValidationStages" resultMap="ModeValidationStage">
@@ -23,6 +24,23 @@
 		WHERE idModeValidationStage = #id#
 		LIMIT 0, 1
 	</statement>
+
+	<insert id="addModeValidationStage">
+		INSERT INTO ModeValidationStage (libelleModeValidationStage,modifiable)
+		VALUES (#libelle#,1);
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateModeValidationStage">
+		UPDATE ModeValidationStage SET libelleModeValidationStage=#libelle#
+		WHERE idModeValidationStage=#id#
+	</update>
+
+	<delete id="deleteModeValidationStage">
+		DELETE FROM ModeValidationStage WHERE idModeValidationStage=#id#
+	</delete>
 	
 	
 </sqlMap>

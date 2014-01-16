@@ -290,6 +290,25 @@ public interface RemoteServices extends Serializable{
 	 */
 	public boolean deleteContratOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
 	
+	/**
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addModeValidationStage(ModeValidationStageDTO mv) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateModeValidationStage(ModeValidationStageDTO mv) throws DataUpdateException,WebServiceDataBaseException;
+	/**
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteModeValidationStage(int id) throws DataDeleteException,WebServiceDataBaseException;
+	
 	/* ****************************************************************************
 	 * ACCORD PARTENARIAT
 	 *****************************************************************************/
@@ -486,7 +505,7 @@ public interface RemoteServices extends Serializable{
 	public int getNombreCentreGestion(String codeUniversite);
 
 	/**
-	 * R�cup�re les centres de gestion correspondant � l'uid ldap d'un personnel
+	 * Recupere les centres de gestion correspondant a l'uid ldap d'un personnel
 	 * ayant les droits en ecriture ou en admin pour ces centres
 	 * 
 	 * @param uidPersonnel
@@ -495,7 +514,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<CentreGestionDTO> getCentreDroitEcritureFromCodUniv(String uidPersonnel, String codeUniversite);
 	/**
-	 * R�cup�re les centres de gestion correspondant � l'uid ldap d'un personnel
+	 * Recupere les centres de gestion correspondant a l'uid ldap d'un personnel
 	 * ayant des droits pour ces centres
 	 * 
 	 * @param uidPersonnel
@@ -504,7 +523,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<CentreGestionDTO> getCentreFromUidFromCodUniv(String uidPersonnel, String codeUniversite);
 	/**
-	 * R�cup�re les centres de gestion correspondant � l'uid ldap d'un personnel
+	 * Recupere les centres de gestion correspondant a l'uid ldap d'un personnel
 	 * ayant les droits en ecriture ou en admin pour ces centres
 	 * 
 	 * @param uidPersonnel
@@ -512,7 +531,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<CentreGestionDTO> getCentreDroitEcriture(String uidPersonnel);
 	/**
-	 * R�cup�re les centres de gestion correspondant � l'uid ldap d'un personnel
+	 * Recupere les centres de gestion correspondant a l'uid ldap d'un personnel
 	 * ayant des droits pour ces centres
 	 * 
 	 * @param uidPersonnel

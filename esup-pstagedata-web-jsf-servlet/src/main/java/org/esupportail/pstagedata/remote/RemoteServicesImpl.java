@@ -5121,6 +5121,34 @@ public class RemoteServicesImpl implements RemoteServices{
 		return b;
 	}
 	
-	
+	@Override
+	public int addModeValidationStage(ModeValidationStageDTO mv)
+			throws DataAddException, WebServiceDataBaseException {
+		int b=0;
+		if(mv!=null){
+			b = this.modeValidationStageDomainService.addModeValidationStage(mv);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean updateModeValidationStage(ModeValidationStageDTO mv)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(mv!=null){
+			b = this.modeValidationStageDomainService.updateModeValidationStage(mv);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean deleteModeValidationStage(int id) throws DataDeleteException,
+			WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.modeValidationStageDomainService.deleteModeValidationStage(id);
+		}
+		return b;
+	}
 }
 

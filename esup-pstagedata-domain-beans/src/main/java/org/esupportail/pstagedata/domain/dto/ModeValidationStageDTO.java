@@ -18,6 +18,11 @@ public class ModeValidationStageDTO extends NomenclatureIdDTO implements Seriali
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
+	/**
 	 * Constructeur
 	 */
 	public ModeValidationStageDTO(){
@@ -30,6 +35,7 @@ public class ModeValidationStageDTO extends NomenclatureIdDTO implements Seriali
 	 */
 	public ModeValidationStageDTO(ModeValidationStage m){
 		super(m);
+		this.modifiable = m.isModifiable();
 	}
 	
 	/* ***************************************************************
@@ -46,6 +52,20 @@ public class ModeValidationStageDTO extends NomenclatureIdDTO implements Seriali
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean isModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

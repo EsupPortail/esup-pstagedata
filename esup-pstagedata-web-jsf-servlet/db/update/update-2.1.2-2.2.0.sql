@@ -30,6 +30,7 @@ ALTER TABLE TypeStructure ADD modifiable TINYINT(1) NULL DEFAULT 0;
 ALTER TABLE StatutJuridique ADD modifiable TINYINT(1) NULL DEFAULT 0;
 ALTER TABLE TypeOffre ADD modifiable TINYINT(1) NULL DEFAULT 0;
 ALTER TABLE ContratOffre ADD modifiable TINYINT(1) NULL DEFAULT 0;
+ALTER TABLE ModeValidationStage ADD modifiable TINYINT(1) NULL DEFAULT 0;
 
 -- Rectification idOrigineStage en auto_increment
 ALTER TABLE OrigineStage CHANGE idOrigineStage idOrigineStage INT NOT NULL AUTO_INCREMENT;

@@ -16,6 +16,11 @@ public class ModeValidationStage extends NomenclatureId implements Serializable{
 	 ****************************************************************/
 
 	/**
+	 * modifiable
+	 */
+	private boolean modifiable;
+	
+	/**
 	 * Constructeur
 	 */
 	public ModeValidationStage(){
@@ -36,6 +41,20 @@ public class ModeValidationStage extends NomenclatureId implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the modifiable
+	 */
+	public boolean isModifiable() {
+		return modifiable;
+	}
+
+	/**
+	 * @param modifiable the modifiable to set
+	 */
+	public void setModifiable(boolean modifiable) {
+		this.modifiable = modifiable;
 	}
 	
 }

@@ -502,8 +502,8 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
 			this.codeEtape=c.getCodeEtape();
 			this.codeUniversiteEtape=c.getCodeUniversiteEtape();
+			this.idCentreGestion=c.getIdCentreGestion();
 			if(!light){
-				this.idCentreGestion=c.getIdCentreGestion();
 				this.codeDepartement=c.getCodeDepartement();
 				this.idEnseignant=c.getIdEnseignant();
 				this.idService=c.getIdService();
