@@ -25,7 +25,7 @@ public class NomenclatureCodeDTO implements Serializable{
 	 */
 	private String libelle;	
 	/**
-	 * T�moin en service
+	 * Temoin en service
 	 */
 	private String temEnServ;
 
@@ -94,7 +94,7 @@ public class NomenclatureCodeDTO implements Serializable{
 	}
 
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**

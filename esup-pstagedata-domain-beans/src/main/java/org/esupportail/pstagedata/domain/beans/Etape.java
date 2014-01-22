@@ -15,9 +15,14 @@ public class Etape extends NomenclatureCode implements Serializable{
 	 * Propriétés
 	 ****************************************************************/
 	/**
-	 * Code universit�
+	 * Code universite
 	 */
 	private String codeUniversite;
+	
+	/**
+	 * Code universite
+	 */
+	private String codeVersionEtape;
 
 	/**
 	 * Constructeur
@@ -54,6 +59,20 @@ public class Etape extends NomenclatureCode implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the codeVersionEtape
+	 */
+	public String getCodeVersionEtape() {
+		return codeVersionEtape;
+	}
+
+	/**
+	 * @param codeVersionEtape the codeVersionEtape to set
+	 */
+	public void setCodeVersionEtape(String codeVersionEtape) {
+		this.codeVersionEtape = codeVersionEtape;
 	}
 	
 }

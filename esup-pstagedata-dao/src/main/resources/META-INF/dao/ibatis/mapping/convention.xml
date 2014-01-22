@@ -16,6 +16,7 @@
 		<result property="codeUniversiteUFR" column="codeUniversiteUFR"/>
 		<result property="codeDepartement" column="codeDepartement"/>
 		<result property="codeEtape" column="codeEtape"/>
+		<result property="codeVersionEtape" column="codeVersionEtape"/>
 		<result property="codeUniversiteEtape" column="codeUniversiteEtape"/>
 		<result property="idEnseignant" column="idEnseignant" nullValue="0"/>
 		<result property="idStructure" column="idStructure" nullValue="0"/>
@@ -269,15 +270,15 @@
 				C.idConvention = #idC#
 			</isNotNull>
 			<isNull property="idC">
-				<isNotNull prepend="AND" property="numET">
+				<isNotEmpty prepend="AND" property="numET">
 					ET.numEtudiant LIKE CONCAT('%',#numET#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="nET">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="nET">
 					ET.nom LIKE CONCAT('%',#nET#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="pET">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="pET">
 					ET.prenom LIKE CONCAT('%',#pET#,'%')
-				</isNotNull>
+				</isNotEmpty>
 				<isNotNull property="idsUfrs">
 					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
 						C.codeUfr = #idsUfrs[]#
@@ -288,9 +289,9 @@
 						C.codeEtape = #idsEtapes[]#
 					</iterate>
 				</isNotNull>
-				<isNotNull prepend="AND" property="sC">
+				<isNotEmpty prepend="AND" property="sC">
 					C.sujetStage LIKE CONCAT('%',#sC#,'%')
-				</isNotNull>
+				</isNotEmpty>
 				<isNotNull prepend="AND" property="idTC">
 					C.idTypeConvention = #idTC#
 				</isNotNull>
@@ -342,12 +343,12 @@
 				<isNotNull prepend="AND" property="idO">
 					C.idOffre = #idO#
 				</isNotNull>
-				<isNotNull prepend="AND" property="nE">
+				<isNotEmpty prepend="AND" property="nE">
 					ES.nom LIKE CONCAT('%',#nE#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="pE">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="pE">
 					ES.prenom LIKE CONCAT('%',#pE#,'%')
-				</isNotNull>
+				</isNotEmpty>
 				<isNotNull property="idsUfrs">
 					<iterate prepend="AND" property="idsUfrs" conjunction="OR" open="(" close=")">
 						C.codeUfr = #idsUfrs[]#
@@ -358,18 +359,18 @@
 						C.codeEtape = #idsEtapes[]#
 					</iterate>
 				</isNotNull>
-				<isNotNull prepend="AND" property="rsS">
+				<isNotEmpty prepend="AND" property="rsS">
 					S.raisonSociale LIKE CONCAT('%',#rsS#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="nsS">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="nsS">
 					S.numeroSiret LIKE CONCAT('%',#nsS#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="cmS">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="cmS">
 					S.commune LIKE CONCAT('%',#cmS#,'%')
-				</isNotNull>
-				<isNotNull prepend="AND" property="cpS">
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="cpS">
 					S.codePostal LIKE CONCAT('%',#cpS#,'%')
-				</isNotNull>
+				</isNotEmpty>
 				<isNotNull prepend="AND" property="idP">
 					S.idPays = #idP#
 				</isNotNull>
@@ -795,7 +796,7 @@
 	
     <insert id="addConvention">
         INSERT INTO Convention 
-         (idConvention,idEtudiant,idCentreGestion,codeUFR,codeUniversiteUFR,codeDepartement,codeEtape,codeUniversiteEtape,
+         (idConvention,idEtudiant,idCentreGestion,codeUFR,codeUniversiteUFR,codeDepartement,codeEtape,codeVersionEtape,codeUniversiteEtape,
   		 idEnseignant,idStructure,idService,idContact,idSignataire,idTypeConvention,idOffre,
   		 sujetStage,dateDebutStage,dateFinStage,interruptionStage,dateDebutInterruption,dateFinInterruption,
   		 nbJoursHebdo,idTempsTravail,commentaireDureeTravail,codeLangueConvention,idOrigineStage,idTheme,conventionStructure,validationPedagogique,
@@ -805,7 +806,7 @@
   		 dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
   		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,idFicheEvaluation,codeRGI,loginCreation,dateCreation)
   		VALUES 
-		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeUniversiteEtape#,
+		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeVersionEtape#,#codeUniversiteEtape#,
   		 #idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
   		 #sujetStage#,#dateDebutStage#,#dateFinStage#,#interruptionStage#,#dateDebutInterruption#,#dateFinInterruption#,
   		 #nbJoursHebdo#,#idTempsTravail#,#commentaireDureeTravail#,#codeLangueConvention#,#idOrigineStage#,#idTheme#,#conventionStructure#,#validationPedagogique#,
@@ -822,7 +823,7 @@
     <update id="updateConvention">               
         UPDATE Convention SET
          idConvention = #idConvention#,idEtudiant = #idEtudiant#,idCentreGestion = #idCentreGestion#,codeUFR = #codeUFR#,codeUniversiteUFR = #codeUniversiteUFR#,
-         codeDepartement = #codeDepartement#,codeEtape = #codeEtape#, codeUniversiteEtape = #codeUniversiteEtape#,
+         codeDepartement = #codeDepartement#,codeEtape = #codeEtape#,codeVersionEtape = #codeVersionEtape#, codeUniversiteEtape = #codeUniversiteEtape#,
   		 idEnseignant = #idEnseignant#,idStructure = #idStructure#,idService = #idService#,idContact = #idContact#,idSignataire = #idSignataire#,idTypeConvention = #idTypeConvention#,idOffre = #idOffre#,
   		 sujetStage = #sujetStage#,dateDebutStage = #dateDebutStage#,dateFinStage = #dateFinStage#,interruptionStage = #interruptionStage#,dateDebutInterruption = #dateDebutInterruption#,dateFinInterruption = #dateFinInterruption#,
   		 nbJoursHebdo = #nbJoursHebdo#,idTempsTravail = #idTempsTravail#,commentaireDureeTravail = #commentaireDureeTravail#,
@@ -866,9 +867,12 @@
         UPDATE Convention C 
         INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
         SET C.idCentreGestion = #idCentreGestion#
-  		WHERE C.codeEtape=#code#  		
+  		WHERE C.codeEtape=#code#
   		<isNotNull property="codeUniversite" prepend="AND">
   			C.codeUniversiteEtape = #codeUniversite# 
+  		</isNotNull>
+  		<isNotNull property="codeVersionEtape" prepend="AND">
+  			C.codeVersionEtape = #codeVersionEtape# 
   		</isNotNull>
     </update>
     

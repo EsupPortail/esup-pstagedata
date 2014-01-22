@@ -400,7 +400,9 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			throws DataUpdateDaoException, DataBaseDaoException{
 		boolean b = false;
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("code", code);
+		String [] tabCodes = code.split(";");
+		parameterMap.put("code", tabCodes[0]);
+		parameterMap.put("codeVersionEtape", tabCodes[1]);
 		parameterMap.put("idCentreGestion", idCentreGestion);
 		parameterMap.put("codeUniversite", codeUniversite);
 		try{

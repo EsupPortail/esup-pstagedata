@@ -11,6 +11,7 @@
 	<resultMap id="CritereGestion"
 		class="ClassCritereGestion">
 		<result property="code" column="codeCritere" />
+		<result property="codeVersionEtape" column="codeVersionEtape" />
 		<result property="libelle" column="libelleCritere" />
 		<result property="idCentreGestion" column="idCentreGestion" />
 	</resultMap>
@@ -30,9 +31,9 @@
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
 
-	<insert id="addCritere" >
-		INSERT INTO CritereGestion (codeCritere,libelleCritere,idCentreGestion)
-		VALUES (#code#,#libelle#,#idCentreGestion#)
+	<insert id="addCritere">
+		INSERT INTO CritereGestion (codeCritere,codeVersionEtape,libelleCritere,idCentreGestion)
+		VALUES (#code#,#codeVersionEtape#,#libelle#,#idCentreGestion#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>

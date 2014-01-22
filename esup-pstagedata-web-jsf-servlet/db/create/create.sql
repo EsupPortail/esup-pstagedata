@@ -1578,11 +1578,13 @@ CREATE  TABLE IF NOT EXISTS `Etape` (
 
   `codeEtape` VARCHAR(10) NOT NULL ,
 
+  `codeVersionEtape` VARCHAR(10) NULL ,
+
   `libelleEtape` VARCHAR(200) NOT NULL ,
 
   `codeUniversite` VARCHAR(50) NOT NULL DEFAULT ' ' ,
 
-  PRIMARY KEY (`codeEtape`, `codeUniversite`) )
+  PRIMARY KEY (`codeEtape`,`codeVersionEtape`, `codeUniversite`) )
 
 ENGINE = InnoDB
 
@@ -1869,6 +1871,8 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
   `codeUniversiteUFR` VARCHAR(50) NULL ,
 
   `codeEtape` VARCHAR(10) NULL ,
+
+  `codeVersionEtape` VARCHAR(10) NULL ,
 
   `codeUniversiteEtape` VARCHAR(50) NULL ,
 
@@ -2292,11 +2296,13 @@ CREATE  TABLE IF NOT EXISTS `CritereGestion` (
 
   `codeCritere` VARCHAR(15) NOT NULL ,
 
+  `codeVersionEtape` VARCHAR(10) NULL ,
+
   `libelleCritere` VARCHAR(200) NOT NULL ,
 
   `idCentreGestion` INT NOT NULL ,
 
-  PRIMARY KEY (`codeCritere`))
+  PRIMARY KEY (`codeCritere`,`codeVersionEtape`))
 
 ENGINE = InnoDB
 

@@ -22,6 +22,11 @@ public class CritereGestionDTO extends NomenclatureCodeDTO implements Serializab
 	private int idCentreGestion;
 	
 	/**
+	 * Code universite
+	 */
+	private String codeVersionEtape;
+	
+	/**
 	 * Constructeurs
 	 */
 	public CritereGestionDTO() {
@@ -36,6 +41,7 @@ public class CritereGestionDTO extends NomenclatureCodeDTO implements Serializab
 		if(c!=null){
 			if(c.getIdCentreGestion() != null )
 				idCentreGestion=c.getIdCentreGestion();
+			codeVersionEtape=c.getCodeVersionEtape();
 		}
 	}
 	
@@ -77,5 +83,19 @@ public class CritereGestionDTO extends NomenclatureCodeDTO implements Serializab
 	 */
 	public void setIdCentreGestion(int idCentreGestion) {
 		this.idCentreGestion = idCentreGestion;
+	}
+
+	/**
+	 * @return the codeVersionEtape
+	 */
+	public String getCodeVersionEtape() {
+		return codeVersionEtape;
+	}
+
+	/**
+	 * @param codeVersionEtape the codeVersionEtape to set
+	 */
+	public void setCodeVersionEtape(String codeVersionEtape) {
+		this.codeVersionEtape = codeVersionEtape;
 	}
 }

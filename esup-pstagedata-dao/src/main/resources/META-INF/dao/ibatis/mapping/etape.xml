@@ -9,6 +9,7 @@
 	<resultMap id="Etape"
 		class="ClassEtape">
 		<result property="code" column="codeEtape" />
+		<result property="codeVersionEtape" column="codeVersionEtape" />
 		<result property="libelle" column="libelleEtape" />
 		<result property="codeUniversite" column="codeUniversite" />
 	</resultMap>
@@ -49,8 +50,8 @@
 	</statement>
 
 	<insert id="addEtape" >
-        INSERT INTO Etape (codeEtape, libelleEtape, codeUniversite)
-		VALUES (#code#, #libelle#, #codeUniversite#);
+        INSERT INTO Etape (codeEtape,codeVersionEtape, libelleEtape, codeUniversite)
+		VALUES (#code#, #codeVersionEtape#, #libelle#, #codeUniversite#);
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>

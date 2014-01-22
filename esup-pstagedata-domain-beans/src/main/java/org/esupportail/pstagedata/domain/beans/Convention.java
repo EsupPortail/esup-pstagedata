@@ -49,6 +49,10 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	private String codeEtape;
 	/**
+	 * Code universite
+	 */
+	private String codeVersionEtape;
+	/**
 	 * codeUniversite
 	 */
 	private String codeUniversiteEtape;
@@ -1645,6 +1649,22 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setCodeCaisse(String codeCaisse) {
 		this.codeCaisse = codeCaisse;
+	}
+
+
+	/**
+	 * @return the codeVersionEtape
+	 */
+	public String getCodeVersionEtape() {
+		return codeVersionEtape;
+	}
+
+
+	/**
+	 * @param codeVersionEtape the codeVersionEtape to set
+	 */
+	public void setCodeVersionEtape(String codeVersionEtape) {
+		this.codeVersionEtape = codeVersionEtape;
 	}
 
 }

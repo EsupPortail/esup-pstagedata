@@ -50,6 +50,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private String codeEtape;
 	/**
+	 * codeVersionEtape
+	 */
+	private String codeVersionEtape;
+	/**
 	 * codeUniversite
 	 */
 	private String codeUniversiteEtape;
@@ -501,6 +505,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.codeUFR=c.getCodeUFR();
 			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
 			this.codeEtape=c.getCodeEtape();
+			this.codeVersionEtape=c.getCodeVersionEtape();
 			this.codeUniversiteEtape=c.getCodeUniversiteEtape();
 			this.idCentreGestion=c.getIdCentreGestion();
 			if(!light){
@@ -622,6 +627,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.codeUFR=c.getCodeUFR();
 			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
 			this.codeEtape=c.getCodeEtape();
+			this.codeVersionEtape=c.getCodeVersionEtape();
 			this.codeUniversiteEtape=c.getCodeUniversiteEtape();
 			this.codeDepartement=c.getCodeDepartement();
 			this.idEnseignant=c.getIdEnseignant();
@@ -725,6 +731,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				"codeUFR : "+codeUFR+", "+
 				"codeDepartement : "+codeDepartement+", "+
 				"codeEtape : "+codeEtape+", "+
+				"codeVersionEtape : "+codeVersionEtape+", "+
 				"idStructure : "+idStructure+", "+
 				"idService: "+idService+", "+
 				"idContact : "+idContact+", "+
@@ -2338,6 +2345,22 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setCodeCaisse(String codeCaisse) {
 		this.codeCaisse = codeCaisse;
+	}
+
+
+	/**
+	 * @return the codeVersionEtape
+	 */
+	public String getCodeVersionEtape() {
+		return codeVersionEtape;
+	}
+
+
+	/**
+	 * @param codeVersionEtape the codeVersionEtape to set
+	 */
+	public void setCodeVersionEtape(String codeVersionEtape) {
+		this.codeVersionEtape = codeVersionEtape;
 	}
 
 

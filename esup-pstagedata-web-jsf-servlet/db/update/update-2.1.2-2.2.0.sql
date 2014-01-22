@@ -37,3 +37,22 @@ ALTER TABLE OrigineStage CHANGE idOrigineStage idOrigineStage INT NOT NULL AUTO_
 
 -- Rajout du titre de l'avenant
 ALTER TABLE Avenant ADD titreAvenant VARCHAR(50) NULL DEFAULT '' after idConvention;
+
+-- Rajout du code version etape dans les tables concernees
+ALTER TABLE Convention ADD codeVersionEtape VARCHAR(10) NULL DEFAULT '' after codeEtape;
+ALTER TABLE CritereGestion ADD codeVersionEtape VARCHAR(10) NULL DEFAULT '' after codeCritere;
+ALTER TABLE Etape ADD codeVersionEtape VARCHAR(10) NULL DEFAULT '' after codeEtape;
+
+--Ajout du code version etape à la clé de la table Etape
+ALTER TABLE Etape
+  DROP PRIMARY KEY,
+   ADD PRIMARY KEY(
+     `codeEtape`,
+     `codeVersionEtape`,
+     `codeUniversite`);
+--Ajout du code version etape à la clé de la table CritereGestion
+ALTER TABLE CritereGestion
+  DROP PRIMARY KEY,
+   ADD PRIMARY KEY(
+     `codeCritere`,
+     `codeVersionEtape`);

@@ -17,10 +17,14 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 	 * Propriétés
 	 ****************************************************************/
 	/**
-	 * Code universit�
+	 * Code universite
 	 */
 	private String codeUniversite;
 	
+	/**
+	 * Code universite
+	 */
+	private String codeVersionEtape;
 	/**
 	 * Constructeur
 	 */
@@ -36,6 +40,7 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 		super(e);
 		if(e!=null){
 			this.codeUniversite=e.getCodeUniversite();
+			this.codeVersionEtape=e.getCodeVersionEtape();
 		}
 	}
 	
@@ -58,7 +63,7 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 	}
 	
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 	
 	/**
@@ -67,6 +72,20 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 	@Override
 	public String toString(){
 		return super.toString();
+	}
+
+	/**
+	 * @return the codeVersionEtape
+	 */
+	public String getCodeVersionEtape() {
+		return codeVersionEtape;
+	}
+
+	/**
+	 * @param codeVersionEtape the codeVersionEtape to set
+	 */
+	public void setCodeVersionEtape(String codeVersionEtape) {
+		this.codeVersionEtape = codeVersionEtape;
 	}
 
 }

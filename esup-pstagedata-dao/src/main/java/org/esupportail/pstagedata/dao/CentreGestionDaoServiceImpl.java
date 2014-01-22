@@ -121,9 +121,38 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 	public CentreGestion getCentreFromCritere(String codeCritere,
 			String codeUniversite) {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("codeCritere", codeCritere);
-		parameterMap.put("codeUniversite", codeUniversite);
-		return (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
+		CentreGestion centre = new CentreGestion();
+		
+		if(codeCritere.contains(";")){
+			String[] tab = codeCritere.split(";");
+			codeCritere = tab[0];
+			parameterMap.put("codeCritere", codeCritere);
+			parameterMap.put("codeUniversite", codeUniversite);
+			parameterMap.put("codeVersionEtape", "");
+			centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
+			if (centre != null){
+				// si l'on trouve un centre a partir du code etape et avec un codeVersionEtape vide (ancienne facon de les stocker donc), on renvoie le centre en question
+				return centre;
+			} else {
+				// sinon on recherche avec le codeversionetape
+				parameterMap = new HashMap<String, String>();
+				String codeVersionEtape = tab[1];
+				
+				parameterMap.put("codeCritere", codeCritere);
+				parameterMap.put("codeUniversite", codeUniversite);
+				parameterMap.put("codeVersionEtape", codeVersionEtape);
+
+				centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
+			}
+			
+		} else {
+			parameterMap.put("codeCritere", codeCritere);
+			parameterMap.put("codeUniversite", codeUniversite);
+			parameterMap.put("codeVersionEtape", null);
+			centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
+		}
+
+		return centre;
 
 	}	
 	

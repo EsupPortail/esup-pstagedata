@@ -145,10 +145,16 @@
 	
 	<!--recherche des centres selon l'identifiant d'un critere -->
 	<statement id="getCentreFromCritere" resultMap="CentreGestion">
-	 SELECT C.* FROM CentreGestion C 
-	INNER JOIN CritereGestion Cri
-	ON C.idCentreGestion=Cri.idCentreGestion 
-	WHERE Cri.codeCritere= #codeCritere# AND C.codeUniversite=#codeUniversite#
+		SELECT C.* FROM CentreGestion C 
+		INNER JOIN CritereGestion Cri
+		ON C.idCentreGestion=Cri.idCentreGestion 
+		WHERE Cri.codeCritere= #codeCritere#
+		<isNotNull property="codeUniversite" prepend="AND">
+			C.codeUniversite=#codeUniversite# 
+		</isNotNull>
+		<isNotNull property="codeVersionEtape" prepend="AND">
+			Cri.codeVersionEtape=#codeVersionEtape# 
+		</isNotNull>
 	</statement>
 	
 	

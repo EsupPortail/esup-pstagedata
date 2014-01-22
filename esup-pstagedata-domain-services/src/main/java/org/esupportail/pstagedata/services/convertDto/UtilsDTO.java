@@ -441,6 +441,7 @@ public class UtilsDTO {
 			c.setCode(cd.getCode());
 			c.setLibelle(cd.getLibelle());
 			c.setIdCentreGestion(cd.getIdCentreGestion());
+			c.setCodeVersionEtape(cd.getCodeVersionEtape());
 		}
 		return c;
 	}
@@ -1159,6 +1160,7 @@ public class UtilsDTO {
 			o.setCode(oDTO.getCode());
 			o.setLibelle(oDTO.getLibelle());
 			o.setCodeUniversite(oDTO.getCodeUniversite());
+			o.setCodeVersionEtape(oDTO.getCodeVersionEtape());
 		}
 		return o;
 	}
@@ -1298,6 +1300,7 @@ public class UtilsDTO {
 			o.setCodeDepartement(oDTO.getCodeDepartement());
 			o.setCodeElp(oDTO.getCodeElp());
 			o.setCodeEtape(oDTO.getCodeEtape());
+			o.setCodeVersionEtape(oDTO.getCodeVersionEtape());
 			o.setCodeUniversiteEtape(oDTO.getCodeUniversiteEtape());
 			o.setCodeFinalite(oDTO.getCodeFinalite());
 			o.setCodeLangueConvention(oDTO.getCodeLangueConvention());
