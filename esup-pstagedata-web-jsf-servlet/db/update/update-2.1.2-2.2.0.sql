@@ -56,3 +56,6 @@ ALTER TABLE CritereGestion
    ADD PRIMARY KEY(
      `codeCritere`,
      `codeVersionEtape`);
+
+--Suppression de la contrainte au niveau du mode de versement de la gratification
+ALTER TABLE Convention DROP FOREIGN KEY fk_Convention_ModeVersGratification1; 

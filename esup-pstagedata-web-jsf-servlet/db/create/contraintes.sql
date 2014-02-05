@@ -477,11 +477,6 @@ ADD( CONSTRAINT `fk_Convention_CentreGestion1`
     REFERENCES `Indemnisation` (`idIndemnisation` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Convention_ModeVersGratification1`
-    FOREIGN KEY (`idModeVersGratification` )
-    REFERENCES `ModeVersGratification` (`idModeVersGratification` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_NatureTravail1`
     FOREIGN KEY (`idNatureTravail` )
     REFERENCES `NatureTravail` (`idNatureTravail` )
@@ -574,7 +569,6 @@ CREATE INDEX `fk_Convention_TempsTravail1` ON `Convention` (`idTempsTravail` ASC
 CREATE INDEX `fk_Convention_LangueConvention1` ON `Convention` (`codeLangueConvention` ASC) ;
 CREATE INDEX `fk_Convention_Theme1` ON `Convention` (`idTheme` ASC) ;
 CREATE INDEX `fk_Convention_Indemnisation1` ON `Convention` (`idIndemnisation` ASC) ;
-CREATE INDEX `fk_Convention_ModeVersGratification1` ON `Convention` (`idModeVersGratification` ASC) ;
 CREATE INDEX `fk_Convention_NatureTravail1` ON `Convention` (`idNatureTravail` ASC) ;
 CREATE INDEX `fk_Convention_ModeValidationStage1` ON `Convention` (`idModeValidationStage` ASC) ;
 CREATE INDEX `fk_Convention_UniteDuree1` ON `Convention` (`idUniteDureeExceptionnelle` ASC) ;
