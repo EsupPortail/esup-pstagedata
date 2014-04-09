@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReponseSupplementaire">
+
+	<typeAlias alias="ClassReponseSupplementaire"
+		type="org.esupportail.pstagedata.domain.beans.ReponseSupplementaire" />
+
+	<resultMap id="ReponseSupplementaire" class="ClassReponseSupplementaire">
+		<result property="idQuestionSupplementaire" column="idQuestionSupplementaire" />
+		<result property="idConvention" column="idConvention" />
+		<result property="reponseTxt" column="reponseTxt" />
+		<result property="reponseInt" column="reponseInt" />
+		<result property="reponseBool" column="reponseBool" nullValue="0"/>
+	</resultMap>
+	
+	<statement id="getReponseSupplementaire" resultMap="ReponseSupplementaire">
+		SELECT * FROM ReponseSupplementaire
+		WHERE idQuestionSupplementaire = #idQuestionSupplementaire# AND idConvention = #idConvention#
+	</statement>
+
+	<insert id="addReponseSupplementaire">
+		INSERT INTO ReponseSupplementaire
+		(idQuestionSupplementaire,idConvention)
+		VALUES
+		(#idQuestionSupplementaire#,#idConvention#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateReponseSupplementaire">
+		UPDATE ReponseSupplementaire SET
+		reponseTxt=#reponseTxt#,reponseInt=#reponseInt#,reponseBool=#reponseBool#
+		WHERE idQuestionSupplementaire=#idQuestionSupplementaire# AND idConvention=#idConvention#
+	</update>
+
+	<delete id="deleteReponseSupplementaire">
+		DELETE FROM ReponseSupplementaire WHERE
+		idQuestionSupplementaire=#idQuestionSupplementaire# AND idConvention=#idConvention#
+	</delete>
+
+</sqlMap>

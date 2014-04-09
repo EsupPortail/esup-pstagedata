@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FicheEvaluation">
+
+	<typeAlias alias="ClassFicheEvaluation"
+		type="org.esupportail.pstagedata.domain.beans.FicheEvaluation" />
+
+	<resultMap id="FicheEvaluation" class="ClassFicheEvaluation">
+		<result property="idFicheEvaluation" column="idFicheEvaluation" />
+		<result property="idCentreGestion" column="idCentreGestion" />
+		<result property="validationEtudiant" column="validationEtudiant" />
+		<result property="validationEnseignant" column="validationEnseignant" />
+		<result property="validationEntreprise" column="validationEntreprise" />
+		<result property="questionEnt1" column="questionEnt1" />
+		<result property="questionEnt2" column="questionEnt2" />
+		<result property="questionEnt3" column="questionEnt3" />
+		<result property="questionEnt4" column="questionEnt4" />
+		<result property="questionEnt5" column="questionEnt5" />
+		<result property="questionEnt6" column="questionEnt6" />
+		<result property="questionEnt7" column="questionEnt7" />
+		<result property="questionEnt8" column="questionEnt8" />
+		<result property="questionEnt9" column="questionEnt9" />
+		<result property="questionEnt10" column="questionEnt10" />
+		<result property="questionEnt11" column="questionEnt11" />
+		<result property="questionEnt12" column="questionEnt12" />
+		<result property="questionEnt13" column="questionEnt13" />
+		<result property="questionEnt14" column="questionEnt14" />
+		<result property="questionEnt15" column="questionEnt15" />
+		<result property="questionEnt16" column="questionEnt16" />
+		<result property="questionEnt17" column="questionEnt17" />
+		<result property="questionEnt18" column="questionEnt18" />
+		<result property="questionEnt19" column="questionEnt19" />
+		<result property="questionEtuI1" column="questionEtuI1" />
+		<result property="questionEtuI2" column="questionEtuI2" />
+		<result property="questionEtuI3" column="questionEtuI3" />
+		<result property="questionEtuI4" column="questionEtuI4" />
+		<result property="questionEtuI5" column="questionEtuI5" />
+		<result property="questionEtuI6" column="questionEtuI6" />
+		<result property="questionEtuI7" column="questionEtuI7" />
+		<result property="questionEtuI8" column="questionEtuI8" />
+		<result property="questionEtuII1" column="questionEtuII1" />
+		<result property="questionEtuII2" column="questionEtuII2" />
+		<result property="questionEtuII3" column="questionEtuII3" />
+		<result property="questionEtuII4" column="questionEtuII4" />
+		<result property="questionEtuII5" column="questionEtuII5" />
+		<result property="questionEtuII6" column="questionEtuII6" />
+		<result property="questionEtuIII1" column="questionEtuIII1" />
+		<result property="questionEtuIII2" column="questionEtuIII2" />
+		<result property="questionEtuIII3" column="questionEtuIII3" />
+		<result property="questionEtuIII4" column="questionEtuIII4" />
+		<result property="questionEtuIII5" column="questionEtuIII5" />
+		<result property="questionEtuIII6" column="questionEtuIII6" />
+		<result property="questionEtuIII7" column="questionEtuIII7" />
+		<result property="questionEtuIII8" column="questionEtuIII8" />
+		<result property="questionEtuIII9" column="questionEtuIII9" />
+		<result property="questionEtuIII10" column="questionEtuIII10" />
+		<result property="questionEtuIII11" column="questionEtuIII11" />
+		<result property="questionEtuIII12" column="questionEtuIII12" />
+		<result property="questionEtuIII13" column="questionEtuIII13" />
+		<result property="questionEtuIII14" column="questionEtuIII14" />
+		<result property="questionEtuIII15" column="questionEtuIII15" />
+		<result property="questionEtuIII16" column="questionEtuIII16" />
+		<result property="questionEnsI1" column="questionEnsI1" />
+		<result property="questionEnsI2" column="questionEnsI2" />
+		<result property="questionEnsI3" column="questionEnsI3" />
+		<result property="questionEnsII1" column="questionEnsII1" />
+		<result property="questionEnsII2" column="questionEnsII2" />
+		<result property="questionEnsII3" column="questionEnsII3" />
+		<result property="questionEnsII4" column="questionEnsII4" />
+		<result property="questionEnsII5" column="questionEnsII5" />
+		<result property="questionEnsII6" column="questionEnsII6" />
+		<result property="questionEnsII7" column="questionEnsII7" />
+		<result property="questionEnsII8" column="questionEnsII8" />
+		<result property="questionEnsII9" column="questionEnsII9" />
+		<result property="questionEnsII10" column="questionEnsII10" />
+		<result property="questionEnsII11" column="questionEnsII11" />
+	</resultMap>
+
+	<statement id="getFicheEvaluationFromIdCentre" resultMap="FicheEvaluation">
+		SELECT * FROM FicheEvaluation
+		WHERE idCentreGestion = #idCentreGestion#
+	</statement>
+
+	<insert id="addFicheEvaluation">
+		INSERT INTO FicheEvaluation
+		(idCentreGestion)
+		VALUES
+		(#idCentreGestion#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateFicheEvaluationEtudiant">
+		UPDATE FicheEvaluation SET
+		questionEtuI1=#questionEtuI1#,questionEtuI2=#questionEtuI2#,
+		questionEtuI3=#questionEtuI3#, questionEtuI4=#questionEtuI4#,
+		questionEtuI5=#questionEtuI5#,questionEtuI6=#questionEtuI6#,questionEtuI7=#questionEtuI7#,
+		questionEtuI8=#questionEtuI8#,questionEtuII1=#questionEtuII1#,questionEtuII2=#questionEtuII2#,
+		questionEtuII3=#questionEtuII3#,questionEtuII4=#questionEtuII4#,questionEtuII5=#questionEtuII5#,
+		questionEtuII6=#questionEtuII6#,questionEtuIII1=#questionEtuIII1#,
+		questionEtuIII2=#questionEtuIII2#,questionEtuIII3=#questionEtuIII3#,questionEtuIII4=#questionEtuIII4#,
+		questionEtuIII5=#questionEtuIII5#,questionEtuIII6=#questionEtuIII6#,questionEtuIII7=#questionEtuIII7#,
+		questionEtuIII8=#questionEtuIII8#,questionEtuIII9=#questionEtuIII9#,questionEtuIII10=#questionEtuIII10#,
+		questionEtuIII11=#questionEtuIII11#,questionEtuIII12=#questionEtuIII12#,questionEtuIII13=#questionEtuIII13#,
+		questionEtuIII14=#questionEtuIII14#,questionEtuIII15=#questionEtuIII15#,questionEtuIII16=#questionEtuIII16#,
+		validationEtudiant=#validationEtudiant#
+		WHERE idFicheEvaluation=#idFicheEvaluation#
+	</update>
+	<update id="updateFicheEvaluationEntreprise">
+		UPDATE FicheEvaluation SET
+		questionEnt1=#questionEnt1#,questionEnt2=#questionEnt2#,questionEnt3=#questionEnt3#,
+		questionEnt4=#questionEnt4#,questionEnt5=#questionEnt5#,questionEnt6=#questionEnt6#,
+		questionEnt7=#questionEnt7#,questionEnt8=#questionEnt8#,questionEnt9=#questionEnt9#,
+		questionEnt10=#questionEnt10#,questionEnt11=#questionEnt11#,questionEnt12=#questionEnt12#,
+		questionEnt13=#questionEnt13#,questionEnt14=#questionEnt14#,
+		questionEnt15=#questionEnt15#,questionEnt16=#questionEnt16#,
+		questionEnt17=#questionEnt17#,questionEnt18=#questionEnt18#,
+		questionEnt19=#questionEnt19#,
+		validationEntreprise=#validationEntreprise#
+		WHERE idFicheEvaluation = #idFicheEvaluation#
+	</update>
+	<update id="updateFicheEvaluationEnseignant">
+		UPDATE FicheEvaluation SET
+		questionEnsI1=#questionEnsI1#,questionEnsI2=#questionEnsI2#,questionEnsI3=#questionEnsI3#,
+		questionEnsII1=#questionEnsII1#,questionEnsII2=#questionEnsII2#,questionEnsII3=#questionEnsII3#,
+		questionEnsII4=#questionEnsII4#,questionEnsII5=#questionEnsII5#,questionEnsII6=#questionEnsII6#,
+		questionEnsII7=#questionEnsII7#,questionEnsII8=#questionEnsII8#,questionEnsII9=#questionEnsII9#,
+		questionEnsII10=#questionEnsII10#,questionEnsII11=#questionEnsII11#,
+		validationEnseignant=#validationEnseignant#
+		WHERE idFicheEvaluation = #idFicheEvaluation#
+	</update>
+
+	<delete id="deleteFicheEvaluation">
+		DELETE FROM FicheEvaluation WHERE
+		idFicheEvaluation=#idFicheEvaluation#
+	</delete>
+
+</sqlMap>

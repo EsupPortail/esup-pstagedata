@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="QuestionSupplementaire">
+
+	<typeAlias alias="ClassQuestionSupplementaire"
+		type="org.esupportail.pstagedata.domain.beans.QuestionSupplementaire" />
+
+	<resultMap id="QuestionSupplementaire" class="ClassQuestionSupplementaire">
+		<result property="idQuestionSupplementaire" column="idQuestionSupplementaire" />
+		<result property="idFicheEvaluation" column="idFicheEvaluation" />
+		<result property="idPlacement" column="idPlacement" />
+		<result property="question" column="question" />
+		<result property="typeQuestion" column="typeQuestion" />
+	</resultMap>
+	
+	<statement id="getQuestionsSupplementaires" resultMap="QuestionSupplementaire">
+		SELECT * FROM QuestionSupplementaire
+		WHERE idFicheEvaluation = #idFicheEvaluation#
+	</statement>
+
+	<statement id="getQuestionsSupplementairesFromIdPlacement" resultMap="QuestionSupplementaire">
+		SELECT * FROM QuestionSupplementaire
+		WHERE idFicheEvaluation = #idFicheEvaluation# AND idPlacement=#idPlacement#
+	</statement>
+	
+	<insert id="addQuestionSupplementaire">
+		INSERT INTO QuestionSupplementaire
+		(idFicheEvaluation,idPlacement,question,typeQuestion)
+		VALUES
+		(#idFicheEvaluation#,#idPlacement#,#question#,#typeQuestion#)
+		<selectKey resultClass="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateQuestionSupplementaire">
+		UPDATE QuestionSupplementaire SET
+		question=#question#,typeQuestion=#typeQuestion#
+		WHERE idQuestionSupplementaire=#idQuestionSupplementaire#
+	</update>
+
+	<delete id="deleteQuestionSupplementaire">
+		DELETE FROM QuestionSupplementaire WHERE
+		idQuestionSupplementaire=#idQuestionSupplementaire#
+	</delete>
+
+</sqlMap>
