@@ -313,10 +313,6 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	private boolean priseEnChargeFraisMission;
 	/**
-	 * idFicheEvaluation
-	 */
-	private Integer idFicheEvaluation;
-	/**
 	 * codeRGI - regime inscription
 	 */
 	private String codeRGI;
@@ -1387,20 +1383,6 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setPriseEnChargeFraisMission(boolean priseEnChargeFraisMission) {
 		this.priseEnChargeFraisMission = priseEnChargeFraisMission;
-	}
-
-	/**
-	 * @return the idFicheEvaluation
-	 */
-	public Integer getIdFicheEvaluation() {
-		return idFicheEvaluation;
-	}
-
-	/**
-	 * @param idFicheEvaluation the idFicheEvaluation to set
-	 */
-	public void setIdFicheEvaluation(Integer idFicheEvaluation) {
-		this.idFicheEvaluation = idFicheEvaluation;
 	}
 
 	/**

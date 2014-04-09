@@ -32,7 +32,7 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	private int idEffectif;
 	/**
-	 * Code identifiant dans le pays de l�entreprise
+	 * Code identifiant dans le pays de l'entreprise
 	 */
 	private String codeEtab;
 	/**

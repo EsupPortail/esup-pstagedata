@@ -81,7 +81,6 @@
 		<result property="libelleFinalite" column="libelleFinalite"/>
 		<result property="codeCursusLMD" column="codeCursusLMD"/>
 		<result property="priseEnChargeFraisMission" column="priseEnChargeFraisMission"/>
-		<result property="idFicheEvaluation" column="idFicheEvaluation" nullValue="0"/>
 		<result property="codeRGI" column="codeRGI"/>
 		<result property="loginCreation" column="loginCreation"/>
 		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
@@ -150,6 +149,7 @@
 		<result property="idIndemnisation" column="idIndemnisation"/>
 		<result property="codeElp" column="codeElp"/>
 		<result property="libelleELP" column="libelleELP"/>
+		<result property="avantagesNature" column="avantagesNature"/>
 		
 		<result property="structure" column="idStructure" select="getStructureExportFromId"/>
 		<result property="etudiant" column="idEtudiant" select="getEtudiantExportFromId"/>
@@ -219,7 +219,7 @@
         C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion
         FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
+		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape)
         INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
         LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
         INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -767,7 +767,7 @@
         C.idStructure, C.idEtudiant, C.codeDepartement, 
         C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire , C.idTypeConvention,
         C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp, C.libelleElp,
-        C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation
+        C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature
         FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
@@ -804,7 +804,7 @@
   		 idIndemnisation,montantGratification,fonctionsEtTaches,details,annee,idAssurance,insee,codeCaisse,temConfSujetTeme,nbHeuresHebdo,quotiteTravail,
   		 modeEncadreSuivi,idModeVersGratification,avantagesNature,idNatureTravail,idModeValidationStage,codeElp,libelleELP,creditECTS,travailNuitFerie,
   		 dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
-  		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,idFicheEvaluation,codeRGI,loginCreation,dateCreation)
+  		 codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,codeRGI,loginCreation,dateCreation)
   		VALUES 
 		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeVersionEtape#,#codeUniversiteEtape#,
   		 #idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
@@ -814,7 +814,7 @@
   		 #idIndemnisation#,#montantGratification#,#fonctionsEtTaches#,#details#,#annee#,#idAssurance#,#insee#,#codeCaisse#,#temConfSujetTeme#,#nbHeuresHebdo#,#quotiteTravail#,
   		 #modeEncadreSuivi#,#idModeVersGratification#,#avantagesNature#,#idNatureTravail#,#idModeValidationStage#,#codeElp#,#libelleELP#,#creditECTS#,#travailNuitFerie#,
   		 #dureeStage#,#nomEtabRef#,#adresseEtabRef#,#nomSignataireComposante#,#qualiteSignataire#,#libelleCPAM#,#dureeExceptionnelle#,#idUniteDureeExceptionnelle#,#idUniteGratification#,
-  		 #codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#idFicheEvaluation#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP())
+  		 #codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP())
 		<selectKey resultClass="java.lang.Integer">
          SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -837,7 +837,7 @@
   		 idNatureTravail = #idNatureTravail#,idModeValidationStage = #idModeValidationStage#,codeElp = #codeElp#,libelleELP = #libelleELP#,creditECTS = #creditECTS#,travailNuitFerie = #travailNuitFerie#,
   		 dureeStage = #dureeStage#,nomEtabRef = #nomEtabRef#,adresseEtabRef = #adresseEtabRef#,nomSignataireComposante = #nomSignataireComposante#,
   		 qualiteSignataire = #qualiteSignataire#,libelleCPAM = #libelleCPAM#,dureeExceptionnelle = #dureeExceptionnelle#,idUniteDureeExceptionnelle = #idUniteDureeExceptionnelle#,idUniteGratification = #idUniteGratification#,
-  		 codeFinalite = #codeFinalite#,libelleFinalite = #libelleFinalite#,codeCursusLMD = #codeCursusLMD#,priseEnChargeFraisMission = #priseEnChargeFraisMission#,idFicheEvaluation = #idFicheEvaluation#,
+  		 codeFinalite = #codeFinalite#,libelleFinalite = #libelleFinalite#,codeCursusLMD = #codeCursusLMD#,priseEnChargeFraisMission = #priseEnChargeFraisMission#,
   		 codeRGI=#codeRGI#,
   		 loginModif = #loginModif#,dateModif = CURRENT_TIMESTAMP(),loginValidation = #loginValidation#,dateValidation = #dateValidation#,loginSignature = #loginSignature#,dateSignature = #dateSignature#
   		WHERE idConvention = #idConvention#

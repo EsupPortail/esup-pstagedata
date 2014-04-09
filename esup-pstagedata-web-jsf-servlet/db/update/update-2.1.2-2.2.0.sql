@@ -47,15 +47,18 @@ ALTER TABLE Etape ADD codeVersionEtape VARCHAR(10) NULL DEFAULT '' after codeEta
 ALTER TABLE Etape
   DROP PRIMARY KEY,
    ADD PRIMARY KEY(
-     `codeEtape`,
-     `codeVersionEtape`,
-     `codeUniversite`);
+     codeEtape,
+     codeVersionEtape,
+     codeUniversite);
 --Ajout du code version etape à la clé de la table CritereGestion
 ALTER TABLE CritereGestion
   DROP PRIMARY KEY,
    ADD PRIMARY KEY(
-     `codeCritere`,
-     `codeVersionEtape`);
+     codeCritere,
+     codeVersionEtape);
 
 --Suppression de la contrainte au niveau du mode de versement de la gratification
 ALTER TABLE Convention DROP FOREIGN KEY fk_Convention_ModeVersGratification1; 
+
+--Suppression de l'obligation de motif au niveau des avenants
+ALTER TABLE Avenant CHANGE motifAvenant motifAvenant TEXT NULL;

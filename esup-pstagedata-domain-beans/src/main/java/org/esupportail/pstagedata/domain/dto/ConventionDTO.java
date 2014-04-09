@@ -314,10 +314,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private boolean priseEnChargeFraisMission;
 	/**
-	 * idFicheEvaluation
-	 */
-	private Integer idFicheEvaluation;
-	/**
 	 * codeRGI - regime inscription
 	 */
 	private String codeRGI;
@@ -338,6 +334,15 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private Date dateSignature;
 
+	/**
+	 * nombre avenant
+	 */
+	private int nbAvenant;
+
+	/**
+	 * variable pour la listCheckBox de validation en masse
+	 */
+	private boolean selected;
 
 	/* **
 	 * Objets
@@ -387,6 +392,16 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * ufr
 	 */
 	private UfrDTO ufr;
+
+	/**
+	 * ficheEvaluation
+	 */
+	private FicheEvaluationDTO ficheEvaluation;
+
+	/**
+	 * reponseEvaluation
+	 */
+	private ReponseEvaluationDTO reponseEvaluation;
 
 	/* **
 	 * Objets Nomenclature
@@ -452,21 +467,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private CaisseRegimeDTO caisseRegime;
 
-
 	/**
 	 * langueConvention
 	 */
 	private LangueConventionDTO langueConvention;
-
-	/**
-	 * nombre avenant
-	 */
-	private int nbAvenant;
-
-	/**
-	 * variable pour la listCheckBox de validation en masse
-	 */
-	private boolean selected;
 
 
 	/**
@@ -483,7 +487,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		this.setIdOrigineStage(0);
 		this.setIdUniteDureeExceptionnelle(0);
 		this.setIdUniteGratification(0);
-		this.setIdFicheEvaluation(0);
 	}
 
 
@@ -569,7 +572,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				this.libelleFinalite=c.getLibelleFinalite();
 				this.codeCursusLMD=c.getCodeCursusLMD();
 				this.priseEnChargeFraisMission=c.isPriseEnChargeFraisMission();
-				this.idFicheEvaluation=c.getIdFicheEvaluation();
 				this.codeRGI=c.getCodeRGI();
 				this.loginValidation=c.getLoginValidation();
 				this.dateValidation=c.getDateValidation();
@@ -663,7 +665,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 //			this.quotiteTravail=c.getQuotiteTravail();
 //			this.modeEncadreSuivi=c.getModeEncadreSuivi();
 //			this.idModeVersGratification=c.getIdModeVersGratification();
-//			this.avantagesNature=c.getAvantagesNature();
+			this.avantagesNature=c.getAvantagesNature();
 //			this.idNatureTravail=c.getIdNatureTravail();
 //			this.idModeValidationStage=c.getIdModeValidationStage();
 			this.codeElp=c.getCodeElp();
@@ -795,7 +797,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				"libelleFinalite : "+libelleFinalite+", "+
 				"codeCursusLMD : "+codeCursusLMD+", "+
 				"priseEnChargeFraisMission : "+priseEnChargeFraisMission+", "+
-				"idFicheEvaluation : "+idFicheEvaluation+", "+
 				"codeRGI : "+codeRGI+", "+
 				"loginValidation : "+loginValidation+", "+
 				"dateValidation : "+dateValidation+", "+
@@ -1859,21 +1860,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public void setPriseEnChargeFraisMission(boolean priseEnChargeFraisMission) {
 		this.priseEnChargeFraisMission = priseEnChargeFraisMission;
 	}
-
-	/**
-	 * @return the idFicheEvaluation
-	 */
-	public Integer getIdFicheEvaluation() {
-		return idFicheEvaluation;
-	}
-
-	/**
-	 * @param idFicheEvaluation the idFicheEvaluation to set
-	 */
-	public void setIdFicheEvaluation(Integer idFicheEvaluation) {
-		this.idFicheEvaluation = idFicheEvaluation;
-	}
-
+	
 	/**
 	 * @return the loginValidation
 	 */
@@ -2339,14 +2326,12 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		return codeCaisse;
 	}
 
-
 	/**
 	 * @param codeCaisse the codeCaisse to set
 	 */
 	public void setCodeCaisse(String codeCaisse) {
 		this.codeCaisse = codeCaisse;
 	}
-
 
 	/**
 	 * @return the codeVersionEtape
@@ -2355,7 +2340,6 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		return codeVersionEtape;
 	}
 
-
 	/**
 	 * @param codeVersionEtape the codeVersionEtape to set
 	 */
@@ -2363,5 +2347,34 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		this.codeVersionEtape = codeVersionEtape;
 	}
 
+	/**
+	 * @return the ficheEvaluation
+	 */
+	public FicheEvaluationDTO getFicheEvaluation() {
+		return ficheEvaluation;
+	}
+
+	/**
+	 * @param ficheEvaluation the ficheEvaluation to set
+	 */
+	public void setFicheEvaluation(FicheEvaluationDTO ficheEvaluation) {
+		this.ficheEvaluation = ficheEvaluation;
+	}
+
+
+	/**
+	 * @return the reponseEvaluation
+	 */
+	public ReponseEvaluationDTO getReponseEvaluation() {
+		return reponseEvaluation;
+	}
+
+
+	/**
+	 * @param reponseEvaluation the reponseEvaluation to set
+	 */
+	public void setReponseEvaluation(ReponseEvaluationDTO reponseEvaluation) {
+		this.reponseEvaluation = reponseEvaluation;
+	}
 
 }

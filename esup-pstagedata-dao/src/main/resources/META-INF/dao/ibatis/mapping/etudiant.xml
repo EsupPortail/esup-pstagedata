@@ -37,6 +37,7 @@
 		<result property="prenom" column="prenom"/>
 		<result property="mail" column="mail"/>
 		<result property="numEtudiant" column="numEtudiant"/>
+		<result property="codeSexe" column="codeSexe"/>
      </resultMap>
  
     <statement id="getEtudiants" resultMap="Etudiant">
@@ -54,7 +55,7 @@
     </statement>
     
     <statement id="getEtudiantExportFromId"  resultMap="EtudiantExport">
-        SELECT E.idEtudiant, E.nom, E.prenom, E.mail, E.numEtudiant FROM Etudiant E WHERE idEtudiant=#id#
+        SELECT E.idEtudiant, E.nom, E.prenom, E.mail, E.numEtudiant, E.codeSexe FROM Etudiant E WHERE idEtudiant=#id#
         LIMIT 0,1
     </statement>
     

@@ -88,6 +88,10 @@
 		class="org.esupportail.pstagedata.domain.FapQualificationSimplifieeDomainServiceImpl">
 		<property name="fapQualificationSimplifieeDaoService" ref="fapQualificationSimplifieeDaoService" />
 	</bean>
+	<bean id="ficheEvaluationDomainService"
+		class="org.esupportail.pstagedata.domain.FicheEvaluationDomainServiceImpl">
+		<property name="ficheEvaluationDaoService" ref="ficheEvaluationDaoService" />
+	</bean>
 	<bean id="modeCandidatureDomainService"
 		class="org.esupportail.pstagedata.domain.ModeCandidatureDomainServiceImpl">
 		<property name="modeCandidatureDaoService" ref="modeCandidatureDaoService" />

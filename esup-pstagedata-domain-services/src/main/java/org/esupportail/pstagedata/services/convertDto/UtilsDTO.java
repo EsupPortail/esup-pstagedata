@@ -32,6 +32,7 @@ import org.esupportail.pstagedata.domain.beans.FapN2;
 import org.esupportail.pstagedata.domain.beans.FapN3;
 import org.esupportail.pstagedata.domain.beans.FapQualification;
 import org.esupportail.pstagedata.domain.beans.FapQualificationSimplifiee;
+import org.esupportail.pstagedata.domain.beans.FicheEvaluation;
 import org.esupportail.pstagedata.domain.beans.Fichier;
 import org.esupportail.pstagedata.domain.beans.Indemnisation;
 import org.esupportail.pstagedata.domain.beans.LangueConvention;
@@ -48,6 +49,9 @@ import org.esupportail.pstagedata.domain.beans.OffreDiffusion;
 import org.esupportail.pstagedata.domain.beans.OrigineStage;
 import org.esupportail.pstagedata.domain.beans.Pays;
 import org.esupportail.pstagedata.domain.beans.PersonnelCentreGestion;
+import org.esupportail.pstagedata.domain.beans.QuestionSupplementaire;
+import org.esupportail.pstagedata.domain.beans.ReponseEvaluation;
+import org.esupportail.pstagedata.domain.beans.ReponseSupplementaire;
 import org.esupportail.pstagedata.domain.beans.Service;
 import org.esupportail.pstagedata.domain.beans.StatutJuridique;
 import org.esupportail.pstagedata.domain.beans.Structure;
@@ -89,6 +93,7 @@ import org.esupportail.pstagedata.domain.dto.FapN2DTO;
 import org.esupportail.pstagedata.domain.dto.FapN3DTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationDTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationSimplifieeDTO;
+import org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO;
 import org.esupportail.pstagedata.domain.dto.FichierDTO;
 import org.esupportail.pstagedata.domain.dto.IndemnisationDTO;
 import org.esupportail.pstagedata.domain.dto.LangueConventionDTO;
@@ -105,6 +110,9 @@ import org.esupportail.pstagedata.domain.dto.OffreDiffusionDTO;
 import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
 import org.esupportail.pstagedata.domain.dto.PaysDTO;
 import org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO;
+import org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO;
 import org.esupportail.pstagedata.domain.dto.ServiceDTO;
 import org.esupportail.pstagedata.domain.dto.StatutJuridiqueDTO;
 import org.esupportail.pstagedata.domain.dto.StructureDTO;
@@ -137,10 +145,6 @@ public class UtilsDTO {
 	public UtilsDTO(){
 		super();
 	}
-
-	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
 
 	/* ***************************************************************
 	 * Methodes
@@ -409,7 +413,7 @@ public class UtilsDTO {
 			c.setMdp(cd.getMdp());
 			//Nom en majuscules
 			c.setNom(StringUtils.hasText(cd.getNom())?cd.getNom().toUpperCase():null);
-			//1�re lettre du pr�nom en majuscules
+			//1ere lettre du prenom en majuscules
 			c.setPrenom(Utils.premiereLettreMAJ(cd.getPrenom()));
 			c.setTel(cd.getTel());
 		}
@@ -466,6 +470,7 @@ public class UtilsDTO {
 			cr.setTempsTravail(UtilsDTO.getTempsTravailFromDTO(c.getTempsTravail()));
 			cr.setLangueConvention(UtilsDTO.getLangueConventionFromDTO(c.getLangueConvention()));
 			cr.setEstValidee(c.getEstValidee());
+			cr.setEstVerifiee(c.getEstVerifiee());
 			cr.setDateStage(c.getDateStage());
 			cr.setAnneeUniversitaire(c.getAnneeUniversitaire());
 			cr.setIdOffre(c.getIdOffre());
@@ -1337,9 +1342,6 @@ public class UtilsDTO {
 				o.setIdEnseignant(null);
 			else o.setIdEnseignant(oDTO.getIdEnseignant());
 			o.setIdEtudiant(oDTO.getIdEtudiant());
-			if(oDTO.getIdFicheEvaluation()<=0)
-				o.setIdFicheEvaluation(null);
-			else o.setIdFicheEvaluation(oDTO.getIdFicheEvaluation());
 			o.setIdIndemnisation(oDTO.getIdIndemnisation());
 			o.setIdModeValidationStage(oDTO.getIdModeValidationStage());
 			o.setIdModeVersGratification(oDTO.getIdModeVersGratification());
@@ -2198,5 +2200,294 @@ public class UtilsDTO {
 		}
 		
 		return ld;
+	}
+	
+	public static List<FicheEvaluationDTO> getFicheEvaluationListDTO(List<FicheEvaluation> l){
+		List<FicheEvaluationDTO> ld = new ArrayList<FicheEvaluationDTO>();
+		if (l!=null) {
+			for (FicheEvaluation fe : l) {
+				FicheEvaluationDTO feDTO = new FicheEvaluationDTO(fe);
+				ld.add(feDTO);
+			}
+		}
+		return ld;
+	}
+	/**
+	 * @param fe
+	 * @return FicheEvaluation
+	 */
+	public static FicheEvaluation getFicheEvaluationFromDTO(FicheEvaluationDTO fed){
+		FicheEvaluation f = new FicheEvaluation();
+		if(fed!=null){
+			f.setIdFicheEvaluation(fed.getIdFicheEvaluation());
+			f.setIdCentreGestion(fed.getIdCentreGestion());
+			f.setValidationEtudiant(fed.isValidationEtudiant());
+			f.setValidationEnseignant(fed.isValidationEnseignant());
+			f.setValidationEntreprise(fed.isValidationEntreprise());
+			// fiche entreprise
+			f.setQuestionEnt1(fed.isQuestionEnt1());
+			f.setQuestionEnt2(fed.isQuestionEnt2());
+			f.setQuestionEnt3(fed.isQuestionEnt3());
+			f.setQuestionEnt4(fed.isQuestionEnt4());
+			f.setQuestionEnt5(fed.isQuestionEnt5());
+			f.setQuestionEnt6(fed.isQuestionEnt6());
+			f.setQuestionEnt7(fed.isQuestionEnt7());
+			f.setQuestionEnt8(fed.isQuestionEnt8());
+			f.setQuestionEnt9(fed.isQuestionEnt9());
+			f.setQuestionEnt10(fed.isQuestionEnt10());
+			f.setQuestionEnt11(fed.isQuestionEnt11());
+			f.setQuestionEnt12(fed.isQuestionEnt12());
+			f.setQuestionEnt13(fed.isQuestionEnt13());
+			f.setQuestionEnt14(fed.isQuestionEnt14());
+			f.setQuestionEnt15(fed.isQuestionEnt15());
+			f.setQuestionEnt16(fed.isQuestionEnt16());
+			f.setQuestionEnt17(fed.isQuestionEnt17());
+			f.setQuestionEnt18(fed.isQuestionEnt18());
+			f.setQuestionEnt19(fed.isQuestionEnt19());
+			// fiche etudiant
+			f.setQuestionEtuI1(fed.isQuestionEtuI1());
+			f.setQuestionEtuI2(fed.isQuestionEtuI2());
+			f.setQuestionEtuI3(fed.isQuestionEtuI3());
+			f.setQuestionEtuI4(fed.isQuestionEtuI4());
+			f.setQuestionEtuI5(fed.isQuestionEtuI5());
+			f.setQuestionEtuI6(fed.isQuestionEtuI6());
+			f.setQuestionEtuI7(fed.isQuestionEtuI7());
+			f.setQuestionEtuI8(fed.isQuestionEtuI8());
+			f.setQuestionEtuII1(fed.isQuestionEtuII1());
+			f.setQuestionEtuII2(fed.isQuestionEtuII2());
+			f.setQuestionEtuII3(fed.isQuestionEtuII3());
+			f.setQuestionEtuII4(fed.isQuestionEtuII4());
+			f.setQuestionEtuII5(fed.isQuestionEtuII5());
+			f.setQuestionEtuII6(fed.isQuestionEtuII6());
+			f.setQuestionEtuIII1(fed.isQuestionEtuIII1());
+			f.setQuestionEtuIII2(fed.isQuestionEtuIII2());
+			f.setQuestionEtuIII3(fed.isQuestionEtuIII3());
+			f.setQuestionEtuIII4(fed.isQuestionEtuIII4());
+			f.setQuestionEtuIII5(fed.isQuestionEtuIII5());
+			f.setQuestionEtuIII6(fed.isQuestionEtuIII6());
+			f.setQuestionEtuIII7(fed.isQuestionEtuIII7());
+			f.setQuestionEtuIII8(fed.isQuestionEtuIII8());
+			f.setQuestionEtuIII9(fed.isQuestionEtuIII9());
+			f.setQuestionEtuIII10(fed.isQuestionEtuIII10());
+			f.setQuestionEtuIII11(fed.isQuestionEtuIII11());
+			f.setQuestionEtuIII12(fed.isQuestionEtuIII12());
+			f.setQuestionEtuIII13(fed.isQuestionEtuIII13());
+			f.setQuestionEtuIII14(fed.isQuestionEtuIII14());
+			f.setQuestionEtuIII15(fed.isQuestionEtuIII15());
+			f.setQuestionEtuIII16(fed.isQuestionEtuIII16());
+			// fiche enseignant
+			f.setQuestionEnsI1(fed.isQuestionEnsI1());
+			f.setQuestionEnsI2(fed.isQuestionEnsI2());
+			f.setQuestionEnsI3(fed.isQuestionEnsI3());
+			f.setQuestionEnsII1(fed.isQuestionEnsII1());
+			f.setQuestionEnsII2(fed.isQuestionEnsII2());
+			f.setQuestionEnsII3(fed.isQuestionEnsII3());
+			f.setQuestionEnsII4(fed.isQuestionEnsII4());
+			f.setQuestionEnsII5(fed.isQuestionEnsII5());
+			f.setQuestionEnsII6(fed.isQuestionEnsII6());
+			f.setQuestionEnsII7(fed.isQuestionEnsII7());
+			f.setQuestionEnsII8(fed.isQuestionEnsII8());
+			f.setQuestionEnsII9(fed.isQuestionEnsII9());
+			f.setQuestionEnsII10(fed.isQuestionEnsII10());
+			f.setQuestionEnsII11(fed.isQuestionEnsII11());
+		}
+		return f;
+	}
+	
+	public static List<ReponseEvaluationDTO> getReponseEvaluationListDTO(List<ReponseEvaluation> l){
+		List<ReponseEvaluationDTO> ld = new ArrayList<ReponseEvaluationDTO>();
+		if (l!=null) {
+			for (ReponseEvaluation fe : l) {
+				ReponseEvaluationDTO feDTO = new ReponseEvaluationDTO(fe);
+				ld.add(feDTO);
+			}
+		}
+		return ld;
+	}
+	/**
+	 * @param fe
+	 * @return ReponseEvaluation
+	 */
+	public static ReponseEvaluation getReponseEvaluationFromDTO(ReponseEvaluationDTO red){
+		ReponseEvaluation r = new ReponseEvaluation();
+		if(red!=null){
+			r.setIdFicheEvaluation(red.getIdFicheEvaluation());
+			r.setIdConvention(red.getIdConvention());
+			r.setValidationEnseignant(red.isValidationEnseignant());
+			r.setValidationEntreprise(red.isValidationEntreprise());
+			r.setValidationEtudiant(red.isValidationEtudiant());
+			// fiche entreprise
+			r.setReponseEnt1(red.getReponseEnt1());
+			r.setReponseEnt1bis(red.getReponseEnt1bis());
+			r.setReponseEnt2(red.getReponseEnt2());
+			r.setReponseEnt2bis(red.getReponseEnt2bis());
+			r.setReponseEnt3(red.getReponseEnt3());
+			r.setReponseEnt4(red.getReponseEnt4());
+			r.setReponseEnt4bis(red.getReponseEnt4bis());
+			r.setReponseEnt5(red.getReponseEnt5());
+			r.setReponseEnt5bis(red.getReponseEnt5bis());
+			r.setReponseEnt6(red.getReponseEnt6());
+			r.setReponseEnt6bis(red.getReponseEnt6bis());
+			r.setReponseEnt7(red.getReponseEnt7());
+			r.setReponseEnt7bis(red.getReponseEnt7bis());
+			r.setReponseEnt8(red.getReponseEnt8());
+			r.setReponseEnt8bis(red.getReponseEnt8bis());
+			r.setReponseEnt9(red.getReponseEnt9());
+			r.setReponseEnt9bis(red.getReponseEnt9bis());
+			r.setReponseEnt10(red.getReponseEnt10());
+			r.setReponseEnt10bis(red.getReponseEnt10bis());
+			r.setReponseEnt11(red.getReponseEnt11());
+			r.setReponseEnt11bis(red.getReponseEnt11bis());
+			r.setReponseEnt12(red.getReponseEnt12());
+			r.setReponseEnt12bis(red.getReponseEnt12bis());
+			r.setReponseEnt13(red.getReponseEnt13());
+			r.setReponseEnt13bis(red.getReponseEnt13bis());
+			r.setReponseEnt14(red.getReponseEnt14());
+			r.setReponseEnt14bis(red.getReponseEnt14bis());
+			r.setReponseEnt15(red.getReponseEnt15());
+			r.setReponseEnt15bis(red.getReponseEnt15bis());
+			r.setReponseEnt16(red.getReponseEnt16());
+			r.setReponseEnt16bis(red.getReponseEnt16bis());
+			r.setReponseEnt17(red.getReponseEnt17());
+			r.setReponseEnt17bis(red.getReponseEnt17bis());
+			r.setReponseEnt18(red.isReponseEnt18());
+			r.setReponseEnt19(red.getReponseEnt19());
+			// fiche etudiant
+			r.setReponseEtuI1(red.getReponseEtuI1());
+			r.setReponseEtuI1bis(red.getReponseEtuI1bis());
+			r.setReponseEtuI2(red.getReponseEtuI2());
+			r.setReponseEtuI3(red.getReponseEtuI3());
+			r.setReponseEtuI4a(red.isReponseEtuI4a());
+			r.setReponseEtuI4b(red.isReponseEtuI4b());
+			r.setReponseEtuI4c(red.isReponseEtuI4c());
+			r.setReponseEtuI4d(red.isReponseEtuI4d());
+			r.setReponseEtuI5(red.getReponseEtuI5());
+			r.setReponseEtuI6(red.getReponseEtuI6());
+			r.setReponseEtuI7(red.isReponseEtuI7());
+			r.setReponseEtuI7bis1(red.getReponseEtuI7bis1());
+			r.setReponseEtuI7bis1a(red.isReponseEtuI7bis1a());
+			r.setReponseEtuI7bis1b(red.getReponseEtuI7bis1b());
+			r.setReponseEtuI7bis2(red.getReponseEtuI7bis2());
+			r.setReponseEtuI8(red.isReponseEtuI8());
+			r.setReponseEtuII1(red.getReponseEtuII1());
+			r.setReponseEtuII1bis(red.getReponseEtuII1bis());
+			r.setReponseEtuII2(red.getReponseEtuII2());
+			r.setReponseEtuII2bis(red.getReponseEtuII2bis());
+			r.setReponseEtuII3(red.getReponseEtuII3());
+			r.setReponseEtuII3bis(red.getReponseEtuII3bis());
+			r.setReponseEtuII4(red.getReponseEtuII4());
+			r.setReponseEtuII5(red.isReponseEtuII5());
+			r.setReponseEtuII5a(red.getReponseEtuII5a());
+			r.setReponseEtuII5b(red.isReponseEtuII5b());
+			r.setReponseEtuII6(red.isReponseEtuII6());
+			r.setReponseEtuIII1(red.isReponseEtuIII1());
+			r.setReponseEtuIII1bis(red.getReponseEtuIII1bis());
+			r.setReponseEtuIII2(red.isReponseEtuIII2());
+			r.setReponseEtuIII2bis(red.getReponseEtuIII2bis());
+			r.setReponseEtuIII3(red.isReponseEtuIII3());
+			r.setReponseEtuIII3bis(red.getReponseEtuIII3bis());
+			r.setReponseEtuIII4(red.getReponseEtuIII4());
+			r.setReponseEtuIII5a(red.isReponseEtuIII5a());
+			r.setReponseEtuIII5b(red.isReponseEtuIII5b());
+			r.setReponseEtuIII5c(red.isReponseEtuIII5c());
+			r.setReponseEtuIII5bis(red.getReponseEtuIII5bis());
+			r.setReponseEtuIII6(red.getReponseEtuIII6());
+			r.setReponseEtuIII6bis(red.getReponseEtuIII6bis());
+			r.setReponseEtuIII7(red.getReponseEtuIII7());
+			r.setReponseEtuIII7bis(red.getReponseEtuIII7bis());
+			r.setReponseEtuIII8(red.isReponseEtuIII8());
+			r.setReponseEtuIII8bis(red.getReponseEtuIII8bis());
+			r.setReponseEtuIII9(red.isReponseEtuIII9());
+			r.setReponseEtuIII9bis(red.getReponseEtuIII9bis());
+			r.setReponseEtuIII10(red.isReponseEtuIII10());
+			r.setReponseEtuIII11(red.isReponseEtuIII11());
+			r.setReponseEtuIII12(red.isReponseEtuIII12());
+			r.setReponseEtuIII13(red.isReponseEtuIII13());
+			r.setReponseEtuIII14(red.isReponseEtuIII14());
+			r.setReponseEtuIII15(red.getReponseEtuIII15());
+			r.setReponseEtuIII15bis(red.getReponseEtuIII15bis());
+			r.setReponseEtuIII16(red.getReponseEtuIII16());
+			r.setReponseEtuIII16bis(red.getReponseEtuIII16bis());
+			// fiche enseignant
+			r.setReponseEnsI1a(red.isReponseEnsI1a());
+			r.setReponseEnsI1b(red.isReponseEnsI1b());
+			r.setReponseEnsI1c(red.isReponseEnsI1c());
+			r.setReponseEnsI2a(red.isReponseEnsI2a());
+			r.setReponseEnsI2b(red.isReponseEnsI2b());
+			r.setReponseEnsI2c(red.isReponseEnsI2c());
+			r.setReponseEnsI3(red.getReponseEnsI3());
+			r.setReponseEnsII1(red.getReponseEnsII1());
+			r.setReponseEnsII2(red.getReponseEnsII2());
+			r.setReponseEnsII3(red.getReponseEnsII3());
+			r.setReponseEnsII4(red.getReponseEnsII4());
+			r.setReponseEnsII5(red.getReponseEnsII5());
+			r.setReponseEnsII6(red.getReponseEnsII6());
+			r.setReponseEnsII7(red.getReponseEnsII7());
+			r.setReponseEnsII8(red.getReponseEnsII8());
+			r.setReponseEnsII9(red.getReponseEnsII9());
+			r.setReponseEnsII10(red.getReponseEnsII10());
+			r.setReponseEnsII11(red.getReponseEnsII11());
+		}
+		return r;
+	}
+	
+	/**
+	 * @param l
+	 * @return
+	 */
+	public static List<QuestionSupplementaireDTO> getQuestionSupplementaireListDTO(List<QuestionSupplementaire> l){
+		List<QuestionSupplementaireDTO> lq = new ArrayList<QuestionSupplementaireDTO>();
+		if (l!=null) {
+			for (QuestionSupplementaire qs : l) {
+				QuestionSupplementaireDTO qsDTO = new QuestionSupplementaireDTO(qs);
+				lq.add(qsDTO);
+			}
+		}
+		return lq;
+	}
+	/**
+	 * @param qsd
+	 * @return QuestionSupplementaire
+	 */
+	public static QuestionSupplementaire getQuestionSupplementaireFromDTO(QuestionSupplementaireDTO qsd){
+		QuestionSupplementaire qs = new QuestionSupplementaire();
+		if(qsd!=null){
+			qs.setIdQuestionSupplementaire(qsd.getIdQuestionSupplementaire());
+			qs.setIdFicheEvaluation(qsd.getIdFicheEvaluation());
+			qs.setIdPlacement(qsd.getIdPlacement());
+			qs.setQuestion(qsd.getQuestion());
+			qs.setTypeQuestion(qsd.getTypeQuestion());
+		}
+		return qs;
+	}
+	
+	/**
+	 * @param l
+	 * @return
+	 */
+	public static List<ReponseSupplementaireDTO> getReponseSupplementaireListDTO(List<ReponseSupplementaire> l){
+		List<ReponseSupplementaireDTO> lr = new ArrayList<ReponseSupplementaireDTO>();
+		if (l!=null) {
+			for (ReponseSupplementaire rs : l) {
+				ReponseSupplementaireDTO feDTO = new ReponseSupplementaireDTO(rs);
+				lr.add(feDTO);
+			}
+		}
+		return lr;
+	}
+	/**
+	 * @param qsd
+	 * @return ReponseSupplementaire
+	 */
+	public static ReponseSupplementaire getReponseSupplementaireFromDTO(ReponseSupplementaireDTO rsd){
+		ReponseSupplementaire rs = new ReponseSupplementaire();
+		if(rsd!=null){
+			rs.setIdQuestionSupplementaire(rsd.getIdQuestionSupplementaire());
+			rs.setIdConvention(rsd.getIdConvention());
+			rs.setReponseTxt(rsd.getReponseTxt());
+			rs.setReponseInt(rsd.getReponseInt());
+			rs.setReponseBool(rsd.isReponseBool());
+		}
+		return rs;
 	}
 }

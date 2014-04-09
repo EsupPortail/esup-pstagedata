@@ -1530,6 +1530,8 @@ CREATE  TABLE IF NOT EXISTS `ModeValidationStage` (
 
   `temEnServModeValid` VARCHAR(1) NOT NULL DEFAULT 'O' ,
 
+  `modifiable` TINYINT(1) NULL DEFAULT 0,
+
   PRIMARY KEY (`idModeValidationStage`) )
 
 ENGINE = InnoDB
@@ -1620,39 +1622,6 @@ ENGINE = InnoDB
 
 DEFAULT CHARACTER SET = utf8;
 
-
-
-
-
--- -----------------------------------------------------
-
--- Table `FicheEvaluation`
-
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `FicheEvaluation` ;
-
-
-
-CREATE  TABLE IF NOT EXISTS `FicheEvaluation` (
-
-  `idFicheEvaluation` INT NOT NULL AUTO_INCREMENT ,
-
-  `stageDeboucheEmploi` TINYINT(1) NULL DEFAULT false ,
-
-  `TypeEmploi` VARCHAR(20) NULL ,
-
-  `loginCreation` VARCHAR(50) NOT NULL ,
-
-  `dateCreation` DATETIME NOT NULL ,
-
-  `loginModif` VARCHAR(50) NULL ,
-
-  `dateModif` DATETIME NULL ,
-
-  PRIMARY KEY (`idFicheEvaluation`) )
-
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -2006,8 +1975,6 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `priseEnChargeFraisMission` TINYINT(1) NULL DEFAULT false ,
 
-  `idFicheEvaluation` INT NULL ,
-
   `codeRGI` VARCHAR(1) NULL ,
 
   `loginCreation` VARCHAR(50) NOT NULL ,
@@ -2054,7 +2021,7 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `titreAvenant` VARCHAR(50) NULL DEFAULT '' ,
 
-  `motifAvenant` TEXT NOT NULL ,
+  `motifAvenant` TEXT NULL ,
 
   `rupture` TINYINT NOT NULL DEFAULT 0 ,
 
@@ -2109,92 +2076,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
--- -----------------------------------------------------
-
--- Table `TypeCritereEvaluation`
-
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `TypeCritereEvaluation` ;
-
-
-
-CREATE  TABLE IF NOT EXISTS `TypeCritereEvaluation` (
-
-  `idTypeCritereEvaluation` INT NOT NULL AUTO_INCREMENT ,
-
-  `libelleTypeCritereEvaluation` VARCHAR(50) NOT NULL ,
-
-  `temEnServTypeCritereEvaluation` VARCHAR(1) NOT NULL ,
-
-  PRIMARY KEY (`idTypeCritereEvaluation`) )
-
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
-
--- Table `CritereEvaluation`
-
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `CritereEvaluation` ;
-
-
-
-CREATE  TABLE IF NOT EXISTS `CritereEvaluation` (
-
-  `idCritereEvaluation` INT NOT NULL AUTO_INCREMENT ,
-
-  `libelleCritereEvaluation` VARCHAR(200) NOT NULL ,
-
-  `anneeCritereEvaluation` VARCHAR(10) NOT NULL ,
-
-  `idTypeCritere` INT NOT NULL ,
-
-  `loginCreation` VARCHAR(50) NOT NULL ,
-
-  `dateCreation` DATETIME NOT NULL ,
-
-  `loginModif` VARCHAR(50) NULL ,
-
-  `dateModif` DATETIME NULL ,
-
-  PRIMARY KEY (`idCritereEvaluation`))
-
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
-
--- Table `ResultatEvaluation`
-
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `ResultatEvaluation` ;
-
-
-
-CREATE  TABLE IF NOT EXISTS `ResultatEvaluation` (
-
-  `idResultatEvaluation` INT NOT NULL AUTO_INCREMENT ,
-
-  `avisEvaluation` VARCHAR(50) NOT NULL ,
-
-  `loginCreation` VARCHAR(50) NOT NULL ,
-
-  `dateCreation` DATETIME NOT NULL ,
-
-  `loginModif` VARCHAR(50) NULL ,
-
-  `dateModif` DATETIME NULL ,
-
-  `idCritereEvaluation` INT NOT NULL ,
-
-  `idFicheEvaluation` INT NOT NULL ,
-
-  PRIMARY KEY (`idResultatEvaluation`))
-
-ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 

@@ -67,5 +67,9 @@
 	<sqlMap resource="META-INF/dao/ibatis/mapping/categorie.xml"/>
 	<sqlMap resource="META-INF/dao/ibatis/mapping/statisticItem.xml"/>
 	<sqlMap resource="META-INF/dao/ibatis/mapping/conventionStatisticItem.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/ficheEvaluation.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/reponseEvaluation.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/questionSupplementaire.xml"/>
+	<sqlMap resource="META-INF/dao/ibatis/mapping/reponseSupplementaire.xml"/>
 	
 </sqlMapConfig>

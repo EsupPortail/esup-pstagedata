@@ -554,25 +554,6 @@ COMMIT;
 
 
 
--- -----------------------------------------------------
-
--- Data for table `TypeCritereEvaluation`
-
--- -----------------------------------------------------
-
-SET AUTOCOMMIT=0;
-
-INSERT INTO `TypeCritereEvaluation` (`idTypeCritereEvaluation`, `libelleTypeCritereEvaluation`, `temEnServTypeCritereEvaluation`) VALUES (1, 'ENTREPRISE', 'O');
-
-INSERT INTO `TypeCritereEvaluation` (`idTypeCritereEvaluation`, `libelleTypeCritereEvaluation`, `temEnServTypeCritereEvaluation`) VALUES (2, 'ETUDIANT', 'O');
-
-INSERT INTO `TypeCritereEvaluation` (`idTypeCritereEvaluation`, `libelleTypeCritereEvaluation`, `temEnServTypeCritereEvaluation`) VALUES (3, ' ENSEIGNANTTUTEUR', 'O');
-
-
-
-COMMIT;
-
-
 
 -- -----------------------------------------------------
 

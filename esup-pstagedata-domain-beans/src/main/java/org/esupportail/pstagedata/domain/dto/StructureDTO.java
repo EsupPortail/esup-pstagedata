@@ -224,6 +224,34 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	}
 
 	/**
+	 * @see org.esupportail.pstagedata.domain.dto.AdresseDTO#toString()
+	 */
+	public String affichageMailModif(){
+		return "idStructure : "+idStructure+", "+
+		"idTypeStructure : "+idTypeStructure+", "+
+		"idStatutJuridique : "+idStatutJuridique+", "+
+		"idEffectif : "+idEffectif+", "+
+		"codeEtab : "+codeEtab+", "+
+		"numeroSiret : "+numeroSiret+", "+
+		"raisonSociale : "+raisonSociale+", "+
+		"codeNAF_N5 : "+codeNAF_N5+", "+
+		"activitePrincipale : "+activitePrincipale+", "+
+		"telephone : "+telephone+", "+
+		"fax : "+fax+", "+
+		"mail : "+mail+", "+
+		"siteWeb : "+siteWeb+", "+
+		"groupe : "+groupe+", "+
+		"logo : "+logo+", "+
+		"estValidee : "+estValidee+", "+
+		"infosAJour : "+infosAJour+", "+
+		"loginInfosAJour : "+loginInfosAJour+", "+
+		"dateValidation : "+dateValidation+", "+
+		"loginValidation : "+loginValidation+", "+
+		"dateStopValidation : "+dateStopValidation+", "+
+		"loginStopValidation : "+loginStopValidation+", "+super.toString();
+	}
+	
+	/**
 	 * @return un string de l'adresse de l'entreprise (raison sociale + adresse)
 	 */
 	public String printAdresse(){
@@ -239,7 +267,25 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		"Code Commune : "+((super.getCodeCommune()!=null&&!super.getCodeCommune().equals("0"))?super.getCodeCommune():"/")+", "+
 		(super.getPays()!=null?super.getPays().getLibelle():"/");
 	}
-
+	/**
+	 * @return un string des infos de l'entreprise (pour le mail d'avertissement modif)
+	 */
+	public String printInfos(){
+		return
+		(("idTypeStructure : "+idTypeStructure+"<br/> "+
+		"idStatutJuridique : "+((this.idStatutJuridique>0)?"/":this.idStatutJuridique)+"<br/> "+
+		"idEffectif : "+idEffectif+"<br/> "+
+		"codeEtab : "+((this.codeEtab==null||this.codeEtab.isEmpty())?"/":this.codeEtab)+"<br/> "+
+		"numeroSiret : "+numeroSiret+"<br/> "+
+		"codeNAF_N5 : "+codeNAF_N5+"<br/> "+
+		"activitePrincipale : "+activitePrincipale+"<br/> "+
+		"telephone : "+telephone+"<br/> "+
+		"fax : "+fax+"<br/> "+
+		"mail : "+mail+"<br/> "+
+		"siteWeb : "+siteWeb+"<br/> "+
+		"groupe : "+groupe+"<br/> "));
+	}
+	
 	/**
 	 * @see java.lang.Object#clone()
 	 */

@@ -63,6 +63,7 @@
 		<property name="etapeDomainService" ref="etapeDomainService"/>
 		<property name="origineStageDomainService" ref="origineStageDomainService"/>
 		<property name="ticketStructureDomainService" ref="ticketStructureDomainService"/>
+		<property name="ficheEvaluationDomainService" ref="ficheEvaluationDomainService"/>
 		
 		<property name="critereDomainService" ref="critereDomainService"/>
 		<property name="conventionStatsDomaineManager" ref="conventionStatsDomaineManager"/>

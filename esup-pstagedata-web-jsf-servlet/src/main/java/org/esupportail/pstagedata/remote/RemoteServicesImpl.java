@@ -34,6 +34,7 @@ import org.esupportail.pstagedata.domain.FapN2DomainService;
 import org.esupportail.pstagedata.domain.FapN3DomainService;
 import org.esupportail.pstagedata.domain.FapQualificationDomainService;
 import org.esupportail.pstagedata.domain.FapQualificationSimplifieeDomainService;
+import org.esupportail.pstagedata.domain.FicheEvaluationDomainService;
 import org.esupportail.pstagedata.domain.FichierDomainService;
 import org.esupportail.pstagedata.domain.IndemnisationDomainService;
 import org.esupportail.pstagedata.domain.LangueConventionDomainService;
@@ -95,6 +96,7 @@ import org.esupportail.pstagedata.domain.dto.FapN2DTO;
 import org.esupportail.pstagedata.domain.dto.FapN3DTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationDTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationSimplifieeDTO;
+import org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO;
 import org.esupportail.pstagedata.domain.dto.FichierDTO;
 import org.esupportail.pstagedata.domain.dto.IndemnisationDTO;
 import org.esupportail.pstagedata.domain.dto.LangueConventionDTO;
@@ -111,6 +113,9 @@ import org.esupportail.pstagedata.domain.dto.OffreDiffusionDTO;
 import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
 import org.esupportail.pstagedata.domain.dto.PaysDTO;
 import org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO;
+import org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO;
 import org.esupportail.pstagedata.domain.dto.ServiceDTO;
 import org.esupportail.pstagedata.domain.dto.StatisticItemDTO;
 import org.esupportail.pstagedata.domain.dto.StatutJuridiqueDTO;
@@ -406,13 +411,249 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * OrigineStageDomainService
 	 */
 	private OrigineStageDomainService origineStageDomainService;
-	
+
 	/**
 	 * TicketStructureDomainService
 	 */
 	private TicketStructureDomainService ticketStructureDomainService;
-	
-	
+	/**
+	 * FicheEvaluationDomainService
+	 */
+	private FicheEvaluationDomainService ficheEvaluationDomainService;
+
+	/* ****************************************************************************
+	 * Fiche Evaluation
+	 *****************************************************************************/	
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getFicheEvaluationFromIdCentre(java.lang.int)
+	 */
+	public FicheEvaluationDTO getFicheEvaluationFromIdCentre(int idCentreGestion) {
+		return this.ficheEvaluationDomainService.getFicheEvaluationFromIdCentre(idCentreGestion);
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addFicheEvaluation(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
+	 */
+	public int addFicheEvaluation(FicheEvaluationDTO fe) throws DataAddException,WebServiceDataBaseException {
+		int tmp = 0;
+		if (fe != null){
+			tmp = this.ficheEvaluationDomainService.addFicheEvaluation(fe);
+		}
+		return tmp;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
+	 */
+	public boolean updateFicheEvaluationEtudiant(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateFicheEvaluationEtudiant(fe);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
+	 */
+	public boolean updateFicheEvaluationEntreprise(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateFicheEvaluationEntreprise(fe);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
+	 */
+	public boolean updateFicheEvaluationEnseignant(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateFicheEvaluationEnseignant(fe);
+		}
+		return b;
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteFicheEvaluation(int)
+	 */
+	public boolean deleteFicheEvaluation(int idFicheEvaluation) throws DataDeleteException,WebServiceDataBaseException{
+		boolean b = false;
+		if (idFicheEvaluation > 0){
+			b = this.ficheEvaluationDomainService.deleteFicheEvaluation(idFicheEvaluation);
+		}
+		return b;
+	}
+
+	/* ****************************************************************************
+	 * Reponse Evaluation
+	 *****************************************************************************/	
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluation(java.lang.int,java.lang.int)
+	 */
+	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention) {
+		return this.ficheEvaluationDomainService.getReponseEvaluation(idFicheEvaluation,idConvention);
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addReponseEvaluation(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
+	 */
+	public int addReponseEvaluation(ReponseEvaluationDTO fe) throws DataAddException,WebServiceDataBaseException {
+		int tmp = 0;
+		if (fe != null){
+			tmp = this.ficheEvaluationDomainService.addReponseEvaluation(fe);
+		}
+		return tmp;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
+	 */
+	public boolean updateReponseEvaluationEtudiant(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateReponseEvaluationEtudiant(fe);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
+	 */
+	public boolean updateReponseEvaluationEntreprise(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateReponseEvaluationEntreprise(fe);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
+	 */
+	public boolean updateReponseEvaluationEnseignant(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
+		boolean b = false;
+		if (fe != null){
+			b = this.ficheEvaluationDomainService.updateReponseEvaluationEnseignant(fe);
+		}
+		return b;
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteReponseEvaluation(int, int)
+	 */
+	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteException,WebServiceDataBaseException{
+		boolean b = false;
+		if (idFicheEvaluation > 0 && idConvention > 0){
+			b = this.ficheEvaluationDomainService.deleteReponseEvaluation(idFicheEvaluation,idConvention);
+		}
+		return b;
+	}
+
+
+	/* ****************************************************************************
+	 * Question Supplementaire
+	 *****************************************************************************/	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getQuestionsSupplementaires(int)
+	 */
+	public List<QuestionSupplementaireDTO> getQuestionsSupplementaires(int idFicheEvaluation) {
+		return this.ficheEvaluationDomainService.getQuestionsSupplementaires(idFicheEvaluation);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getQuestionsSupplementairesFromIdPlacement(int, int)
+	 */
+	public List<QuestionSupplementaireDTO> getQuestionsSupplementairesFromIdPlacement(int idFicheEvaluation, int idPlacement) {
+		return this.ficheEvaluationDomainService.getQuestionsSupplementairesFromIdPlacement(idFicheEvaluation, idPlacement);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#addQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
+	 */
+	public int addQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataAddException, WebServiceDataBaseException {
+		int tmp = 0;
+		if (qs != null){
+			this.ficheEvaluationDomainService.addQuestionSupplementaire(qs);
+		}
+		return tmp;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
+	 */
+	public boolean updateQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (qs != null){
+			b = this.ficheEvaluationDomainService.updateQuestionSupplementaire(qs);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteQuestionSupplementaire(int)
+	 */
+	public boolean deleteQuestionSupplementaire(int idQuestionSupplementaire) throws DataDeleteException, WebServiceDataBaseException {
+		boolean b = false;
+		if (idQuestionSupplementaire > 0){
+			b = this.ficheEvaluationDomainService.deleteQuestionSupplementaire(idQuestionSupplementaire);
+		}
+		return b;
+	}
+
+	/* ****************************************************************************
+	 * Reponse Supplementaire
+	 *****************************************************************************/	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getReponseSupplementaire(int, int)
+	 */
+	public ReponseSupplementaireDTO getReponseSupplementaire(int idQuestionSupplementaire, int idConvention) {
+		return this.ficheEvaluationDomainService.getReponseSupplementaire(idQuestionSupplementaire,idConvention);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
+	 */
+	public int addReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataAddException, WebServiceDataBaseException {
+		int tmp = 0;
+		if (rs != null){
+			tmp = this.ficheEvaluationDomainService.addReponseSupplementaire(rs);
+		}
+		return tmp;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponsesSupplementaires(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
+	 */
+	public int addReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataAddException, WebServiceDataBaseException {
+		int tmp = 0;
+		for (ReponseSupplementaireDTO reponse : lr){
+			tmp = this.ficheEvaluationDomainService.addReponseSupplementaire(reponse);
+		}
+		return tmp;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
+	 */
+	public boolean updateReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (rs != null){
+			b = this.ficheEvaluationDomainService.updateReponseSupplementaire(rs);
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateReponsesSupplementaires(java.util.List)
+	 */
+	public boolean updateReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (lr != null && !lr.isEmpty()){
+			for(ReponseSupplementaireDTO reponse : lr){
+				b = this.ficheEvaluationDomainService.updateReponseSupplementaire(reponse);
+			}
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteReponseSupplementaire(int,int)
+	 */
+	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire, int idConvention) throws DataDeleteException, WebServiceDataBaseException {
+		boolean b = false;
+		if (idQuestionSupplementaire > 0 && idConvention > 0){
+			b = this.ficheEvaluationDomainService.deleteReponseSupplementaire(idQuestionSupplementaire,idConvention);
+		}
+		return b;
+	}
+
 
 	/* ****************************************************************************
 	 * ACCORD PARTENARIAT
@@ -687,14 +928,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public int getNombreAffectation() {
 		return this.affectationDomainService.getNombreAffectation();
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAffectation(org.esupportail.pstagedata.domain.dto.AffectationDTO)
 	 */
 	public int addAffectation(AffectationDTO a) throws DataAddException,WebServiceDataBaseException,AffectationAlreadyExistingForCodeException{
 		int b=0;
 		if(a!=null){
-			
+
 			try {
 				b = this.affectationDomainService.addAffectation(a);
 			} catch (DataAddException e) {
@@ -709,7 +950,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		return b;
 
 	}
-	
+
 
 	/* ****************************************************************************
 	 * AVENANT
@@ -763,7 +1004,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		b = this.avenantDomainService.deleteAvenant(idAvenant);
 		return b;
 	}
-	
+
 	/* ****************************************************************************
 	 * ASSURANCE
 	 *****************************************************************************/
@@ -941,14 +1182,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	public boolean deleteCentreGestion(int idCentreGestion) throws DataDeleteException,WebServiceDataBaseException,CentreReferenceException{
 		boolean b = false;
-		
+
 		List<String> ref = this.centreGestionDomainService.centreGestionReference(idCentreGestion);
-		
+
 		if (ref.isEmpty()){
 			b = this.centreGestionDomainService.deleteCentreGestion(idCentreGestion);
 		} else {
 			String raison = "";
-			
+
 			if (ref.size() == 1){
 				raison = ref.get(0)+".";
 			} else {
@@ -962,7 +1203,7 @@ public class RemoteServicesImpl implements RemoteServices{
 					}
 				}
 			}
-			
+
 			throw new CentreReferenceException(raison);
 		}
 		return b;
@@ -1055,14 +1296,14 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreContactByCentreGestion(int)
 	 */
 	public int getNombreContactByCentreGestion(int idCentreGestion){
 		return this.contactDomainService.getNombreContactByCentreGestion(idCentreGestion);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
@@ -1192,7 +1433,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteConvention(int)
 	 */
 	public boolean deleteConvention(int idConvention)
-	throws DataDeleteException, WebServiceDataBaseException {
+			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
 		if(idConvention>0){
 			b = this.conventionDomainService.deleteConvention(idConvention);
@@ -1216,7 +1457,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<String> getAnneesConventionFromCodUniv(String codeUniversite){
 		return this.conventionDomainService.getAnneesConvention(codeUniversite);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsFromCriteres(org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
 	 */
@@ -1238,7 +1479,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return lo;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsFromCriteresExport(org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
@@ -1250,18 +1491,18 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return lo;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionFromExport(int)
 	 */
-//	public ConventionDTO getConventionFromExport(int id) {
-//		ConventionDTO tmp=null;
-//		if(id>0){
-//			tmp=this.conventionDomainService.getConventionFromExport(id);
-//		}
-//		return tmp;
-//	}
+	//	public ConventionDTO getConventionFromExport(int id) {
+	//		ConventionDTO tmp=null;
+	//		if(id>0){
+	//			tmp=this.conventionDomainService.getConventionFromExport(id);
+	//		}
+	//		return tmp;
+	//	}
 	public List<ConventionDTO> getConventionsFromExport(List<Integer> idsConventionsExport) {
 		List<ConventionDTO> lc = null;
 		if(idsConventionsExport != null && !idsConventionsExport.isEmpty()){
@@ -1269,15 +1510,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return lc;
 	}
-	
-	
+
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventions(java.lang.String)
 	 */
 	public List<ConventionDTO> getConventionsFromCodUniv(String codeUniversite) {
 		return this.conventionDomainService.getConventions(codeUniversite);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsEtudiant(java.lang.String, java.lang.String)
 	 */
@@ -1291,7 +1532,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<ConventionDTO> getConventionsByEnseignant(int idEnseignant, String annee) {
 		return this.conventionDomainService.getConventionsByEnseignant(idEnseignant, annee);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreConventionByCentreGestion(int, java.lang.String)
 	 */
@@ -1303,7 +1544,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
 	public boolean updateConvention(ConventionDTO convention)
-	throws DataUpdateException, WebServiceDataBaseException {
+			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(convention!=null){
 			b = this.conventionDomainService.updateConvention(convention);
@@ -1316,24 +1557,24 @@ public class RemoteServicesImpl implements RemoteServices{
 	public boolean updateCentreConventionByEtape(String code, int idCentreGestion) throws DataUpdateException, WebServiceDataBaseException{
 		return updateCentreConventionByEtapeCodUniv(code, idCentreGestion,null);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCentreConventionByUfr(java.lang.String, int, java.lang.String)
 	 */
 	public boolean updateCentreConventionByUfrCodUniv(String code, int idCentreGestion, String codeUniversite)
-	throws DataUpdateException, WebServiceDataBaseException {
+			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(code!=null && idCentreGestion>0){
 			b = this.conventionDomainService.updateCentreConventionByUfr(code,idCentreGestion, codeUniversite);
 		}
 		return b;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCentreConventionByEtape(java.lang.String, int, java.lang.String)
 	 */
 	public boolean updateCentreConventionByEtapeCodUniv(String code, int idCentreGestion, String codeUniversite)
-	throws DataUpdateException, WebServiceDataBaseException {
+			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(code!=null && idCentreGestion>0){
 			b = this.conventionDomainService.updateCentreConventionByEtape(code,idCentreGestion, codeUniversite);
@@ -1433,7 +1674,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<DroitAdministrationDTO> getDroitAdministration(){
 		return this.droitAdministrationDomainService.getDroitAdministration();
 	}
-	
+
 	/* ****************************************************************************
 	 * DUREE DIFFUSION
 	 *****************************************************************************/
@@ -1465,7 +1706,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			try {
 				b = this.enseignantDomainService.addEnseignant(enseignant);
 			} catch (DataAddException e) {
-				
+
 				throw e;
 			}
 		}
@@ -1493,7 +1734,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEnseignantFromUid(java.lang.String, java.lang.String)
@@ -1552,7 +1793,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<EtapeDTO> getEtapesFromCodUniv(String codeUniversite) {
 		return this.etapeDomainService.getEtapes(codeUniversite);
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEtape(org.esupportail.pstagedata.domain.dto.EtapeDTO)
@@ -1573,7 +1814,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}		
 		return b;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtapeFromId(java.lang.String)
@@ -1585,7 +1826,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtapesFromIdsCentreGestion(java.util.List, java.lang.String)
 	 */
@@ -1673,7 +1914,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateEtudiant(org.esupportail.pstagedata.domain.dto.EtudiantDTO)
 	 */
 	public boolean updateEtudiant(EtudiantDTO etudiant)
-	throws DataUpdateException, WebServiceDataBaseException {
+			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(etudiant!=null){
 			b = this.etudiantDomainService.updateEtudiant(etudiant);
@@ -1800,14 +2041,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<NafN5DTO> getNafN5(){
 		return this.nafN5DomainService.getNafN5();
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNafN5FromCodeNafN1(java.lang.String)
 	 */
 	public List<NafN5DTO> getNafN5FromCodeNafN1(String code) {
 		return this.nafN5DomainService.getNafN5FromCodeNafN1(code);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNafN5FromCodeNafN5(java.lang.String)
 	 */
@@ -1869,14 +2110,14 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return o;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreOffreByCentreGestion(int)
 	 */
 	public int getNombreOffreByCentreGestion(int idCentreGestion){
 		return this.offreDomainService.getNombreOffreByCentreGestion(idCentreGestion);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getOffresFromCriteres(org.esupportail.pstagedata.domain.dto.CritereRechercheOffreDTO)
 	 */
@@ -1973,7 +2214,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#countOffreADiffuser(java.util.List)
 	 */
@@ -2062,7 +2303,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/* ****************************************************************************
 	 * OFFRE DIFFUSION
 	 *****************************************************************************/
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getOffreDiffusionFromIdOffre(int)
 	 */
@@ -2073,7 +2314,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return l;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addOffreDiffusion(java.util.List)
 	 */
@@ -2084,7 +2325,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteOffreDiffusionFromId(int)
 	 */
@@ -2311,7 +2552,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<StructureDTO> getStructuresFromVerification(boolean estValidee){
 		return this.structureDomainService.getStructuresFromVerification(estValidee);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructureFromId(int)
 	 */
@@ -2511,7 +2752,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresAncien(org.esupportail.pstagedata.domain.dto.CritereRechercheStructureAncienDTO)
@@ -2674,14 +2915,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	/* ****************************************************************************
 	 * Ufr
 	 *****************************************************************************/
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrs(java.lang.String)
 	 */
 	public List<UfrDTO> getUfrsFromCodUniv(String codeUniversite) {
 		return this.ufrDomainService.getUfrs(codeUniversite);
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addUfr(org.esupportail.pstagedata.domain.dto.UfrDTO)
@@ -2725,7 +2966,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return lu;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrsFromIdsCentreGestion(java.util.List)
 	 */
@@ -2774,8 +3015,8 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<OrigineStageDTO> getOrigineStages() {
 		return this.origineStageDomainService.getOrigineStages();
 	}
-	
-	
+
+
 	/* ****************************************************************************
 	 * TicketStructure
 	 *****************************************************************************/
@@ -2786,7 +3027,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
 		if(ticketStructure!=null){
-				b = this.ticketStructureDomainService.addTicketStructure(ticketStructure);
+			b = this.ticketStructureDomainService.addTicketStructure(ticketStructure);
 		}		
 		return b;
 	}
@@ -3595,7 +3836,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public void setAvenantDomainService(AvenantDomainService avenantDomainService) {
 		this.avenantDomainService = avenantDomainService;
 	}
-	
+
 	/**
 	 * @return the ticketStructureDomainService
 	 */
@@ -3616,7 +3857,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 ***************************************************************** STATISTIQUES **************************************************************** 
 	 ***********************************************************************************************************************************************/
 
-	
+
 
 	/**
 	 * @param critereDomainService
@@ -3702,7 +3943,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	//
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getTotalConventionsParTheme(java.lang.Integer, java.lang.String, java.lang.String)
@@ -3718,7 +3959,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	//
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getTotalConventionsParIndemnite(java.lang.Integer, java.lang.String, java.lang.String)
@@ -3845,7 +4086,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getTotalConventionsParStructureType(java.lang.Integer, java.lang.String, java.lang.String)
 	 */
@@ -3913,7 +4154,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/*** UFR ***/
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNumberOfConventionsByStudy(java.lang.Integer, java.lang.String, java.lang.String)
 	 */
@@ -4013,7 +4254,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndWorkDuration(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4026,7 +4267,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndStructure(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4039,7 +4280,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndActivity(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4052,7 +4293,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndStructureType(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4065,7 +4306,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndStructureSize(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4078,7 +4319,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndServiceDep(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4091,7 +4332,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndServiceCountry(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4104,7 +4345,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStudyAndTheme(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4119,8 +4360,8 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 
-/*** DEPARTEMENT ***/
-	
+	/*** DEPARTEMENT ***/
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartment(Integer idCentreGestion, String annee, String etab)  throws RemoteException
 	{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
@@ -4202,7 +4443,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndWayToFind(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4215,7 +4456,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndTeacherGuide(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4228,7 +4469,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndStructure(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4241,7 +4482,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndStructureType(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4254,7 +4495,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndStructureSize(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4267,7 +4508,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndServiceDep(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4280,7 +4521,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndServiceCountry(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4293,7 +4534,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByDepartmentAndTheme(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4306,9 +4547,9 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
-/*** ETAPE ***/
-	
+
+	/*** ETAPE ***/
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStep(Integer idCentreGestion, String annee, String etab)  throws RemoteException
 	{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
@@ -4390,7 +4631,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndWayToFind(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4403,7 +4644,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndTeacherGuide(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4416,7 +4657,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndStructure(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4429,7 +4670,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndStructureType(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4442,7 +4683,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndStructureSize(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4455,7 +4696,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndServiceDep(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4468,7 +4709,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndServiceCountry(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4481,7 +4722,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return totalCvts;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfConventionsByStepAndTheme(Integer idCentreGestion, String annee, String etab) throws RemoteException{
 		ConventionStatsDomaineService cStatsDomaineService = this.conventionStatsDomaineManager.creer(etab);
 		List<StatisticItemDTO> totalCvts =null;
@@ -4495,8 +4736,8 @@ public class RemoteServicesImpl implements RemoteServices{
 		return totalCvts;
 	}
 
-/*** OFFRES ***/
-	
+	/*** OFFRES ***/
+
 	public List<String> getAnneesOffres(Integer idCenter, String etatoffre) throws RemoteException {	
 		List<String> offerYears =null;
 		OffreStatsDomaineService offreStatsDomaineService = this.offreStatsDomaineManager.create(etatoffre);
@@ -4531,7 +4772,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	public List<StatisticItemDTO> getNumberOfOffersByActivity(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> numberOfOffers =null;
 		try {
@@ -4630,7 +4871,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	public List<StatisticItemDTO> getNumberOfOffersByFormation(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4642,12 +4883,12 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
-	
-	
+
+
+
 	public List<StatisticItemDTO> getNumberOfOffersByFunction(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4659,11 +4900,11 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
-	
+
+
 	public List<StatisticItemDTO> getNumberOfOffersByValidation(
 			Integer idCentreDeGestion, String annee, String etatOffre)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4675,10 +4916,10 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfOffersByPublication(
 			Integer idCentreDeGestion, String annee, String etatOffre)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4690,10 +4931,10 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfOffersByCandidateFound(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4705,10 +4946,10 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfOffersByLocalStudent(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4720,10 +4961,10 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
+
 	public List<StatisticItemDTO> getNumberOfOffersByLevel(
 			Integer idCentreDeGestion, String annee, String etatOffre, boolean validation, boolean publication)
-			throws RemoteException {
+					throws RemoteException {
 
 		OffreStatsDomaineService offreStatsDS= this.offreStatsDomaineManager.create(etatOffre);
 		List<StatisticItemDTO> nbOffresParStType =null;
@@ -4735,8 +4976,8 @@ public class RemoteServicesImpl implements RemoteServices{
 
 		return nbOffresParStType;
 	}
-	
-	
+
+
 	/**
 	 * @return the dureeDiffusionDomainService
 	 */
@@ -4751,7 +4992,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			DureeDiffusionDomainService dureeDiffusionDomainService) {
 		this.dureeDiffusionDomainService = dureeDiffusionDomainService;
 	}
-	
+
 
 	/*Ajout duree*/
 	/**
@@ -4818,12 +5059,12 @@ public class RemoteServicesImpl implements RemoteServices{
 		return totalCvts;
 	}
 
-	  /***********************************/
-	 /*** AJOUTS/UPDATES/SUPPRESSIONS ***/
+	/***********************************/
+	/*** AJOUTS/UPDATES/SUPPRESSIONS ***/
 	/***********************************/
 	@Override
 	public int addCaisseRegime(CaisseRegimeDTO cr) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(cr!=null){
 			b = this.caisseRegimeDomainService.addCaisseRegime(cr);
@@ -4873,7 +5114,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteNiveauFormation(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.niveauFormationDomainService.deleteNiveauFormation(id);
@@ -4883,7 +5124,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addEffectif(EffectifDTO ef) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(ef!=null){
 			b = this.effectifDomainService.addEffectif(ef);
@@ -4893,7 +5134,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean updateEffectif(EffectifDTO ef) throws DataUpdateException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(ef!=null){
 			b = this.effectifDomainService.updateEffectif(ef);
@@ -4903,7 +5144,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteEffectif(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.effectifDomainService.deleteEffectif(id);
@@ -4913,7 +5154,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addTempsTravail(TempsTravailDTO tt) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(tt!=null){
 			b = this.tempsTravailDomainService.addTempsTravail(tt);
@@ -4933,7 +5174,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteTempsTravail(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.tempsTravailDomainService.deleteTempsTravail(id);
@@ -4943,7 +5184,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addOrigineStage(OrigineStageDTO os) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(os!=null){
 			b = origineStageDomainService.addOrigineStage(os);
@@ -4963,7 +5204,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.origineStageDomainService.deleteOrigineStage(id);
@@ -4973,7 +5214,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addTypeConvention(TypeConventionDTO tc) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(tc!=null){
 			b = this.typeConventionDomainService.addTypeConvention(tc);
@@ -4993,7 +5234,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteTypeConvention(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.typeConventionDomainService.deleteTypeConvention(id);
@@ -5003,7 +5244,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addTypeStructure(TypeStructureDTO ts) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(ts!=null){
 			b = this.typeStructureDomainService.addTypeStructure(ts);
@@ -5023,7 +5264,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.typeStructureDomainService.deleteTypeStructure(id);
@@ -5053,7 +5294,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.statutJuridiqueDomainService.deleteStatutJuridique(id);
@@ -5063,7 +5304,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addTypeOffre(TypeOffreDTO to) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(to!=null){
 			b = this.typeOffreDomainService.addTypeOffre(to);
@@ -5073,7 +5314,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean updateTypeOffre(TypeOffreDTO to) throws DataUpdateException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(to!=null){
 			b = this.typeOffreDomainService.updateTypeOffre(to);
@@ -5083,7 +5324,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.typeOffreDomainService.deleteTypeOffre(id);
@@ -5093,7 +5334,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public int addContratOffre(ContratOffreDTO co) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int b=0;
 		if(co!=null){
 			b = this.contratDomainService.addContratOffre(co);
@@ -5113,14 +5354,14 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteContratOffre(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.contratDomainService.deleteContratOffre(id);
 		}
 		return b;
 	}
-	
+
 	@Override
 	public int addModeValidationStage(ModeValidationStageDTO mv)
 			throws DataAddException, WebServiceDataBaseException {
@@ -5143,12 +5384,30 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	@Override
 	public boolean deleteModeValidationStage(int id) throws DataDeleteException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
 			b = this.modeValidationStageDomainService.deleteModeValidationStage(id);
 		}
 		return b;
 	}
+
+
+	/**
+	 * @return the ficheEvaluationDomainService
+	 */
+	public FicheEvaluationDomainService getFicheEvaluationDomainService() {
+		return ficheEvaluationDomainService;
+	}
+
+
+	/**
+	 * @param ficheEvaluationDomainService the ficheEvaluationDomainService to set
+	 */
+	public void setFicheEvaluationDomainService(
+			FicheEvaluationDomainService ficheEvaluationDomainService) {
+		this.ficheEvaluationDomainService = ficheEvaluationDomainService;
+	}
+
 }
 

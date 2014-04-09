@@ -36,6 +36,7 @@ import org.esupportail.pstagedata.domain.dto.FapN2DTO;
 import org.esupportail.pstagedata.domain.dto.FapN3DTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationDTO;
 import org.esupportail.pstagedata.domain.dto.FapQualificationSimplifieeDTO;
+import org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO;
 import org.esupportail.pstagedata.domain.dto.FichierDTO;
 import org.esupportail.pstagedata.domain.dto.IndemnisationDTO;
 import org.esupportail.pstagedata.domain.dto.LangueConventionDTO;
@@ -52,6 +53,9 @@ import org.esupportail.pstagedata.domain.dto.OffreDiffusionDTO;
 import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
 import org.esupportail.pstagedata.domain.dto.PaysDTO;
 import org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO;
+import org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO;
+import org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO;
 import org.esupportail.pstagedata.domain.dto.ServiceDTO;
 import org.esupportail.pstagedata.domain.dto.StatisticItemDTO;
 import org.esupportail.pstagedata.domain.dto.StatutJuridiqueDTO;
@@ -98,6 +102,171 @@ import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
 public interface RemoteServices extends Serializable{
 
 	/* ****************************************************************************
+	 * Fiche Evaluation
+	 *****************************************************************************/
+	/**
+	 * @return List<FicheEvaluationDTO>
+	 */
+	public FicheEvaluationDTO getFicheEvaluationFromIdCentre(int idCentreGestion);
+
+	/**
+	 * @param fe
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addFicheEvaluation(FicheEvaluationDTO fe) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateFicheEvaluationEtudiant(FicheEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateFicheEvaluationEntreprise(FicheEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateFicheEvaluationEnseignant(FicheEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param idFicheEvaluation
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean deleteFicheEvaluation(int idFicheEvaluation) throws DataDeleteException, WebServiceDataBaseException;
+	/* ****************************************************************************
+	 * REPONSE EVALUATION
+	 *****************************************************************************/
+	/**
+	 * @return List<ReponseEvaluationDTO>
+	 */
+	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention);
+	/**
+	 * @param fe
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addReponseEvaluation(ReponseEvaluationDTO fe) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateReponseEvaluationEtudiant(ReponseEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateReponseEvaluationEntreprise(ReponseEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param fe
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateReponseEvaluationEnseignant(ReponseEvaluationDTO fe) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param idFicheEvaluation
+	 * @param idConvention
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteException, WebServiceDataBaseException;
+
+	/* ****************************************************************************
+	 * QUESTION SUPPLEMENTAIRE
+	 *****************************************************************************/
+	/**
+	 * @return List<QuestionSupplementaireDTO>
+	 */
+	public List<QuestionSupplementaireDTO> getQuestionsSupplementaires(int idFicheEvaluation);
+	/**
+	 * @return List<QuestionSupplementaireDTO>
+	 */
+	public List<QuestionSupplementaireDTO> getQuestionsSupplementairesFromIdPlacement(int idFicheEvaluation, int idPlacement);
+	/**
+	 * @param qs
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @param qs
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param idQuestionSupplementaire
+	 * @return boolean
+	 * @throws DataDeleteException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean deleteQuestionSupplementaire(int idQuestionSupplementaire) throws DataDeleteException, WebServiceDataBaseException;
+
+	/* ****************************************************************************
+	 * REPONSE SUPPLEMENTAIRE
+	 *****************************************************************************/
+	/**
+	 * @return ReponseSupplementaireDTO
+	 */
+	public ReponseSupplementaireDTO getReponseSupplementaire(int idQuestionSupplementaire, int idConvention);
+	/**
+	 * @param rs
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @param lr
+	 * @return int
+	 * @throws DataAddException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public int addReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataAddException, WebServiceDataBaseException;
+	/**
+	 * @param rs
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataUpdateException, WebServiceDataBaseException;
+	/**
+	 * @param lr
+	 * @return boolean
+	 * @throws DataUpdateException 
+	 * @throws WebServiceDataBaseException 
+	 */
+	public boolean updateReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataUpdateException, WebServiceDataBaseException;
+
+	/**
+	 * @param idQuestionSupplementaire
+	 * @param idConvention
+	 * @return boolean
+	 * @throws DataDeleteException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire, int idConvention) throws DataDeleteException, WebServiceDataBaseException;
+	
+	/* ****************************************************************************
 	 * NOMENCLATURES
 	 *****************************************************************************/
 	/**
@@ -118,7 +287,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteCaisseRegime(String codeCaisse) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -137,7 +306,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteNiveauFormation(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -156,7 +325,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteEffectif(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -175,7 +344,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTempsTravail(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -194,7 +363,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -213,7 +382,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeConvention(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -232,7 +401,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -251,7 +420,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -270,7 +439,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -289,7 +458,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteContratOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -308,7 +477,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteModeValidationStage(int id) throws DataDeleteException,WebServiceDataBaseException;
-	
+
 	/* ****************************************************************************
 	 * ACCORD PARTENARIAT
 	 *****************************************************************************/
@@ -1205,7 +1374,7 @@ public interface RemoteServices extends Serializable{
 	 * @return List<StructureDTO>
 	 */
 	public List<StructureDTO> getStructuresFromVerification(boolean estValidee);
-	
+
 	/**
 	 * @param id
 	 * @return StructureDTO
@@ -1653,7 +1822,7 @@ public interface RemoteServices extends Serializable{
 	 * @param id
 	 * @return ConventionDTO pour export
 	 */
-//	public ConventionDTO getConventionFromExport(int id);
+	//	public ConventionDTO getConventionFromExport(int id);
 	public List<ConventionDTO> getConventionsFromExport(List<Integer> idsConventionsExport);
 
 	/**

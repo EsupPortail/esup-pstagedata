@@ -527,11 +527,6 @@ ADD( CONSTRAINT `fk_Convention_CentreGestion1`
     REFERENCES `Contact` (`idContact` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Convention_FicheEvaluation1`
-    FOREIGN KEY (`idFicheEvaluation` )
-    REFERENCES `FicheEvaluation` (`idFicheEvaluation` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_Enseignant1`
     FOREIGN KEY (`idEnseignant` )
     REFERENCES `Enseignant` (`idEnseignant` )
@@ -553,8 +548,8 @@ ADD( CONSTRAINT `fk_Convention_CentreGestion1`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_Etape1`
-    FOREIGN KEY (`codeEtape` , `codeUniversiteEtape` )
-    REFERENCES `Etape` (`codeEtape` , `codeUniversite` )
+    FOREIGN KEY (`codeEtape` , `codeVersionEtape`, `codeUniversiteEtape` )
+    REFERENCES `Etape` (`codeEtape` , `codeVersionEtape` , `codeUniversite` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_Ufr1`
@@ -579,7 +574,6 @@ CREATE INDEX `fk_Convention_Offre1` ON `Convention` (`idOffre` ASC) ;
 CREATE INDEX `fk_Convention_Structure1` ON `Convention` (`idStructure` ASC) ;
 CREATE INDEX `fk_Convention_Service1` ON `Convention` (`idService` ASC) ;
 CREATE INDEX `fk_Convention_Signataire` ON `Convention` (`idSignataire` ASC) ;
-CREATE INDEX `fk_Convention_FicheEvaluation1` ON `Convention` (`idFicheEvaluation` ASC) ;
 CREATE INDEX `fk_Convention_Enseignant1` ON `Convention` (`idEnseignant` ASC) ;
 CREATE INDEX `fk_Convention_Etudiant1` ON `Convention` (`idEtudiant` ASC) ;
 CREATE INDEX `fk_Convention_CaisseRegime1` ON `Convention` (`codeCaisse` ASC) ;
@@ -614,43 +608,6 @@ CREATE INDEX `fk_Avenant_Convention1` ON `Avenant` (`idConvention` ASC) ;
 CREATE INDEX `fk_Avenant_Service1` ON `Avenant` (`idService` ASC) ;
 CREATE INDEX `fk_Avenant_Contact1` ON `Avenant` (`idContact` ASC) ;
 
-
--- -----------------------------------------------------
-
--- Table `CritereEvaluation`
-
--- -----------------------------------------------------
-ALTER TABLE `CritereEvaluation`
-ADD( CONSTRAINT `fk_CritereEvaluation_TypeCritere1`
-    FOREIGN KEY (`idTypeCritere` )
-    REFERENCES `TypeCritereEvaluation` (`idTypeCritereEvaluation` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-    
-CREATE INDEX `fk_CritereEvaluation_TypeCritere1` ON `CritereEvaluation` (`idTypeCritere` ASC) ;
-
-
-
--- -----------------------------------------------------
-
--- Table `ResultatEvaluation`
-
--- -----------------------------------------------------
-
-ALTER TABLE `ResultatEvaluation`
-ADD( CONSTRAINT `fk_ResultatEvaluation_CritereEvaluation1`
-    FOREIGN KEY (`idCritereEvaluation` )
-    REFERENCES `CritereEvaluation` (`idCritereEvaluation` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ResultatEvaluation_FicheEvaluation1`
-    FOREIGN KEY (`idFicheEvaluation` )
-    REFERENCES `FicheEvaluation` (`idFicheEvaluation` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
-CREATE INDEX `fk_ResultatEvaluation_CritereEvaluation1` ON `ResultatEvaluation` (`idCritereEvaluation` ASC) ;
-CREATE INDEX `fk_ResultatEvaluation_FicheEvaluation1` ON `ResultatEvaluation` (`idFicheEvaluation` ASC) ;
 
 -- -----------------------------------------------------
 

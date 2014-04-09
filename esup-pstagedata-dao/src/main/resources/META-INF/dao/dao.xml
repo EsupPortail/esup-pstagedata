@@ -156,6 +156,9 @@
 	<bean id="origineStageDaoService"
 		class="org.esupportail.pstagedata.dao.OrigineStageDaoServiceImpl"
 		parent="abstractIBatisDaoService" />
+	<bean id="ficheEvaluationDaoService"
+		class="org.esupportail.pstagedata.dao.FicheEvaluationDaoServiceImpl"
+		parent="abstractIBatisDaoService" />
 
 
 	<!-- ############################################################################################### 
