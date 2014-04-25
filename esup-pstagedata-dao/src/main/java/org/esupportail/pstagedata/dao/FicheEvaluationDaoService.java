@@ -78,7 +78,15 @@ public interface FicheEvaluationDaoService extends Serializable {
 	 * @return ReponseEvaluation
 	 */
 	public ReponseEvaluation getReponseEvaluation(int idFicheEvaluation, int idConvention);
-
+	/**
+	 * @return ReponseEvaluation
+	 */
+	public ReponseEvaluation getReponseEvaluationFromCode(String codeAcces);
+	/**
+	 * @param idFicheEvaluation
+	 * @return List<ReponseEvaluation>
+	 */
+	public List<ReponseEvaluation> getReponsesEvaluation(int idFicheEvaluation);
 	/**
 	 * @param f
 	 * @return int
@@ -115,6 +123,21 @@ public interface FicheEvaluationDaoService extends Serializable {
 	 * @throws DataBaseDaoException 
 	 */
 	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteDaoException, DataBaseDaoException;
+	
+	/**
+	 * @param codeAcces
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateDaoException, DataBaseDaoException;
+	
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
 
 	/* ****************************************************************************
 	 * QUESTION SUPPLEMENTAIRE
@@ -180,4 +203,5 @@ public interface FicheEvaluationDaoService extends Serializable {
 	 * @return boolean
 	 */
 	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire,int idConvention);
+
 }

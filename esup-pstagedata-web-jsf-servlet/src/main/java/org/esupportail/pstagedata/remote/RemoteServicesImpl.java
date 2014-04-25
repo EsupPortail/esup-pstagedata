@@ -492,6 +492,20 @@ public class RemoteServicesImpl implements RemoteServices{
 	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention) {
 		return this.ficheEvaluationDomainService.getReponseEvaluation(idFicheEvaluation,idConvention);
 	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getReponseEvaluationFromCode(java.lang.String)
+	 */
+	public ReponseEvaluationDTO getReponseEvaluationFromCode(String codeAcces) {
+		return this.ficheEvaluationDomainService.getReponseEvaluationFromCode(codeAcces);
+	}
+	/**
+	 * @param idFicheEvaluation
+	 * @return List<ReponseEvaluationDTO>
+	 */
+	public List<ReponseEvaluationDTO> getReponsesEvaluation(int idFicheEvaluation) {
+		return this.ficheEvaluationDomainService.getReponsesEvaluation(idFicheEvaluation);
+	}
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addReponseEvaluation(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
@@ -545,6 +559,23 @@ public class RemoteServicesImpl implements RemoteServices{
 		return b;
 	}
 
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setCodeAcces(java.lang.String)
+	 */
+	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateException, WebServiceDataBaseException{
+		boolean b = false;
+		if (idFicheEvaluation > 0 && idConvention > 0 && codeAcces != null){
+			b = this.ficheEvaluationDomainService.setCodeAcces(idFicheEvaluation, idConvention, codeAcces);
+		}
+		return b;
+	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEntreprise()
+	 */
+	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setEnvoiMailEntreprise(idFicheEvaluation, idConvention);
+	}
 
 	/* ****************************************************************************
 	 * Question Supplementaire
@@ -567,7 +598,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	public int addQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataAddException, WebServiceDataBaseException {
 		int tmp = 0;
 		if (qs != null){
-			this.ficheEvaluationDomainService.addQuestionSupplementaire(qs);
+			tmp = this.ficheEvaluationDomainService.addQuestionSupplementaire(qs);
 		}
 		return tmp;
 	}

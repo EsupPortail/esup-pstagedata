@@ -1,6 +1,7 @@
 package org.esupportail.pstagedata.domain.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author Florian Garot : florian.garot@univ-artois.fr
@@ -37,6 +38,18 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	 * validationEntreprise
 	 */
 	private boolean validationEntreprise;
+	/**
+	 * envoiMailTuteurPro
+	 */
+	private boolean envoiMailTuteurPro;
+	/**
+	 * dateEnvoiMailTuteurPro
+	 */
+	private Date dateEnvoiMailTuteurPro;
+	/**
+	 * codeAcces
+	 */
+	private String codeAcces;
 
 	/* ***************************************************************
 	 * Reponses Entreprise
@@ -2115,6 +2128,48 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	 */
 	public void setReponseEtuIII9bis(String reponseEtuIII9bis) {
 		this.reponseEtuIII9bis = reponseEtuIII9bis;
+	}
+
+	/**
+	 * @return the envoiMailTuteurPro
+	 */
+	public boolean isEnvoiMailTuteurPro() {
+		return envoiMailTuteurPro;
+	}
+
+	/**
+	 * @param envoiMailTuteurPro the envoiMailTuteurPro to set
+	 */
+	public void setEnvoiMailTuteurPro(boolean envoiMailTuteurPro) {
+		this.envoiMailTuteurPro = envoiMailTuteurPro;
+	}
+
+	/**
+	 * @return the dateEnvoiMailTuteurPro
+	 */
+	public Date getDateEnvoiMailTuteurPro() {
+		return dateEnvoiMailTuteurPro;
+	}
+
+	/**
+	 * @param dateEnvoiMailTuteurPro the dateEnvoiMailTuteurPro to set
+	 */
+	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
+		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
+	}
+
+	/**
+	 * @return the codeAcces
+	 */
+	public String getCodeAcces() {
+		return codeAcces;
+	}
+
+	/**
+	 * @param codeAcces the codeAcces to set
+	 */
+	public void setCodeAcces(String codeAcces) {
+		this.codeAcces = codeAcces;
 	}
 
 }

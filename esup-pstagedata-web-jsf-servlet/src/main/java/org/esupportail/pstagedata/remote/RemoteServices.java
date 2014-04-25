@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jws.WebService;
 
+import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
+import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO;
 import org.esupportail.pstagedata.domain.dto.AdminStructureDTO;
 import org.esupportail.pstagedata.domain.dto.AffectationDTO;
@@ -148,9 +150,17 @@ public interface RemoteServices extends Serializable{
 	 * REPONSE EVALUATION
 	 *****************************************************************************/
 	/**
-	 * @return List<ReponseEvaluationDTO>
+	 * @return ReponseEvaluationDTO
 	 */
 	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention);
+	/**
+	 * @return ReponseEvaluationDTO
+	 */
+	public ReponseEvaluationDTO getReponseEvaluationFromCode(String codeAcces);
+	/**
+	 * @return List<ReponseEvaluationDTO>
+	 */
+	public List<ReponseEvaluationDTO> getReponsesEvaluation(int idFicheEvaluation);
 	/**
 	 * @param fe
 	 * @return int
@@ -188,6 +198,20 @@ public interface RemoteServices extends Serializable{
 	 */
 	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteException, WebServiceDataBaseException;
 
+	/**
+	 * @param codeAcces
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateException, WebServiceDataBaseException;
+	
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException;
 	/* ****************************************************************************
 	 * QUESTION SUPPLEMENTAIRE
 	 *****************************************************************************/

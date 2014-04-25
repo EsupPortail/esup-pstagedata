@@ -15,6 +15,9 @@
 		<result property="validationEtudiant" column="validationEtudiant" />
 		<result property="validationEnseignant" column="validationEnseignant" />
 		<result property="validationEntreprise" column="validationEntreprise" />
+		<result property="envoiMailTuteurPro" column="envoiMailTuteurPro" />
+		<result property="dateEnvoiMailTuteurPro" column="dateEnvoiMailTuteurPro" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="codeAcces" column="codeAcces" />
 		<result property="reponseEnt1" column="reponseEnt1" nullValue="0" />
 		<result property="reponseEnt1bis" column="reponseEnt1bis" />
 		<result property="reponseEnt2" column="reponseEnt2" nullValue="0" />
@@ -160,7 +163,18 @@
 		AND
 		idConvention=#idConvention#
 	</statement>
-
+	
+	<statement id="getReponseEvaluationFromCode" resultMap="ReponseEvaluation">
+		SELECT * FROM ReponseEvaluation
+		WHERE codeAcces = #codeAcces#
+	</statement>
+	
+	<statement id="getReponsesEvaluation" resultMap="ReponseEvaluation">
+		SELECT * FROM
+		ReponseEvaluation
+		WHERE idFicheEvaluation = #idFicheEvaluation#
+	</statement>
+	
 	<insert id="addReponseEvaluation">
 		INSERT INTO ReponseEvaluation
 		(idFicheEvaluation, idConvention)
@@ -170,7 +184,7 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-
+	
 	<update id="updateReponseEvaluationEtudiant">
 		UPDATE ReponseEvaluation SET
 		reponseEtuI1=#reponseEtuI1#,
@@ -233,6 +247,17 @@
 		idFicheEvaluation=#idFicheEvaluation# AND idConvention=#idConvention#
 	</update>
 
+	<update id="setCodeAcces">
+		UPDATE ReponseEvaluation SET codeAcces=#codeAcces#
+		WHERE idFicheEvaluation = #idFicheEvaluation# AND idConvention=#idConvention#
+	</update>
+	
+	<update id="setEnvoiMailEntreprise">
+		UPDATE ReponseEvaluation SET envoiMailTuteurPro=true,
+		dateEnvoiMailTuteurPro=CURDATE()
+		WHERE idFicheEvaluation = #idFicheEvaluation# AND idConvention=#idConvention#
+	</update>
+	
 	<delete id="deleteReponseEvaluation">
 		DELETE FROM ReponseEvaluation WHERE idFicheEvaluation
 		= #idFicheEvaluation# AND idConvention=#idConvention#

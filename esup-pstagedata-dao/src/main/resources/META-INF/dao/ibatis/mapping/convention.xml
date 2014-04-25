@@ -130,6 +130,10 @@
 		<result property="fonctionsEtTaches" column="fonctionsEtTaches"/>
 		<result property="details" column="details"/>
 		<result property="idTheme" column="idTheme"/>
+		<result property="adresseEtudiant" column="adresseEtudiant"/>
+		<result property="codePostalEtudiant" column="codePostalEtudiant"/>
+		<result property="villeEtudiant" column="villeEtudiant"/>
+		<result property="paysEtudiant" column="paysEtudiant"/>
 		<result property="courrielPersoEtudiant" column="courrielPersoEtudiant"/>
 		<result property="telEtudiant" column="telEtudiant"/>
 		<result property="telPortableEtudiant" column="telPortableEtudiant"/>
@@ -767,7 +771,8 @@
         C.idStructure, C.idEtudiant, C.codeDepartement, 
         C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire , C.idTypeConvention,
         C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp, C.libelleElp,
-        C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature
+        C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
+        adresseEtudiant, codePostalEtudiant, villeEtudiant, paysEtudiant
         FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)

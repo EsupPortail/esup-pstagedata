@@ -2316,6 +2316,9 @@ public class UtilsDTO {
 			r.setValidationEnseignant(red.isValidationEnseignant());
 			r.setValidationEntreprise(red.isValidationEntreprise());
 			r.setValidationEtudiant(red.isValidationEtudiant());
+			r.setEnvoiMailTuteurPro(red.isEnvoiMailTuteurPro());
+			r.setDateEnvoiMailTuteurPro(red.getDateEnvoiMailTuteurPro());
+			r.setCodeAcces(red.getCodeAcces());
 			// fiche entreprise
 			r.setReponseEnt1(red.getReponseEnt1());
 			r.setReponseEnt1bis(red.getReponseEnt1bis());

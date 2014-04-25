@@ -1,6 +1,7 @@
 package org.esupportail.pstagedata.domain.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.esupportail.pstagedata.domain.beans.ReponseEvaluation;
 
@@ -39,6 +40,18 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 	 * validationEntreprise
 	 */
 	private boolean validationEntreprise;
+	/**
+	 * envoiMailTuteurPro
+	 */
+	private boolean envoiMailTuteurPro;
+	/**
+	 * dateEnvoiMailTuteurPro
+	 */
+	private Date dateEnvoiMailTuteurPro;
+	/**
+	 * codeAcces
+	 */
+	private String codeAcces;
 
 	/* ***************************************************************
 	 * Reponses Entreprise
@@ -510,7 +523,10 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 			this.idConvention = re.getIdConvention();
 			this.validationEnseignant = re.isValidationEnseignant();
 			this.validationEtudiant = re.isValidationEtudiant();
-			this.validationEntreprise= re.isValidationEntreprise();
+			this.validationEntreprise = re.isValidationEntreprise();
+			this.envoiMailTuteurPro = re.isEnvoiMailTuteurPro();
+			this.dateEnvoiMailTuteurPro = re.getDateEnvoiMailTuteurPro();
+			this.codeAcces = re.getCodeAcces();
 			// fiche entreprise
 			this.reponseEnt1 = re.getReponseEnt1();
 			this.reponseEnt1bis = re.getReponseEnt1bis();
@@ -2347,5 +2363,47 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 	 */
 	public void setReponseEtuIII9bis(String reponseEtuIII9bis) {
 		this.reponseEtuIII9bis = reponseEtuIII9bis;
+	}
+
+	/**
+	 * @return the envoiMailTuteurPro
+	 */
+	public boolean isEnvoiMailTuteurPro() {
+		return envoiMailTuteurPro;
+	}
+
+	/**
+	 * @param envoiMailTuteurPro the envoiMailTuteurPro to set
+	 */
+	public void setEnvoiMailTuteurPro(boolean envoiMailTuteurPro) {
+		this.envoiMailTuteurPro = envoiMailTuteurPro;
+	}
+
+	/**
+	 * @return the dateEnvoiMailTuteurPro
+	 */
+	public Date getDateEnvoiMailTuteurPro() {
+		return dateEnvoiMailTuteurPro;
+	}
+
+	/**
+	 * @param dateEnvoiMailTuteurPro the dateEnvoiMailTuteurPro to set
+	 */
+	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
+		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
+	}
+
+	/**
+	 * @return the codeAcces
+	 */
+	public String getCodeAcces() {
+		return codeAcces;
+	}
+
+	/**
+	 * @param codeAcces the codeAcces to set
+	 */
+	public void setCodeAcces(String codeAcces) {
+		this.codeAcces = codeAcces;
 	}
 }

@@ -3,6 +3,7 @@ package org.esupportail.pstagedata.domain.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.Convention;
 
@@ -403,6 +404,11 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private ReponseEvaluationDTO reponseEvaluation;
 
+	/**
+	 * questionsSupplementaires
+	 */
+	private List<QuestionSupplementaireDTO> questionsSupplementaires;
+	
 	/* **
 	 * Objets Nomenclature
 	 */
@@ -646,10 +652,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.commentaireDureeTravail=c.getCommentaireDureeTravail();
 			this.commentaireStage=c.getCommentaireStage();
 			this.idTheme=c.getIdTheme();
-//			this.adresseEtudiant=c.getAdresseEtudiant();
-//			this.codePostalEtudiant=c.getCodePostalEtudiant();
-//			this.villeEtudiant=c.getVilleEtudiant();
-//			this.paysEtudiant=c.getPaysEtudiant();
+			this.adresseEtudiant=c.getAdresseEtudiant();
+			this.codePostalEtudiant=c.getCodePostalEtudiant();
+			this.villeEtudiant=c.getVilleEtudiant();
+			this.paysEtudiant=c.getPaysEtudiant();
 			this.courrielPersoEtudiant=c.getCourrielPersoEtudiant();
 			this.telEtudiant=c.getTelEtudiant();
 			this.telPortableEtudiant=c.getTelPortableEtudiant();
@@ -2375,6 +2381,22 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setReponseEvaluation(ReponseEvaluationDTO reponseEvaluation) {
 		this.reponseEvaluation = reponseEvaluation;
+	}
+
+
+	/**
+	 * @return the questionsSupplementaires
+	 */
+	public List<QuestionSupplementaireDTO> getQuestionsSupplementaires() {
+		return questionsSupplementaires;
+	}
+
+
+	/**
+	 * @param questionsSupplementaires the questionsSupplementaires to set
+	 */
+	public void setQuestionsSupplementaires(List<QuestionSupplementaireDTO> questionsSupplementaires) {
+		this.questionsSupplementaires = questionsSupplementaires;
 	}
 
 }

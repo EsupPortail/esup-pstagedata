@@ -35,7 +35,7 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 
 
 	/* ****************************************************************************
-	 * FICHE
+	 * FICHE EVALUATION
 	 *****************************************************************************/
 	/**
 	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#getFicheEvaluation()
@@ -152,6 +152,20 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		parameterMap.put("idConvention", idConvention);
 		return (ReponseEvaluation) getSqlMapClientTemplate().queryForObject("getReponseEvaluation", parameterMap);
 	}
+	/**
+	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#getReponseEvaluationFromCode(java.lang.String)
+	 */
+	public ReponseEvaluation getReponseEvaluationFromCode(String codeAcces){
+		return (ReponseEvaluation) getSqlMapClientTemplate().queryForObject("getReponseEvaluationFromCode", codeAcces);
+	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#getReponsesEvaluation(int)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<ReponseEvaluation> getReponsesEvaluation(int idFicheEvaluation) {
+		return getSqlMapClientTemplate().queryForList("getReponsesEvaluation", idFicheEvaluation);
+	}
 	
 	/**
 	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#addFicheEvaluation(org.esupportail.pstagedata.domain.beans.FicheEvaluation)
@@ -251,6 +265,47 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		return b;
 	}
 
+	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces)
+			throws DataUpdateDaoException, DataBaseDaoException {
+		boolean b = false;
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("idFicheEvaluation", idFicheEvaluation);
+		parameterMap.put("idConvention", idConvention);
+		parameterMap.put("codeAcces", codeAcces);
+		try{
+			b = getSqlMapClientTemplate().update("setCodeAcces",parameterMap)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
+		boolean b = false;
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("idFicheEvaluation", idFicheEvaluation);
+		parameterMap.put("idConvention", idConvention);
+		try{
+			b = getSqlMapClientTemplate().update("setEnvoiMailEntreprise",parameterMap)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
 	/* ****************************************************************************
 	 * QUESTION SUPPLEMENTAIRE
 	 *****************************************************************************/
@@ -403,4 +458,5 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		}
 		return b;
 	}
+
 }
