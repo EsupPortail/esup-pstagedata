@@ -157,17 +157,6 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 		}
 		return rDTO;
 	}
-	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluationFromCode(java.lang.String)
-	 */
-	public ReponseEvaluationDTO getReponseEvaluationFromCode(String codeAcces) {
-		ReponseEvaluation r = this.ficheEvaluationDaoService.getReponseEvaluationFromCode(codeAcces);
-		ReponseEvaluationDTO rDTO = null;
-		if (r!=null){
-			rDTO = new ReponseEvaluationDTO(r);
-		}
-		return rDTO;
-	}
 	
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponsesEvaluation(int)
@@ -255,13 +244,13 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setCodeAcces(java.lang.String)
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEtudiant()
 	 */
-	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateException,
+	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
 		boolean b = false;
 		try{
-			b = this.ficheEvaluationDaoService.setCodeAcces(idFicheEvaluation, idConvention, codeAcces);
+			b = this.ficheEvaluationDaoService.setImpressionEtudiant(idFicheEvaluation,idConvention);
 		} catch (DataUpdateDaoException e) {
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
@@ -269,15 +258,74 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 		}
 		return b;
 	}
-
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEntreprise()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEnseignant()
 	 */
-	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException,
+	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
 		boolean b = false;
 		try{
-			b = this.ficheEvaluationDaoService.setEnvoiMailEntreprise(idFicheEvaluation,idConvention);
+			b = this.ficheEvaluationDaoService.setImpressionEnseignant(idFicheEvaluation,idConvention);
+		} catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());
+		} catch (DataBaseDaoException e){
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEntreprise()
+	 */
+	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = this.ficheEvaluationDaoService.setImpressionEntreprise(idFicheEvaluation,idConvention);
+		} catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());
+		} catch (DataBaseDaoException e){
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEtudiant()
+	 */
+	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = this.ficheEvaluationDaoService.setEnvoiMailEtudiant(idConvention);
+		} catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());
+		} catch (DataBaseDaoException e){
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEnseignant()
+	 */
+	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = this.ficheEvaluationDaoService.setEnvoiMailEnseignant(idConvention);
+		} catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());
+		} catch (DataBaseDaoException e){
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	/**
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEntreprise()
+	 */
+	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateException,
+			WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = this.ficheEvaluationDaoService.setEnvoiMailEntreprise(idConvention);
 		} catch (DataUpdateDaoException e) {
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){

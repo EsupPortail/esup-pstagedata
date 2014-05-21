@@ -60,6 +60,10 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	 * alertes mail
 	 */
 	private boolean alertesMail;
+	/**
+	 * droitEvaluation
+	 */
+	private boolean droitEvaluation;
 	/* **
 	 * 
 	 * Objets
@@ -100,6 +104,7 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 				idDroitAdmin=p.getIdDroitAdmin();
 			impressionConvention=p.getImpressionConvention();
 			alertesMail=p.isAlertesMail();
+			droitEvaluation=p.isDroitEvaluation();
 			campus=p.getCampus();
 			batiment=p.getBatiment();
 			bureau=p.getBureau();
@@ -127,6 +132,7 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 		"fonction : "+fonction+", "+
 		"codeAffectation : "+codeAffectation+", "+
 		"alertesMail : "+alertesMail+", "+
+		"droitEvaluation : "+droitEvaluation+", "+
 		"impressionConvention : "+impressionConvention+", "+super.toString();
 	}
 	
@@ -322,6 +328,20 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	 */
 	public void setAlertesMail(boolean alertesMail) {
 		this.alertesMail = alertesMail;
+	}
+
+	/**
+	 * @return the droitEvaluation
+	 */
+	public boolean isDroitEvaluation() {
+		return droitEvaluation;
+	}
+
+	/**
+	 * @param droitEvaluation the droitEvaluation to set
+	 */
+	public void setDroitEvaluation(boolean droitEvaluation) {
+		this.droitEvaluation = droitEvaluation;
 	}
 	
 	

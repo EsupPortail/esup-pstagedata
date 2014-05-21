@@ -912,6 +912,7 @@ public class UtilsDTO {
 			pg.setIdCivilite(pd.getIdCivilite());
 			pg.setImpressionConvention(pd.getImpressionConvention());
 			pg.setAlertesMail(pd.isAlertesMail());
+			pg.setDroitEvaluation(pd.isDroitEvaluation());
 			pg.setCodeUniversite(pd.getCodeUniversite());
 			pg.setCampus(pd.getCampus());
 			pg.setBatiment(pd.getBatiment());
@@ -1399,6 +1400,13 @@ public class UtilsDTO {
 			o.setValidationPedagogique(oDTO.isValidationPedagogique());
 			o.setVilleEtudiant(oDTO.getVilleEtudiant());
 			
+			// Ajout Evaluation
+			o.setEnvoiMailEtudiant(oDTO.isEnvoiMailEtudiant());
+			o.setDateEnvoiMailEtudiant(oDTO.getDateEnvoiMailEtudiant());
+			o.setEnvoiMailTuteurPedago(oDTO.isEnvoiMailTuteurPedago());
+			o.setDateEnvoiMailTuteurPedago(oDTO.getDateEnvoiMailTuteurPedago());
+			o.setEnvoiMailTuteurPro(oDTO.isEnvoiMailTuteurPro());
+			o.setDateEnvoiMailTuteurPro(oDTO.getDateEnvoiMailTuteurPro());
 		}
 		return o;
 	}
@@ -2313,12 +2321,12 @@ public class UtilsDTO {
 		if(red!=null){
 			r.setIdFicheEvaluation(red.getIdFicheEvaluation());
 			r.setIdConvention(red.getIdConvention());
+			r.setValidationEtudiant(red.isValidationEtudiant());
 			r.setValidationEnseignant(red.isValidationEnseignant());
 			r.setValidationEntreprise(red.isValidationEntreprise());
-			r.setValidationEtudiant(red.isValidationEtudiant());
-			r.setEnvoiMailTuteurPro(red.isEnvoiMailTuteurPro());
-			r.setDateEnvoiMailTuteurPro(red.getDateEnvoiMailTuteurPro());
-			r.setCodeAcces(red.getCodeAcces());
+			r.setImpressionEtudiant(red.isImpressionEtudiant());
+			r.setImpressionEnseignant(red.isImpressionEnseignant());
+			r.setImpressionEntreprise(red.isImpressionEntreprise());
 			// fiche entreprise
 			r.setReponseEnt1(red.getReponseEnt1());
 			r.setReponseEnt1bis(red.getReponseEnt1bis());
@@ -2337,7 +2345,7 @@ public class UtilsDTO {
 			r.setReponseEnt8bis(red.getReponseEnt8bis());
 			r.setReponseEnt9(red.getReponseEnt9());
 			r.setReponseEnt9bis(red.getReponseEnt9bis());
-			r.setReponseEnt10(red.getReponseEnt10());
+			r.setReponseEnt10(red.isReponseEnt10());
 			r.setReponseEnt10bis(red.getReponseEnt10bis());
 			r.setReponseEnt11(red.getReponseEnt11());
 			r.setReponseEnt11bis(red.getReponseEnt11bis());

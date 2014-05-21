@@ -15,9 +15,9 @@
 		<result property="validationEtudiant" column="validationEtudiant" />
 		<result property="validationEnseignant" column="validationEnseignant" />
 		<result property="validationEntreprise" column="validationEntreprise" />
-		<result property="envoiMailTuteurPro" column="envoiMailTuteurPro" />
-		<result property="dateEnvoiMailTuteurPro" column="dateEnvoiMailTuteurPro" javaType="java.util.Date" jdbcType="DATETIME"/>
-		<result property="codeAcces" column="codeAcces" />
+		<result property="impressionEtudiant" column="impressionEtudiant" />
+		<result property="impressionEnseignant" column="impressionEnseignant" />
+		<result property="impressionEntreprise" column="impressionEntreprise" />
 		<result property="reponseEnt1" column="reponseEnt1" nullValue="0" />
 		<result property="reponseEnt1bis" column="reponseEnt1bis" />
 		<result property="reponseEnt2" column="reponseEnt2" nullValue="0" />
@@ -164,11 +164,6 @@
 		idConvention=#idConvention#
 	</statement>
 	
-	<statement id="getReponseEvaluationFromCode" resultMap="ReponseEvaluation">
-		SELECT * FROM ReponseEvaluation
-		WHERE codeAcces = #codeAcces#
-	</statement>
-	
 	<statement id="getReponsesEvaluation" resultMap="ReponseEvaluation">
 		SELECT * FROM
 		ReponseEvaluation
@@ -246,15 +241,17 @@
 		WHERE
 		idFicheEvaluation=#idFicheEvaluation# AND idConvention=#idConvention#
 	</update>
-
-	<update id="setCodeAcces">
-		UPDATE ReponseEvaluation SET codeAcces=#codeAcces#
+	
+	<update id="setImpressionEtudiant">
+		UPDATE ReponseEvaluation SET impressionEtudiant=true
 		WHERE idFicheEvaluation = #idFicheEvaluation# AND idConvention=#idConvention#
 	</update>
-	
-	<update id="setEnvoiMailEntreprise">
-		UPDATE ReponseEvaluation SET envoiMailTuteurPro=true,
-		dateEnvoiMailTuteurPro=CURDATE()
+	<update id="setImpressionEnseignant">
+		UPDATE ReponseEvaluation SET impressionEnseignant=true
+		WHERE idFicheEvaluation = #idFicheEvaluation# AND idConvention=#idConvention#
+	</update>
+	<update id="setImpressionEntreprise">
+		UPDATE ReponseEvaluation SET impressionEntreprise=true
 		WHERE idFicheEvaluation = #idFicheEvaluation# AND idConvention=#idConvention#
 	</update>
 	

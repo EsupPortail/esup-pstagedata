@@ -478,6 +478,30 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private LangueConventionDTO langueConvention;
 
+	/**
+	 * envoiMailEtudiant
+	 */
+	private boolean envoiMailEtudiant;
+	/**
+	 * dateEnvoiMailTuteurPedago
+	 */
+	private Date dateEnvoiMailEtudiant;
+	/**
+	 * envoiMailTuteurPedago
+	 */
+	private boolean envoiMailTuteurPedago;
+	/**
+	 * dateEnvoiMailTuteurPro
+	 */
+	private Date dateEnvoiMailTuteurPedago;
+	/**
+	 * envoiMailTuteurPro
+	 */
+	private boolean envoiMailTuteurPro;
+	/**
+	 * dateEnvoiMailTuteurPro
+	 */
+	private Date dateEnvoiMailTuteurPro;
 
 	/**
 	 * Constructeur
@@ -517,6 +541,13 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.codeVersionEtape=c.getCodeVersionEtape();
 			this.codeUniversiteEtape=c.getCodeUniversiteEtape();
 			this.idCentreGestion=c.getIdCentreGestion();
+			// ajouts evaluation
+			this.envoiMailEtudiant = c.isEnvoiMailEtudiant();
+			this.dateEnvoiMailEtudiant = c.getDateEnvoiMailEtudiant();
+			this.envoiMailTuteurPedago = c.isEnvoiMailTuteurPedago();
+			this.dateEnvoiMailTuteurPedago = c.getDateEnvoiMailTuteurPedago();
+			this.envoiMailTuteurPro = c.isEnvoiMailTuteurPro();
+			this.dateEnvoiMailTuteurPro = c.getDateEnvoiMailTuteurPro();
 			if(!light){
 				this.codeDepartement=c.getCodeDepartement();
 				this.idEnseignant=c.getIdEnseignant();
@@ -808,6 +839,12 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				"dateValidation : "+dateValidation+", "+
 				"loginSignature : "+loginSignature+", "+
 				"dateSignature : "+dateSignature+", "+
+				"envoiMailEtudiant : "+envoiMailEtudiant+", "+
+				"dateEnvoiMailEtudiant : "+dateEnvoiMailEtudiant+", "+
+				"envoiMailTuteurPedago : "+envoiMailTuteurPedago+", "+
+				"dateEnvoiMailTuteurPedago : "+dateEnvoiMailTuteurPedago+", "+
+				"envoiMailTuteurPro : "+envoiMailTuteurPro+", "+
+				"dateEnvoiMailTuteurPro : "+dateEnvoiMailTuteurPro+", "+
 				", "+super.toString();
 
 	}
@@ -2397,6 +2434,102 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setQuestionsSupplementaires(List<QuestionSupplementaireDTO> questionsSupplementaires) {
 		this.questionsSupplementaires = questionsSupplementaires;
+	}
+
+
+	/**
+	 * @return the envoiMailEtudiant
+	 */
+	public boolean isEnvoiMailEtudiant() {
+		return envoiMailEtudiant;
+	}
+
+
+	/**
+	 * @param envoiMailEtudiant the envoiMailEtudiant to set
+	 */
+	public void setEnvoiMailEtudiant(boolean envoiMailEtudiant) {
+		this.envoiMailEtudiant = envoiMailEtudiant;
+	}
+
+
+	/**
+	 * @return the dateEnvoiMailEtudiant
+	 */
+	public Date getDateEnvoiMailEtudiant() {
+		return dateEnvoiMailEtudiant;
+	}
+
+
+	/**
+	 * @param dateEnvoiMailEtudiant the dateEnvoiMailEtudiant to set
+	 */
+	public void setDateEnvoiMailEtudiant(Date dateEnvoiMailEtudiant) {
+		this.dateEnvoiMailEtudiant = dateEnvoiMailEtudiant;
+	}
+
+
+	/**
+	 * @return the envoiMailTuteurPedago
+	 */
+	public boolean isEnvoiMailTuteurPedago() {
+		return envoiMailTuteurPedago;
+	}
+
+
+	/**
+	 * @param envoiMailTuteurPedago the envoiMailTuteurPedago to set
+	 */
+	public void setEnvoiMailTuteurPedago(boolean envoiMailTuteurPedago) {
+		this.envoiMailTuteurPedago = envoiMailTuteurPedago;
+	}
+
+
+	/**
+	 * @return the dateEnvoiMailTuteurPedago
+	 */
+	public Date getDateEnvoiMailTuteurPedago() {
+		return dateEnvoiMailTuteurPedago;
+	}
+
+
+	/**
+	 * @param dateEnvoiMailTuteurPedago the dateEnvoiMailTuteurPedago to set
+	 */
+	public void setDateEnvoiMailTuteurPedago(Date dateEnvoiMailTuteurPedago) {
+		this.dateEnvoiMailTuteurPedago = dateEnvoiMailTuteurPedago;
+	}
+
+
+	/**
+	 * @return the envoiMailTuteurPro
+	 */
+	public boolean isEnvoiMailTuteurPro() {
+		return envoiMailTuteurPro;
+	}
+
+
+	/**
+	 * @param envoiMailTuteurPro the envoiMailTuteurPro to set
+	 */
+	public void setEnvoiMailTuteurPro(boolean envoiMailTuteurPro) {
+		this.envoiMailTuteurPro = envoiMailTuteurPro;
+	}
+
+
+	/**
+	 * @return the dateEnvoiMailTuteurPro
+	 */
+	public Date getDateEnvoiMailTuteurPro() {
+		return dateEnvoiMailTuteurPro;
+	}
+
+
+	/**
+	 * @param dateEnvoiMailTuteurPro the dateEnvoiMailTuteurPro to set
+	 */
+	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
+		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
 	}
 
 }

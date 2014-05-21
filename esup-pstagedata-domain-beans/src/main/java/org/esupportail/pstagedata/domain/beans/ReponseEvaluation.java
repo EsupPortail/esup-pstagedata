@@ -1,7 +1,6 @@
 package org.esupportail.pstagedata.domain.beans;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author Florian Garot : florian.garot@univ-artois.fr
@@ -39,17 +38,17 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	 */
 	private boolean validationEntreprise;
 	/**
-	 * envoiMailTuteurPro
+	 * impressionEtudiant
 	 */
-	private boolean envoiMailTuteurPro;
+	private boolean impressionEtudiant;
 	/**
-	 * dateEnvoiMailTuteurPro
+	 * impressionEnseignant
 	 */
-	private Date dateEnvoiMailTuteurPro;
+	private boolean impressionEnseignant;
 	/**
-	 * codeAcces
+	 * impressionEntreprise
 	 */
-	private String codeAcces;
+	private boolean impressionEntreprise;
 
 	/* ***************************************************************
 	 * Reponses Entreprise
@@ -126,7 +125,7 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	/**
 	 * reponseEnt10
 	 */
-	private int reponseEnt10;
+	private boolean reponseEnt10;
 	/**
 	 * reponseEnt10bis
 	 */
@@ -803,14 +802,14 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	/**
 	 * @return the reponseEnt10
 	 */
-	public int getReponseEnt10() {
+	public boolean isReponseEnt10() {
 		return reponseEnt10;
 	}
 
 	/**
 	 * @param reponseEnt10 the reponseEnt10 to set
 	 */
-	public void setReponseEnt10(int reponseEnt10) {
+	public void setReponseEnt10(boolean reponseEnt10) {
 		this.reponseEnt10 = reponseEnt10;
 	}
 
@@ -2131,45 +2130,45 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	}
 
 	/**
-	 * @return the envoiMailTuteurPro
+	 * @return the impressionEtudiant
 	 */
-	public boolean isEnvoiMailTuteurPro() {
-		return envoiMailTuteurPro;
+	public boolean isImpressionEtudiant() {
+		return impressionEtudiant;
 	}
 
 	/**
-	 * @param envoiMailTuteurPro the envoiMailTuteurPro to set
+	 * @param impressionEtudiant the impressionEtudiant to set
 	 */
-	public void setEnvoiMailTuteurPro(boolean envoiMailTuteurPro) {
-		this.envoiMailTuteurPro = envoiMailTuteurPro;
+	public void setImpressionEtudiant(boolean impressionEtudiant) {
+		this.impressionEtudiant = impressionEtudiant;
 	}
 
 	/**
-	 * @return the dateEnvoiMailTuteurPro
+	 * @return the impressionEnseignant
 	 */
-	public Date getDateEnvoiMailTuteurPro() {
-		return dateEnvoiMailTuteurPro;
+	public boolean isImpressionEnseignant() {
+		return impressionEnseignant;
 	}
 
 	/**
-	 * @param dateEnvoiMailTuteurPro the dateEnvoiMailTuteurPro to set
+	 * @param impressionEnseignant the impressionEnseignant to set
 	 */
-	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
-		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
+	public void setImpressionEnseignant(boolean impressionEnseignant) {
+		this.impressionEnseignant = impressionEnseignant;
 	}
 
 	/**
-	 * @return the codeAcces
+	 * @return the impressionEntreprise
 	 */
-	public String getCodeAcces() {
-		return codeAcces;
+	public boolean isImpressionEntreprise() {
+		return impressionEntreprise;
 	}
 
 	/**
-	 * @param codeAcces the codeAcces to set
+	 * @param impressionEntreprise the impressionEntreprise to set
 	 */
-	public void setCodeAcces(String codeAcces) {
-		this.codeAcces = codeAcces;
+	public void setImpressionEntreprise(boolean impressionEntreprise) {
+		this.impressionEntreprise = impressionEntreprise;
 	}
 
 }

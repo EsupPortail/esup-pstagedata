@@ -8,6 +8,17 @@ DROP TABLE TypeCritereEvaluation;
 SET FOREIGN_KEY_CHECKS=1;
 ALTER TABLE Convention DROP COLUMN idFicheEvaluation;
 
+-- Ajout du champs droitEvaluation dans la table PersonnelCentreGestion
+ALTER TABLE PersonnelCentreGestion ADD droitEvaluation TINYINT(1) NULL DEFAULT 0;
+
+-- Ajout des champs relatifs a l'envoi de mail d'avertissement pour l'evaluation du stage
+ALTER TABLE Convention ADD envoiMailEtudiant TINYINT(1) DEFAULT 0;
+ALTER TABLE Convention ADD dateEnvoiMailEtudiant DATETIME NULL;
+ALTER TABLE Convention ADD envoiMailTuteurPedago TINYINT(1) DEFAULT 0;
+ALTER TABLE Convention ADD dateEnvoiMailTuteurPedago DATETIME NULL;
+ALTER TABLE Convention ADD envoiMailTuteurPro TINYINT(1) DEFAULT 0;
+ALTER TABLE Convention ADD dateEnvoiMailTuteurPro DATETIME NULL;
+
 -- Nouvelle table FicheEvaluation --
 CREATE TABLE IF NOT EXISTS FicheEvaluation (
 	idFicheEvaluation INT NOT NULL AUTO_INCREMENT,
@@ -90,9 +101,9 @@ CREATE TABLE IF NOT EXISTS ReponseEvaluation (
 	validationEtudiant TINYINT(1) DEFAULT 0,
 	validationEnseignant TINYINT(1) DEFAULT 0,
 	validationEntreprise TINYINT(1) DEFAULT 0,
-	envoiMailTuteurPro TINYINT(1) DEFAULT 0,
-	dateEnvoiMailTuteurPro DATETIME NULL,
-	codeAcces VARCHAR(200) NULL,
+	impressionEtudiant TINYINT(1) DEFAULT 0,
+	impressionEnseignant TINYINT(1) DEFAULT 0,
+	impressionEntreprise TINYINT(1) DEFAULT 0,
 	reponseEnt1 INT NULL,
 	reponseEnt1bis TEXT NULL,
 	reponseEnt2 INT NULL,
@@ -110,7 +121,7 @@ CREATE TABLE IF NOT EXISTS ReponseEvaluation (
 	reponseEnt8bis TEXT NULL,
 	reponseEnt9 INT NULL,
 	reponseEnt9bis TEXT NULL,
-	reponseEnt10 INT NULL,
+	reponseEnt10 TINYINT(1) DEFAULT 0,
 	reponseEnt10bis TEXT NULL,
 	reponseEnt11 INT NULL,
 	reponseEnt11bis TEXT NULL,
@@ -174,7 +185,7 @@ CREATE TABLE IF NOT EXISTS ReponseEvaluation (
 	reponseEtuIII8 TINYINT(1) DEFAULT 0,
 	reponseEtuIII8bis TEXT NULL,
 	reponseEtuIII9 TINYINT(1) DEFAULT 0,
-	reponseEtuIII9bis TINYINT(1) DEFAULT 0,
+	reponseEtuIII9bis TEXT NULL,
 	reponseEtuIII10 TINYINT(1) DEFAULT 0,
 	reponseEtuIII11 TINYINT(1) DEFAULT 0,
 	reponseEtuIII12 TINYINT(1) DEFAULT 0,

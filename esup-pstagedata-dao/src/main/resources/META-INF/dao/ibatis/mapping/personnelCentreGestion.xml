@@ -34,6 +34,7 @@
 		<result property="codeAffectation" column="codeAffectation" />
 		<result property="codeUniversiteAffectation" column="codeUniversiteAffectation" />
 		<result property="alertesMail" column="alertesMail" />
+		<result property="droitEvaluation" column="droitEvaluation" />
 	</resultMap>
 
 	<statement id="getPersonnelCentreGestionList" resultMap="PersonnelCentreGestion">
@@ -86,10 +87,10 @@
 	<insert id="addPersonnelCentreGestion" >
 		INSERT INTO PersonnelCentreGestion (idPersonnelCentreGestion,idCentreGestion,uidPersonnel,nom,
 		prenom,mail,telephone,fax,fonction,idDroitAdministration,idCivilite,impressionConvention,codeUniversite,typePersonne,
-		campus,batiment,bureau,loginCreation,dateCreation,codeAffectation,codeUniversiteAffectation,alertesMail)
+		campus,batiment,bureau,loginCreation,dateCreation,codeAffectation,codeUniversiteAffectation,alertesMail,droitEvaluation)
 		VALUES (#id#,#idCentreGestion#,#uidPersonnel#,#nom#,
 		#prenom#,#mail#,#tel#,#fax#,#fonction#,#idDroitAdmin#,#idCivilite#,#impressionConvention#,#codeUniversite#,#typePersonne#,
-		#campus#,#batiment#,#bureau#,#loginCreation#,CURRENT_TIMESTAMP(),#codeAffectation#,#codeUniversiteAffectation#,#alertesMail#)
+		#campus#,#batiment#,#bureau#,#loginCreation#,CURRENT_TIMESTAMP(),#codeAffectation#,#codeUniversiteAffectation#,#alertesMail#,#droitEvaluation#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -100,7 +101,8 @@
 		uidPersonnel=#uidPersonnel#,nom=#nom#,prenom=#prenom#,mail=#mail#,telephone=#tel#,fax=#fax#,fonction=#fonction#,
 		idDroitAdministration=#idDroitAdmin#,idCivilite=#idCivilite#,impressionConvention=#impressionConvention#,
 		codeUniversite=#codeUniversite#,typePersonne=#typePersonne#,campus=#campus#,batiment=#batiment#,bureau=#bureau#,loginModif=#loginModif#,
-		dateModif=CURRENT_TIMESTAMP(),codeAffectation=#codeAffectation#, codeUniversiteAffectation=#codeUniversiteAffectation#,alertesMail=#alertesMail#
+		dateModif=CURRENT_TIMESTAMP(),codeAffectation=#codeAffectation#, codeUniversiteAffectation=#codeUniversiteAffectation#,alertesMail=#alertesMail#,
+		droitEvaluation=#droitEvaluation#
 		WHERE idPersonnelCentreGestion=#id#
 	</update>
 

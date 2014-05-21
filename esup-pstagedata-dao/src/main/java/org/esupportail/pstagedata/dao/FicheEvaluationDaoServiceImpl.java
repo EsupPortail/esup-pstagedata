@@ -152,12 +152,6 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		parameterMap.put("idConvention", idConvention);
 		return (ReponseEvaluation) getSqlMapClientTemplate().queryForObject("getReponseEvaluation", parameterMap);
 	}
-	/**
-	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#getReponseEvaluationFromCode(java.lang.String)
-	 */
-	public ReponseEvaluation getReponseEvaluationFromCode(String codeAcces){
-		return (ReponseEvaluation) getSqlMapClientTemplate().queryForObject("getReponseEvaluationFromCode", codeAcces);
-	}
 	
 	/**
 	 * @see org.esupportail.pstagedata.dao.FicheEvaluationDaoService#getReponsesEvaluation(int)
@@ -265,15 +259,14 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		return b;
 	}
 
-	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces)
-			throws DataUpdateDaoException, DataBaseDaoException {
+	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
 		boolean b = false;
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("idFicheEvaluation", idFicheEvaluation);
 		parameterMap.put("idConvention", idConvention);
-		parameterMap.put("codeAcces", codeAcces);
 		try{
-			b = getSqlMapClientTemplate().update("setCodeAcces",parameterMap)>0?true:false;
+			b = getSqlMapClientTemplate().update("setImpressionEtudiant",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
@@ -286,14 +279,85 @@ public class FicheEvaluationDaoServiceImpl extends AbstractIBatisDaoService impl
 		return b;
 	}
 
-	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException,
+	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException,
 			DataBaseDaoException {
 		boolean b = false;
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("idFicheEvaluation", idFicheEvaluation);
 		parameterMap.put("idConvention", idConvention);
 		try{
-			b = getSqlMapClientTemplate().update("setEnvoiMailEntreprise",parameterMap)>0?true:false;
+			b = getSqlMapClientTemplate().update("setImpressionEnseignant",parameterMap)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
+		boolean b = false;
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("idFicheEvaluation", idFicheEvaluation);
+		parameterMap.put("idConvention", idConvention);
+		try{
+			b = getSqlMapClientTemplate().update("setImpressionEntreprise",parameterMap)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
+	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("setEnvoiMailEtudiant",idConvention)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("setEnvoiMailEnseignant",idConvention)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
+	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateDaoException,
+			DataBaseDaoException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("setEnvoiMailEntreprise",idConvention)>0?true:false;
 		}catch (DataAccessException e) {
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update

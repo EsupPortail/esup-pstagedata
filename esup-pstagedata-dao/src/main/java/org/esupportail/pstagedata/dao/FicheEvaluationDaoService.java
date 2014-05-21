@@ -79,10 +79,6 @@ public interface FicheEvaluationDaoService extends Serializable {
 	 */
 	public ReponseEvaluation getReponseEvaluation(int idFicheEvaluation, int idConvention);
 	/**
-	 * @return ReponseEvaluation
-	 */
-	public ReponseEvaluation getReponseEvaluationFromCode(String codeAcces);
-	/**
 	 * @param idFicheEvaluation
 	 * @return List<ReponseEvaluation>
 	 */
@@ -123,21 +119,42 @@ public interface FicheEvaluationDaoService extends Serializable {
 	 * @throws DataBaseDaoException 
 	 */
 	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteDaoException, DataBaseDaoException;
-	
-	/**
-	 * @param codeAcces
-	 * @return boolean
-	 * @throws DataUpdateDaoException
-	 * @throws DataBaseDaoException
-	 */
-	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateDaoException, DataBaseDaoException;
-	
 	/**
 	 * @return boolean
 	 * @throws DataUpdateDaoException
 	 * @throws DataBaseDaoException
 	 */
-	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
+	/**
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateDaoException, DataBaseDaoException;
 
 	/* ****************************************************************************
 	 * QUESTION SUPPLEMENTAIRE

@@ -492,13 +492,6 @@ public class RemoteServicesImpl implements RemoteServices{
 	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention) {
 		return this.ficheEvaluationDomainService.getReponseEvaluation(idFicheEvaluation,idConvention);
 	}
-	
-	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getReponseEvaluationFromCode(java.lang.String)
-	 */
-	public ReponseEvaluationDTO getReponseEvaluationFromCode(String codeAcces) {
-		return this.ficheEvaluationDomainService.getReponseEvaluationFromCode(codeAcces);
-	}
 	/**
 	 * @param idFicheEvaluation
 	 * @return List<ReponseEvaluationDTO>
@@ -560,21 +553,40 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setCodeAcces(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
 	 */
-	public boolean setCodeAcces(int idFicheEvaluation, int idConvention, String codeAcces) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
-		if (idFicheEvaluation > 0 && idConvention > 0 && codeAcces != null){
-			b = this.ficheEvaluationDomainService.setCodeAcces(idFicheEvaluation, idConvention, codeAcces);
-		}
-		return b;
+	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setImpressionEtudiant(idFicheEvaluation, idConvention);
 	}
-	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
+	 */
+	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setImpressionEnseignant(idFicheEvaluation, idConvention);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
+	 */
+	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setImpressionEntreprise(idFicheEvaluation, idConvention);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEtudiant()
+	 */
+	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setEnvoiMailEtudiant(idConvention);
+	}
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEnseignant()
+	 */
+	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setEnvoiMailEnseignant(idConvention);
+	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEntreprise()
 	 */
-	public boolean setEnvoiMailEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
-		return this.ficheEvaluationDomainService.setEnvoiMailEntreprise(idFicheEvaluation, idConvention);
+	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
+		return this.ficheEvaluationDomainService.setEnvoiMailEntreprise(idConvention);
 	}
 
 	/* ****************************************************************************

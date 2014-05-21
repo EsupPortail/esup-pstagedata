@@ -60,6 +60,10 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 	 * alertes mail
 	 */
 	private boolean alertesMail;
+	/**
+	 * droitEvaluation
+	 */
+	private boolean droitEvaluation;
 	
 	/* ***************************************************************
 	 * Objets
@@ -103,6 +107,7 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 		"fonction : "+fonction+", "+
 		"codeAffectation : "+codeAffectation+", "+
 		"impressionConvention : "+impressionConvention+", "+
+		"droitEvaluation : "+droitEvaluation+", "+
 		"alertesMail : "+alertesMail+", "+super.toString();
 	}
 	
@@ -302,5 +307,19 @@ public class PersonnelCentreGestion extends Personne implements Serializable{
 	 */
 	public void setAlertesMail(boolean alertesMail) {
 		this.alertesMail = alertesMail;
+	}
+
+	/**
+	 * @return the droitEvaluation
+	 */
+	public boolean isDroitEvaluation() {
+		return droitEvaluation;
+	}
+
+	/**
+	 * @param droitEvaluation the droitEvaluation to set
+	 */
+	public void setDroitEvaluation(boolean droitEvaluation) {
+		this.droitEvaluation = droitEvaluation;
 	}
 }

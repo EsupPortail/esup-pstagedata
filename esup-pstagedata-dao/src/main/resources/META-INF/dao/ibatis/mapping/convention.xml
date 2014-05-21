@@ -91,6 +91,12 @@
 		<result property="loginSignature" column="loginSignature"/>
 		<result property="dateSignature" column="dateSignature" javaType="java.util.Date" jdbcType="DATETIME"/>
 		<result property="validationPedagogique" column="validationPedagogique"/>
+		<result property="envoiMailEtudiant" column="envoiMailEtudiant" />
+		<result property="dateEnvoiMailEtudiant" column="dateEnvoiMailEtudiant" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="envoiMailTuteurPedago" column="envoiMailTuteurPedago" />
+		<result property="dateEnvoiMailTuteurPedago" column="dateEnvoiMailTuteurPedago" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="envoiMailTuteurPro" column="envoiMailTuteurPro" />
+		<result property="dateEnvoiMailTuteurPro" column="dateEnvoiMailTuteurPro" javaType="java.util.Date" jdbcType="DATETIME"/>
      </resultMap>
      
      <resultMap id="ConventionLight" class="ClassConvention">
@@ -105,6 +111,12 @@
 		<result property="codeUniversiteUFR" column="codeUniversiteUFR"/>
 		<result property="codeUniversiteEtape" column="codeUniversiteEtape"/>
 		<result property="idCentreGestion" column="idCentreGestion"/>
+		<result property="envoiMailEtudiant" column="envoiMailEtudiant" />
+		<result property="dateEnvoiMailEtudiant" column="dateEnvoiMailEtudiant" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="envoiMailTuteurPedago" column="envoiMailTuteurPedago" />
+		<result property="dateEnvoiMailTuteurPedago" column="dateEnvoiMailTuteurPedago" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="envoiMailTuteurPro" column="envoiMailTuteurPro" />
+		<result property="dateEnvoiMailTuteurPro" column="dateEnvoiMailTuteurPro" javaType="java.util.Date" jdbcType="DATETIME"/>
 		
 		<result property="structure" column="idStructure" select="getStructureSuperLightFromId"/>
 		<result property="etudiant" column="idEtudiant" select="getEtudiantLightFromId"/>
@@ -182,7 +194,9 @@
 	<statement id="getConventionsEtudiant" resultMap="ConventionLight">
         SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
-        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion
+        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
+        C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
+        C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro, C.dateEnvoiMailTuteurPro
          FROM Convention C
          INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
          INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
@@ -197,7 +211,9 @@
     <statement id="getConventionsByEnseignant" resultMap="ConventionLight">
         SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
-        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion
+        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
+        C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
+        C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro, C.dateEnvoiMailTuteurPro
          FROM Convention C
          INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
          INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
@@ -220,7 +236,9 @@
     <statement id="getConventionsFromCriteres" resultMap="ConventionLight">
         SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
-        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion
+        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
+        C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
+        C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro, C.dateEnvoiMailTuteurPro
         FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape)
@@ -403,7 +421,9 @@
 	<statement id="getConventionsFromCriteresByEnseignantTuteur" resultMap="ConventionLight">
         SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage, C.validationPedagogique,
         C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
-        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion
+        C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
+        C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
+        C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro, C.dateEnvoiMailTuteurPro
         FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND U.codeUniversite = C.codeUniversiteEtape)
@@ -884,5 +904,20 @@
     <delete id="deleteConvention">
     	 DELETE FROM Convention WHERE idConvention = #idConvention#
     </delete>
-      	
+    
+	<update id="setEnvoiMailEtudiant">
+		UPDATE Convention SET envoiMailEtudiant=true,
+		dateEnvoiMailEtudiant=CURDATE()
+		WHERE idConvention=#idConvention#
+	</update>
+	<update id="setEnvoiMailEnseignant">
+		UPDATE Convention SET envoiMailTuteurPedago=true,
+		dateEnvoiMailTuteurPedago=CURDATE()
+		WHERE idConvention=#idConvention#
+	</update>
+	<update id="setEnvoiMailEntreprise">
+		UPDATE Convention SET envoiMailTuteurPro=true,
+		dateEnvoiMailTuteurPro=CURDATE()
+		WHERE idConvention=#idConvention#
+	</update>
 </sqlMap>
