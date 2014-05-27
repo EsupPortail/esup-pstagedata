@@ -43,6 +43,7 @@
 		<result property="validationPedagogique" column="validationPedagogique"/>
 		<result property="autorisationEtudiantCreationConvention" column="autorisationEtudiantCreationConvention"/>
 		<result property="idModeValidationStage" column="idModeValidationStage"/>
+		<result property="visibiliteEvalPro" column="visibiliteEvalPro"/>
 	</resultMap>
 	
 	<resultMap id="CentreGestionSuperLight"	class="ClassCentreGestion">
@@ -165,13 +166,13 @@
 		saisieTuteurProParEtudiant,choixAnneeAvantDebutAnnee,choixAnneeApresDebutAnnee,depotAnonyme,
 		codeUniversite,dateCreation,loginCreation,nomViseur,prenomViseur,urlPageInstruction,
 		idCentreGestionSuperViseur,codeConfidentialite,autoriserImpressionConvention,validationPedagogique,
-		autorisationEtudiantCreationConvention,idModeValidationStage)
+		autorisationEtudiantCreationConvention,idModeValidationStage,visibiliteEvalPro)
 		VALUES (#idCentreGestion#,#nomCentre#,#idNiveauCentre#,#batimentResidence#,#voie#,#commune#,
 		#codePostal#,#siteWeb#,#mail#,#telephone#,#fax#,#commentaire#,#presenceTuteurEns#,#presenceTuteurPro#,
 		#saisieTuteurProParEtudiant#,#choixAnneeAvantDebutAnnee#,#choixAnneeApresDebutAnnee#,#depotAnonyme#,#codeUniversite#,
 		CURRENT_TIMESTAMP(),#loginCreation#,#nomViseur#,#prenomViseur#,#urlPageInstruction#,
 		#idCentreGestionSuperViseur#,#codeConfidentialite#,#autoriserImpressionConvention#,#validationPedagogique#,
-		#autorisationEtudiantCreationConvention#,#idModeValidationStage#)
+		#autorisationEtudiantCreationConvention#,#idModeValidationStage#,#visibiliteEvalPro#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -187,7 +188,8 @@
 		depotAnonyme=#depotAnonyme#,codeUniversite=#codeUniversite#,dateModif=CURRENT_TIMESTAMP(),loginModif=#loginModif#,
 		nomViseur=#nomViseur#,prenomViseur=#prenomViseur#,urlPageInstruction=#urlPageInstruction#,idCentreGestionSuperViseur=#idCentreGestionSuperViseur#,
 		codeConfidentialite=#codeConfidentialite#,autoriserImpressionConvention=#autoriserImpressionConvention#,validationPedagogique=#validationPedagogique#,
-		autorisationEtudiantCreationConvention=#autorisationEtudiantCreationConvention#,idModeValidationStage=#idModeValidationStage#
+		autorisationEtudiantCreationConvention=#autorisationEtudiantCreationConvention#,idModeValidationStage=#idModeValidationStage#,
+		visibiliteEvalPro=#visibiliteEvalPro#
 		WHERE idCentreGestion=#idCentreGestion#
 	</update>
 	

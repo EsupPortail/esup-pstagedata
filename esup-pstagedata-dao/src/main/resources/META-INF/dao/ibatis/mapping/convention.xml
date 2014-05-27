@@ -907,17 +907,17 @@
     
 	<update id="setEnvoiMailEtudiant">
 		UPDATE Convention SET envoiMailEtudiant=true,
-		dateEnvoiMailEtudiant=CURDATE()
+		dateEnvoiMailEtudiant=CURRENT_TIMESTAMP()
 		WHERE idConvention=#idConvention#
 	</update>
 	<update id="setEnvoiMailEnseignant">
 		UPDATE Convention SET envoiMailTuteurPedago=true,
-		dateEnvoiMailTuteurPedago=CURDATE()
+		dateEnvoiMailTuteurPedago=CURRENT_TIMESTAMP()
 		WHERE idConvention=#idConvention#
 	</update>
 	<update id="setEnvoiMailEntreprise">
 		UPDATE Convention SET envoiMailTuteurPro=true,
-		dateEnvoiMailTuteurPro=CURDATE()
+		dateEnvoiMailTuteurPro=CURRENT_TIMESTAMP()
 		WHERE idConvention=#idConvention#
 	</update>
 </sqlMap>

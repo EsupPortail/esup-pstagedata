@@ -114,6 +114,10 @@ public class CentreGestion extends Adresse implements Serializable{
 	 * mode d'évaluation des stages
 	 */
 	private int idModeValidationStage;
+	/**
+	 * true si les etudiants peuvent voir l'appreciation de leur tuteur pro
+	 */
+	private boolean visibiliteEvalPro;
 	
 	/* ***************************************************************
 	 * Objets
@@ -541,5 +545,19 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public void setModeValidationStage(ModeValidationStage modeValidationStage) {
 		this.modeValidationStage = modeValidationStage;
+	}
+
+	/**
+	 * @return the visibiliteEvalPro
+	 */
+	public boolean isVisibiliteEvalPro() {
+		return visibiliteEvalPro;
+	}
+
+	/**
+	 * @param visibiliteEvalPro the visibiliteEvalPro to set
+	 */
+	public void setVisibiliteEvalPro(boolean visibiliteEvalPro) {
+		this.visibiliteEvalPro = visibiliteEvalPro;
 	}
 }

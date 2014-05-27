@@ -117,6 +117,10 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * mode d'évaluation des stages
 	 */
 	private int idModeValidationStage;
+	/**
+	 * true si les etudiants peuvent voir l'appreciation de leur tuteur pro
+	 */
+	private boolean visibiliteEvalPro;
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -176,6 +180,7 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 			}
 			codeConfidentialite=cg.getCodeConfidentialite();
 			autoriserImpressionConvention=cg.isAutoriserImpressionConvention();	
+			visibiliteEvalPro=cg.isVisibiliteEvalPro();
 			if(cg.getIdFichier() > 0)
 				idFichier=cg.getIdFichier();
 			if(cg.getNiveauCentre()!=null) niveauCentre=new NiveauCentreDTO(cg.getNiveauCentre());
@@ -229,6 +234,8 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 		"urlPageInstruction : "+urlPageInstruction+", "+
 		"idCentreGestionSuperviseur : "+idCentreGestionSuperViseur+", "+
 		"codeConfidentialite : "+codeConfidentialite+", "+
+		"validationPedagogique : "+validationPedagogique+", "+
+		"visibiliteEvalPro : "+visibiliteEvalPro+", "+
 		"idFichier : "+idFichier+", "+super.toString();
 	}
 	
@@ -636,6 +643,20 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	public void setModeValidationStage(ModeValidationStageDTO modeValidationStage) {
 		this.modeValidationStage = modeValidationStage;
+	}
+
+	/**
+	 * @return the visibiliteEvalPro
+	 */
+	public boolean isVisibiliteEvalPro() {
+		return visibiliteEvalPro;
+	}
+
+	/**
+	 * @param visibiliteEvalPro the visibiliteEvalPro to set
+	 */
+	public void setVisibiliteEvalPro(boolean visibiliteEvalPro) {
+		this.visibiliteEvalPro = visibiliteEvalPro;
 	}
 
 }

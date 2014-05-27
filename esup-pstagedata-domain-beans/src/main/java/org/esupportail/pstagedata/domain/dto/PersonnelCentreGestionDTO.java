@@ -61,9 +61,17 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	 */
 	private boolean alertesMail;
 	/**
-	 * droitEvaluation
+	 * droitEvaluationEtudiant
 	 */
-	private boolean droitEvaluation;
+	private boolean droitEvaluationEtudiant;
+	/**
+	 * droitEvaluationEnseignant
+	 */
+	private boolean droitEvaluationEnseignant;
+	/**
+	 * droitEvaluationEntreprise
+	 */
+	private boolean droitEvaluationEntreprise;
 	/* **
 	 * 
 	 * Objets
@@ -104,7 +112,9 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 				idDroitAdmin=p.getIdDroitAdmin();
 			impressionConvention=p.getImpressionConvention();
 			alertesMail=p.isAlertesMail();
-			droitEvaluation=p.isDroitEvaluation();
+			droitEvaluationEtudiant=p.isDroitEvaluationEtudiant();
+			droitEvaluationEnseignant=p.isDroitEvaluationEnseignant();
+			droitEvaluationEntreprise=p.isDroitEvaluationEntreprise();
 			campus=p.getCampus();
 			batiment=p.getBatiment();
 			bureau=p.getBureau();
@@ -132,7 +142,9 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 		"fonction : "+fonction+", "+
 		"codeAffectation : "+codeAffectation+", "+
 		"alertesMail : "+alertesMail+", "+
-		"droitEvaluation : "+droitEvaluation+", "+
+		"droitEvaluationEtudiant : "+droitEvaluationEtudiant+", "+
+		"droitEvaluationEnseignant : "+droitEvaluationEnseignant+", "+
+		"droitEvaluationEntreprise : "+droitEvaluationEntreprise+", "+
 		"impressionConvention : "+impressionConvention+", "+super.toString();
 	}
 	
@@ -331,18 +343,45 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 	}
 
 	/**
-	 * @return the droitEvaluation
+	 * @return the droitEvaluationEtudiant
 	 */
-	public boolean isDroitEvaluation() {
-		return droitEvaluation;
+	public boolean isDroitEvaluationEtudiant() {
+		return droitEvaluationEtudiant;
 	}
 
 	/**
-	 * @param droitEvaluation the droitEvaluation to set
+	 * @param droitEvaluationEtudiant the droitEvaluationEtudiant to set
 	 */
-	public void setDroitEvaluation(boolean droitEvaluation) {
-		this.droitEvaluation = droitEvaluation;
+	public void setDroitEvaluationEtudiant(boolean droitEvaluationEtudiant) {
+		this.droitEvaluationEtudiant = droitEvaluationEtudiant;
 	}
-	
+
+	/**
+	 * @return the droitEvaluationEnseignant
+	 */
+	public boolean isDroitEvaluationEnseignant() {
+		return droitEvaluationEnseignant;
+	}
+
+	/**
+	 * @param droitEvaluationEnseignant the droitEvaluationEnseignant to set
+	 */
+	public void setDroitEvaluationEnseignant(boolean droitEvaluationEnseignant) {
+		this.droitEvaluationEnseignant = droitEvaluationEnseignant;
+	}
+
+	/**
+	 * @return the droitEvaluationEntreprise
+	 */
+	public boolean isDroitEvaluationEntreprise() {
+		return droitEvaluationEntreprise;
+	}
+
+	/**
+	 * @param droitEvaluationEntreprise the droitEvaluationEntreprise to set
+	 */
+	public void setDroitEvaluationEntreprise(boolean droitEvaluationEntreprise) {
+		this.droitEvaluationEntreprise = droitEvaluationEntreprise;
+	}
 	
 }

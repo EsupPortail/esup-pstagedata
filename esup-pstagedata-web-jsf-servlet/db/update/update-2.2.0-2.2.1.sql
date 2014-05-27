@@ -8,8 +8,13 @@ DROP TABLE TypeCritereEvaluation;
 SET FOREIGN_KEY_CHECKS=1;
 ALTER TABLE Convention DROP COLUMN idFicheEvaluation;
 
--- Ajout du champs droitEvaluation dans la table PersonnelCentreGestion
-ALTER TABLE PersonnelCentreGestion ADD droitEvaluation TINYINT(1) NULL DEFAULT 0;
+-- Ajout des champs droitEvaluation dans la table PersonnelCentreGestion
+ALTER TABLE PersonnelCentreGestion ADD droitEvaluationEtudiant TINYINT(1) NULL DEFAULT 0;
+ALTER TABLE PersonnelCentreGestion ADD droitEvaluationEnseignant TINYINT(1) NULL DEFAULT 0;
+ALTER TABLE PersonnelCentreGestion ADD droitEvaluationEntreprise TINYINT(1) NULL DEFAULT 0;
+
+-- Ajout de la nouvelle propriete de centre pour la visibilite de l'eval pro aux etus
+ALTER TABLE CentreGestion add visibiliteEvalPro TINYINT(1) NULL DEFAULT 0;
 
 -- Ajout des champs relatifs a l'envoi de mail d'avertissement pour l'evaluation du stage
 ALTER TABLE Convention ADD envoiMailEtudiant TINYINT(1) DEFAULT 0;

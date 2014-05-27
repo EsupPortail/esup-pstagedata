@@ -342,6 +342,7 @@ public class UtilsDTO {
 			c.setValidationPedagogique(cd.isValidationPedagogique());
 			c.setAutorisationEtudiantCreationConvention(cd.isAutorisationEtudiantCreationConvention());
 			if(cd.getIdModeValidationStage()>=0) c.setIdModeValidationStage(cd.getIdModeValidationStage());
+			c.setVisibiliteEvalPro(cd.isVisibiliteEvalPro());
 		}
 		return c;
 	}
@@ -912,7 +913,9 @@ public class UtilsDTO {
 			pg.setIdCivilite(pd.getIdCivilite());
 			pg.setImpressionConvention(pd.getImpressionConvention());
 			pg.setAlertesMail(pd.isAlertesMail());
-			pg.setDroitEvaluation(pd.isDroitEvaluation());
+			pg.setDroitEvaluationEtudiant(pd.isDroitEvaluationEtudiant());
+			pg.setDroitEvaluationEnseignant(pd.isDroitEvaluationEnseignant());
+			pg.setDroitEvaluationEntreprise(pd.isDroitEvaluationEntreprise());
 			pg.setCodeUniversite(pd.getCodeUniversite());
 			pg.setCampus(pd.getCampus());
 			pg.setBatiment(pd.getBatiment());
