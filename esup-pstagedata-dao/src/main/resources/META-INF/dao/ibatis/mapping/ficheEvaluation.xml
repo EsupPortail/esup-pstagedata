@@ -15,69 +15,69 @@
 		<result property="validationEtudiant" column="validationEtudiant" />
 		<result property="validationEnseignant" column="validationEnseignant" />
 		<result property="validationEntreprise" column="validationEntreprise" />
-		<result property="questionEnt1" column="questionEnt1" />
-		<result property="questionEnt2" column="questionEnt2" />
-		<result property="questionEnt3" column="questionEnt3" />
-		<result property="questionEnt4" column="questionEnt4" />
-		<result property="questionEnt5" column="questionEnt5" />
-		<result property="questionEnt6" column="questionEnt6" />
-		<result property="questionEnt7" column="questionEnt7" />
-		<result property="questionEnt8" column="questionEnt8" />
-		<result property="questionEnt9" column="questionEnt9" />
-		<result property="questionEnt10" column="questionEnt10" />
-		<result property="questionEnt11" column="questionEnt11" />
-		<result property="questionEnt12" column="questionEnt12" />
-		<result property="questionEnt13" column="questionEnt13" />
-		<result property="questionEnt14" column="questionEnt14" />
-		<result property="questionEnt15" column="questionEnt15" />
-		<result property="questionEnt16" column="questionEnt16" />
-		<result property="questionEnt17" column="questionEnt17" />
-		<result property="questionEnt18" column="questionEnt18" />
-		<result property="questionEnt19" column="questionEnt19" />
-		<result property="questionEtuI1" column="questionEtuI1" />
-		<result property="questionEtuI2" column="questionEtuI2" />
-		<result property="questionEtuI3" column="questionEtuI3" />
-		<result property="questionEtuI4" column="questionEtuI4" />
-		<result property="questionEtuI5" column="questionEtuI5" />
-		<result property="questionEtuI6" column="questionEtuI6" />
-		<result property="questionEtuI7" column="questionEtuI7" />
-		<result property="questionEtuI8" column="questionEtuI8" />
-		<result property="questionEtuII1" column="questionEtuII1" />
-		<result property="questionEtuII2" column="questionEtuII2" />
-		<result property="questionEtuII3" column="questionEtuII3" />
-		<result property="questionEtuII4" column="questionEtuII4" />
-		<result property="questionEtuII5" column="questionEtuII5" />
-		<result property="questionEtuII6" column="questionEtuII6" />
-		<result property="questionEtuIII1" column="questionEtuIII1" />
-		<result property="questionEtuIII2" column="questionEtuIII2" />
-		<result property="questionEtuIII3" column="questionEtuIII3" />
-		<result property="questionEtuIII4" column="questionEtuIII4" />
-		<result property="questionEtuIII5" column="questionEtuIII5" />
-		<result property="questionEtuIII6" column="questionEtuIII6" />
-		<result property="questionEtuIII7" column="questionEtuIII7" />
-		<result property="questionEtuIII8" column="questionEtuIII8" />
-		<result property="questionEtuIII9" column="questionEtuIII9" />
-		<result property="questionEtuIII10" column="questionEtuIII10" />
-		<result property="questionEtuIII11" column="questionEtuIII11" />
-		<result property="questionEtuIII12" column="questionEtuIII12" />
-		<result property="questionEtuIII13" column="questionEtuIII13" />
-		<result property="questionEtuIII14" column="questionEtuIII14" />
-		<result property="questionEtuIII15" column="questionEtuIII15" />
-		<result property="questionEtuIII16" column="questionEtuIII16" />
-		<result property="questionEnsI1" column="questionEnsI1" />
-		<result property="questionEnsI2" column="questionEnsI2" />
-		<result property="questionEnsI3" column="questionEnsI3" />
-		<result property="questionEnsII1" column="questionEnsII1" />
-		<result property="questionEnsII2" column="questionEnsII2" />
-		<result property="questionEnsII3" column="questionEnsII3" />
-		<result property="questionEnsII4" column="questionEnsII4" />
-		<result property="questionEnsII5" column="questionEnsII5" />
-		<result property="questionEnsII6" column="questionEnsII6" />
-		<result property="questionEnsII7" column="questionEnsII7" />
-		<result property="questionEnsII8" column="questionEnsII8" />
-		<result property="questionEnsII9" column="questionEnsII9" />
-		<result property="questionEnsII10" column="questionEnsII10" />
-		<result property="questionEnsII11" column="questionEnsII11" />
+		<result property="questionEnt1" column="questionEnt1" nullValue="1" />
+		<result property="questionEnt2" column="questionEnt2" nullValue="1" />
+		<result property="questionEnt3" column="questionEnt3" nullValue="1"/>
+		<result property="questionEnt4" column="questionEnt4" nullValue="1" />
+		<result property="questionEnt5" column="questionEnt5" nullValue="1" />
+		<result property="questionEnt6" column="questionEnt6" nullValue="1" />
+		<result property="questionEnt7" column="questionEnt7" nullValue="1" />
+		<result property="questionEnt8" column="questionEnt8" nullValue="1" />
+		<result property="questionEnt9" column="questionEnt9" nullValue="1" />
+		<result property="questionEnt10" column="questionEnt10" nullValue="1" />
+		<result property="questionEnt11" column="questionEnt11" nullValue="1" />
+		<result property="questionEnt12" column="questionEnt12" nullValue="1" />
+		<result property="questionEnt13" column="questionEnt13" nullValue="1" />
+		<result property="questionEnt14" column="questionEnt14" nullValue="1" />
+		<result property="questionEnt15" column="questionEnt15" nullValue="1" />
+		<result property="questionEnt16" column="questionEnt16" nullValue="1" />
+		<result property="questionEnt17" column="questionEnt17" nullValue="1" />
+		<result property="questionEnt18" column="questionEnt18" nullValue="1" />
+		<result property="questionEnt19" column="questionEnt19" nullValue="1" />
+		<result property="questionEtuI1" column="questionEtuI1" nullValue="1" />
+		<result property="questionEtuI2" column="questionEtuI2" nullValue="1" />
+		<result property="questionEtuI3" column="questionEtuI3" nullValue="1" />
+		<result property="questionEtuI4" column="questionEtuI4" nullValue="1" />
+		<result property="questionEtuI5" column="questionEtuI5" nullValue="1" />
+		<result property="questionEtuI6" column="questionEtuI6" nullValue="1"/>
+		<result property="questionEtuI7" column="questionEtuI7" nullValue="1" />
+		<result property="questionEtuI8" column="questionEtuI8" nullValue="1" />
+		<result property="questionEtuII1" column="questionEtuII1" nullValue="1" />
+		<result property="questionEtuII2" column="questionEtuII2" nullValue="1" />
+		<result property="questionEtuII3" column="questionEtuII3" nullValue="1" />
+		<result property="questionEtuII4" column="questionEtuII4" nullValue="1" />
+		<result property="questionEtuII5" column="questionEtuII5" nullValue="1" />
+		<result property="questionEtuII6" column="questionEtuII6" nullValue="1" />
+		<result property="questionEtuIII1" column="questionEtuIII1" nullValue="1" />
+		<result property="questionEtuIII2" column="questionEtuIII2" nullValue="1" />
+		<result property="questionEtuIII3" column="questionEtuIII3" nullValue="1" />
+		<result property="questionEtuIII4" column="questionEtuIII4" nullValue="1" />
+		<result property="questionEtuIII5" column="questionEtuIII5" nullValue="1" />
+		<result property="questionEtuIII6" column="questionEtuIII6" nullValue="1" />
+		<result property="questionEtuIII7" column="questionEtuIII7" nullValue="1" />
+		<result property="questionEtuIII8" column="questionEtuIII8" nullValue="1" />
+		<result property="questionEtuIII9" column="questionEtuIII9" nullValue="1" />
+		<result property="questionEtuIII10" column="questionEtuIII10" nullValue="1" />
+		<result property="questionEtuIII11" column="questionEtuIII11" nullValue="1" />
+		<result property="questionEtuIII12" column="questionEtuIII12" nullValue="1" />
+		<result property="questionEtuIII13" column="questionEtuIII13" nullValue="1" />
+		<result property="questionEtuIII14" column="questionEtuIII14" nullValue="1" />
+		<result property="questionEtuIII15" column="questionEtuIII15" nullValue="1" />
+		<result property="questionEtuIII16" column="questionEtuIII16" nullValue="1" />
+		<result property="questionEnsI1" column="questionEnsI1" nullValue="1" />
+		<result property="questionEnsI2" column="questionEnsI2" nullValue="1" />
+		<result property="questionEnsI3" column="questionEnsI3" nullValue="1" />
+		<result property="questionEnsII1" column="questionEnsII1" nullValue="1" />
+		<result property="questionEnsII2" column="questionEnsII2" nullValue="1" />
+		<result property="questionEnsII3" column="questionEnsII3" nullValue="1" />
+		<result property="questionEnsII4" column="questionEnsII4" nullValue="1" />
+		<result property="questionEnsII5" column="questionEnsII5" nullValue="1" />
+		<result property="questionEnsII6" column="questionEnsII6" nullValue="1" />
+		<result property="questionEnsII7" column="questionEnsII7" nullValue="1" />
+		<result property="questionEnsII8" column="questionEnsII8" nullValue="1" />
+		<result property="questionEnsII9" column="questionEnsII9" nullValue="1" />
+		<result property="questionEnsII10" column="questionEnsII10" nullValue="1" />
+		<result property="questionEnsII11" column="questionEnsII11" nullValue="1" />
 	</resultMap>
 
 	<statement id="getFicheEvaluationFromIdCentre" resultMap="FicheEvaluation">
