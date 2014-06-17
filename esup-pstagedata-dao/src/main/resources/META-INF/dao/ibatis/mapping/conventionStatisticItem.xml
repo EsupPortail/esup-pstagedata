@@ -92,6 +92,54 @@
 	</statement>
 	
 	<!--nombre de conventions selon la gratification -->
+	<!-- Ajouts pour afficher par tranches -->
+	<statement id="getNumberOfConventionsByIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		(SELECT 'Moins de 436 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ < ]]> 436)
+		UNION
+		(SELECT 'Entre 436 et 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification<![CDATA[ >= ]]>436
+		AND c.montantGratification <![CDATA[ <= ]]> 600)
+		UNION
+		(SELECT 'Plus de 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ > ]]> 600)
+		UNION
+		(SELECT 'Pas d\'indemnisation' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Non'
+		GROUP BY lib)
+		UNION
+		(SELECT ind.libelleIndemnisation AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Ne sait pas'
+		GROUP BY lib)
+	</statement>
 	<statement id="getNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
 	SELECT ind.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
@@ -331,7 +379,7 @@
 				
 	<statement id="getNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
 	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
-	FROM Convention c JOIN Service sv USING ( idService )
+	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
 		WHERE c.idCentreGestion =  #idCentreGestion#
 		AND c.annee = #annee#
 		AND c.validationConvention =1
@@ -433,6 +481,58 @@
 	</statement>
 	
 	<!--nombre de conventions par UFR et  gratification-->
+	<!-- Ajouts pour afficher par tranches -->
+	<statement id="getNumberOfConventionsByStudyAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,'Moins de 436 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR 
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ < ]]> 436
+		GROUP BY idPriorCriteria, lib)
+		UNION
+		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,'Entre 436 et 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR 
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification<![CDATA[ >= ]]>436
+		AND c.montantGratification <![CDATA[ <= ]]> 600
+		GROUP BY idPriorCriteria, lib)
+		UNION
+		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,'Plus de 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR 
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ > ]]> 600
+		GROUP BY idPriorCriteria, lib)
+		UNION
+		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,'Pas d\'indemnisation' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Non'
+		GROUP BY idPriorCriteria, lib)
+		UNION
+		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,ind.libelleIndemnisation AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Ne sait pas'
+		GROUP BY idPriorCriteria, lib)
+		ORDER BY idPriorCriteria, lib
+	</statement>
 	<statement id="getNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
 	<![CDATA[
 		SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
@@ -814,6 +914,58 @@
 	</statement>  
 	
 	<!--nombre de conventions par departement et  gratification-->
+	<!-- Ajouts pour afficher par tranches -->
+	<statement id="getNumberOfConventionsByDepartmentAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		(SELECT c.codeDepartement AS libPriorCriteria,'Moins de 436 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ < ]]> 436
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT c.codeDepartement AS libPriorCriteria,'Entre 436 et 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification<![CDATA[ >= ]]>436
+		AND c.montantGratification <![CDATA[ <= ]]> 600
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT c.codeDepartement AS libPriorCriteria,'Plus de 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ > ]]> 600
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT c.codeDepartement AS libPriorCriteria,'Pas d\'indemnisation' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Non'
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT c.codeDepartement AS libPriorCriteria,ind.libelleIndemnisation AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND ind.libelleIndemnisation='Ne sait pas'
+		GROUP BY libPriorCriteria, lib)
+		ORDER BY libPriorCriteria,lib
+	</statement>
 	<statement id="getNumberOfConventionsByDepartmentAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, i.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
@@ -1009,6 +1161,65 @@
 	</statement>  
 	
 	<!--nombre de conventions par Step et  gratification-->
+	<!-- Ajouts pour afficher par tranches -->
+	<statement id="getNumberOfConventionsByStepAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+		(SELECT e.libelleEtape AS libPriorCriteria,'Moins de 436 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c, Etape e
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.codeEtape = e.codeEtape
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ < ]]> 436
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,'Entre 436 et 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c, Etape e
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.codeEtape = e.codeEtape
+		AND c.montantGratification!=''
+		AND c.montantGratification<![CDATA[ >= ]]>436
+		AND c.montantGratification <![CDATA[ <= ]]> 600
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,'Plus de 600 euros' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c, Etape e
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.codeEtape = e.codeEtape
+		AND c.montantGratification!=''
+		AND c.montantGratification <![CDATA[ > ]]> 600
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,'Pas d\'indemnisation' AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c, Etape e, Indemnisation i
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.codeEtape = e.codeEtape
+		AND c.idIndemnisation = i.idIndemnisation
+		AND i.libelleIndemnisation='Non'
+		GROUP BY libPriorCriteria, lib)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,i.libelleIndemnisation AS lib,
+		count(c.idConvention) AS number
+		FROM Convention c, Etape e, Indemnisation i
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.codeEtape = e.codeEtape
+		AND c.idIndemnisation = i.idIndemnisation
+		AND i.libelleIndemnisation='Ne sait pas'
+		GROUP BY libPriorCriteria, lib)
+		ORDER BY libPriorCriteria,lib
+	</statement>
 	<statement id="getNumberOfConventionsByStepAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, i.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
