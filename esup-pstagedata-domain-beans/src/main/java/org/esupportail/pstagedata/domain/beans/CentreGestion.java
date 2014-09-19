@@ -79,9 +79,13 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private String nomViseur;
 	/**
-	 * pr�nom du Viseur
+	 * Prénom du Viseur
 	 */
 	private String prenomViseur;
+	/**
+	 * qualité du Viseur
+	 */
+	private String qualiteViseur;
 	/**
 	 * Url de la page d'instruction des consignes d'impression
 	 */
@@ -559,5 +563,19 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public void setVisibiliteEvalPro(boolean visibiliteEvalPro) {
 		this.visibiliteEvalPro = visibiliteEvalPro;
+	}
+
+	/**
+	 * @return the qualiteViseur
+	 */
+	public String getQualiteViseur() {
+		return qualiteViseur;
+	}
+
+	/**
+	 * @param qualiteViseur the qualiteViseur to set
+	 */
+	public void setQualiteViseur(String qualiteViseur) {
+		this.qualiteViseur = qualiteViseur;
 	}
 }

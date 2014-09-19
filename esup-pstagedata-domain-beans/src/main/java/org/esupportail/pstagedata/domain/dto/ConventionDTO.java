@@ -344,6 +344,15 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * variable pour la listCheckBox de validation en masse
 	 */
 	private boolean selected;
+	
+	/**
+	 * competences
+	 */
+	private String competences;
+	/**
+	 * nbConges
+	 */
+	private String nbConges;
 
 	/* **
 	 * Objets
@@ -2530,6 +2539,38 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
 		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
+	}
+
+
+	/**
+	 * @return the competences
+	 */
+	public String getCompetences() {
+		return competences;
+	}
+
+
+	/**
+	 * @param competences the competences to set
+	 */
+	public void setCompetences(String competences) {
+		this.competences = competences;
+	}
+
+
+	/**
+	 * @return the nbConges
+	 */
+	public String getNbConges() {
+		return nbConges;
+	}
+
+
+	/**
+	 * @param nbConges the nbConges to set
+	 */
+	public void setNbConges(String nbConges) {
+		this.nbConges = nbConges;
 	}
 
 }

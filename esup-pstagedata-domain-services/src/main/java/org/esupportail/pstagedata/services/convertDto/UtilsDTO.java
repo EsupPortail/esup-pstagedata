@@ -332,6 +332,7 @@ public class UtilsDTO {
 			c.setLoginModif(cd.getLoginModif());
 			c.setNomViseur(cd.getNomViseur());
 			c.setPrenomViseur(cd.getPrenomViseur());
+			c.setQualiteViseur(cd.getQualiteViseur());
 			c.setUrlPageInstruction(cd.getUrlPageInstruction());
 			if(cd.getIdCentreGestionSuperViseur()<=0)
 				c.setIdCentreGestionSuperViseur(null);
@@ -1410,6 +1411,10 @@ public class UtilsDTO {
 			o.setDateEnvoiMailTuteurPedago(oDTO.getDateEnvoiMailTuteurPedago());
 			o.setEnvoiMailTuteurPro(oDTO.isEnvoiMailTuteurPro());
 			o.setDateEnvoiMailTuteurPro(oDTO.getDateEnvoiMailTuteurPro());
+			
+			// Ajout nouvelle convention
+			o.setCompetences(oDTO.getCompetences());
+			o.setNbConges(oDTO.getNbConges());
 		}
 		return o;
 	}

@@ -404,6 +404,14 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 * dateEnvoiMailTuteurPro
 	 */
 	private Date dateEnvoiMailTuteurPro;
+	/**
+	 * competences
+	 */
+	private String competences;
+	/**
+	 * nbConges
+	 */
+	private String nbConges;
 	
 	/**
 	 * Constructeur
@@ -1768,6 +1776,38 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setDateEnvoiMailTuteurPro(Date dateEnvoiMailTuteurPro) {
 		this.dateEnvoiMailTuteurPro = dateEnvoiMailTuteurPro;
+	}
+
+
+	/**
+	 * @return the competences
+	 */
+	public String getCompetences() {
+		return competences;
+	}
+
+
+	/**
+	 * @param competences the competences to set
+	 */
+	public void setCompetences(String competences) {
+		this.competences = competences;
+	}
+
+
+	/**
+	 * @return the nbConges
+	 */
+	public String getNbConges() {
+		return nbConges;
+	}
+
+
+	/**
+	 * @param nbConges the nbConges to set
+	 */
+	public void setNbConges(String nbConges) {
+		this.nbConges = nbConges;
 	}
 
 }

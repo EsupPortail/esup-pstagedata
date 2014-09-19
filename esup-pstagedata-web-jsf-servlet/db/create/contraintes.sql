@@ -1,4 +1,4 @@
--- Fichier contenant toutes les contraintes et les index lors de la cr�ation de la base
+-- Fichier contenant toutes les contraintes et les index lors de la creation de la base
 
 -- -----------------------------------------------------
 

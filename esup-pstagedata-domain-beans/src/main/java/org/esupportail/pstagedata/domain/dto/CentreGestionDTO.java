@@ -85,6 +85,10 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	private String prenomViseur;
 	/**
+	 * qualité du Viseur
+	 */
+	private String qualiteViseur;
+	/**
 	 * Url de la page d'instruction des consignes d'impression
 	 */
 	private String urlPageInstruction;
@@ -657,6 +661,20 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	public void setVisibiliteEvalPro(boolean visibiliteEvalPro) {
 		this.visibiliteEvalPro = visibiliteEvalPro;
+	}
+
+	/**
+	 * @return the qualiteViseur
+	 */
+	public String getQualiteViseur() {
+		return qualiteViseur;
+	}
+
+	/**
+	 * @param qualiteViseur the qualiteViseur to set
+	 */
+	public void setQualiteViseur(String qualiteViseur) {
+		this.qualiteViseur = qualiteViseur;
 	}
 
 }

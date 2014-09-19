@@ -1,4 +1,4 @@
--- Retrait de la table Version Etape et de ses dependences (pas ou mal utilisées) --
+-- Retrait de la table Version Etape et de ses dependences (pas ou mal utilisees) --
 ALTER TABLE `Convention` DROP FOREIGN KEY `fk_Convention_VersionEtape1`;
 ALTER TABLE `Convention` DROP COLUMN `codeVersionEtape`;
 DROP TABLE `VersionEtape`;
