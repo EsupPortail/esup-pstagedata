@@ -177,6 +177,7 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 			codeUniversite=cg.getCodeUniversite();
 			nomViseur=cg.getNomViseur();
 			prenomViseur=cg.getPrenomViseur();
+			qualiteViseur=cg.getQualiteViseur();
 			urlPageInstruction=cg.getUrlPageInstruction();
 			validationPedagogique=cg.isValidationPedagogique();
 			if (cg.getIdCentreGestionSuperViseur() != null) {
