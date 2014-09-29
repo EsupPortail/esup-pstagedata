@@ -1740,7 +1740,7 @@ DROP TABLE IF EXISTS `CaisseRegime` ;
 
 CREATE  TABLE IF NOT EXISTS `CaisseRegime` (
 
-  `codeCaisse` `codeCaisse` VARCHAR(5) NULL ,
+  `codeCaisse` VARCHAR(5) NULL ,
 
   `libelleCaisse` VARCHAR(100) NOT NULL ,
 
