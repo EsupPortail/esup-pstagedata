@@ -129,7 +129,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                } else {
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                }
 					}
 				}
 			}
@@ -152,7 +156,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                } else {
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                }
 					}
 				}
 			}
@@ -200,7 +208,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 					c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 				}
 				if(c.getCodeEtape()!=null){
-					c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+	                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+	                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+	                } else {
+	                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+	                }
 				}
 			}
 			lr = UtilsDTO.getConventionListDTO(l);
@@ -228,7 +240,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                } else {
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                }
 					}
 				}
 			}
@@ -258,7 +274,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                } else {
+		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+		                }
 					}
 				}
 			}

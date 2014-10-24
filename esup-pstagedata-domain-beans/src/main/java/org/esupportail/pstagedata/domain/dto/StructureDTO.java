@@ -80,7 +80,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	/**
 	 * vrai si validee
 	 */
-	private boolean estValidee;
+	private int estValidee;
 	/**
 	 * Derniere Date indiquant que les infos sont e jour
 	 */
@@ -165,7 +165,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 				siteWeb=s.getSiteWeb();
 				groupe=s.getGroupe();
 				logo=s.getLogo();
-				estValidee=s.isEstValidee();
+				estValidee=s.getEstValidee();
 				infosAJour=s.getInfosAJour();
 				loginInfosAJour=s.getLoginInfosAJour();	
 				dateValidation=s.getDateValidation();
@@ -488,18 +488,6 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		this.logo = logo;
 	}
 	/**
-	 * @return the estValidee
-	 */
-	public boolean isEstValidee() {
-		return estValidee;
-	}
-	/**
-	 * @param estValidee the estValidee to set
-	 */
-	public void setEstValidee(boolean estValidee) {
-		this.estValidee = estValidee;
-	}
-	/**
 	 * @return the infosAJour
 	 */
 	public Date getInfosAJour() {
@@ -654,5 +642,19 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	public void setNafN5(NafN5DTO nafN5) {
 		this.nafN5 = nafN5;
+	}
+
+	/**
+	 * @return the estValidee
+	 */
+	public int getEstValidee() {
+		return estValidee;
+	}
+
+	/**
+	 * @param estValidee the estValidee to set
+	 */
+	public void setEstValidee(int estValidee) {
+		this.estValidee = estValidee;
 	}
 }

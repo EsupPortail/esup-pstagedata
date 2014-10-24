@@ -57,7 +57,7 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	/**
 	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
 	 */
-	public List<StructureDTO> getStructuresFromVerification(boolean estValidee){
+	public List<StructureDTO> getStructuresFromVerification(int estValidee){
 		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresFromVerification(estValidee));
 	}
 	

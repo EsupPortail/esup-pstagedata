@@ -221,7 +221,7 @@ CREATE  TABLE IF NOT EXISTS `Structure` (
 
   `logo` VARCHAR(200) NULL ,
 
-  `estValidee` TINYINT(1) NOT NULL DEFAULT false ,
+  `estValidee` INT(1) NOT NULL DEFAULT 0,
 
   `loginModif` VARCHAR(50) NULL ,
 

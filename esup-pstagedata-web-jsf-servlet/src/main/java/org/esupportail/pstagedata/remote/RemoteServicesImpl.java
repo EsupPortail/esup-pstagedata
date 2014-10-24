@@ -2592,7 +2592,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromVerification(boolean)
 	 */
-	public List<StructureDTO> getStructuresFromVerification(boolean estValidee){
+	public List<StructureDTO> getStructuresFromVerification(int estValidee){
 		return this.structureDomainService.getStructuresFromVerification(estValidee);
 	}
 

@@ -30,7 +30,7 @@ public interface StructureDaoService extends Serializable {
 	 * @param estValidee
 	 * @return List<Structure>
 	 */
-	public List<Structure> getStructuresFromVerification(boolean estValidee);
+	public List<Structure> getStructuresFromVerification(int estValidee);
 	
 	/**
 	 * @param id

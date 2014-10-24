@@ -403,12 +403,12 @@
     </update>
     
     <update id="updateStructureValidation">
-		UPDATE Structure SET dateValidation = CURRENT_TIMESTAMP(), loginValidation = #loginValidation#, estValidee=true
+		UPDATE Structure SET dateValidation = CURRENT_TIMESTAMP(), loginValidation = #loginValidation#, estValidee=1
 		WHERE idStructure = #idStructure#
     </update>
     
     <update id="updateStructureStopValidation">
-		UPDATE Structure SET dateStopValidation = CURRENT_TIMESTAMP(), loginStopValidation = #loginStopValidation#, estValidee=false
+		UPDATE Structure SET dateStopValidation = CURRENT_TIMESTAMP(), loginStopValidation = #loginStopValidation#, estValidee=2
 		WHERE idStructure = #idStructure#
     </update>
 

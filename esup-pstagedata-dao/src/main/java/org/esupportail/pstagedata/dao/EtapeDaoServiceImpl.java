@@ -85,7 +85,14 @@ public class EtapeDaoServiceImpl extends AbstractIBatisDaoService implements Eta
 	public Etape getEtapeFromId(String code, String codeUniversite) {
 		if(StringUtils.hasText(code) && StringUtils.hasText(codeUniversite)){
 			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-			parameterMap.put("code", code);
+			if (code.contains(";")){
+				String [] tabCodes = code.split(";");
+				parameterMap.put("code", tabCodes[0]);
+				parameterMap.put("codeVersionEtape", tabCodes[1]);
+			} else {
+				parameterMap.put("code", code);
+				parameterMap.put("codeVersionEtape", null);
+			}
 			parameterMap.put("codeUniversite", codeUniversite);
 			return (Etape) getSqlMapClientTemplate().queryForObject("getEtapeFromId",parameterMap);
 		}

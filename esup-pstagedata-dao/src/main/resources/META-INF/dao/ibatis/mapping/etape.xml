@@ -43,6 +43,9 @@
 	<statement id="getEtapeFromId" resultMap="Etape">
 		SELECT * FROM Etape
 		WHERE codeEtape = #code#
+		<isNotNull property="codeVersionEtape" prepend="AND">
+			codeVersionEtape = #codeVersionEtape#
+		</isNotNull>
 		<isNotNull property="codeUniversite" prepend="AND">
 			codeUniversite = #codeUniversite#
 		</isNotNull>

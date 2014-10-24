@@ -76,9 +76,9 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	private String logo;
 	/**
-	 * vrai si valid�e
+	 * vrai si validee
 	 */
-	private boolean estValidee;
+	private int estValidee;
 	/**
 	 * Derni�re Date indiquant que les infos sont � jour
 	 */
@@ -328,18 +328,6 @@ public class Structure extends Adresse implements Serializable{
 		this.logo = logo;
 	}
 	/**
-	 * @return the estValidee
-	 */
-	public boolean isEstValidee() {
-		return estValidee;
-	}
-	/**
-	 * @param estValidee the estValidee to set
-	 */
-	public void setEstValidee(boolean estValidee) {
-		this.estValidee = estValidee;
-	}
-	/**
 	 * @return the infosAJour
 	 */
 	public Date getInfosAJour() {
@@ -494,5 +482,19 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	public void setEffectif(Effectif effectif) {
 		this.effectif = effectif;
+	}
+
+	/**
+	 * @return the estValidee
+	 */
+	public int getEstValidee() {
+		return estValidee;
+	}
+
+	/**
+	 * @param estValidee the estValidee to set
+	 */
+	public void setEstValidee(int estValidee) {
+		this.estValidee = estValidee;
 	}	
 }

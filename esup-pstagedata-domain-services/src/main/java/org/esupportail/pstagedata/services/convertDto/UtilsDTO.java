@@ -995,9 +995,9 @@ public class UtilsDTO {
 			s.setDateCreation(sd.getDateCreation());
 			s.setDateModif(sd.getDateModif());
 			s.setDateValidation(sd.getDateValidation());
-			s.setEstValidee(s.isEstValidee());
+			s.setEstValidee(s.getEstValidee());
 			s.setFax(sd.getFax());
-			// Groupe transform� sans accent et en majuscules pour homog�n�iser
+			// Groupe transforme sans accent et en majuscules pour homog�n�iser
 			s.setGroupe(Utils.sansAccentEnMAJ(sd.getGroupe()));
 			s.setIdEffectif(sd.getIdEffectif());
 			s.setIdPays(sd.getIdPays());

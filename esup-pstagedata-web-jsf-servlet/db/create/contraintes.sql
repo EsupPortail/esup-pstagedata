@@ -410,7 +410,7 @@ ADD( CONSTRAINT `fk_AdminStructure_Civilite1`
 
 -- -----------------------------------------------------
 
-CREATE UNIQUE INDEX `index_codeEtape_codeUniversite` ON `Etape` (`codeEtape` ASC, `codeUniversite` ASC) ;
+CREATE UNIQUE INDEX `index_codeEtape_codeUniversite` ON `Etape` (`codeEtape` ASC, `codeVersionEtape` ASC, `codeUniversite` ASC) ;
 
 -- -----------------------------------------------------
 

@@ -39,7 +39,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
 	 */
 	@SuppressWarnings({ "unchecked", "cast" })
-	public List<Structure> getStructuresFromVerification(boolean estValidee){
+	public List<Structure> getStructuresFromVerification(int estValidee){
 		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromVerification", estValidee);
 	}
 	

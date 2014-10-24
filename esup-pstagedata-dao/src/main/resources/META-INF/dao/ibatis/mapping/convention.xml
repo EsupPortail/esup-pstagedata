@@ -121,6 +121,7 @@
 		<result property="annee" column="annee" />
 		<result property="codeUFR" column="codeUFR" />
 		<result property="codeEtape" column="codeEtape" />
+		<result property="codeVersionEtape" column="codeVersionEtape" />
 		<result property="codeUniversiteUFR" column="codeUniversiteUFR" />
 		<result property="codeUniversiteEtape" column="codeUniversiteEtape" />
 		<result property="idCentreGestion" column="idCentreGestion" />
@@ -212,7 +213,8 @@
 	<statement id="getConventionsEtudiant" resultMap="ConventionLight">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
-		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape,
+		C.codeVersionEtape, C.annee,
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
@@ -222,7 +224,7 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite =
 		C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape)
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		WHERE ET.identEtudiant = #identEtudiant#
 		<isNotNull property="codeUniversite" prepend="AND">
@@ -233,7 +235,7 @@
 	<statement id="getConventionsByEnseignant" resultMap="ConventionLight">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
-		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.codeVersionEtape, C.annee,
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
@@ -243,7 +245,7 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite =
 		C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape)
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		LEFT JOIN Avenant AV ON (AV.idConvention = C.idConvention and AV.validationAvenant = true)
 		WHERE (ES.idEnseignant=#idEnseignant# OR AV.idEnseignant=#idEnseignant#) and C.annee LIKE CONCAT('%',#annee#,'%')
@@ -263,7 +265,8 @@
 	<statement id="getConventionsFromCriteres" resultMap="ConventionLight">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
-		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape,
+		C.codeVersionEtape, C.annee,
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
@@ -273,7 +276,7 @@
 		U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON
 		(E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape)
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -491,7 +494,7 @@
 		resultMap="ConventionLight">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
-		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.annee,
+		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.codeVersionEtape, C.annee,
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
@@ -500,8 +503,8 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON
-		(E.codeEtape = C.codeEtape AND U.codeUniversite =
-		C.codeUniversiteEtape)
+		(E.codeEtape = C.codeEtape AND E.codeUniversite =
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		<isNull property="idC">
@@ -717,8 +720,8 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON
-		(E.codeEtape = C.codeEtape AND U.codeUniversite =
-		C.codeUniversiteEtape)
+		(E.codeEtape = C.codeEtape AND E.codeUniversite =
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -952,8 +955,8 @@
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
 		INNER JOIN Etape E ON
-		(E.codeEtape = C.codeEtape AND U.codeUniversite =
-		C.codeUniversiteEtape)
+		(E.codeEtape = C.codeEtape AND E.codeUniversite =
+		C.codeUniversiteEtape AND E.codeVersionEtape = C.codeVersionEtape)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
