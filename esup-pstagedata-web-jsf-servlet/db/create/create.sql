@@ -1993,6 +1993,10 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `dateSignature` DATETIME NULL ,
 
+  `nbConges` TEXT NULL ,
+
+  `competences` TEXT NULL ,
+
   PRIMARY KEY (`idConvention`))
 
 ENGINE = InnoDB

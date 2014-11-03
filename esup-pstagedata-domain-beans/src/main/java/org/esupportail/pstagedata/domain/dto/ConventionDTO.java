@@ -648,6 +648,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				if (c.getSignataire() != null) {
 					this.signataire = new ContactDTO(c.getSignataire());
 				}
+				
+				// Ajout nouvelle convention
+				this.nbConges = c.getNbConges();
+				this.competences = c.getCompetences();
 			}else{
 				this.structure=new StructureDTO(c.getStructure(),true);
 				this.etudiant=new EtudiantDTO(c.getEtudiant(),true);
