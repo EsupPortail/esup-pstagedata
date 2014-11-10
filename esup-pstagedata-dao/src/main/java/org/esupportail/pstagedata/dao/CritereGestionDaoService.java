@@ -32,7 +32,13 @@ public interface CritereGestionDaoService extends Serializable {
 	 * @return List<CritereGestion>
 	 */
 	public List<CritereGestion> getCritereGestionFromIdCentre(int idCentreGestion);
-
+	
+	/**
+	 * @param codeEtape
+	 * @return CritereGestion
+	 */
+	public CritereGestion getCritereGestionSansVetFromCodeEtape(String codeEtape);
+	
 	/**
 	 * @param idCentreGestion
 	 * @return int

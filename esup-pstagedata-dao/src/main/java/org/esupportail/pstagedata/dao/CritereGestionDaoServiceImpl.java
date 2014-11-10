@@ -5,6 +5,7 @@
 package org.esupportail.pstagedata.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
@@ -43,6 +44,12 @@ public class CritereGestionDaoServiceImpl extends AbstractIBatisDaoService imple
 	public List<CritereGestion> getCritereGestionFromIdCentre(int idCentreGestion){
 		return  getSqlMapClientTemplate().queryForList("getCritereGestionFromIdCentre", idCentreGestion);
 	}
+	/**
+	 * @see org.esupportail.pstagedata.dao.CritereGestionDaoService#getCritereGestionSansVetFromCodeEtape(String)
+	 */
+	public CritereGestion getCritereGestionSansVetFromCodeEtape(String codeEtape){
+		return (CritereGestion) getSqlMapClientTemplate().queryForObject("getCritereGestionSansVetFromCodeEtape", codeEtape);
+	}
 
 	/**
 	 * @see org.esupportail.pstagedata.dao.CritereGestionDaoService#getNombreCritereGestion(int)
@@ -76,7 +83,16 @@ public class CritereGestionDaoServiceImpl extends AbstractIBatisDaoService imple
 	public boolean deleteCritere(String codeCritere) throws DataDeleteDaoException, DataBaseDaoException{
 		boolean b = false;
 		try{
-			b = getSqlMapClientTemplate().delete("deleteCritere", codeCritere)>0?true:false;
+			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+			if (codeCritere.contains(";")){
+				String [] tabCodes = codeCritere.split(";");
+				parameterMap.put("code", tabCodes[0]);
+				parameterMap.put("codeVersionEtape", tabCodes[1]);
+			} else {
+				parameterMap.put("code", codeCritere);
+				parameterMap.put("codeVersionEtape", null);
+			}
+			b = getSqlMapClientTemplate().delete("deleteCritere", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update

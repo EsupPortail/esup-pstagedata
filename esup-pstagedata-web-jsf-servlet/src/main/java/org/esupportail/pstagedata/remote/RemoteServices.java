@@ -952,6 +952,11 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<CritereGestionDTO> getCritereGestionFromIdCentre(int idCentreGestion);
 	/**
+	 * @param codeEtape
+	 * @return CritereGestionDTO
+	 */
+	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape);
+	/**
 	 * @param idCentreGestion
 	 * @return int
 	 */
@@ -1976,6 +1981,14 @@ public interface RemoteServices extends Serializable{
 	 * @return String
 	 */
 	public String getCodeUFRFromCodeEtapeFromCodUniv(String codeEtape, String codeUniversite);
+	/**
+	 * @param codeEtape
+	 * @param codeVersionEtape
+	 * @return boolean
+	 * @throws DataUpdateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException;
 	/* ****************************************************************************
 	 * Etudiant
 	 *****************************************************************************/

@@ -96,7 +96,7 @@
 		FROM Structure S
 		WHERE S.estValidee = #estValidee#
 		ORDER BY S.dateCreation DESC
-		LIMIT 0, 50
+		LIMIT 0, 200
 	</statement>
 	
 	<statement id="getStructureFromId" resultMap="Structure">

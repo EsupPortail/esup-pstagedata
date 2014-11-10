@@ -10,6 +10,7 @@ import org.esupportail.pstagedata.dao.CritereGestionDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
+import org.esupportail.pstagedata.domain.beans.CritereGestion;
 import org.esupportail.pstagedata.domain.dto.CritereGestionDTO;
 import org.esupportail.pstagedata.exceptions.DataAddException;
 import org.esupportail.pstagedata.exceptions.DataDeleteException;
@@ -61,6 +62,14 @@ public class CritereGestionDomainServiceImpl implements CritereGestionDomainServ
 	 */
 	public List<CritereGestionDTO> getCritereGestionFromIdCentre(int idCentreGestion) {
 		return UtilsDTO.getCritereGestionListDTO(this.CritereGestionDaoService.getCritereGestionFromIdCentre(idCentreGestion));
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#getCritereGestionSansVetFromCodeEtape(codeEtape)
+	 */
+	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape) {
+		CritereGestion c = this.CritereGestionDaoService.getCritereGestionSansVetFromCodeEtape(codeEtape);
+		return c==null?null:new CritereGestionDTO(c);
 	}
 	
 	/**

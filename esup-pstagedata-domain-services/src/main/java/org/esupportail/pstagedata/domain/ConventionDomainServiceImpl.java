@@ -344,6 +344,23 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public String getCodeUFRFromCodeEtape(String codeEtape, String codeUniversite) {
 		return this.conventionDaoService.getCodeUFRFromCodeEtape(codeEtape, codeUniversite);
 	}
+	
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException{
+		boolean b = false;
+		try{
+			b = this.conventionDaoService.updateConventionSetCodeVersionEtape(codeEtape, codeVersionEtape);
+		}catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());	
+		}catch (DataBaseDaoException e) {
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
 	/**
 	 * @return the ufrDaoService
 	 */

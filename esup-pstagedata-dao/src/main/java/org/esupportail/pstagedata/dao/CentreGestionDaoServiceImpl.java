@@ -126,21 +126,21 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		if(codeCritere.contains(";")){
 			String[] tab = codeCritere.split(";");
 			codeCritere = tab[0];
+			String codeVersionEtape = tab[1];
 			parameterMap.put("codeCritere", codeCritere);
 			parameterMap.put("codeUniversite", codeUniversite);
-			parameterMap.put("codeVersionEtape", "");
+			parameterMap.put("codeVersionEtape", codeVersionEtape);
 			centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
 			if (centre != null){
-				// si l'on trouve un centre a partir du code etape et avec un codeVersionEtape vide (ancienne facon de les stocker donc), on renvoie le centre en question
+				// si l'on trouve un centre a partir du couple code etape/codeVersionEtape, on renvoie le centre en question
 				return centre;
 			} else {
-				// sinon on recherche avec le codeversionetape
+				// sinon on recherche sans le codeversionetape
 				parameterMap = new HashMap<String, String>();
-				String codeVersionEtape = tab[1];
 				
 				parameterMap.put("codeCritere", codeCritere);
 				parameterMap.put("codeUniversite", codeUniversite);
-				parameterMap.put("codeVersionEtape", codeVersionEtape);
+				parameterMap.put("codeVersionEtape", "");
 
 				centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
 			}

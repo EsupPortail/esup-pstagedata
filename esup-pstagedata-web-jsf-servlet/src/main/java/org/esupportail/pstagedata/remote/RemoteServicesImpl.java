@@ -1664,6 +1664,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	public int getNombreConventionByCentreGestion(int idCentreGestion){
 		return getNombreConventionByCentreGestionFromCodUniv(idCentreGestion, null);
 	}
+
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		if(codeEtape!=null && codeVersionEtape!=null){
+			b = this.conventionDomainService.updateConventionSetCodeVersionEtape(codeEtape,codeVersionEtape);
+		}
+		return b;
+	}
 	/* ****************************************************************************
 	 * CRITERE GESTION
 	 *****************************************************************************/
@@ -1681,7 +1693,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<CritereGestionDTO> getCritereGestionFromIdCentre(int idCentreGestion) {
 		return this.critereGestionDomainService.getCritereGestionFromIdCentre(idCentreGestion);
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCritereGestionSansVetFromCodeEtape(String)
+	 */
+	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape) {
+		return this.critereGestionDomainService.getCritereGestionSansVetFromCodeEtape(codeEtape);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreCritereGestion(int)
 	 */

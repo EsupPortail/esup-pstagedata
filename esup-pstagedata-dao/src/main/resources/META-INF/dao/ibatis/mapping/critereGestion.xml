@@ -24,7 +24,13 @@
 		SELECT * FROM CritereGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
-
+	
+	<!-- 	Recuperation d'un critere de gestion sans code version etape a partir du code etape -->
+	<statement id="getCritereGestionSansVetFromCodeEtape" resultMap="CritereGestion">
+		SELECT * FROM CritereGestion
+		WHERE codeCritere = #codeEtape# AND codeVersionEtape = ''
+	</statement>
+	
 	<!--	Récupération du nombre de criteres de gestion -->
 	<statement id="getNombreCritereGestion" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM CritereGestion
@@ -40,6 +46,9 @@
 	</insert>
 	
 	<delete id="deleteCritere">
-		DELETE FROM CritereGestion WHERE codeCritere = #codeCritere#
+		DELETE FROM CritereGestion WHERE codeCritere = #code#
+		<isNotNull property="codeVersionEtape" prepend="AND">
+			codeVersionEtape = #codeVersionEtape#
+		</isNotNull>
 	</delete>
 </sqlMap>

@@ -433,6 +433,26 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		return (String) getSqlMapClientTemplate().queryForObject("getCodeUFRFromCodeEtape",parameterMap);
 	}
 	
-	
+	/**
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateDaoException, DataBaseDaoException {
+		boolean b = false;
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("codeEtape", codeEtape);
+		parameterMap.put("codeVersionEtape", codeVersionEtape);
+		try{
+			b = getSqlMapClientTemplate().update("updateConventionSetCodeVersionEtape",parameterMap)>0?true:false;
+		} catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		} catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
 	
 }

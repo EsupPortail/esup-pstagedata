@@ -1139,4 +1139,9 @@
 		WHERE
 		idConvention=#idConvention#
 	</update>
+	
+	<update id="updateConventionSetCodeVersionEtape">
+		UPDATE Convention SET codeVersionEtape=#codeVersionEtape#
+		WHERE codeEtape = #codeEtape# AND codeVersionEtape = ''
+	</update>
 </sqlMap>

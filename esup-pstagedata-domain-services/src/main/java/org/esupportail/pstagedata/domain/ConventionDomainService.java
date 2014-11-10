@@ -133,5 +133,13 @@ public interface ConventionDomainService extends Serializable {
 	 * @return String
 	 */
 	public String getCodeUFRFromCodeEtape(String codeEtape, String codeUniversite);
-	
+
+	/**
+	 * @param codeEtape
+	 * @param codeVersionEtape
+	 * @return boolean
+	 * @throws DataUpdateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException;
 }

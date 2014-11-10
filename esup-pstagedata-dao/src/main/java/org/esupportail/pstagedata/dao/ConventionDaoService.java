@@ -136,4 +136,13 @@ public interface ConventionDaoService extends Serializable {
 	 * @return String
 	 */
 	public String getCodeUFRFromCodeEtape(String codeEtape, String codeUniversite);
+
+	/**
+	 * @param codeEtape
+	 * @param codeVersionEtape
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateDaoException, DataBaseDaoException;
 }
