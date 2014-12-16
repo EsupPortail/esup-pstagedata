@@ -257,6 +257,7 @@
 		INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		LEFT JOIN Avenant AV ON (AV.idConvention = C.idConvention and AV.validationAvenant = true)
 		WHERE (ES.idEnseignant=#idEnseignant# OR AV.idEnseignant=#idEnseignant#) and C.annee LIKE CONCAT('%',#annee#,'%')
+		ORDER BY C.dateCreation DESC
 	</statement>
 
 	<statement id="getAnneesConvention" resultClass="java.lang.String">

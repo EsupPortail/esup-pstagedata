@@ -162,51 +162,49 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 			CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();			
 			if(cgEntr!=null && cgEntr.getIdCentreGestion()>0){
 				if(idsCentresGestion.size() == 1 && idsCentresGestion.contains(cgEntr.getIdCentreGestion())){
-					//Si l'on se trouve c�t� entreprise
+					//Si l'on se trouve cote entreprise
 					entrepriseOnly=true;
 					//Recup des contacts entreprises uniquement
 					lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, cgEntr.getIdCentreGestion()));
 					if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
-				}else if (idsCentresGestion.size() > 1 && idsCentresGestion.contains(cgEntr.getIdCentreGestion())){
+				} else if (idsCentresGestion.size() > 1 && idsCentresGestion.contains(cgEntr.getIdCentreGestion())){
 					//Si on se trouve c�t� stage et que l'on est rattach� au centre ets
-					//Recup des contacts entreprise
-					lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, cgEntr.getIdCentreGestion()));
-					if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
+					//On laisse passer, le centre etant dans les idsCentre, ses contacts seront recup par la suite
 				} else {
-					//Si on se trouve c�t� stage sans etre rattach� au centre entreprise
+					//Si on se trouve c�t� stage sans etre rattache au centre entreprise
 					//Recup des contacts entreprises si pas de confidentialit� sur le centre entreprise
 					switch (cgEntr.getCodeConfidentialite().charAt(0)) {
-					case '0'://Pas de confidentialit�
+					case '0'://Pas de confidentialite
 						lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, cgEntr.getIdCentreGestion()));
 						if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
 						break;
 					}
 				}
 			}
-			//Si on se trouve c�t� stage
+			//Si on se trouve cote stage
 			if(!entrepriseOnly){
-				//Recup cg Etab de l'universit�
+				//Recup cg Etab de l'universite
 				CentreGestion cgEtab = this.centreGestionDaoService.getCentreEtablissement(codeUniversite);
 				if(cgEtab!=null && cgEtab.getIdCentreGestion()>0){
 					switch (cgEtab.getCodeConfidentialite().charAt(0)) {
-					case '0'://Pas de confidentialit�
-						//Recup de tout les contacts de l'universit�
+					case '0'://Pas de confidentialite
+						//Recup de tous les contacts de l'universite
 						lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndCodeUniversite(idService, codeUniversite));
 						if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
 						break;
-					case '1'://Confidentialit� totale
-						//Recup des contacts des centres en param�tre
+					case '1'://Confidentialite totale
+						//Recup des contacts des centres en parametre
 						for(int i : idsCentresGestion){
 							lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, i));
 							if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
 						}
-						//Recup contacts centre etab sauf si d�j� en param�tre
+						//Recup contacts centre etab sauf si deja en parametre
 						if(!idsCentresGestion.contains(cgEtab.getIdCentreGestion())){
 							lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, cgEtab.getIdCentreGestion()));
 							if(lTmp!=null && !lTmp.isEmpty()) lRet.addAll(lTmp);
 						}
 						break;
-					case '2'://Confidentialit� libre
+					case '2'://Confidentialite libre
 						//Recup des contacts des centres sans confidentialit� hormis centre en param�tre
 						List<Integer> lIdsCentresSansConf = this.centreGestionDaoService.getIdsCentreGestionSansConfidentialiteFromCodeUniversite(codeUniversite);
 						if(lIdsCentresSansConf!=null && !lIdsCentresSansConf.isEmpty()){
@@ -217,12 +215,12 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 								}
 							}
 						}
-						//Recup des contacts des centres en param�tre
+						//Recup des contacts des centres en parametre
 						for(int i : idsCentresGestion){
 							lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, i));
 							if(lTmp!=null && !lTmp.isEmpty())lRet.addAll(lTmp);
 						}
-						//Recup contacts centre etab sauf si d�j� en param�tre
+						//Recup contacts centre etab sauf si deja en param�tre
 						if(!idsCentresGestion.contains(cgEtab.getIdCentreGestion())){
 							lTmp=UtilsDTO.getContactListDTO(this.contactDaoService.getContactsFromIdServiceAndIdCentreGestion(idService, cgEtab.getIdCentreGestion()));
 							if(lTmp!=null && !lTmp.isEmpty()) lRet.addAll(lTmp);
@@ -231,7 +229,7 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 					}
 				}
 			}
-		//Si idsCentreGestion null donc c�t� stage donc recup contacts sans confidentialit�
+		//Si idsCentreGestion null donc cote stage donc recup contacts sans confidentialit�
 		}else if(idService>0 && (idsCentresGestion==null || idsCentresGestion.isEmpty()) && StringUtils.hasText(codeUniversite)){
 			// Recup cg Entreprise
 			CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();			

@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS FicheEvaluation (
   CONSTRAINT fk_FicheEvaluation_CentreGestion FOREIGN KEY (idCentreGestion)
   REFERENCES CentreGestion (idCentreGestion) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
-CREATE INDEX fk_FicheEvaluation_CentreGestion ON FicheEvaluation (idCentreGestion ASC);
+CREATE INDEX fk_FicheEvaluation_CentreGestion1 ON FicheEvaluation (idCentreGestion ASC);
 
 CREATE TABLE IF NOT EXISTS ReponseEvaluation (
 	idFicheEvaluation INT NOT NULL,
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS QuestionSupplementaire (
   CONSTRAINT fk_QuestionSupplementaire_FicheEvaluation FOREIGN KEY (idFicheEvaluation)
   REFERENCES FicheEvaluation (idFicheEvaluation) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
-CREATE INDEX fk_QuestionSupplementaire_FicheEvaluation ON QuestionSupplementaire (idFicheEvaluation ASC);
+CREATE INDEX fk_QuestionSupplementaire_FicheEvaluation1 ON QuestionSupplementaire (idFicheEvaluation ASC);
 
 CREATE TABLE IF NOT EXISTS ReponseSupplementaire(
   idQuestionSupplementaire INT NOT NULL,
@@ -249,5 +249,5 @@ CREATE TABLE IF NOT EXISTS ReponseSupplementaire(
   CONSTRAINT fk_ReponseSupplementaire_Convention FOREIGN KEY (idConvention)
   REFERENCES Convention (idConvention) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
-CREATE INDEX fk_ReponseSupplementaire_QuestionSupplementaire ON ReponseSupplementaire (idQuestionSupplementaire ASC);
-CREATE INDEX fk_ReponseSupplementaire_Convention ON ReponseSupplementaire (idConvention ASC);
+CREATE INDEX fk_ReponseSupplementaire_QuestionSupplementaire1 ON ReponseSupplementaire (idQuestionSupplementaire ASC);
+CREATE INDEX fk_ReponseSupplementaire_Convention1 ON ReponseSupplementaire (idConvention ASC);
