@@ -20,7 +20,7 @@
 	</resultMap>
 
 	<statement id="getPays" resultMap="Pays">
-		SELECT * FROM Pays
+		SELECT * FROM Pays WHERE temEnServPays = 'O'
 	</statement>
 	<statement id="getPaysFromId" resultMap="Pays">
 		SELECT * FROM Pays

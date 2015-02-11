@@ -504,6 +504,8 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
 
   `prenomViseur` VARCHAR(50) NULL ,
 
+  `qualiteViseur` VARCHAR(100) NULL,
+
   `urlPageInstruction` VARCHAR(200) NULL ,
 
   `idCentreGestionSuperViseur` INT NULL ,
@@ -1996,6 +1998,10 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
   `nbConges` TEXT NULL ,
 
   `competences` TEXT NULL ,
+
+  `idUniteDureeGratification` INT NULL ,
+
+  `monnaieGratification` VARCHAR(50) NULL DEFAULT 'euros',
 
   PRIMARY KEY (`idConvention`))
 

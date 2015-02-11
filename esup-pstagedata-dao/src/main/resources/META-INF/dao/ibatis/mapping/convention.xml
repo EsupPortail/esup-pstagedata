@@ -112,6 +112,10 @@
 			javaType="java.util.Date" jdbcType="DATETIME" />
 		<result property="nbConges" column="nbConges"/>
 		<result property="competences" column="competences"/>
+		
+		<result property="idUniteDureeGratification" column="idUniteDureeGratification"
+			nullValue="0" />
+		<result property="monnaieGratification" column="monnaieGratification" nullValue="euros"/>
 	</resultMap>
 
 	<resultMap id="ConventionLight" class="ClassConvention">
@@ -194,6 +198,9 @@
 		<result property="contact" column="idContact" select="getContactExportFromId" />
 		<result property="signataire" column="idSignataire" select="getContactExportFromId" />
 		<result property="nbAvenant" column="idConvention" select="getNombreAvenant" />
+		
+		<result property="idUniteDureeGratification" column="idUniteDureeGratification"/>
+		<result property="monnaieGratification" column="monnaieGratification" />
 	</resultMap>
 
 	<statement id="getConventions" resultMap="Convention">
@@ -229,7 +236,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		WHERE ET.identEtudiant = #identEtudiant#
 		<isNotNull property="codeUniversite" prepend="AND">
@@ -253,7 +261,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		LEFT JOIN Avenant AV ON (AV.idConvention = C.idConvention and AV.validationAvenant = true)
 		WHERE (ES.idEnseignant=#idEnseignant# OR AV.idEnseignant=#idEnseignant#) and C.annee LIKE CONCAT('%',#annee#,'%')
@@ -287,7 +296,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -517,7 +527,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		<isNull property="idC">
@@ -736,7 +747,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -965,7 +977,8 @@
 		C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp,
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
-		adresseEtudiant, codePostalEtudiant, villeEtudiant, paysEtudiant
+		adresseEtudiant, codePostalEtudiant, villeEtudiant, paysEtudiant, C.idUniteDureeGratification,
+		C.monnaieGratification
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
@@ -973,7 +986,8 @@
 		C.codeUniversiteEtape AND 
 		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
 		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -1011,7 +1025,7 @@
 		idIndemnisation,montantGratification,fonctionsEtTaches,details,annee,idAssurance,insee,codeCaisse,temConfSujetTeme,nbHeuresHebdo,quotiteTravail,
 		modeEncadreSuivi,idModeVersGratification,avantagesNature,idNatureTravail,idModeValidationStage,codeElp,libelleELP,creditECTS,travailNuitFerie,
 		dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
-		codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,codeRGI,loginCreation,dateCreation,nbConges,competences)
+		codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,codeRGI,loginCreation,dateCreation,nbConges,competences,idUniteDureeGratification,monnaieGratification)
 		VALUES
 		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeVersionEtape#,#codeUniversiteEtape#,
 		#idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
@@ -1021,7 +1035,7 @@
 		#idIndemnisation#,#montantGratification#,#fonctionsEtTaches#,#details#,#annee#,#idAssurance#,#insee#,#codeCaisse#,#temConfSujetTeme#,#nbHeuresHebdo#,#quotiteTravail#,
 		#modeEncadreSuivi#,#idModeVersGratification#,#avantagesNature#,#idNatureTravail#,#idModeValidationStage#,#codeElp#,#libelleELP#,#creditECTS#,#travailNuitFerie#,
 		#dureeStage#,#nomEtabRef#,#adresseEtabRef#,#nomSignataireComposante#,#qualiteSignataire#,#libelleCPAM#,#dureeExceptionnelle#,#idUniteDureeExceptionnelle#,#idUniteGratification#,
-		#codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP(),#nbConges#,#competences#)
+		#codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP(),#nbConges#,#competences#,#idUniteDureeGratification#,#monnaieGratification#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -1080,7 +1094,8 @@
 		loginModif = #loginModif#,dateModif = CURRENT_TIMESTAMP(),loginValidation =
 		#loginValidation#,dateValidation = #dateValidation#,loginSignature =
 		#loginSignature#,dateSignature=#dateSignature#,nbConges=#nbConges#,
-		competences=#competences#
+		competences=#competences#,idUniteDureeGratification=#idUniteDureeGratification#,
+		monnaieGratification=#monnaieGratification#
 		WHERE idConvention = #idConvention#
 	</update>
 

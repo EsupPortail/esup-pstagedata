@@ -353,6 +353,14 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * nbConges
 	 */
 	private String nbConges;
+	/**
+	 * idUniteDureeGratification
+	 */
+	private Integer idUniteDureeGratification;
+	/**
+	 * monnaieGratification
+	 */
+	private String monnaieGratification;
 
 	/* **
 	 * Objets
@@ -437,6 +445,11 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private UniteDureeDTO uniteDuree;
 
+	/**
+	 * uniteDureeGratification
+	 */
+	private UniteDureeDTO uniteDureeGratification;
+	
 	/**
 	 * tempsTravail
 	 */
@@ -525,6 +538,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		this.setIdOffre(0);
 		this.setIdOrigineStage(0);
 		this.setIdUniteDureeExceptionnelle(0);
+		this.setIdUniteDureeGratification(0);
 		this.setIdUniteGratification(0);
 	}
 
@@ -613,6 +627,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				this.libelleCPAM=c.getLibelleCPAM();
 				this.dureeExceptionnelle=c.getDureeExceptionnelle();
 				this.idUniteDureeExceptionnelle=c.getIdUniteDureeExceptionnelle();
+				this.idUniteDureeGratification=c.getIdUniteDureeGratification();
 				this.idUniteGratification=c.getIdUniteGratification();
 				this.codeFinalite=c.getCodeFinalite();
 				this.libelleFinalite=c.getLibelleFinalite();
@@ -652,6 +667,8 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				// Ajout nouvelle convention
 				this.nbConges = c.getNbConges();
 				this.competences = c.getCompetences();
+				
+				this.monnaieGratification = c.getMonnaieGratification();
 			}else{
 				this.structure=new StructureDTO(c.getStructure(),true);
 				this.etudiant=new EtudiantDTO(c.getEtudiant(),true);
@@ -730,7 +747,9 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 //			this.libelleCPAM=c.getLibelleCPAM();
 			this.dureeExceptionnelle=c.getDureeExceptionnelle();
 			this.idUniteDureeExceptionnelle=c.getIdUniteDureeExceptionnelle();
+			this.idUniteDureeGratification=c.getIdUniteDureeGratification();
 			this.idUniteGratification=c.getIdUniteGratification();
+			this.monnaieGratification=c.getMonnaieGratification();
 //			this.codeFinalite=c.getCodeFinalite();
 //			this.libelleFinalite=c.getLibelleFinalite();
 //			this.codeCursusLMD=c.getCodeCursusLMD();
@@ -842,6 +861,8 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				"libelleCPAM: "+libelleCPAM+", "+
 				"dureeExceptionnelle : "+dureeExceptionnelle+", "+
 				"idUniteDureeExceptionnelle : "+idUniteDureeExceptionnelle+", "+
+				"idUniteDureeGratification : "+idUniteDureeGratification+", "+
+				"monnaieGratification : "+monnaieGratification+", "+
 				"idUniteGratification : "+idUniteGratification+", "+
 				"codeFinalite : "+codeFinalite+", "+
 				"libelleFinalite : "+libelleFinalite+", "+
@@ -2575,6 +2596,36 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setNbConges(String nbConges) {
 		this.nbConges = nbConges;
+	}
+
+
+	public Integer getIdUniteDureeGratification() {
+		return idUniteDureeGratification;
+	}
+
+
+	public void setIdUniteDureeGratification(Integer idUniteDureeGratification) {
+		this.idUniteDureeGratification = idUniteDureeGratification;
+	}
+
+
+	public UniteDureeDTO getUniteDureeGratification() {
+		return uniteDureeGratification;
+	}
+
+
+	public void setUniteDureeGratification(UniteDureeDTO uniteDureeGratification) {
+		this.uniteDureeGratification = uniteDureeGratification;
+	}
+
+
+	public String getMonnaieGratification() {
+		return monnaieGratification;
+	}
+
+
+	public void setMonnaieGratification(String monnaieGratification) {
+		this.monnaieGratification = monnaieGratification;
 	}
 
 }

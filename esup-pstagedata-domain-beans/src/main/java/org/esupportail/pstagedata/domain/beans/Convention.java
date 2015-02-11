@@ -332,6 +332,14 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 * dateSignature
 	 */
 	private Date dateSignature;
+	/**
+	 * idUniteDureeGratification
+	 */
+	private Integer idUniteDureeGratification;
+	/**
+	 * monnaieGratification
+	 */
+	private String monnaieGratification;
 
 
 	/* **
@@ -1808,6 +1816,26 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	public void setNbConges(String nbConges) {
 		this.nbConges = nbConges;
+	}
+
+
+	public Integer getIdUniteDureeGratification() {
+		return idUniteDureeGratification;
+	}
+
+
+	public void setIdUniteDureeGratification(Integer idUniteDureeGratification) {
+		this.idUniteDureeGratification = idUniteDureeGratification;
+	}
+
+
+	public String getMonnaieGratification() {
+		return monnaieGratification;
+	}
+
+
+	public void setMonnaieGratification(String monnaieGratification) {
+		this.monnaieGratification = monnaieGratification;
 	}
 
 }

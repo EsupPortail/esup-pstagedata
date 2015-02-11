@@ -1369,10 +1369,13 @@ public class UtilsDTO {
 			if(oDTO.getIdUniteDureeExceptionnelle()<=0)
 				o.setIdUniteDureeExceptionnelle(null);
 			else o.setIdUniteDureeExceptionnelle(oDTO.getIdUniteDureeExceptionnelle());
-			
+			if(oDTO.getIdUniteDureeGratification()<=0)
+				o.setIdUniteDureeGratification(null);
+			else o.setIdUniteDureeGratification(oDTO.getIdUniteDureeGratification());
 			if(oDTO.getIdUniteGratification()<=0)
 				o.setIdUniteGratification(null);
 			else o.setIdUniteGratification(oDTO.getIdUniteGratification());
+			o.setMonnaieGratification(oDTO.getMonnaieGratification());
 			o.setInsee(oDTO.getInsee());
 			o.setInterruptionStage(oDTO.isInterruptionStage());
 			o.setLibelleCPAM(oDTO.getLibelleCPAM());
