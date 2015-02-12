@@ -5,3 +5,4 @@ target/
 .project
 config.properties
 _jarClient/
+log4j.properties
