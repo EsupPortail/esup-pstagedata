@@ -110,6 +110,10 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * montantGratification
 	 */
 	private String montantGratification;
+	/**
+	 * idUniteDureeGratification
+	 */
+	private Integer idUniteDureeGratification;
 	
 	/* ***************************************************************
 	 * Objets
@@ -628,6 +632,16 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 */
 	public void setTitreAvenant(String titreAvenant) {
 		this.titreAvenant = titreAvenant;
+	}
+
+
+	public Integer getIdUniteDureeGratification() {
+		return idUniteDureeGratification;
+	}
+
+
+	public void setIdUniteDureeGratification(Integer idUniteDureeGratification) {
+		this.idUniteDureeGratification = idUniteDureeGratification;
 	}
 	
 	

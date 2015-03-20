@@ -667,3 +667,16 @@ ADD( CONSTRAINT `fk_OffreModeCandidature_Offre1`
     REFERENCES `ModeCandidature` (`idModeCandidature` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+    
+ 
+-- -----------------------------------------------------
+
+-- AJOUT 2.2.1 MODULE EVALUATION
+
+-- -----------------------------------------------------
+
+CREATE INDEX fk_FicheEvaluation_CentreGestion1 ON FicheEvaluation (idCentreGestion ASC);
+CREATE INDEX fk_QuestionSupplementaire_FicheEvaluation1 ON QuestionSupplementaire (idFicheEvaluation ASC);
+CREATE INDEX fk_ReponseSupplementaire_QuestionSupplementaire1 ON ReponseSupplementaire (idQuestionSupplementaire ASC);
+CREATE INDEX fk_ReponseSupplementaire_Convention1 ON ReponseSupplementaire (idConvention ASC);
+    

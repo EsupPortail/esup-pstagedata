@@ -37,6 +37,7 @@
 		<result property="dateCreation" column="dateCreation" javaType="java.util.Date" jdbcType="DATETIME"/>
 		<result property="loginModif" column="loginModif"/>
 		<result property="dateModif" column="dateModif" javaType="java.util.Date" jdbcType="DATETIME"/>
+		<result property="idUniteDureeGratification" column="idUniteDureeGratification" nullValue="0" />
 	</resultMap>
 
 	<statement id="getAvenant" resultMap="Avenant">
@@ -55,12 +56,12 @@
 		dateFinStage, interruptionStage, dateDebutInterruption, dateFinInterruption, modificationLieu,
 		idService, modificationSujet, sujetStage, modificationEnseignant, idEnseignant, modificationSalarie, 
 		idContact,modificationMontantGratification, idUniteGratification, montantGratification,
-		validationAvenant, loginCreation, dateCreation) 
+		validationAvenant, loginCreation, dateCreation,idUniteDureeGratification) 
 		VALUES (#titreAvenant#,#idConvention#,#motifAvenant#,#rupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
 		#interruptionStage#,#dateDebutInterruption#, #dateFinInterruption#,#modificationLieu#, #idService#,
 		#modificationSujet#,#sujetStage#, #modificationEnseignant#,#idEnseignant#,#modificationSalarie#, 
 		#idContact#,#modificationMontantGratification#,#idUniteGratification#,#montantGratification#,
-		#validationAvenant#,#loginCreation#,CURRENT_TIMESTAMP());
+		#validationAvenant#,#loginCreation#,CURRENT_TIMESTAMP(),#idUniteDureeGratification#);
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -75,7 +76,7 @@
 		idEnseignant=#idEnseignant#,modificationSalarie=#modificationSalarie#,idContact=#idContact#,
 		modificationMontantGratification=#modificationMontantGratification#,idUniteGratification=#idUniteGratification#,
 		montantGratification=#montantGratification#, validationAvenant=#validationAvenant#,
-		loginModif=#loginModif#,dateModif=CURRENT_TIMESTAMP()
+		loginModif=#loginModif#,dateModif=CURRENT_TIMESTAMP(),idUniteDureeGratification=#idUniteDureeGratification#
 		WHERE idAvenant=#idAvenant#
 	</update>
 	

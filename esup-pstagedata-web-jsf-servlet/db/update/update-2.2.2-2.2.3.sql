@@ -6,4 +6,6 @@ UPDATE UniteDuree SET libelleUniteDuree='heure' WHERE idUniteDuree=1;
 
 ALTER TABLE Convention ADD idUniteDureeGratification INT NULL DEFAULT 4;
 
+ALTER TABLE Avenant ADD idUniteDureeGratification INT NULL DEFAULT 4;
+
 ALTER TABLE Convention ADD monnaieGratification VARCHAR(50) NULL DEFAULT 'euros';

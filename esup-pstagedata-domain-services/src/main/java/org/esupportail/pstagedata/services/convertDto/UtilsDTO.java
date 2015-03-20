@@ -274,6 +274,11 @@ public class UtilsDTO {
 			} else if (ad.getIdUniteGratification() != null ){
 				a.setIdUniteGratification(ad.getIdUniteGratification());
 			}
+			if (ad.getIdUniteDureeGratification() != null && ad.getIdUniteDureeGratification() == 0){
+				a.setIdUniteDureeGratification(null);
+			} else if (ad.getIdUniteDureeGratification() != null ){
+				a.setIdUniteDureeGratification(ad.getIdUniteDureeGratification());
+			}
 			a.setInterruptionStage(ad.isInterruptionStage());
 			if (ad.getLoginCreation() != null)
 				a.setLoginCreation(ad.getLoginCreation());

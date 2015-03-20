@@ -112,6 +112,10 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 * montantGratification
 	 */
 	private String montantGratification;
+	/**
+	 * idUniteDureeGratification
+	 */
+	private Integer idUniteDureeGratification;
 	
 	/* ***************************************************************
 	 * Objets
@@ -132,6 +136,11 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 * uniteGratification
 	 */
 	private UniteGratificationDTO uniteGratification;
+
+	/**
+	 * uniteDureeGratification
+	 */
+	private UniteDureeDTO uniteDureeGratification;
 	
 	/**
 	 * convention
@@ -174,6 +183,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 			this.validationAvenant=a.isValidationAvenant();
 			this.modificationMontantGratification=a.isModificationMontantGratification();
 			this.setIdUniteGratification(a.getIdUniteGratification());
+			this.setIdUniteDureeGratification(a.getIdUniteDureeGratification());
 			this.setMontantGratification(a.getMontantGratification());
 			if(a.getService()!=null) 
 				setService(new ServiceDTO(a.getService()));
@@ -218,6 +228,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		"modificationMontantGratification : " + modificationMontantGratification +", "+
 		"idUniteGratification : " + idUniteGratification + ", "+
 		"montantGratification : " + montantGratification + ", "+
+		"idUniteDureeGratification : " + idUniteDureeGratification +", "+
 		"validationAvenant : "+validationAvenant+", "+
 		", "+super.toString();
 
@@ -686,6 +697,22 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setTitreAvenant(String titreAvenant) {
 		this.titreAvenant = titreAvenant;
+	}
+
+	public Integer getIdUniteDureeGratification() {
+		return idUniteDureeGratification;
+	}
+
+	public void setIdUniteDureeGratification(Integer idUniteDureeGratification) {
+		this.idUniteDureeGratification = idUniteDureeGratification;
+	}
+
+	public UniteDureeDTO getUniteDureeGratification() {
+		return uniteDureeGratification;
+	}
+
+	public void setUniteDureeGratification(UniteDureeDTO uniteDureeGratification) {
+		this.uniteDureeGratification = uniteDureeGratification;
 	}
 	
 	
