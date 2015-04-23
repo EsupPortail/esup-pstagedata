@@ -692,6 +692,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.dateDebutStage=c.getDateDebutStage();
 			this.dateFinStage=c.getDateFinStage();
 			this.validationConvention=c.isValidationConvention();
+			this.validationPedagogique=c.isValidationPedagogique();
 			this.annee=c.getAnnee();
 			this.codeUFR=c.getCodeUFR();
 			this.codeUniversiteUFR=c.getCodeUniversiteUFR();
@@ -935,6 +936,15 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public boolean getValidationConventionExport() {
 		return isValidationConvention();
 	}
+	
+	/**
+	 * 
+	 * @return isValidationPedagogique
+	 */
+	public boolean getValidationPedagogiqueExport() {
+		return isValidationPedagogique();
+	}
+
 
 
 	/* ***************************************************************

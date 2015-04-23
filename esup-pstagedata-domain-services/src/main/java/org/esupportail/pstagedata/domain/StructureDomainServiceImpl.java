@@ -77,14 +77,29 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructure(int)
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructureBase(int)
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteException, WebServiceDataBaseException{
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		try{
-			b = this.structureDaoService.deleteStructure(idStructure);
+			b = this.structureDaoService.deleteStructureBase(idStructure);
 		}catch (DataDeleteDaoException e) {
 			throw new DataDeleteException(e.getMessage());	
+		}catch (DataBaseDaoException e) {
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructure(int)
+	 */
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException{
+		boolean b = false;
+		try{
+			b = this.structureDaoService.deleteStructure(idStructure,loginCurrentUser);
+		}catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}

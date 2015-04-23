@@ -1591,7 +1591,17 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException 
 	 * @throws StructureDeleteException 
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteException, WebServiceDataBaseException, StructureDeleteException;
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException, StructureDeleteException;	
+	/**
+	 * 
+	 * @param idStructure
+	 * @return boolean
+	 * @throws DataDeleteException
+	 * @throws WebServiceDataBaseException
+	 * @throws StructureDeleteException
+	 */
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException;
+	
 	/* ****************************************************************************
 	 * TEMPS TRAVAIL
 	 *****************************************************************************/
@@ -2057,6 +2067,9 @@ public interface RemoteServices extends Serializable{
 	 * @return int
 	 */
 	public int getNombreConventionByEnseignantFromCodUniv(String uidEnseignant, String codeUniversite);
+	
+	public int getNombreConventionByEnseignantByAnneeFromCodUniv(String uidEnseignant, String codeUniversite, String annee );
+	
 	/**
 	 * @return List
 	 */

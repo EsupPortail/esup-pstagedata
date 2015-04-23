@@ -1816,7 +1816,11 @@ public class RemoteServicesImpl implements RemoteServices{
 	public int getNombreConventionByEnseignantFromCodUniv(String uidEnseignant, String codeUniversite){
 		return this.enseignantDomainService.getNombreConventionByEnseignant(uidEnseignant, codeUniversite);
 	}
-
+	
+	public int getNombreConventionByEnseignantByAnneeFromCodUniv(String uidEnseignant, String codeUniversite, String annee ){
+		return this.enseignantDomainService.getNombreConventionByEnseignantByAnnee(uidEnseignant, codeUniversite, annee);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEnseignants(java.lang.String)
 	 */
@@ -2577,7 +2581,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteService(int)
 	 */
-	public boolean deleteService(int idService) throws DataDeleteException, WebServiceDataBaseException,ServiceDeleteException{
+	public boolean deleteService(int idService) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idService>0){
 			int nbContactRefOffre = this.serviceDomainService.countContactRefOffre(idService);
@@ -2900,9 +2904,9 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteStructure(int)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteStructureBase(int)
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteException, WebServiceDataBaseException, StructureDeleteException{
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
 			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
@@ -2920,7 +2924,23 @@ public class RemoteServicesImpl implements RemoteServices{
 				}
 			}
 			b = this.serviceDomainService.deleteServiceFromIdStructure(idStructure);
-			b = this.structureDomainService.deleteStructure(idStructure);
+			b = this.structureDomainService.deleteStructureBase(idStructure);
+		}
+		return b;
+	}
+	
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException, StructureDeleteException{
+		boolean b = false;
+		if(idStructure>0){
+			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
+			int nbO = this.structureDomainService.countOffreFromIdStructure(idStructure);
+			int nbCv = this.structureDomainService.countConventionFromIdStructure(idStructure);
+			boolean accord = this.accordPartenariatDomainService.getAccordFromIdStructure(idStructure)!=null;
+			if(nbCpt > 0 || nbO > 0 || nbCv > 0 || accord){
+				throw new StructureDeleteException("Suppression impossible. Offres : "+nbCpt+", Comptes : "+nbO+", Conventions : "+nbCv+", Accord : "+accord,
+						nbCpt,nbO,nbCv,accord);
+			}			
+			b=this.structureDomainService.deleteStructure(idStructure,loginCurrentUser);
 		}
 		return b;
 	}

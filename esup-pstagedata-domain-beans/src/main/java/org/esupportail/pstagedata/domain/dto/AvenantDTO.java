@@ -115,7 +115,11 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	/**
 	 * idUniteDureeGratification
 	 */
-	private Integer idUniteDureeGratification;
+	private Integer idUniteDureeGratification;	
+	/**
+	 * dateRupture
+	 */
+	private Date dateRupture;
 	
 	/* ***************************************************************
 	 * Objets
@@ -196,6 +200,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 			if (a.getConvention() != null) {
 				setConvention(new ConventionDTO(a.getConvention(),false));
 			}
+			this.dateRupture=a.getDateRupture();
 			
 		}
 	}	
@@ -211,6 +216,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		"titreAvenant : "+titreAvenant+", "+
 		"motifAvenant : "+motifAvenant+", "+
 		"rupture : "+rupture+", "+
+		"dateRupture : "+dateRupture+", "+
 		"modificationPeriode : "+modificationPeriode+", "+
 		"dateDebutStage : "+dateDebutStage+", "+
 		"dateFinStage : "+dateFinStage+", "+
@@ -713,6 +719,20 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 
 	public void setUniteDureeGratification(UniteDureeDTO uniteDureeGratification) {
 		this.uniteDureeGratification = uniteDureeGratification;
+	}
+	/**
+	 * 
+	 * @return the dateRupture
+	 */
+	public Date getDateRupture(){
+		return dateRupture;
+	}
+	/**
+	 * 
+	 * @param dateRupture the dateRupture to set
+	 */
+	public void setDateRupture(Date dateRupture){
+		this.dateRupture=dateRupture;
 	}
 	
 	

@@ -44,6 +44,8 @@
 		<result property="loginValidation" column="loginValidation" />
 		<result property="dateStopValidation" column="dateStopValidation" javaType="java.util.Date" jdbcType="DATETIME"/>
 		<result property="loginStopValidation" column="loginStopValidation" />
+		<result property="temEnServStructure" column="temEnServStructure" />
+		
 		
 		<result property="idAccordPartenariat" column="idAccordPartenariat" nullValue="0"/>
 	</resultMap>
@@ -95,6 +97,7 @@
 		S.voie, S.commune, S.codePostal, S.idPays, S.estValidee, S.dateCreation
 		FROM Structure S
 		WHERE S.estValidee = #estValidee#
+		AND temEnServStructure = 'O'
 		ORDER BY S.dateCreation DESC
 		LIMIT 0, 200
 	</statement>
@@ -103,6 +106,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.idStructure = #idStructure#
+		AND temEnServStructure = 'O'
 		LIMIT 0,1
 	</statement>
 	
@@ -119,6 +123,7 @@
 		S.codeNAF_N5, S.telephone, S.fax, S.mail, S.siteWeb   
 		FROM Structure S
 		WHERE S.idStructure = #idStructure#
+		AND temEnServStructure = 'O'
 		LIMIT 0,1
 	</statement>
 	
@@ -126,6 +131,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.idStructure = #idStructure#
+		AND temEnServStructure = 'O'
 		LIMIT 0,1
 	</statement>
 	
@@ -134,13 +140,15 @@
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		INNER JOIN Service Se ON S.idStructure=Se.idStructure
 		WHERE Se.idService = #idService#
+		AND temEnServStructure = 'O'
 		LIMIT 0,1
 	</statement>	
 	
 	<statement id="getStructureFromRaisonSociale" resultMap="Structure">
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
-		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%') 
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -148,6 +156,7 @@
 	<statement id="countStructureFromRaisonSociale" resultClass="java.lang.Integer">
 		SELECT COUNT(*) FROM Structure 
 		WHERE raisonSociale LIKE CONCAT('%',#raisonSociale#,'%')
+		AND temEnServStructure = 'O'
 	</statement>
 	
 	<statement id="getStructuresFromRaisonSocialeEtDepartement" resultMap="Structure">
@@ -155,6 +164,7 @@
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
 		AND S.codePostal LIKE CONCAT(#codePostal#,'%')
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -164,6 +174,7 @@
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		INNER JOIN Pays P ON S.idPays = P.idPays
 		WHERE S.raisonSociale LIKE CONCAT('%',#raisonSociale#,'%')
+		AND temEnServStructure = 'O'
 		AND (
 			P.COG=#cog# 
 			OR P.CRPAY=#cog# 
@@ -177,6 +188,7 @@
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		INNER JOIN Pays P ON S.idPays = P.idPays
 		WHERE S.raisonSociale LIKE CONCAT('%',#value#,'%')
+		AND temEnServStructure = 'O'
 		AND P.COG!=99100 
 		AND P.CRPAY!=99100
 		ORDER BY S.raisonSociale
@@ -187,6 +199,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.numeroSiret=#value#
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0 , 1
 	</statement>
@@ -195,6 +208,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure 
 		WHERE S.numeroSiret LIKE CONCAT(#siren#,'%')
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0 , 200
 	</statement>
@@ -203,6 +217,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.telephone=#telephone#
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -211,6 +226,7 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure 
 		WHERE S.fax=#fax#
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -234,6 +250,7 @@
 			<isNotNull property="idPays" prepend="AND">
 				S.idPays = #idPays#
 			</isNotNull>
+			AND temEnServStructure = 'O'
 		</dynamic>
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
@@ -245,6 +262,7 @@
 		INNER JOIN Service Se ON S.idStructure = Se.idStructure
 		WHERE Se.nom LIKE CONCAT('%', #nom#,'%')
 		AND S.codePostal LIKE CONCAT(#codePostal#,'%')
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -265,7 +283,8 @@
 			<isNotNull property="codePostal" prepend="AND">
 				S.codePostal LIKE CONCAT(#codePostal#,'%')
 			</isNotNull>
-		</dynamic>
+			AND temEnServStructure = 'O'
+		</dynamic> 
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -277,6 +296,7 @@
 		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
 		AND A.dateCreation <![CDATA[ >= ]]> #dateDebut#
 		AND A.dateCreation <![CDATA[ <= ]]> #dateFin#
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -288,6 +308,7 @@
 		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
 		AND A.dateCreation <![CDATA[ >= ]]> #dateDebut#
 		AND A.dateCreation <![CDATA[ <= ]]> #dateFin#
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
@@ -297,6 +318,7 @@
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE A.idAccordPartenariat IS NULL 
 		AND S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND temEnServStructure = 'O'
 		ORDER BY S.raisonSociale
 		LIMIT 0 , 200
 	</statement>
@@ -309,6 +331,7 @@
 		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
 		INNER JOIN NiveauCentre as N ON CG.idNiveauCentre = N.idNiveauCentre
 		WHERE C.mail = #mail#
+		AND temEnServStructure = 'O'
 		AND N.libelleNiveauCentre = 'ENTREPRISE'
 		AND C.login IS NOT NULL
 		AND C.mdp IS NOT NULL
@@ -412,8 +435,13 @@
 		WHERE idStructure = #idStructure#
     </update>
 
-	<delete id="deleteStructure">
+	<delete id="deleteStructureBase">
 		DELETE FROM Structure WHERE idStructure = #idStructure#
 	</delete>
+	
+	<update id="deleteStructure">
+		UPDATE Structure SET temEnServStructure = 'N', loginModif=#loginCurrentUser#, dateModif=CURDATE() 
+		WHERE idStructure = #idStructure#
+	</update>
 
 </sqlMap>

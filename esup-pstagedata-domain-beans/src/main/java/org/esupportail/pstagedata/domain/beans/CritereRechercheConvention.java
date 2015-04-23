@@ -151,6 +151,9 @@ public class CritereRechercheConvention implements Serializable{
 	 * nbre recherche Maxi.
 	 */
 	private String nbRechercheMaxi;
+	
+	private Boolean estEtrangere;
+	
 	/**
 	 * Constructeur
 	 */
@@ -643,6 +646,20 @@ public class CritereRechercheConvention implements Serializable{
 	 */
 	public void setIdsEtapes(List<String> idsEtapes) {
 		this.idsEtapes = idsEtapes;
+	}
+
+	/**
+	 * @return estEtrangere
+	 */
+	public Boolean getEstEtrangere() {
+		return estEtrangere;
+	}
+
+	/**
+	 * @param estEtrangere the estEtrangere to set
+	 */
+	public void setEstEtrangere(Boolean estEtrangere) {
+		this.estEtrangere = estEtrangere;
 	}
 
 }

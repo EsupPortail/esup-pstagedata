@@ -132,6 +132,11 @@ public class Structure extends Adresse implements Serializable{
 	private Effectif effectif;
 	
 	/**
+	 *  temEnServStructure : structure existante (non-supprimee)
+	 */
+	private String temEnServStructure="O";
+	
+	/**
 	 * Constructeur
 	 */
 	public Structure(){
@@ -496,5 +501,21 @@ public class Structure extends Adresse implements Serializable{
 	 */
 	public void setEstValidee(int estValidee) {
 		this.estValidee = estValidee;
-	}	
+	}
+
+	/**
+	 * @return the temEnServStructure
+	 */
+	public String getTemEnServStructure() {
+		return temEnServStructure;
+	}
+
+	/**
+	 * @param temEnServStructure the temEnServStructure to set
+	 */
+	public void setTemEnServStructure(String temEnServStructure) {
+		this.temEnServStructure = temEnServStructure;
+	}
+
+	
 }

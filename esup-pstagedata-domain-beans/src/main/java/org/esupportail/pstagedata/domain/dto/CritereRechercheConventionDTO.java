@@ -157,6 +157,8 @@ public class CritereRechercheConventionDTO implements Serializable{
 	public CritereRechercheConventionDTO(){
 		super();
 	}
+	
+	private Boolean EstEtrangere;
 
 	/* ***************************************************************
 	 * Getters / Setters
@@ -633,6 +635,21 @@ public class CritereRechercheConventionDTO implements Serializable{
 	 */
 	public void setIdsEtapes(List<String> idsEtapes) {
 		this.idsEtapes = idsEtapes;
+	}
+
+	/**
+	 * 
+	 * @return the EstEtrangere
+	 */
+	public Boolean getEstEtrangere() {
+		return EstEtrangere;
+	}
+
+	/**
+	 * @param estEtrangere the estEtrangere (true/false) to set
+	 */
+	public void setEstEtrangere(Boolean estEtrangere) {
+		EstEtrangere = estEtrangere;
 	}
 
 	

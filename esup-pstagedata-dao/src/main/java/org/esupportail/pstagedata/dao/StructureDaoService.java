@@ -196,5 +196,13 @@ public interface StructureDaoService extends Serializable {
 	 * @throws DataDeleteDaoException 
 	 * @throws DataBaseDaoException 
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteDaoException, DataBaseDaoException;
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteDaoException, DataBaseDaoException;
+	/**
+	 * 
+	 * @param idStructure
+	 * @return boolean
+	 * @throws DataDeleteDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateDaoException, DataBaseDaoException;
 }

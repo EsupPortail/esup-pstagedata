@@ -155,6 +155,7 @@
 		<result property="dateDebutStage" column="dateDebutStage" />
 		<result property="dateFinStage" column="dateFinStage" />
 		<result property="validationConvention" column="validationConvention" />
+		<result property="validationPedagogique" column="validationPedagogique" />
 		<result property="interruptionStage" column="interruptionStage" />
 		<result property="dateDebutInterruption" column="dateDebutInterruption" />
 		<result property="dateFinInterruption" column="dateFinInterruption" />
@@ -324,6 +325,9 @@
 			INNER JOIN Structure S ON S.idStructure = C.idStructure
 			<isNotNull property="idP">
 				INNER JOIN Pays P ON S.idPays = P.idPays
+			</isNotNull>
+			<isNotNull property="idPE">
+				INNER JOIN Pays P ON (S.idPays = P.idPays) AND (P.idPays!=82)
 			</isNotNull>
 			<isNotNull property="idTS">
 				INNER JOIN TypeStructure TS ON S.idTypeStructure =
@@ -964,7 +968,7 @@
 
 	<statement id="getConventionsFromExport" resultMap="ConventionExport">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
-		C.validationConvention, C.interruptionStage, C.dateDebutInterruption,
+		C.validationConvention, C.validationPedagogique, C.interruptionStage, C.dateDebutInterruption,
 		C.dateFinInterruption,
 		C.nbJoursHebdo, C.idTempsTravail, C.dureeStage, C.sujetStage,
 		C.fonctionsEtTaches, C.details, C.idTheme,
