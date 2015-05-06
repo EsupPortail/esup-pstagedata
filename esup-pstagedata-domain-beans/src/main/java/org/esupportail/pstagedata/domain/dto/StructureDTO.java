@@ -134,6 +134,12 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 * NafN5
 	 */
 	private NafN5DTO nafN5;
+	
+	/**
+	 *  temEnServStructure : structure existante (non-supprimee)
+	 */
+	private String temEnServStructure="O";
+	
 	/**
 	 * Constructeur
 	 */
@@ -172,6 +178,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 				loginValidation=s.getLoginValidation();
 				dateStopValidation=s.getDateStopValidation();
 				loginStopValidation=s.getLoginStopValidation();
+				temEnServStructure=s.getTemEnServStructure();
 				if (s.getIdAccordPartenariat() != null) idAccordPartenariat=s.getIdAccordPartenariat();
 				if(s.getAccordPartenariat()!=null) accordPartenariat=new AccordPartenariatDTO(s.getAccordPartenariat());
 			}
@@ -220,7 +227,8 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		"dateValidation : "+dateValidation+", "+
 		"loginValidation : "+loginValidation+", "+
 		"dateStopValidation : "+dateStopValidation+", "+
-		"loginStopValidation : "+loginStopValidation+", "+super.toString();
+		"loginStopValidation : "+loginStopValidation+", "+
+		"temEnServStructure : "+temEnServStructure +", "+super.toString();
 	}
 
 	/**
@@ -248,7 +256,8 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		"dateValidation : "+dateValidation+", "+
 		"loginValidation : "+loginValidation+", "+
 		"dateStopValidation : "+dateStopValidation+", "+
-		"loginStopValidation : "+loginStopValidation+", "+super.toString();
+		"loginStopValidation : "+loginStopValidation+", "+
+		"temEnServStructure : "+temEnServStructure+", " +super.toString();
 	}
 	
 	/**
@@ -656,5 +665,19 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	public void setEstValidee(int estValidee) {
 		this.estValidee = estValidee;
+	}
+
+	/**
+	 * @return the temEnServStructure
+	 */
+	public String getTemEnServStructure() {
+		return temEnServStructure;
+	}
+
+	/**
+	 * @param temEnServStructure the temEnServStructure to set
+	 */
+	public void setTemEnServStructure(String temEnServStructure) {
+		this.temEnServStructure = temEnServStructure;
 	}
 }

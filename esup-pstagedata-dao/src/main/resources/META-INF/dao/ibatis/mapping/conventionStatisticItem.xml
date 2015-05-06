@@ -1126,6 +1126,7 @@
 	FROM Convention c, Etape e
 	WHERE  c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
 	GROUP BY libPriorCriteria
@@ -1139,6 +1140,7 @@
 	FROM Convention c, Etape e, TypeConvention tc
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idTypeConvention = tc.idTypeConvention
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1153,6 +1155,7 @@
 	FROM Convention c, Etape e, Theme t
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idTheme = t.idTheme
 	AND c.Annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1170,6 +1173,7 @@
 		AND c.annee = #annee#
 		AND c.validationConvention=1
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.montantGratification!=''
 		AND c.montantGratification <![CDATA[ < ]]> 436
 		GROUP BY libPriorCriteria, lib)
@@ -1181,6 +1185,7 @@
 		AND c.annee = #annee#
 		AND c.validationConvention=1
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.montantGratification!=''
 		AND c.montantGratification<![CDATA[ >= ]]>436
 		AND c.montantGratification <![CDATA[ <= ]]> 600
@@ -1193,6 +1198,7 @@
 		AND c.annee = #annee#
 		AND c.validationConvention=1
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.montantGratification!=''
 		AND c.montantGratification <![CDATA[ > ]]> 600
 		GROUP BY libPriorCriteria, lib)
@@ -1204,6 +1210,7 @@
 		AND c.annee = #annee#
 		AND c.validationConvention=1
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idIndemnisation = i.idIndemnisation
 		AND i.libelleIndemnisation='Non'
 		GROUP BY libPriorCriteria, lib)
@@ -1215,6 +1222,7 @@
 		AND c.annee = #annee#
 		AND c.validationConvention=1
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idIndemnisation = i.idIndemnisation
 		AND i.libelleIndemnisation='Ne sait pas'
 		GROUP BY libPriorCriteria, lib)
@@ -1226,6 +1234,7 @@
 	FROM Convention c, Etape e, Indemnisation i
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idIndemnisation = i.idIndemnisation
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1240,6 +1249,7 @@
 	FROM Convention c, Etape e, TempsTravail tt
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idTempsTravail = tt.idTempsTravail
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1254,6 +1264,7 @@
 	FROM Convention c,  Etape e
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
 	GROUP BY libPriorCriteria,lib
@@ -1267,6 +1278,7 @@
 	FROM Convention c, Etape e, OrigineStage os
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idOrigineStage = os.idOrigineStage
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1281,6 +1293,7 @@
 	FROM Convention c, Etape e, Enseignant en
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idEnseignant = en.idEnseignant
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1295,6 +1308,7 @@
 	FROM Convention c, Etape e, Structure s
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idStructure = s.idStructure
 	AND c.annee = #annee#	
 	AND c.validationConvention = 1	
@@ -1309,6 +1323,7 @@
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Etape e
 	WHERE c.idCentreGestion = #idCentreGestion#
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idStructure = s.idStructure
 		AND s.codeNAF_N5 = n5.codeNAF_N5
 		AND n5.codeNAF_N1 = n1.codeNAF_N1
@@ -1325,6 +1340,7 @@
 	FROM Convention c, Etape e, Structure s, TypeStructure ts
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.idStructure = s.idStructure
 	AND s.idTypeStructure = ts.idTypeStructure
 	AND c.annee = #annee#	
@@ -1355,6 +1371,7 @@
 	FROM Convention c, Etape e, Service se, Pays p
 	WHERE c.idService = se.idService
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idCentreGestion = #idCentreGestion#
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
@@ -1373,6 +1390,7 @@
 	FROM Convention c, Etape e, Service s, Pays p
 	WHERE c.idService = s.idService
 		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idCentreGestion = #idCentreGestion#
 		AND c.validationConvention = 1	
 		AND c.annee = #annee#	
@@ -1448,6 +1466,7 @@
 	FROM Convention c, Etape e
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#
 	AND c.validationConvention=1
 	AND c.dureeStage <![CDATA[ < ]]> 9
@@ -1459,6 +1478,7 @@
 	FROM Convention c, Etape e
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.codeEtape = e.codeEtape
+	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#
 	AND c.validationConvention=1
 	AND c.dureeStage <![CDATA[ >= ]]>9

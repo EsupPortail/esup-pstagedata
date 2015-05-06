@@ -300,6 +300,8 @@ public class UtilsDTO {
 			if (ad.getSujetStage() != null)
 				a.setSujetStage(ad.getSujetStage());
 			a.setValidationAvenant(ad.isValidationAvenant());
+			if (ad.getDateRupture() != null)
+				a.setDateRupture(ad.getDateRupture());
 		}
 		return a;
 	}
@@ -494,6 +496,7 @@ public class UtilsDTO {
 			cr.setStatutJuridique(UtilsDTO.getStatutJuridiqueFromDTO(c.getStatutJuridique()));
 			cr.setEffectif(UtilsDTO.getEffectifFromDTO(c.getEffectif()));
 			cr.setNafN1(UtilsDTO.getNafN1FromDTO(c.getNafN1()));
+			cr.setEstEtrangere(c.getEstEtrangere());
 			if (c.getNbExportMaxi() != null) {
 				cr.setNbExportMaxi(c.getNbExportMaxi());
 			}
@@ -1025,6 +1028,7 @@ public class UtilsDTO {
 			s.setSiteWeb(sd.getSiteWeb());
 			s.setTelephone(sd.getTelephone());
 			s.setVoie(sd.getVoie());
+			s.setTemEnServStructure(sd.getTemEnServStructure());
 		}
 		return s;		
 	}

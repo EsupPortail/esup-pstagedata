@@ -171,8 +171,13 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("nsS", StringUtils.hasText(critereRechercheConvention.getNumeroSiret())?critereRechercheConvention.getNumeroSiret():null);
 			parameterMap.put("cmS", StringUtils.hasText(critereRechercheConvention.getCommune())?critereRechercheConvention.getCommune():null);
 			parameterMap.put("cpS", StringUtils.hasText(critereRechercheConvention.getCodePostal())?critereRechercheConvention.getCodePostal():null);
-			if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
-			else parameterMap.put("idP",null);
+			
+			if (critereRechercheConvention.getEstEtrangere()) parameterMap.put("idPE", critereRechercheConvention.getPays().getId());
+			else{
+				if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
+				else parameterMap.put("idP",null);
+			}
+			
 			if(critereRechercheConvention.getTypeStructure()!=null) parameterMap.put("idTS", critereRechercheConvention.getTypeStructure().getId());
 			else parameterMap.put("idTS",null);
 			if(critereRechercheConvention.getStatutJuridique()!=null) parameterMap.put("idSJ", critereRechercheConvention.getStatutJuridique().getId());

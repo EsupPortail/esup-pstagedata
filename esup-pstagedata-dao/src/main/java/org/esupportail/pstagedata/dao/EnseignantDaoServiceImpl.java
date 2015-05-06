@@ -107,7 +107,15 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 		parameterMap.put("codeUniversite", codeUniversite);
 		return (Integer)getSqlMapClientTemplate().queryForObject("getNombreConventionByEnseignant",parameterMap);
 	}
-
+	
+	public int getNombreConventionByEnseignantByAnnee(String uidEnseignant, String codeUniversite, String annee){
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		parameterMap.put("uidEnseignant", uidEnseignant);
+		parameterMap.put("codeUniversite", codeUniversite);
+		parameterMap.put("annee", annee);
+		return (Integer)getSqlMapClientTemplate().queryForObject("getNombreConventionByEnseignantByAnnee",parameterMap);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.dao.EnseignantDaoService#updateEnseignant(org.esupportail.pstagedata.domain.beans.Enseignant)
 	 */

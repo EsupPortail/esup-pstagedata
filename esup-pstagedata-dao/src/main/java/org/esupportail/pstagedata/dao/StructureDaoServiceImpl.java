@@ -63,12 +63,12 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.dao.StructureDaoService#deleteStructure(int)
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#deleteStructureBase(int)
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteDaoException, DataBaseDaoException{
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteDaoException, DataBaseDaoException{
 		boolean b = false;
 		try{
-			b = getSqlMapClientTemplate().delete("deleteStructure", idStructure)>0?true:false;
+			b = getSqlMapClientTemplate().delete("deleteStructureBase", idStructure)>0?true:false;
 		}catch (DataAccessException e) {
 			if(e.getMessage().contains("Cannot delete or update")){
 				throw new DataDeleteDaoException(e.getMessage());
@@ -79,7 +79,29 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		}
 		return b;
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#deleteStructure(int)
+	 */
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateDaoException, DataBaseDaoException{
+		boolean b = false;
+		try{
+			HashMap<String, String> parameterMap = new HashMap<String, String>();
+			parameterMap.put("idStructure", ""+idStructure);
+			parameterMap.put("loginCurrentUser", ""+loginCurrentUser);
+			b = getSqlMapClientTemplate().update("deleteStructure", parameterMap)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataAddDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructureFromId(int)
 	 */

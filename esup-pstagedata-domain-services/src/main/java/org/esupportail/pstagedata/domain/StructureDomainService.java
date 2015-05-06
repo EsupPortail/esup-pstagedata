@@ -196,5 +196,15 @@ public interface StructureDomainService extends Serializable {
 	 * @throws DataDeleteException 
 	 * @throws WebServiceDataBaseException 
 	 */
-	public boolean deleteStructure(int idStructure) throws DataDeleteException, WebServiceDataBaseException;
+	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException;
+	
+	/**
+	 * @param idStructure
+	 * @return boolean
+	 * @throws DataDeleteException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException;
 }
+
+

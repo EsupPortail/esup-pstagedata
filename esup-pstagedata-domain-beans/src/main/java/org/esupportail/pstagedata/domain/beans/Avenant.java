@@ -114,7 +114,12 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * idUniteDureeGratification
 	 */
 	private Integer idUniteDureeGratification;
-	
+	/**
+	 * dateRupture
+	 */
+	private Date dateRupture;
+
+
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -134,7 +139,7 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * uniteGratification
 	 */
 	private UniteGratification uniteGratification;
-	
+
 	/**
 	 * Convention
 	 */
@@ -643,6 +648,22 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	public void setIdUniteDureeGratification(Integer idUniteDureeGratification) {
 		this.idUniteDureeGratification = idUniteDureeGratification;
 	}
-	
-	
+
+	/**
+	 * 
+	 * @return the dateRupture
+	 */
+	public Date getDateRupture() {
+		return dateRupture;
+	}
+
+	/**
+	 * 
+	 * @param dateRupture the dateRupture to set
+	 */
+	public void setDateRupture(Date dateRupture) {
+		this.dateRupture = dateRupture;
+	}
+
+
 }

@@ -48,6 +48,8 @@ public interface EnseignantDomainService extends Serializable {
 	 */
 	public int getNombreConventionByEnseignant(String uidEnseignant, String codeUniversite);
 	
+	public int getNombreConventionByEnseignantByAnnee(String uidEnseignant, String codeUniversite, String annee);
+	
 	/**
 	 * @param enseignant
 	 * @return int
@@ -73,5 +75,7 @@ public interface EnseignantDomainService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteEnseignant(int idEnseignant) throws DataDeleteException, WebServiceDataBaseException;
+
+	
 
 }

@@ -51,7 +51,8 @@ public interface EnseignantDaoService extends Serializable {
 	 * @return int
 	 */
 	public int getNombreConventionByEnseignant(String uidEnseignant,String codeUniversite);
-
+	
+	public int getNombreConventionByEnseignantByAnnee(String uidEnseignant,String codeUniversite, String annee);
 	
 	/**
 	 * @param enseignant

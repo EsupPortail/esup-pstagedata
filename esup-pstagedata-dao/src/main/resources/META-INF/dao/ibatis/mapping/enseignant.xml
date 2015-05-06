@@ -67,11 +67,20 @@
 	
 	<statement id="getNombreConventionByEnseignant" resultClass="java.lang.Integer">
 		SELECT COUNT(DISTINCT C.idEtudiant) FROM Convention as C
-        INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
-        WHERE E.uidEnseignant = #uidEnseignant# 
-        <isNotNull property="codeUniversite" prepend="AND">
-        	E.codeUniversite = #codeUniversite#
-        </isNotNull>
+		INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
+		WHERE E.uidEnseignant = #uidEnseignant#
+		<isNotNull property="codeUniversite" prepend="AND">
+			E.codeUniversite = #codeUniversite#
+		</isNotNull>
+	</statement>
+
+	<statement id="getNombreConventionByEnseignantByAnnee" resultClass="java.lang.Integer">
+		SELECT COUNT(C.idEtudiant) FROM Convention as C
+		INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
+		WHERE E.uidEnseignant = #uidEnseignant# AND C.annee = #annee#
+		<isNotNull property="codeUniversite" prepend="AND">
+			E.codeUniversite = #codeUniversite#
+		</isNotNull>
 	</statement>
 	
 	<insert id="addEnseignant" >

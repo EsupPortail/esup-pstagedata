@@ -2049,7 +2049,7 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `idConvention` INT NOT NULL ,
 
-  `titreAvenant` VARCHAR(50) NULL DEFAULT '' ,
+  `titreAvenant` TEXT NULL DEFAULT '' ,
 
   `motifAvenant` TEXT NULL ,
 

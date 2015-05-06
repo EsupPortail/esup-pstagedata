@@ -36,7 +36,7 @@ ALTER TABLE ModeValidationStage ADD modifiable TINYINT(1) NULL DEFAULT 0;
 ALTER TABLE OrigineStage CHANGE idOrigineStage idOrigineStage INT NOT NULL AUTO_INCREMENT;
 
 -- Rajout du titre de l'avenant
-ALTER TABLE Avenant ADD titreAvenant VARCHAR(50) NULL DEFAULT '' after idConvention;
+ALTER TABLE Avenant ADD titreAvenant TEXT NULL DEFAULT '' after idConvention;
 
 -- Rajout du code version etape dans les tables concernees
 ALTER TABLE Convention ADD codeVersionEtape VARCHAR(10) NULL DEFAULT '' after codeEtape;
