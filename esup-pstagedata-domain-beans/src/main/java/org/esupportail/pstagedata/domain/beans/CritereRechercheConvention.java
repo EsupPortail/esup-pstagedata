@@ -151,7 +151,10 @@ public class CritereRechercheConvention implements Serializable{
 	 * nbre recherche Maxi.
 	 */
 	private String nbRechercheMaxi;
-	
+
+	/**
+	 * true si l'on recherche les conventions etrangeres
+	 */
 	private boolean estEtrangere;
 	
 	/**
@@ -651,14 +654,14 @@ public class CritereRechercheConvention implements Serializable{
 	/**
 	 * @return estEtrangere
 	 */
-	public Boolean getEstEtrangere() {
+	public boolean getEstEtrangere() {
 		return estEtrangere;
 	}
 
 	/**
 	 * @param estEtrangere the estEtrangere to set
 	 */
-	public void setEstEtrangere(Boolean estEtrangere) {
+	public void setEstEtrangere(boolean estEtrangere) {
 		this.estEtrangere = estEtrangere;
 	}
 

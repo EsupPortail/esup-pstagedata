@@ -158,6 +158,9 @@ public class CritereRechercheConventionDTO implements Serializable{
 		super();
 	}
 	
+	/**
+	 * true si l'on recherche uniquement les conventions etrangeres
+	 */
 	private boolean estEtrangere;
 
 	/* ***************************************************************
@@ -639,16 +642,16 @@ public class CritereRechercheConventionDTO implements Serializable{
 
 	/**
 	 * 
-	 * @return the EstEtrangere
+	 * @return the estEtrangere
 	 */
-	public Boolean getEstEtrangere() {
+	public boolean getEstEtrangere() {
 		return estEtrangere;
 	}
 
 	/**
 	 * @param estEtrangere the estEtrangere (true/false) to set
 	 */
-	public void setEstEtrangere(Boolean estEtrangere) {
+	public void setEstEtrangere(boolean estEtrangere) {
 		this.estEtrangere = estEtrangere;
 	}
 

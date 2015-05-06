@@ -5,9 +5,9 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Enseignant">
-	<typeAlias alias="ClassEnseignant" type="org.esupportail.pstagedata.domain.beans.Enseignant"/>
-	<resultMap id="Enseignant"
-		class="ClassEnseignant">
+	<typeAlias alias="ClassEnseignant"
+		type="org.esupportail.pstagedata.domain.beans.Enseignant" />
+	<resultMap id="Enseignant" class="ClassEnseignant">
 		<result property="id" column="idEnseignant" />
 		<result property="uidEnseignant" column="uidEnseignant" />
 		<result property="nom" column="nom" />
@@ -27,9 +27,8 @@
 		<result property="loginModif" column="loginModif" />
 		<result property="dateModif" column="dateModif" />
 	</resultMap>
-	
-	<resultMap id="EnseignantExport"
-		class="ClassEnseignant">
+
+	<resultMap id="EnseignantExport" class="ClassEnseignant">
 		<result property="id" column="idEnseignant" />
 		<result property="uidEnseignant" column="uidEnseignant" />
 		<result property="nom" column="nom" />
@@ -46,25 +45,30 @@
 			</isNotNull>
 		</dynamic>
 	</statement>
-	
+
 	<statement id="getEnseignantFromId" resultMap="Enseignant">
-		SELECT * FROM Enseignant WHERE idEnseignant=#id#
-        LIMIT 0,1
-	</statement>
-	
-	<statement id="getEnseignantExportFromId" resultMap="EnseignantExport">
-		SELECT idEnseignant, uidEnseignant, nom, prenom, mail, telephone
-		FROM Enseignant WHERE idEnseignant=#id#
-        LIMIT 0,1
-	</statement>
-	
-	<statement id="getEnseignantFromUid" resultMap="Enseignant">
-		SELECT * FROM Enseignant
-		WHERE uidEnseignant = #uidEnseignant#
-		AND codeUniversite = #codeUniversite#
+		SELECT * FROM
+		Enseignant WHERE idEnseignant=#id#
 		LIMIT 0,1
 	</statement>
-	
+
+	<statement id="getEnseignantExportFromId" resultMap="EnseignantExport">
+		SELECT
+		idEnseignant, uidEnseignant, nom, prenom, mail, telephone
+		FROM
+		Enseignant WHERE idEnseignant=#id#
+		LIMIT 0,1
+	</statement>
+
+	<statement id="getEnseignantFromUid" resultMap="Enseignant">
+		SELECT * FROM
+		Enseignant
+		WHERE uidEnseignant = #uidEnseignant#
+		AND codeUniversite =
+		#codeUniversite#
+		LIMIT 0,1
+	</statement>
+
 	<statement id="getNombreConventionByEnseignant" resultClass="java.lang.Integer">
 		SELECT COUNT(DISTINCT C.idEtudiant) FROM Convention as C
 		INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
@@ -82,8 +86,8 @@
 			E.codeUniversite = #codeUniversite#
 		</isNotNull>
 	</statement>
-	
-	<insert id="addEnseignant" >
+
+	<insert id="addEnseignant">
 		INSERT INTO Enseignant (idEnseignant,uidEnseignant,nom,prenom,
 		mail,telephone,fax,campus,bureau,batiment,
 		codeUniversite,typePersonne,codeAffectation,loginCreation,dateCreation,codeUniversiteAffectation)
@@ -92,21 +96,25 @@
 		#codeUniversite#,#typePersonne#,#codeAffectation#,#loginCreation#,CURRENT_TIMESTAMP(),#codeUniversiteAffectation#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
-     	</selectKey>
+		</selectKey>
 	</insert>
-	
+
 	<update id="updateEnseignant">
-        UPDATE Enseignant SET
-         idEnseignant = #id#,uidEnseignant = #uidEnseignant#,nom = #nom#,
-         prenom = #prenom#,mail = #mail#,telephone = #tel#,fax = #fax#,campus=#campus#,bureau=#bureau#,batiment=#batiment#,
-  		 codeUniversite = #codeUniversite#,typePersonne= #typePersonne#,codeAffectation = #codeAffectation#,loginModif = #loginModif#,
-  		 dateModif = CURRENT_TIMESTAMP(), codeUniversiteAffectation = #codeUniversiteAffectation#
-  		WHERE idEnseignant = #id#
-    </update>
-    
-    <delete id="deleteEnseignant">
-    	 DELETE FROM Enseignant WHERE idEnseignant = #id#
-    </delete>
+		UPDATE Enseignant SET
+		idEnseignant = #id#,uidEnseignant = #uidEnseignant#,nom = #nom#,
+		prenom = #prenom#,mail = #mail#,telephone = #tel#,fax =
+		#fax#,campus=#campus#,bureau=#bureau#,batiment=#batiment#,
+		codeUniversite = #codeUniversite#,typePersonne=
+		#typePersonne#,codeAffectation = #codeAffectation#,loginModif =
+		#loginModif#,
+		dateModif = CURRENT_TIMESTAMP(), codeUniversiteAffectation =
+		#codeUniversiteAffectation#
+		WHERE idEnseignant = #id#
+	</update>
+
+	<delete id="deleteEnseignant">
+		DELETE FROM Enseignant WHERE idEnseignant = #id#
+	</delete>
 
 </sqlMap>
 

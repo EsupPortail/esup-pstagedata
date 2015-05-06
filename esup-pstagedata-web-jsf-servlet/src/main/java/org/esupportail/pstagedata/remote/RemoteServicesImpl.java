@@ -2581,7 +2581,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteService(int)
 	 */
-	public boolean deleteService(int idService) throws DataDeleteException, WebServiceDataBaseException,ServiceDeleteException{
+	public boolean deleteService(int idService) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idService>0){
 			int nbContactRefOffre = this.serviceDomainService.countContactRefOffre(idService);
