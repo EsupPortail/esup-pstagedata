@@ -29,6 +29,7 @@ public class NatureTravailDaoServiceImpl extends AbstractIBatisDaoService implem
 	/**
 	 * @see org.esupportail.pstagedata.dao.NatureTravailDaoService#getNatureTravails()
 	 */
+	@SuppressWarnings("unchecked")
 	public List<NatureTravail> getNatureTravails() {
 		return getSqlMapClientTemplate().queryForList("getNatureTravails");
 

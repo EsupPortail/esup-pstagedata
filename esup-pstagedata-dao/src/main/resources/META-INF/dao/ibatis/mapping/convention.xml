@@ -190,6 +190,10 @@
 		<result property="codeElp" column="codeElp" />
 		<result property="libelleELP" column="libelleELP" />
 		<result property="avantagesNature" column="avantagesNature" />
+		<result property="dateCreation" column="dateCreation" javaType="java.util.Date"
+			jdbcType="DATETIME" />
+		<result property="dateModif" column="dateModif" javaType="java.util.Date"
+			jdbcType="DATETIME" />
 
 		<result property="structure" column="idStructure" select="getStructureExportFromId" />
 		<result property="etudiant" column="idEtudiant" select="getEtudiantExportFromId" />
@@ -510,7 +514,7 @@
 		ORDER BY C.dateCreation DESC
 		<isNotNull property="isLimit">
 			<isEqual property="isLimit" compareValue="1">
-				LIMIT 0,200
+				LIMIT 0,#nbRechercheMaxi#
 			</isEqual>
 		</isNotNull>
 	</statement>
@@ -737,7 +741,7 @@
 		</dynamic>
 		<isNotNull property="isLimit">
 			<isEqual property="isLimit" compareValue="1">
-				LIMIT 0,200
+				LIMIT 0,#nbRechercheMaxi#
 			</isEqual>
 		</isNotNull>
 	</statement>
@@ -960,7 +964,7 @@
 		</dynamic>
 		<isNotNull property="isLimit">
 			<isEqual property="isLimit" compareValue="1">
-				LIMIT 0,3500
+				LIMIT 0,#nbExportMaxi#
 			</isEqual>
 		</isNotNull>
 	</statement>
@@ -982,7 +986,7 @@
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
 		adresseEtudiant, codePostalEtudiant, villeEtudiant, paysEtudiant, C.idUniteDureeGratification,
-		C.monnaieGratification
+		C.monnaieGratification, C.dateCreation, C.dateModif 
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)

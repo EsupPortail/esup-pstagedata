@@ -188,7 +188,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("nafN1",null);
 			parameterMap.put("isLimit",critereRechercheConvention.isLimit());
 			if (StringUtils.hasText(critereRechercheConvention.getNbRechercheMaxi())) {
-				parameterMap.put("nbRechercheMaxi", critereRechercheConvention.getNbRechercheMaxi());
+				parameterMap.put("nbRechercheMaxi", Integer.parseInt(critereRechercheConvention.getNbRechercheMaxi()));
 			}else {
 				parameterMap.put("nbRechercheMaxi","200");
 			}
@@ -252,7 +252,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("nafN1",null);
 			parameterMap.put("isLimit",critereRechercheConvention.isLimit());
 			if (StringUtils.hasText(critereRechercheConvention.getNbRechercheMaxi())) {
-				parameterMap.put("nbRechercheMaxi", critereRechercheConvention.getNbRechercheMaxi());
+				parameterMap.put("nbRechercheMaxi", Integer.parseInt(critereRechercheConvention.getNbRechercheMaxi()));
 			}else {
 				parameterMap.put("nbRechercheMaxi","200");
 			}
@@ -316,7 +316,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			else parameterMap.put("nafN1",null);
 			parameterMap.put("isLimit",critereRechercheConvention.isLimit());
 			if (critereRechercheConvention.getNbExportMaxi()!=null) {
-				parameterMap.put("nbExportMaxi", critereRechercheConvention.getNbExportMaxi());
+				parameterMap.put("nbExportMaxi", Integer.parseInt(critereRechercheConvention.getNbExportMaxi()));
 			}else {
 				parameterMap.put("nbExportMaxi","200");
 			}

@@ -10,6 +10,7 @@ public class ConventionStatsDomaineManagerImpl implements
 	 * liste clef, valeur des domaines services pour les conventions
 	 */
 private Map<String, ConventionStatsDomaineService> cvtsDomaineServices = null;
+@SuppressWarnings("unused")
 private CoreMessages coreMessages;
   /**
    * ConventionStatsDomaineService par sont etat
