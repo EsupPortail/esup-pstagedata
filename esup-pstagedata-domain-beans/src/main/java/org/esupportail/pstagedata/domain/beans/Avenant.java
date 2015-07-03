@@ -118,6 +118,11 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * dateRupture
 	 */
 	private Date dateRupture;
+	
+	/**
+	 * commentaireRupture
+	 */
+	private String commentaireRupture;
 
 
 	/* ***************************************************************
@@ -663,6 +668,16 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 */
 	public void setDateRupture(Date dateRupture) {
 		this.dateRupture = dateRupture;
+	}
+
+
+	public String getCommentaireRupture() {
+		return commentaireRupture;
+	}
+
+
+	public void setCommentaireRupture(String commentaireRupture) {
+		this.commentaireRupture = commentaireRupture;
 	}
 
 

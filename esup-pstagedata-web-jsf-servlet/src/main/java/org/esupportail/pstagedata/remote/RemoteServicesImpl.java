@@ -1519,7 +1519,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		List<ConventionDTO> lo = null;
 		if(critereRechercheConvention!=null){
 			lo = this.conventionDomainService.getConventionsFromCriteresByEnseignantTuteur(idEnseignant, critereRechercheConvention);
-		}
+		}		
 		return lo;
 	}
 
@@ -1693,14 +1693,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<CritereGestionDTO> getCritereGestionFromIdCentre(int idCentreGestion) {
 		return this.critereGestionDomainService.getCritereGestionFromIdCentre(idCentreGestion);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCritereGestionSansVetFromCodeEtape(String)
 	 */
 	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape) {
 		return this.critereGestionDomainService.getCritereGestionSansVetFromCodeEtape(codeEtape);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreCritereGestion(int)
 	 */
@@ -1816,11 +1816,11 @@ public class RemoteServicesImpl implements RemoteServices{
 	public int getNombreConventionByEnseignantFromCodUniv(String uidEnseignant, String codeUniversite){
 		return this.enseignantDomainService.getNombreConventionByEnseignant(uidEnseignant, codeUniversite);
 	}
-	
+
 	public int getNombreConventionByEnseignantByAnneeFromCodUniv(String uidEnseignant, String codeUniversite, String annee ){
 		return this.enseignantDomainService.getNombreConventionByEnseignantByAnnee(uidEnseignant, codeUniversite, annee);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEnseignants(java.lang.String)
 	 */
@@ -2928,7 +2928,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
-	
+
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
@@ -2943,6 +2943,17 @@ public class RemoteServicesImpl implements RemoteServices{
 			b=this.structureDomainService.deleteStructure(idStructure,loginCurrentUser);
 		}
 		return b;
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getRaisonsSociales()
+	 */
+	public List<String> getRaisonsSociales(String raisonSociale){		
+		List<String> tmp=null;
+		if(StringUtils.hasText(raisonSociale)){
+			tmp= this.structureDomainService.getRaisonsSociales(raisonSociale);
+		}
+		return tmp;
 	}
 
 	/* ****************************************************************************

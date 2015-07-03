@@ -330,11 +330,11 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	/**
 	 * reponseEtuIII3
 	 */
-	private boolean reponseEtuIII3;
+	//private boolean reponseEtuIII3;
 	/**
 	 * reponseEtuIII3bis
 	 */
-	private String reponseEtuIII3bis;
+	//private String reponseEtuIII3bis;
 	/**
 	 * reponseEtuIII4
 	 */
@@ -402,7 +402,7 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 	/**
 	 * reponseEtuIII13
 	 */
-	private boolean reponseEtuIII13;
+	//private boolean reponseEtuIII13;
 	/**
 	 * reponseEtuIII14
 	 */
@@ -1303,33 +1303,33 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 		this.reponseEtuIII2bis = reponseEtuIII2bis;
 	}
 
-	/**
-	 * @return the reponseEtuIII3
-	 */
-	public boolean isReponseEtuIII3() {
-		return reponseEtuIII3;
-	}
-
-	/**
-	 * @param reponseEtuIII3 the reponseEtuIII3 to set
-	 */
-	public void setReponseEtuIII3(boolean reponseEtuIII3) {
-		this.reponseEtuIII3 = reponseEtuIII3;
-	}
-
-	/**
-	 * @return the reponseEtuIII3bis
-	 */
-	public String getReponseEtuIII3bis() {
-		return reponseEtuIII3bis;
-	}
-
-	/**
-	 * @param reponseEtuIII3bis the reponseEtuIII3bis to set
-	 */
-	public void setReponseEtuIII3bis(String reponseEtuIII3bis) {
-		this.reponseEtuIII3bis = reponseEtuIII3bis;
-	}
+//	/**
+//	 * @return the reponseEtuIII3
+//	 */
+//	public boolean isReponseEtuIII3() {
+//		return reponseEtuIII3;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII3 the reponseEtuIII3 to set
+//	 */
+//	public void setReponseEtuIII3(boolean reponseEtuIII3) {
+//		this.reponseEtuIII3 = reponseEtuIII3;
+//	}
+//
+//	/**
+//	 * @return the reponseEtuIII3bis
+//	 */
+//	public String getReponseEtuIII3bis() {
+//		return reponseEtuIII3bis;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII3bis the reponseEtuIII3bis to set
+//	 */
+//	public void setReponseEtuIII3bis(String reponseEtuIII3bis) {
+//		this.reponseEtuIII3bis = reponseEtuIII3bis;
+//	}
 
 	/**
 	 * @return the reponseEtuIII5a
@@ -1457,19 +1457,19 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 		this.reponseEtuIII12 = reponseEtuIII12;
 	}
 
-	/**
-	 * @return the reponseEtuIII13
-	 */
-	public boolean isReponseEtuIII13() {
-		return reponseEtuIII13;
-	}
-
-	/**
-	 * @param reponseEtuIII13 the reponseEtuIII13 to set
-	 */
-	public void setReponseEtuIII13(boolean reponseEtuIII13) {
-		this.reponseEtuIII13 = reponseEtuIII13;
-	}
+//	/**
+//	 * @return the reponseEtuIII13
+//	 */
+//	public boolean isReponseEtuIII13() {
+//		return reponseEtuIII13;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII13 the reponseEtuIII13 to set
+//	 */
+//	public void setReponseEtuIII13(boolean reponseEtuIII13) {
+//		this.reponseEtuIII13 = reponseEtuIII13;
+//	}
 
 	/**
 	 * @return the reponseEtuIII14

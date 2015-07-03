@@ -331,11 +331,11 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 	/**
 	 * reponseEtuIII3
 	 */
-	private boolean reponseEtuIII3;
+	//private boolean reponseEtuIII3;
 	/**
 	 * reponseEtuIII3bis
 	 */
-	private String reponseEtuIII3bis;
+	//private String reponseEtuIII3bis;
 	/**
 	 * reponseEtuIII4
 	 */
@@ -403,7 +403,7 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 	/**
 	 * reponseEtuIII13
 	 */
-	private boolean reponseEtuIII13;
+	//private boolean reponseEtuIII13;
 	/**
 	 * reponseEtuIII14
 	 */
@@ -594,8 +594,8 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 			this.reponseEtuIII1bis = re.getReponseEtuIII1bis();
 			this.reponseEtuIII2 = re.isReponseEtuIII2();
 			this.reponseEtuIII2bis = re.getReponseEtuIII2bis();
-			this.reponseEtuIII3 = re.isReponseEtuIII3();
-			this.reponseEtuIII3bis = re.getReponseEtuIII3bis();
+//			this.reponseEtuIII3 = re.isReponseEtuIII3();
+//			this.reponseEtuIII3bis = re.getReponseEtuIII3bis();
 			this.reponseEtuIII4 = re.getReponseEtuIII4();
 			this.reponseEtuIII5a = re.isReponseEtuIII5a();
 			this.reponseEtuIII5b = re.isReponseEtuIII5b();
@@ -612,7 +612,7 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 			this.reponseEtuIII10 = re.isReponseEtuIII10();
 			this.reponseEtuIII11 = re.isReponseEtuIII11();
 			this.reponseEtuIII12 = re.isReponseEtuIII12();
-			this.reponseEtuIII13 = re.isReponseEtuIII13();
+//			this.reponseEtuIII13 = re.isReponseEtuIII13();
 			this.reponseEtuIII14 = re.isReponseEtuIII14();
 			this.reponseEtuIII15 = re.getReponseEtuIII15();
 			this.reponseEtuIII15bis = re.getReponseEtuIII15bis();
@@ -699,6 +699,7 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 		"reponseEnt16bis : "+reponseEnt16bis+", "+
 		"reponseEnt17 : "+reponseEnt17+", "+
 		"reponseEnt18 : "+reponseEnt18+", "+
+		"reponseEnt18bis : "+reponseEnt18bis+", "+
 		"reponseEnt19 : "+reponseEnt19+", "+
 		"reponseEtuI1 : "+reponseEtuI1+", "+
 		"reponseEtuI1bis : "+reponseEtuI1bis+", "+
@@ -726,13 +727,14 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 		"reponseEtuIII1bis : "+reponseEtuIII1bis+", "+
 		"reponseEtuIII2 : "+reponseEtuIII2+", "+
 		"reponseEtuIII2bis : "+reponseEtuIII2bis+", "+
-		"reponseEtuIII3 : "+reponseEtuIII3+", "+
-		"reponseEtuIII3bis : "+reponseEtuIII3bis+", "+
+		//"reponseEtuIII3 : "+reponseEtuIII3+", "+
+		//"reponseEtuIII3bis : "+reponseEtuIII3bis+", "+
 		"reponseEtuIII4 : "+reponseEtuIII4+", "+
 		"reponseEtuIII5a : "+reponseEtuIII5a+", "+
 		"reponseEtuIII5b : "+reponseEtuIII5b+", "+
 		"reponseEtuIII5c : "+reponseEtuIII5c+", "+
 		"reponseEtuIII6 : "+reponseEtuIII6+", "+
+		"reponseEtuIII6bis : "+reponseEtuIII6bis+", "+
 		"reponseEtuIII7 : "+reponseEtuIII7+", "+
 		"reponseEtuIII8 : "+reponseEtuIII8+", "+
 		"reponseEtuIII8bis : "+reponseEtuIII8bis+", "+
@@ -741,7 +743,7 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 		"reponseEtuIII10 : "+reponseEtuIII10+", "+
 		"reponseEtuIII11 : "+reponseEtuIII11+", "+
 		"reponseEtuIII12 : "+reponseEtuIII12+", "+
-		"reponseEtuIII13 : "+reponseEtuIII13+", "+
+//		"reponseEtuIII13 : "+reponseEtuIII13+", "+
 		"reponseEtuIII14 : "+reponseEtuIII14+", "+
 		"reponseEtuIII15 : "+reponseEtuIII15+", "+
 		"reponseEtuIII16 : "+reponseEtuIII16+", "+
@@ -1537,33 +1539,33 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 		this.reponseEtuIII2bis = reponseEtuIII2bis;
 	}
 
-	/**
-	 * @return the reponseEtuIII3
-	 */
-	public boolean isReponseEtuIII3() {
-		return reponseEtuIII3;
-	}
-
-	/**
-	 * @param reponseEtuIII3 the reponseEtuIII3 to set
-	 */
-	public void setReponseEtuIII3(boolean reponseEtuIII3) {
-		this.reponseEtuIII3 = reponseEtuIII3;
-	}
-
-	/**
-	 * @return the reponseEtuIII3bis
-	 */
-	public String getReponseEtuIII3bis() {
-		return reponseEtuIII3bis;
-	}
-
-	/**
-	 * @param reponseEtuIII3bis the reponseEtuIII3bis to set
-	 */
-	public void setReponseEtuIII3bis(String reponseEtuIII3bis) {
-		this.reponseEtuIII3bis = reponseEtuIII3bis;
-	}
+//	/**
+//	 * @return the reponseEtuIII3
+//	 */
+//	public boolean isReponseEtuIII3() {
+//		return reponseEtuIII3;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII3 the reponseEtuIII3 to set
+//	 */
+//	public void setReponseEtuIII3(boolean reponseEtuIII3) {
+//		this.reponseEtuIII3 = reponseEtuIII3;
+//	}
+//
+//	/**
+//	 * @return the reponseEtuIII3bis
+//	 */
+//	public String getReponseEtuIII3bis() {
+//		return reponseEtuIII3bis;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII3bis the reponseEtuIII3bis to set
+//	 */
+//	public void setReponseEtuIII3bis(String reponseEtuIII3bis) {
+//		this.reponseEtuIII3bis = reponseEtuIII3bis;
+//	}
 
 	/**
 	 * @return the reponseEtuIII5a
@@ -1691,19 +1693,19 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 		this.reponseEtuIII12 = reponseEtuIII12;
 	}
 
-	/**
-	 * @return the reponseEtuIII13
-	 */
-	public boolean isReponseEtuIII13() {
-		return reponseEtuIII13;
-	}
-
-	/**
-	 * @param reponseEtuIII13 the reponseEtuIII13 to set
-	 */
-	public void setReponseEtuIII13(boolean reponseEtuIII13) {
-		this.reponseEtuIII13 = reponseEtuIII13;
-	}
+//	/**
+//	 * @return the reponseEtuIII13
+//	 */
+//	public boolean isReponseEtuIII13() {
+//		return reponseEtuIII13;
+//	}
+//
+//	/**
+//	 * @param reponseEtuIII13 the reponseEtuIII13 to set
+//	 */
+//	public void setReponseEtuIII13(boolean reponseEtuIII13) {
+//		this.reponseEtuIII13 = reponseEtuIII13;
+//	}
 
 	/**
 	 * @return the reponseEtuIII14

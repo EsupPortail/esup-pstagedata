@@ -1602,6 +1602,12 @@ public interface RemoteServices extends Serializable{
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException;
 	
+	/**
+	 * 
+	 * @return List<String>
+	 */
+	public List<String> getRaisonsSociales(String raisonSociale);
+	
 	/* ****************************************************************************
 	 * TEMPS TRAVAIL
 	 *****************************************************************************/

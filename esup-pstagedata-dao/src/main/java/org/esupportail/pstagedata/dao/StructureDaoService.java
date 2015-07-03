@@ -205,4 +205,10 @@ public interface StructureDaoService extends Serializable {
 	 * @throws DataBaseDaoException
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateDaoException, DataBaseDaoException;
+	
+	/**
+	 * 
+	 * @return List<String>
+	 */
+	public List<String> getRaisonsSociales(String raisonSociale);
 }

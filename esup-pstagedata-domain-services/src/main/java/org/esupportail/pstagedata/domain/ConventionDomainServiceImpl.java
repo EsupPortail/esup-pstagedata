@@ -30,12 +30,12 @@ import org.esupportail.pstagedata.services.convertDto.UtilsDTO;
  *
  */
 public class ConventionDomainServiceImpl implements ConventionDomainService {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * ConventionDaoService
 	 */
@@ -69,7 +69,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#addConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
 	public int addConvention(ConventionDTO convention) throws DataAddException,
-			WebServiceDataBaseException {
+	WebServiceDataBaseException {
 		int tmp=0;
 		try{
 			tmp = this.conventionDaoService.addConvention(UtilsDTO.getConventionFromDTO(convention));
@@ -115,7 +115,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public List<String> getAnneesConvention(String codeUniversite){
 		return this.conventionDaoService.getAnneesConvention(codeUniversite);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsFromCriteres(org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
 	 */
@@ -129,11 +129,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                } else {
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                }
+						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						} else {
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						}
 					}
 				}
 			}
@@ -141,12 +141,12 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return lr;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsFromCriteresByEnseignantTuteur(int, org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
 	 */
-	public List<ConventionDTO> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConventionDTO critereRechercheConvention) {
+	public List<ConventionDTO> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConventionDTO critereRechercheConvention) {		
 		List<ConventionDTO> lr = null;
 		if(critereRechercheConvention!=null ){
 			List<Convention> l = this.conventionDaoService.getConventionsFromCriteresByEnseignantTuteur(idEnseignant ,UtilsDTO.getCritereRechercheConventionFromDTO(critereRechercheConvention));
@@ -156,11 +156,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                } else {
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                }
+						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						} else {
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						}
 					}
 				}
 			}
@@ -168,7 +168,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return lr;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsFromCriteresExport(org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
@@ -180,25 +180,25 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return lr;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionFromExport(int)
 	 */
-//	public ConventionDTO getConventionFromExport(int id) {
-//		ConventionDTO cr = null;
-//		Convention c = this.conventionDaoService.getConventionFromExport(id);
-//		if(c!=null){
-//			if(c.getCodeUFR()!=null){
-//				c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-//			}
-//			if(c.getCodeEtape()!=null){
-//				c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-//			}
-//			cr = new ConventionDTO(c,false);
-//		}
-//		return cr;
-//	}
+	//	public ConventionDTO getConventionFromExport(int id) {
+	//		ConventionDTO cr = null;
+	//		Convention c = this.conventionDaoService.getConventionFromExport(id);
+	//		if(c!=null){
+	//			if(c.getCodeUFR()!=null){
+	//				c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
+	//			}
+	//			if(c.getCodeEtape()!=null){
+	//				c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+	//			}
+	//			cr = new ConventionDTO(c,false);
+	//		}
+	//		return cr;
+	//	}
 	public List<ConventionDTO> getConventionsFromExport(List<Integer> idsConventionsExport) {
 		List<ConventionDTO> lr = null;
 		List<Convention> l = this.conventionDaoService.getConventionsFromExport(idsConventionsExport);
@@ -208,11 +208,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 					c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 				}
 				if(c.getCodeEtape()!=null){
-	                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-	                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-	                } else {
-	                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-	                }
+					if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+					} else {
+						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+					}
 				}
 			}
 			lr = UtilsDTO.getConventionListDTO(l);
@@ -226,7 +226,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public List<ConventionDTO> getConventions(String codeUniversite) {
 		return UtilsDTO.getConventionListDTO(this.conventionDaoService.getConventions(codeUniversite),false);
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsEtudiant(java.lang.String, java.lang.String)
 	 */
@@ -240,11 +240,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                } else {
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                }
+						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						} else {
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						}
 					}
 				}
 			}
@@ -252,7 +252,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return lr;
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#getNombreConventionByCentreGestion(int, java.lang.String)
@@ -274,11 +274,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
 					}
 					if(c.getCodeEtape()!=null){
-		                if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                } else {
-		                    c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-		                }
+						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						} else {
+							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
+						}
 					}
 				}
 			}
@@ -320,7 +320,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return b;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#updateCentreConventionByEtape(java.lang.String, int, java.lang.String)
 	 */
@@ -344,7 +344,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public String getCodeUFRFromCodeEtape(String codeEtape, String codeUniversite) {
 		return this.conventionDaoService.getCodeUFRFromCodeEtape(codeEtape, codeUniversite);
 	}
-	
+
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
@@ -360,7 +360,7 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return b;
 	}
-	
+
 	/**
 	 * @return the ufrDaoService
 	 */
@@ -385,6 +385,6 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public void setEtapeDaoService(EtapeDaoService etapeDaoService) {
 		this.etapeDaoService = etapeDaoService;
 	}
-	
-	
+
+
 }

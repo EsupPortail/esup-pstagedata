@@ -205,6 +205,12 @@ public interface StructureDomainService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException;
+	
+	/**
+	 * 
+	 * @return List<String>
+	 */
+	public List<String> getRaisonsSociales(String raisonSociale);
 }
 
 

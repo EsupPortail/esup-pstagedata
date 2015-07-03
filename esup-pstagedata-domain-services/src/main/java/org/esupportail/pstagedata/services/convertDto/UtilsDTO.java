@@ -302,6 +302,8 @@ public class UtilsDTO {
 			a.setValidationAvenant(ad.isValidationAvenant());
 			if (ad.getDateRupture() != null)
 				a.setDateRupture(ad.getDateRupture());
+			if(ad.getCommentaireRupture() != null)
+				a.setCommentaireRupture(ad.getCommentaireRupture());
 		}
 		return a;
 	}
@@ -2382,6 +2384,7 @@ public class UtilsDTO {
 			r.setReponseEnt17(red.getReponseEnt17());
 			r.setReponseEnt17bis(red.getReponseEnt17bis());
 			r.setReponseEnt18(red.isReponseEnt18());
+			r.setReponseEnt18bis(red.getReponseEnt18bis());
 			r.setReponseEnt19(red.getReponseEnt19());
 			// fiche etudiant
 			r.setReponseEtuI1(red.getReponseEtuI1());
@@ -2415,8 +2418,8 @@ public class UtilsDTO {
 			r.setReponseEtuIII1bis(red.getReponseEtuIII1bis());
 			r.setReponseEtuIII2(red.isReponseEtuIII2());
 			r.setReponseEtuIII2bis(red.getReponseEtuIII2bis());
-			r.setReponseEtuIII3(red.isReponseEtuIII3());
-			r.setReponseEtuIII3bis(red.getReponseEtuIII3bis());
+//			r.setReponseEtuIII3(red.isReponseEtuIII3());
+//			r.setReponseEtuIII3bis(red.getReponseEtuIII3bis());
 			r.setReponseEtuIII4(red.getReponseEtuIII4());
 			r.setReponseEtuIII5a(red.isReponseEtuIII5a());
 			r.setReponseEtuIII5b(red.isReponseEtuIII5b());
@@ -2433,7 +2436,7 @@ public class UtilsDTO {
 			r.setReponseEtuIII10(red.isReponseEtuIII10());
 			r.setReponseEtuIII11(red.isReponseEtuIII11());
 			r.setReponseEtuIII12(red.isReponseEtuIII12());
-			r.setReponseEtuIII13(red.isReponseEtuIII13());
+//			r.setReponseEtuIII13(red.isReponseEtuIII13());
 			r.setReponseEtuIII14(red.isReponseEtuIII14());
 			r.setReponseEtuIII15(red.getReponseEtuIII15());
 			r.setReponseEtuIII15bis(red.getReponseEtuIII15bis());

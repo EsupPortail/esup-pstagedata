@@ -443,5 +443,10 @@
 		UPDATE Structure SET temEnServStructure = 'N', loginModif=#loginCurrentUser#, dateModif=CURDATE() 
 		WHERE idStructure = #idStructure#
 	</update>
+	
+	<statement id="getRaisonsSociales" resultClass="java.lang.String">
+		SELECT S.raisonSociale FROM Structure S
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%') 
+	</statement>
 
 </sqlMap>

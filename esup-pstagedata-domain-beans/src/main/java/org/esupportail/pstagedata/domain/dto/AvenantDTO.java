@@ -121,6 +121,12 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	private Date dateRupture;
 	
+	/**
+	 * commentaireRupture
+	 */
+	private String commentaireRupture;
+	
+	
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -169,6 +175,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 			this.idConvention= a.getIdConvention();
 			this.titreAvenant=a.getTitreAvenant();
 			this.motifAvenant = a.getMotifAvenant();
+			this.commentaireRupture=a.getCommentaireRupture();
 			this.rupture=a.isRupture();
 			this.modificationPeriode=a.isModificationPeriode();
 			this.dateDebutStage=a.getDateDebutStage();
@@ -217,6 +224,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		"motifAvenant : "+motifAvenant+", "+
 		"rupture : "+rupture+", "+
 		"dateRupture : "+dateRupture+", "+
+		"commentaireRupture : "+commentaireRupture+", "+
 		"modificationPeriode : "+modificationPeriode+", "+
 		"dateDebutStage : "+dateDebutStage+", "+
 		"dateFinStage : "+dateFinStage+", "+
@@ -733,6 +741,14 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	public void setDateRupture(Date dateRupture){
 		this.dateRupture=dateRupture;
+	}
+
+	public String getCommentaireRupture() {
+		return commentaireRupture;
+	}
+
+	public void setCommentaireRupture(String commentaireRupture) {
+		this.commentaireRupture = commentaireRupture;
 	}
 	
 	

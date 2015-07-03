@@ -16,6 +16,7 @@
 		<result property="motifAvenant" column="motifAvenant" />
 		<result property="rupture" column="rupture" />
 		<result property="dateRupture" column="dateRupture" />	
+		<result property="commentaireRupture" column="commentaireRupture" />
 		<result property="modificationPeriode" column="modificationPeriode" />
 		<result property="dateDebutStage" column="dateDebutStage" />
 		<result property="dateFinStage" column="dateFinStage" />
@@ -53,12 +54,12 @@
 	</statement>
 	
 	<insert id="addAvenant" >
-		INSERT INTO Avenant (titreAvenant, idConvention, motifAvenant, rupture, dateRupture, modificationPeriode, dateDebutStage,
+		INSERT INTO Avenant (titreAvenant, idConvention, motifAvenant, rupture, dateRupture, commentaireRupture, modificationPeriode, dateDebutStage,
 		dateFinStage, interruptionStage, dateDebutInterruption, dateFinInterruption, modificationLieu,
 		idService, modificationSujet, sujetStage, modificationEnseignant, idEnseignant, modificationSalarie, 
 		idContact,modificationMontantGratification, idUniteGratification, montantGratification,
 		validationAvenant, loginCreation, dateCreation,idUniteDureeGratification) 
-		VALUES (#titreAvenant#,#idConvention#,#motifAvenant#,#rupture#,#dateRupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
+		VALUES (#titreAvenant#,#idConvention#,#motifAvenant#,#rupture#,#dateRupture#,#commentaireRupture#,#modificationPeriode#,#dateDebutStage#,#dateFinStage#,
 		#interruptionStage#,#dateDebutInterruption#, #dateFinInterruption#,#modificationLieu#, #idService#,
 		#modificationSujet#,#sujetStage#, #modificationEnseignant#,#idEnseignant#,#modificationSalarie#, 
 		#idContact#,#modificationMontantGratification#,#idUniteGratification#,#montantGratification#,
@@ -70,7 +71,7 @@
 	
 	<update id="updateAvenant">
 		UPDATE Avenant SET titreAvenant=#titreAvenant#,idConvention=#idConvention#,motifAvenant=#motifAvenant#,rupture=#rupture#,
-		dateRupture=#dateRupture#,modificationPeriode=#modificationPeriode#,dateDebutStage=#dateDebutStage#,dateFinStage=#dateFinStage#,
+		dateRupture=#dateRupture#,commentaireRupture=#commentaireRupture#,modificationPeriode=#modificationPeriode#,dateDebutStage=#dateDebutStage#,dateFinStage=#dateFinStage#,
 		interruptionStage=#interruptionStage#,dateDebutInterruption=#dateDebutInterruption#,
 		dateFinInterruption=#dateFinInterruption#,modificationLieu=#modificationLieu#,idService=#idService#,
 		modificationSujet=#modificationSujet#,sujetStage=#sujetStage#,modificationEnseignant=#modificationEnseignant#,

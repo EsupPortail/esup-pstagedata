@@ -316,5 +316,9 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 		}
 		return b;
 	}
+	
+	public List<String> getRaisonsSociales(String raisonSociale){
+		return (List<String>) getStructureDaoService().getRaisonsSociales(raisonSociale);
+	}
 
 }

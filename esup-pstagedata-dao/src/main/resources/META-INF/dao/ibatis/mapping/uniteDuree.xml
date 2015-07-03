@@ -15,7 +15,8 @@
 
 	<statement id="getUnitesDurees" resultMap="UniteDuree">
 		SELECT * FROM UniteDuree
-		WHERE temEnServUniteDuree = 'O'
+		WHERE temEnServUniteDuree = 'O' 
+		AND libelleUniteDuree IS NOT NULL
 	</statement>
 	
 	<statement id="getUniteDureeFromId" resultMap="UniteDuree">
