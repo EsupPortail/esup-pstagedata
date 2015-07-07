@@ -98,8 +98,8 @@
 		<result property="reponseEtuIII1bis" column="reponseEtuIII1bis" />
 		<result property="reponseEtuIII2" column="reponseEtuIII2" />
 		<result property="reponseEtuIII2bis" column="reponseEtuIII2bis" />
-<!-- 		<result property="reponseEtuIII3" column="reponseEtuIII3" /> -->
-<!-- 		<result property="reponseEtuIII3bis" column="reponseEtuIII3bis" /> -->
+		<result property="reponseEtuIII3" column="reponseEtuIII3" />
+		<result property="reponseEtuIII3bis" column="reponseEtuIII3bis" />
 		<result property="reponseEtuIII4" column="reponseEtuIII4" nullValue="0" />
 		<result property="reponseEtuIII5a" column="reponseEtuIII5a" />
 		<result property="reponseEtuIII5b" column="reponseEtuIII5b" />
@@ -119,7 +119,7 @@
 		<result property="reponseEtuIII10" column="reponseEtuIII10" />
 		<result property="reponseEtuIII11" column="reponseEtuIII11" />
 		<result property="reponseEtuIII12" column="reponseEtuIII12" />
-<!-- 		<result property="reponseEtuIII13" column="reponseEtuIII13" /> -->
+		<result property="reponseEtuIII13" column="reponseEtuIII13" />
 		<result property="reponseEtuIII14" column="reponseEtuIII14" />
 		<result property="reponseEtuIII15" column="reponseEtuIII15"
 			nullValue="0" />
@@ -197,13 +197,14 @@
 		reponseEtuII4=#reponseEtuII4#,
 		reponseEtuII5=#reponseEtuII5#,reponseEtuII5a=#reponseEtuII5a#,reponseEtuII5b=#reponseEtuII5b#,
 		reponseEtuII6=#reponseEtuII6#,reponseEtuIII1=#reponseEtuIII1#,reponseEtuIII1bis=#reponseEtuIII1bis#,
-		reponseEtuIII2=#reponseEtuIII2#,reponseEtuIII2bis=#reponseEtuIII2bis#,reponseEtuIII4=#reponseEtuIII4#,reponseEtuIII5a=#reponseEtuIII5a#,
+		reponseEtuIII2=#reponseEtuIII2#,reponseEtuIII2bis=#reponseEtuIII2bis#,reponseEtuIII3=#reponseEtuIII3#,
+		reponseEtuIII3bis=#reponseEtuIII3bis#,reponseEtuIII4=#reponseEtuIII4#,reponseEtuIII5a=#reponseEtuIII5a#,
 		reponseEtuIII5b=#reponseEtuIII5b#,reponseEtuIII5bis=#reponseEtuIII5bis#,reponseEtuIII5c=#reponseEtuIII5c#,
 		reponseEtuIII6=#reponseEtuIII6#,reponseEtuIII6bis=#reponseEtuIII6bis#,
 		reponseEtuIII7=#reponseEtuIII7#,reponseEtuIII7bis=#reponseEtuIII7bis#,
 		reponseEtuIII8=#reponseEtuIII8#,reponseEtuIII8bis=#reponseEtuIII8bis#,
 		reponseEtuIII9=#reponseEtuIII9#,reponseEtuIII9bis=#reponseEtuIII9bis#,reponseEtuIII10=#reponseEtuIII10#,
-		reponseEtuIII11=#reponseEtuIII11#,reponseEtuIII12=#reponseEtuIII12#,
+		reponseEtuIII11=#reponseEtuIII11#,reponseEtuIII12=#reponseEtuIII12#,reponseEtuIII13=#reponseEtuIII13#,
 		reponseEtuIII14=#reponseEtuIII14#,reponseEtuIII15=#reponseEtuIII15#,reponseEtuIII15bis=#reponseEtuIII15bis#,
 		reponseEtuIII16=#reponseEtuIII16#,reponseEtuIII16bis=#reponseEtuIII16bis#,
 		validationEtudiant=#validationEtudiant#

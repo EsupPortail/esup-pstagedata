@@ -204,7 +204,7 @@ public class UtilsDTO {
 			a.setMdp(ad.getMdp());
 			//En majuscules
 			a.setNom(StringUtils.hasText(ad.getNom())?ad.getNom().toUpperCase():null);
-			//Premi�re lettre en MAJ
+			//Premiere lettre en MAJ
 			a.setPrenom(Utils.premiereLettreMAJ(ad.getPrenom()));
 			a.setTel(ad.getTel());
 		}
@@ -2418,8 +2418,8 @@ public class UtilsDTO {
 			r.setReponseEtuIII1bis(red.getReponseEtuIII1bis());
 			r.setReponseEtuIII2(red.isReponseEtuIII2());
 			r.setReponseEtuIII2bis(red.getReponseEtuIII2bis());
-//			r.setReponseEtuIII3(red.isReponseEtuIII3());
-//			r.setReponseEtuIII3bis(red.getReponseEtuIII3bis());
+			r.setReponseEtuIII3(red.isReponseEtuIII3());
+			r.setReponseEtuIII3bis(red.getReponseEtuIII3bis());
 			r.setReponseEtuIII4(red.getReponseEtuIII4());
 			r.setReponseEtuIII5a(red.isReponseEtuIII5a());
 			r.setReponseEtuIII5b(red.isReponseEtuIII5b());
@@ -2436,7 +2436,7 @@ public class UtilsDTO {
 			r.setReponseEtuIII10(red.isReponseEtuIII10());
 			r.setReponseEtuIII11(red.isReponseEtuIII11());
 			r.setReponseEtuIII12(red.isReponseEtuIII12());
-//			r.setReponseEtuIII13(red.isReponseEtuIII13());
+			r.setReponseEtuIII13(red.isReponseEtuIII13());
 			r.setReponseEtuIII14(red.isReponseEtuIII14());
 			r.setReponseEtuIII15(red.getReponseEtuIII15());
 			r.setReponseEtuIII15bis(red.getReponseEtuIII15bis());
