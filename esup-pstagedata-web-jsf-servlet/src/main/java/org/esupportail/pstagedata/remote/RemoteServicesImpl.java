@@ -2932,14 +2932,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
-			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
-			int nbO = this.structureDomainService.countOffreFromIdStructure(idStructure);
-			int nbCv = this.structureDomainService.countConventionFromIdStructure(idStructure);
-			boolean accord = this.accordPartenariatDomainService.getAccordFromIdStructure(idStructure)!=null;
-			if(nbCpt > 0 || nbO > 0 || nbCv > 0 || accord){
-				throw new StructureDeleteException("Suppression impossible. Offres : "+nbCpt+", Comptes : "+nbO+", Conventions : "+nbCv+", Accord : "+accord,
-						nbCpt,nbO,nbCv,accord);
-			}			
+//			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
+//			int nbO = this.structureDomainService.countOffreFromIdStructure(idStructure);
+//			int nbCv = this.structureDomainService.countConventionFromIdStructure(idStructure);
+//			boolean accord = this.accordPartenariatDomainService.getAccordFromIdStructure(idStructure)!=null;
+//			if(nbCpt > 0 || nbO > 0 || nbCv > 0 || accord){
+//				throw new StructureDeleteException("Suppression impossible. Offres : "+nbCpt+", Comptes : "+nbO+", Conventions : "+nbCv+", Accord : "+accord,
+//						nbCpt,nbO,nbCv,accord);
+//			}
 			b=this.structureDomainService.deleteStructure(idStructure,loginCurrentUser);
 		}
 		return b;
