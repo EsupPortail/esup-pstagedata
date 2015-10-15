@@ -16,7 +16,6 @@ import org.esupportail.pstagedata.domain.dto.EtudiantDTO;
 import org.esupportail.pstagedata.exceptions.DataAddException;
 import org.esupportail.pstagedata.exceptions.DataDeleteException;
 import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
 import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
 import org.esupportail.pstagedata.services.convertDto.UtilsDTO;
 
@@ -67,18 +66,6 @@ public class EtudiantDomainServiceImpl implements EtudiantDomainService {
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
-		}catch (EtudiantAlreadyExistingForNumEtuCodeUnivException ee) {
-			try{
-				
-				Etudiant etudiantUid = this.etudiantDaoService.getEtudiantFromUid(etudiant.getIdentEtudiant(), etudiant.getCodeUniversite());
-				if (etudiantUid != null) {
-					tmp = etudiantUid.getId();
-				}
-			}catch (DataAddDaoException e) {
-				throw new DataAddException(e.getMessage(), e.getCause());
-			}catch (DataBaseDaoException e) {
-				throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
-			}
 		}
 		return tmp;
 	}

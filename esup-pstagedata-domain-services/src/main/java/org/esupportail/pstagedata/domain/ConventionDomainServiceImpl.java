@@ -360,6 +360,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		}
 		return b;
 	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getNbConventionsByAnneeAndEtu(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee,
+			String identEtudiant, String codeUniversite) {
+		return this.conventionDaoService.getNbConventionsByAnneeAndEtu(annee, identEtudiant, codeUniversite);
+	}
 
 	/**
 	 * @return the ufrDaoService

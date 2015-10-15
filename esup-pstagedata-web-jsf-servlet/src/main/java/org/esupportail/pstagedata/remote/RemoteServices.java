@@ -307,7 +307,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire, int idConvention) throws DataDeleteException, WebServiceDataBaseException;
-	
+
 	/* ****************************************************************************
 	 * NOMENCLATURES
 	 *****************************************************************************/
@@ -1601,13 +1601,18 @@ public interface RemoteServices extends Serializable{
 	 * @throws StructureDeleteException
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException;
-	
+
 	/**
 	 * 
 	 * @return List<String>
 	 */
 	public List<String> getRaisonsSociales(String raisonSociale);
-	
+
+	/**
+	 * @return List<Structure>
+	 */
+	public List<StructureDTO> getStructuresTemEnServFalse();
+
 	/* ****************************************************************************
 	 * TEMPS TRAVAIL
 	 *****************************************************************************/
@@ -1903,6 +1908,14 @@ public interface RemoteServices extends Serializable{
 	public int getNombreConventionByCentreGestionFromCodUniv(int idCentreGestion, String codeUniversite);
 
 	/**
+	 * @param annee
+	 * @param identEtudiant
+	 * @param codeUniversite 
+	 * @return int
+	 */ 
+	public int getNbConventionsByAnneeAndEtu(String annee, String identEtudiant, String codeUniversite);
+
+	/**
 	 * @param idEnseignant
 	 * @param annee
 	 * @return List<ConventionDTO>
@@ -2020,6 +2033,12 @@ public interface RemoteServices extends Serializable{
 	public EtudiantDTO getEtudiantFromId(int id);
 
 	/**
+	 * @param UID
+	 * @return EtudiantDTO
+	 */
+	public EtudiantDTO getEtudiantFromUid(String uidEtudiant, String codeUniversite);
+	
+	/**
 	 * @param etudiant
 	 * @return int
 	 * @throws DataAddException
@@ -2073,9 +2092,9 @@ public interface RemoteServices extends Serializable{
 	 * @return int
 	 */
 	public int getNombreConventionByEnseignantFromCodUniv(String uidEnseignant, String codeUniversite);
-	
+
 	public int getNombreConventionByEnseignantByAnneeFromCodUniv(String uidEnseignant, String codeUniversite, String annee );
-	
+
 	/**
 	 * @return List
 	 */

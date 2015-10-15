@@ -248,6 +248,7 @@
 		<isNotNull property="codeUniversite" prepend="AND">
 			ET.codeUniversite = #codeUniversite#
 		</isNotNull>
+		ORDER BY C.dateCreation DESC
 	</statement>
 
 	<statement id="getConventionsByEnseignant" resultMap="ConventionLight">
@@ -980,25 +981,14 @@
 		C.montantGratification, C.idUniteGratification,
 		C.dureeExceptionnelle, C.idUniteDureeExceptionnelle,
 		C.idStructure, C.idEtudiant, C.codeDepartement,
-		C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire ,
+		C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire,
 		C.idTypeConvention,
 		C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp,
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
-		adresseEtudiant, codePostalEtudiant, villeEtudiant, paysEtudiant, C.idUniteDureeGratification,
-		C.monnaieGratification, C.dateCreation, C.dateModif 
+		C.adresseEtudiant, C.codePostalEtudiant, C.villeEtudiant, C.paysEtudiant, C.idUniteDureeGratification,
+		C.monnaieGratification, C.dateCreation, C.dateModif
 		FROM Convention C
-		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
-		U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
-		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
-		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
-		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="idsConventionsExport"
 				open="(" close=")">
@@ -1009,7 +999,6 @@
 		</dynamic>
 		ORDER BY C.idConvention
 	</statement>
-
 
 	<statement id="getNombreConventionByCentreGestion"
 		resultClass="java.lang.Integer">
@@ -1168,4 +1157,14 @@
 		UPDATE Convention SET codeVersionEtape=#codeVersionEtape#
 		WHERE codeEtape = #codeEtape# AND codeVersionEtape = ''
 	</update>
+	
+	<statement id="getNbConventionsByAnneeAndEtu" resultClass="java.lang.Integer">
+		SELECT count(*) FROM Convention C
+		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+		WHERE C.annee LIKE CONCAT('%',#annee#,'%')
+		AND ET.identEtudiant = #identEtudiant#
+		<isNotNull property="codeUniversite" prepend="AND">
+			ET.codeUniversite = #codeUniversite#
+		</isNotNull>
+	</statement>
 </sqlMap>

@@ -316,9 +316,19 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 		}
 		return b;
 	}
-	
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getRaisonsSociales(java.lang.String)
+	 */
 	public List<String> getRaisonsSociales(String raisonSociale){
 		return (List<String>) getStructureDaoService().getRaisonsSociales(raisonSociale);
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getStructuresTemEnServFalse()
+	 */
+	public List<StructureDTO> getStructuresTemEnServFalse() {
+		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresTemEnServFalse());
 	}
 
 }

@@ -145,4 +145,12 @@ public interface ConventionDaoService extends Serializable {
 	 * @throws DataBaseDaoException
 	 */
 	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateDaoException, DataBaseDaoException;
+
+	/**
+	 * @param annee
+	 * @param identEtudiant
+	 * @param identEtudiant
+	 * @return int
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee, String identEtudiant, String codeUniversite);
 }

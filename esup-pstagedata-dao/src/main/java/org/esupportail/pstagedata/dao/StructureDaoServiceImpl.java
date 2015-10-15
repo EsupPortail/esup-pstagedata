@@ -467,4 +467,12 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		return (List<String>)getSqlMapClientTemplate().queryForList("getRaisonsSociales",parameterMap);
 	}
 	
+	/**
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructuresTemEnServFalse()
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Structure> getStructuresTemEnServFalse(){
+		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresTemEnServFalse");
+	}
+	
 }

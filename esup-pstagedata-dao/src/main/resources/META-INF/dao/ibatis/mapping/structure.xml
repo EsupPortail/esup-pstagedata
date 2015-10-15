@@ -449,4 +449,11 @@
 		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%') 
 	</statement>
 
+	<statement id="getStructuresTemEnServFalse" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE temEnServStructure = 'N'
+		ORDER BY S.dateModif
+		LIMIT 0, 200
+	</statement>
 </sqlMap>

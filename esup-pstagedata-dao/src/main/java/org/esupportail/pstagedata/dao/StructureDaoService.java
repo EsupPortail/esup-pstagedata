@@ -211,4 +211,9 @@ public interface StructureDaoService extends Serializable {
 	 * @return List<String>
 	 */
 	public List<String> getRaisonsSociales(String raisonSociale);
+	
+	/**
+	 * @return List<Structure>
+	 */
+	public List<Structure> getStructuresTemEnServFalse();
 }

@@ -1312,7 +1312,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	public List<ContactDTO> getContactsFromIdService(int idService, List<Integer> idsCentresGestion, String codeUniversite){
 		List<ContactDTO> l = null;
-		if(idService>0 && idsCentresGestion!=null && !idsCentresGestion.isEmpty() && StringUtils.hasText(codeUniversite)){
+		if(idService>0 && StringUtils.hasText(codeUniversite)){
 			l = this.contactDomainService.getContactsFromIdService(idService, idsCentresGestion, codeUniversite);
 		}
 		return l;
@@ -1583,6 +1583,14 @@ public class RemoteServicesImpl implements RemoteServices{
 		return this.conventionDomainService.getNombreConventionByCentreGestion(idCentreGestion, codeUniversite);
 	}
 
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNbConventionsByAnneeAndEtu(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee,
+			String identEtudiant, String codeUniversite) {
+		return this.conventionDomainService.getNbConventionsByAnneeAndEtu(annee, identEtudiant, codeUniversite);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
@@ -1957,7 +1965,14 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtudiantFromUID(String)
+	 */
+	public EtudiantDTO getEtudiantFromUid(String uidEtudiant, String codeUniversite){
+		return this.etudiantDomainService.getEtudiantFromUid(uidEtudiant, codeUniversite);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtudiantFromId(int)
 	 */
@@ -2955,7 +2970,13 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresTemEnServFalse()
+	 */
+	public List<StructureDTO> getStructuresTemEnServFalse(){
+		return this.structureDomainService.getStructuresTemEnServFalse();
+	}
 	/* ****************************************************************************
 	 * TEMPS TRAVAIL
 	 *****************************************************************************/
