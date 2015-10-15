@@ -1592,14 +1592,6 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNbConventionsByAnneeAndEtu(java.lang.String, java.lang.String, java.lang.String)
-	 */
-	public int getNbConventionsByAnneeAndEtu(String annee,
-			String identEtudiant, String codeUniversite) {
-		return this.conventionDomainService.getNbConventionsByAnneeAndEtu(annee, identEtudiant, codeUniversite);
-	}
-	
-	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
 	public boolean updateConvention(ConventionDTO convention)
