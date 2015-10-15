@@ -253,6 +253,8 @@ CREATE  TABLE IF NOT EXISTS `Structure` (
 
   `prenomDirigeant` VARCHAR(50) NULL ,
 
+  `temEnServStructure` VARCHAR(1) DEFAULT 'O' ,
+ 
   PRIMARY KEY (`idStructure`))
 
 ENGINE = InnoDB
@@ -1883,7 +1885,7 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `dateFinInterruption` DATE NULL ,
 
-  `nbJoursHebdo` ENUM('1','2','3','4','5','6') NOT NULL DEFAULT '5' ,
+  `nbJoursHebdo` ENUM('0.5','1','1.5','2','2.5','3','3.5','4','4.5','5','5.5','6') NOT NULL DEFAULT '5' ,
 
   `idTempsTravail` INT NOT NULL ,
 
@@ -2097,7 +2099,13 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `idUniteGratification` INT NULL ,
 
+  `idUniteDureeGratification` INT NULL DEFAULT 4 ,
+
   `modificationMontantGratification` TINYINT NOT NULL DEFAULT 0 ,
+
+  `dateRupture` DATE NULL ,
+
+  `commentaireRupture` TEXT NULL ,
 
   PRIMARY KEY (`idAvenant`))
 

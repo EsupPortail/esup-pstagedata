@@ -34,6 +34,14 @@ public interface CritereGestionDaoService extends Serializable {
 	public List<CritereGestion> getCritereGestionFromIdCentre(int idCentreGestion);
 	
 	/**
+	 * 
+	 * @param idCentreGestion
+	 * @param anneeUniv
+	 * @return List<CritereGestion>
+	 */
+	public List<CritereGestion> getCritereGestionFromIdCentreAndAnnee(int idCentreGestion, String anneeUniv);
+	
+	/**
 	 * @param codeEtape
 	 * @return CritereGestion
 	 */

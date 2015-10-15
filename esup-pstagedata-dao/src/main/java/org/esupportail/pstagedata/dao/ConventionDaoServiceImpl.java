@@ -459,5 +459,17 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		}
 		return b;
 	}
+
+	/**
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getNbConventionsByAnneeAndEtu(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee,
+			String identEtudiant, String codeUniversite) {
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("annee", annee);
+		parameterMap.put("identEtudiant", identEtudiant);
+		parameterMap.put("codeUniversite", codeUniversite);
+		return (Integer)getSqlMapClientTemplate().queryForObject("getNbConventionsByAnneeAndEtu", parameterMap);
+	}
 	
 }

@@ -80,6 +80,12 @@ public interface StructureDaoService extends Serializable {
 	 */
 	public List<Structure> getStructuresFromRaisonSocialeEtDepartement(String raisonSociale, String departement);
 	/**
+	 * @param raisonSociale
+	 * @param departement
+	 * @return List<Structure>
+	 */
+	public List<Structure> getStructuresFromRaisonSocialeEtDepartementFr(String raisonSociale, String departement);
+	/**
 	 * @param numSiren
 	 * @return List<Structure>
 	 */
@@ -211,4 +217,9 @@ public interface StructureDaoService extends Serializable {
 	 * @return List<String>
 	 */
 	public List<String> getRaisonsSociales(String raisonSociale);
+	
+	/**
+	 * @return List<Structure>
+	 */
+	public List<Structure> getStructuresTemEnServFalse();
 }

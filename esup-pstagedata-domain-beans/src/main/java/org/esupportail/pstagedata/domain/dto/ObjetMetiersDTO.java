@@ -33,6 +33,7 @@ public class ObjetMetiersDTO implements Serializable{
 	 * Derni�re date de modification
 	 */
 	private Date dateModif;
+	
 
 	/**
 	 * Constructeur
@@ -112,6 +113,6 @@ public class ObjetMetiersDTO implements Serializable{
 	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
-
+	
 
 }

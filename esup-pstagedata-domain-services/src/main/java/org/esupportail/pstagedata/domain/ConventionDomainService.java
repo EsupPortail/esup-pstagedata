@@ -142,4 +142,12 @@ public interface ConventionDomainService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException;
+
+	/**
+	 * @param annee 
+	 * @param identEtudiant 
+	 * @param codeUniversite 
+	 * @return int
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee,String identEtudiant, String codeUniversite);
 }

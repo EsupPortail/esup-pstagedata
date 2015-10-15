@@ -13,7 +13,6 @@ import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.beans.Etudiant;
-import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
 import org.springframework.dao.DataAccessException;
 
 
@@ -44,7 +43,29 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			if (error == 1062) {//Duplicate entry
-				throw new EtudiantAlreadyExistingForNumEtuCodeUnivException("Etudiant deja existant pour clef ident-codeUniv : "+etudiant.getIdentEtudiant() + " "+etudiant.getCodeUniversite());
+				// On met à jour l'etudiant puis on retourne son id
+				try{
+					//recuperation de son id
+					Etudiant etudiantUid = this.getEtudiantFromUid(etudiant.getIdentEtudiant(), etudiant.getCodeUniversite());
+					if (etudiantUid != null) {
+						tmp = etudiantUid.getId();
+						etudiant.setId(tmp);
+					}
+					etudiant.setLoginModif(etudiant.getLoginCreation());
+					
+					@SuppressWarnings("unused")
+					boolean b = getSqlMapClientTemplate().update("updateEtudiant",etudiant)>0?true:false;
+				} catch (DataAccessException eu) {
+					error = ((SQLException)eu.getCause()).getErrorCode();
+					if (error == 1452) {//Cannot add or update
+						throw new DataUpdateDaoException(eu.getMessage(),eu.getCause());
+					}
+					throw new DataBaseDaoException(eu.getMessage(), eu.getCause());	
+				} catch (Exception eu) {
+					throw new DataBaseDaoException(eu.getMessage(), eu.getCause());
+				}
+				
+				return tmp;
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {

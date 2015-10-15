@@ -106,7 +106,6 @@
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
 		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
 		WHERE S.idStructure = #idStructure#
-		AND temEnServStructure = 'O'
 		LIMIT 0,1
 	</statement>
 	
@@ -168,6 +167,18 @@
 		ORDER BY S.raisonSociale
 		LIMIT 0, 200
 	</statement>
+	
+	<statement id="getStructuresFromRaisonSocialeEtDepartementFr" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND S.codePostal LIKE CONCAT(#codePostal#,'%')
+		AND temEnServStructure = 'O'
+		AND idPays = 82
+		ORDER BY S.raisonSociale
+		LIMIT 0, 200
+	</statement>
+	
 	
 	<statement id="getStructuresFromRaisonSocialeEtPays" resultMap="Structure">
 		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
@@ -449,4 +460,11 @@
 		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%') 
 	</statement>
 
+	<statement id="getStructuresTemEnServFalse" resultMap="Structure">
+		SELECT DISTINCT S.*, A.idAccordPartenariat FROM Structure S
+		LEFT OUTER JOIN AccordPartenariat A ON S.idStructure = A.idStructure
+		WHERE temEnServStructure = 'N'
+		ORDER BY S.dateModif
+		LIMIT 0, 200
+	</statement>
 </sqlMap>

@@ -540,6 +540,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		this.setIdUniteDureeExceptionnelle(0);
 		this.setIdUniteDureeGratification(0);
 		this.setIdUniteGratification(0);
+		this.setMonnaieGratification("euros");
 	}
 
 

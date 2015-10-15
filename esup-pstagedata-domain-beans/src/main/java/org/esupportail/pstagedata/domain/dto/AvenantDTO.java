@@ -125,6 +125,10 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 	 * commentaireRupture
 	 */
 	private String commentaireRupture;
+	/**
+	 * monnaieGratification
+	 */
+	private String monnaieGratification;
 	
 	
 	/* ***************************************************************
@@ -208,6 +212,7 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 				setConvention(new ConventionDTO(a.getConvention(),false));
 			}
 			this.dateRupture=a.getDateRupture();
+			this.setMonnaieGratification(a.getMonnaieGratification());
 			
 		}
 	}	
@@ -244,7 +249,8 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 		"montantGratification : " + montantGratification + ", "+
 		"idUniteDureeGratification : " + idUniteDureeGratification +", "+
 		"validationAvenant : "+validationAvenant+", "+
-		", "+super.toString();
+		"monnaieGratification :"+monnaieGratification+", "+
+		super.toString();
 
 	}
 	
@@ -749,6 +755,14 @@ public class AvenantDTO extends ObjetMetiersDTO implements Serializable{
 
 	public void setCommentaireRupture(String commentaireRupture) {
 		this.commentaireRupture = commentaireRupture;
+	}
+
+	public String getMonnaieGratification() {
+		return monnaieGratification;
+	}
+
+	public void setMonnaieGratification(String monnaieGratification) {
+		this.monnaieGratification = monnaieGratification;
 	}
 	
 	

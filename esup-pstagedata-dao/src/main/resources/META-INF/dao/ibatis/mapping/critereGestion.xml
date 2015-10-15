@@ -25,6 +25,12 @@
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
 	
+	<statement id="getCritereGestionFromIdCentreAndAnnee" resultMap="CritereGestion">
+		SELECT DISTINCT Crit.idCentreGestion, Crit.codeCritere, Crit.codeVersionEtape, Crit.libelleCritere FROM CritereGestion Crit
+		INNER JOIN Convention C 
+		ON (C.annee = #anneeUniv# AND C.codeEtape = Crit.codeCritere AND C.idCentreGestion = Crit.idCentreGestion AND Crit.idCentreGestion = #idCentreGestion#)
+	</statement>
+	
 	<!-- 	Recuperation d'un critere de gestion sans code version etape a partir du code etape -->
 	<statement id="getCritereGestionSansVetFromCodeEtape" resultMap="CritereGestion">
 		SELECT * FROM CritereGestion

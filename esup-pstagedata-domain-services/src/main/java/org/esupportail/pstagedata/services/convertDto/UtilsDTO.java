@@ -304,6 +304,8 @@ public class UtilsDTO {
 				a.setDateRupture(ad.getDateRupture());
 			if(ad.getCommentaireRupture() != null)
 				a.setCommentaireRupture(ad.getCommentaireRupture());
+			if(ad.getMonnaieGratification() != null)
+				a.setMonnaieGratification(ad.getMonnaieGratification());
 		}
 		return a;
 	}
@@ -966,6 +968,7 @@ public class UtilsDTO {
 			//En majuscules
 			s.setNom(StringUtils.hasText(sd.getNom())?sd.getNom().toUpperCase():null);
 			s.setVoie(Utils.premiereLettreMAJ(sd.getVoie()));
+			s.setTelephone(StringUtils.hasText(sd.getTelephone())?sd.getTelephone().toUpperCase():null);
 		}
 		return s;		
 	}
@@ -2524,4 +2527,8 @@ public class UtilsDTO {
 		}
 		return rs;
 	}
+	
+	
+
+	
 }

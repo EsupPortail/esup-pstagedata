@@ -44,6 +44,18 @@ public class CritereGestionDaoServiceImpl extends AbstractIBatisDaoService imple
 	public List<CritereGestion> getCritereGestionFromIdCentre(int idCentreGestion){
 		return  getSqlMapClientTemplate().queryForList("getCritereGestionFromIdCentre", idCentreGestion);
 	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.dao.CritereGestionDaoService#getCritereGestionFromIdCentreAndAnnee(int, String)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CritereGestion> getCritereGestionFromIdCentreAndAnnee(int idCentreGestion, String anneeUniv){
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("idCentreGestion", idCentreGestion);
+		parameterMap.put("anneeUniv", anneeUniv);
+		return getSqlMapClientTemplate().queryForList("getCritereGestionFromIdCentreAndAnnee",parameterMap);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.dao.CritereGestionDaoService#getCritereGestionSansVetFromCodeEtape(String)
 	 */

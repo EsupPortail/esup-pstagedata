@@ -1312,7 +1312,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	public List<ContactDTO> getContactsFromIdService(int idService, List<Integer> idsCentresGestion, String codeUniversite){
 		List<ContactDTO> l = null;
-		if(idService>0 && idsCentresGestion!=null && !idsCentresGestion.isEmpty() && StringUtils.hasText(codeUniversite)){
+		if(idService>0 && StringUtils.hasText(codeUniversite)){
 			l = this.contactDomainService.getContactsFromIdService(idService, idsCentresGestion, codeUniversite);
 		}
 		return l;
@@ -1584,6 +1584,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNbConventionsByAnneeAndEtu(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public int getNbConventionsByAnneeAndEtu(String annee,
+			String identEtudiant, String codeUniversite) {
+		return this.conventionDomainService.getNbConventionsByAnneeAndEtu(annee, identEtudiant, codeUniversite);
+	}
+	
+	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
 	public boolean updateConvention(ConventionDTO convention)
@@ -1693,7 +1701,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public List<CritereGestionDTO> getCritereGestionFromIdCentre(int idCentreGestion) {
 		return this.critereGestionDomainService.getCritereGestionFromIdCentre(idCentreGestion);
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCritereGestionFromIdCentreAndAnnee(int,String)
+	 */
+	public List<CritereGestionDTO> getCritereGestionFromIdCentreAndAnnee(int idCentreGestion, String anneeUniv){
+		return this.critereGestionDomainService.getCritereGestionFromIdCentreAndAnnee(idCentreGestion, anneeUniv);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCritereGestionSansVetFromCodeEtape(String)
 	 */
@@ -1957,7 +1972,14 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtudiantFromUID(String)
+	 */
+	public EtudiantDTO getEtudiantFromUid(String uidEtudiant, String codeUniversite){
+		return this.etudiantDomainService.getEtudiantFromUid(uidEtudiant, codeUniversite);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtudiantFromId(int)
 	 */
@@ -2720,6 +2742,21 @@ public class RemoteServicesImpl implements RemoteServices{
 		return tmp;
 	}
 	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromRaisonSocialeEtDepartementFr(java.lang.String, java.lang.String)
+	 */
+	public List<StructureDTO> getStructuresFromRaisonSocialeEtDepartementFr(String raisonSociale, String departement){
+		List<StructureDTO> tmp=null;
+		if(StringUtils.hasText(raisonSociale)){
+			if(StringUtils.hasText(departement)){
+				tmp=this.structureDomainService.getStructuresFromRaisonSocialeEtDepartementFr(raisonSociale, departement);
+			}else{
+				//tmp=this.structureDomainService.getStructuresFromRaisonSociale(raisonSociale);
+				tmp=this.structureDomainService.getStructuresFromRaisonSocialeEtPays(raisonSociale, 99100);
+			}
+		}
+		return tmp;
+	}
+	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromNumSiren(java.lang.String)
 	 */
 	public List<StructureDTO> getStructuresFromNumSiren(String numSiren){
@@ -2932,14 +2969,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
-			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
-			int nbO = this.structureDomainService.countOffreFromIdStructure(idStructure);
-			int nbCv = this.structureDomainService.countConventionFromIdStructure(idStructure);
-			boolean accord = this.accordPartenariatDomainService.getAccordFromIdStructure(idStructure)!=null;
-			if(nbCpt > 0 || nbO > 0 || nbCv > 0 || accord){
-				throw new StructureDeleteException("Suppression impossible. Offres : "+nbCpt+", Comptes : "+nbO+", Conventions : "+nbCv+", Accord : "+accord,
-						nbCpt,nbO,nbCv,accord);
-			}			
+//			int nbCpt = this.structureDomainService.countCompteContactFromIdStructure(idStructure);
+//			int nbO = this.structureDomainService.countOffreFromIdStructure(idStructure);
+//			int nbCv = this.structureDomainService.countConventionFromIdStructure(idStructure);
+//			boolean accord = this.accordPartenariatDomainService.getAccordFromIdStructure(idStructure)!=null;
+//			if(nbCpt > 0 || nbO > 0 || nbCv > 0 || accord){
+//				throw new StructureDeleteException("Suppression impossible. Offres : "+nbCpt+", Comptes : "+nbO+", Conventions : "+nbCv+", Accord : "+accord,
+//						nbCpt,nbO,nbCv,accord);
+//			}
 			b=this.structureDomainService.deleteStructure(idStructure,loginCurrentUser);
 		}
 		return b;
@@ -2955,7 +2992,13 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return tmp;
 	}
-
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresTemEnServFalse()
+	 */
+	public List<StructureDTO> getStructuresTemEnServFalse(){
+		return this.structureDomainService.getStructuresTemEnServFalse();
+	}
 	/* ****************************************************************************
 	 * TEMPS TRAVAIL
 	 *****************************************************************************/

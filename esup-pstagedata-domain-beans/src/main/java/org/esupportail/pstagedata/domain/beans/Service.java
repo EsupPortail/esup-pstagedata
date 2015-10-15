@@ -35,21 +35,26 @@ public class Service extends Adresse implements Serializable{
 	 * Login de la personne ayant confirm� que les infos sont � jour
 	 */
 	private String loginInfosAJour;	
+	/**
+	 * telephone
+	 */
+	private String telephone;
+
 	/* **
 	 * Objets
 	 */
-	
+
 	/**
 	 * Constructeur
 	 */
 	public Service(){
 		super();
 	}
-	
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	
-	
+
 	/**
 	 * @return the idService
 	 */
@@ -114,7 +119,21 @@ public class Service extends Adresse implements Serializable{
 	public void setLoginInfosAJour(String loginInfosAJour) {
 		this.loginInfosAJour = loginInfosAJour;
 	}
-	
-	
-	
+	/**
+	 * 
+	 * @return the num tel
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+	/**
+	 * 
+	 * @param telephone the num tel to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+
+
 }

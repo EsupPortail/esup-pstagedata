@@ -13,10 +13,12 @@
 		<result property="code" column="codeNaf_N5" />
 		<result property="codeParent" column="codeNAF_N1" />
 		<result property="libelle" column="libelleNAF_N5" />
+		<result property="temEnServ" column="temEnServNAF_N5" />
 	</resultMap>
 
 	<statement id="getNafN5" resultMap="NafN5">
 		SELECT * FROM NAF_N5
+		WHERE temEnServNAF_N5 = 'O'
 	</statement>
 	<statement id="getNafN5FromCodeNafN5" parameterClass="java.lang.String" resultMap="NafN5">
 		SELECT * FROM NAF_N5

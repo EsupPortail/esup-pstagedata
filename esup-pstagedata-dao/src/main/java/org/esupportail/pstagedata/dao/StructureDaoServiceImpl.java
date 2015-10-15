@@ -15,7 +15,6 @@ import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.beans.CritereRechercheStructureAdresse;
 import org.esupportail.pstagedata.domain.beans.CritereRechercheStructureAncien;
-import org.esupportail.pstagedata.domain.beans.Pays;
 import org.esupportail.pstagedata.domain.beans.Structure;
 import org.esupportail.pstagedata.utils.Utils;
 import org.springframework.dao.DataAccessException;
@@ -176,6 +175,17 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		parameterMap.put("codePostal", departement);
 		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromRaisonSocialeEtDepartement", parameterMap);
 	}
+	/**
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructuresFromRaisonSocialeEtDepartementFr(java.lang.String, java.lang.String)
+	 */
+	@SuppressWarnings({ "cast", "unchecked" })
+	public List<Structure> getStructuresFromRaisonSocialeEtDepartementFr(String raisonSociale, String departement){
+		HashMap<String, String> parameterMap = new HashMap<String, String>();
+		parameterMap.put("raisonSociale", raisonSociale);
+		parameterMap.put("codePostal", departement);
+		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromRaisonSocialeEtDepartementFr", parameterMap);
+	}
+	
 	/**
 	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructuresFromNumSiren(java.lang.String)
 	 */
@@ -466,6 +476,14 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put("raisonSociale", raisonSociale);
 		return (List<String>)getSqlMapClientTemplate().queryForList("getRaisonsSociales",parameterMap);
+	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructuresTemEnServFalse()
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Structure> getStructuresTemEnServFalse(){
+		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresTemEnServFalse");
 	}
 	
 }

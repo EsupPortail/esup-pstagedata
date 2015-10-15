@@ -39,6 +39,7 @@ public interface EtudiantDomainService extends Serializable {
 	 * @return EtudiantDTO
 	 */
 	public EtudiantDTO getEtudiantFromUid(String uidEtudiant,String codeUniversite);
+
 	
 	/**
 	 * @param etudiant

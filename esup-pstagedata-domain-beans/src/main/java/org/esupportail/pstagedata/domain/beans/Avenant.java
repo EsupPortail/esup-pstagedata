@@ -123,7 +123,11 @@ public class Avenant extends ObjetMetiers implements Serializable{
 	 * commentaireRupture
 	 */
 	private String commentaireRupture;
-
+	/**
+	 * monnaieGratification
+	 */
+	private String monnaieGratification;
+	
 
 	/* ***************************************************************
 	 * Objets
@@ -678,6 +682,16 @@ public class Avenant extends ObjetMetiers implements Serializable{
 
 	public void setCommentaireRupture(String commentaireRupture) {
 		this.commentaireRupture = commentaireRupture;
+	}
+
+
+	public String getMonnaieGratification() {
+		return monnaieGratification;
+	}
+
+
+	public void setMonnaieGratification(String monnaieGratification) {
+		this.monnaieGratification = monnaieGratification;
 	}
 
 

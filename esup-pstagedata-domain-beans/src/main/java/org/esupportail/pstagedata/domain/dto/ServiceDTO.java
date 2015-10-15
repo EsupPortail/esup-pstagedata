@@ -37,6 +37,11 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 	 * Login de la personne ayant confirm� que les infos sont � jour
 	 */
 	private String loginInfosAJour;	
+	/**
+	 * telephone
+	 */
+	private String telephone;
+
 	/* **
 	 * 
 	 * Objets
@@ -64,6 +69,7 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 			nom=s.getNom();
 			infosAJour=s.getInfosAJour();
 			loginInfosAJour=s.getLoginInfosAJour();
+			telephone=s.getTelephone();
 		}
 	}
 
@@ -88,7 +94,7 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	@Override
 	public String toString(){
-		return "idService : "+idService+", "+"idStructure : "+idStructure+", "+
+		return "idService : "+idService+", "+"idStructure : "+idStructure+", "+"telephone : "+telephone+
 		", "+"nom : "+nom+", "+
 		"infosAJour : "+infosAJour+", "+"loginInfosAJour : "+loginInfosAJour+", "+super.toString();
 	}
@@ -172,6 +178,21 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 	 */
 	public void setLoginInfosAJour(String loginInfosAJour) {
 		this.loginInfosAJour = loginInfosAJour;
+	}
+
+	/**
+	 * 
+	 * @return the num tel
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+	/**
+	 * 
+	 * @param telephone the num tel to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}	
 	
 	

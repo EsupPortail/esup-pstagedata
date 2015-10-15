@@ -12,10 +12,12 @@
 		class="ClassNafN1">
 		<result property="code" column="codeNaf_N1" />
 		<result property="libelle" column="libelleNaf_N1" />
+		<result property="temEnServ" column="temEnServNAF_N1" />
 	</resultMap>
 
 	<statement id="getNafN1" resultMap="NafN1">
 		SELECT * FROM NAF_N1
+		WHERE temEnServNAF_N1 = 'O'
 	</statement>
 	<statement id="getNafN1FromCodeNafN1" parameterClass="java.lang.String" resultMap="NafN1">
 		SELECT * FROM NAF_N1

@@ -166,6 +166,12 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresFromRaisonSocialeEtDepartement(raisonSociale,departement));
 	}
 	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getStructuresFromRaisonSocialeEtDepartementFr(java.lang.String, java.lang.String)
+	 */
+	public List<StructureDTO> getStructuresFromRaisonSocialeEtDepartementFr(String raisonSociale, String departement){
+		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresFromRaisonSocialeEtDepartementFr(raisonSociale,departement));
+	}
+	/**
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getStructuresFromNumSiren(java.lang.String)
 	 */
 	public List<StructureDTO> getStructuresFromNumSiren(String numSiren){
@@ -316,9 +322,19 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 		}
 		return b;
 	}
-	
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getRaisonsSociales(java.lang.String)
+	 */
 	public List<String> getRaisonsSociales(String raisonSociale){
 		return (List<String>) getStructureDaoService().getRaisonsSociales(raisonSociale);
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getStructuresTemEnServFalse()
+	 */
+	public List<StructureDTO> getStructuresTemEnServFalse() {
+		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresTemEnServFalse());
 	}
 
 }

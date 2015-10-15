@@ -25,6 +25,7 @@
 		<result property="loginModif" column="loginModif" />
 		<result property="infosAJour" column="infosAJour" />
 		<result property="loginInfosAJour" column="loginInfosAJour" />
+		<result property="telephone" column="telephone" />
 	</resultMap>
 	
 	<resultMap id="ServiceExport"
@@ -37,6 +38,7 @@
 		<result property="codeCommune" column="codeCommune" />
 		<result property="codePostal" column="codePostal" />
 		<result property="idPays" column="idPays" />
+		<result property="telephone" column="telephone" />
 	</resultMap>
 
 	<statement id="getServiceFromId" resultMap="Service">
@@ -47,7 +49,7 @@
 	
 	<statement id="getServiceExportFromId" resultMap="ServiceExport">
 		SELECT S.idService, S.nom, S.batimentResidence,
-		S.voie, S.commune, S.codeCommune, S.codePostal, S.idPays
+		S.voie, S.commune, S.codeCommune, S.codePostal, S.idPays, S.telephone
 		FROM Service S
 		WHERE S.idService = #idService#
 		LIMIT 0,1
@@ -100,9 +102,9 @@
 
 	<insert id="addService">
 		INSERT INTO Service (idStructure, nom, batimentResidence, voie, commune, codeCommune, codePostal,
-		idPays, dateCreation, loginCreation, infosAJour, loginInfosAJour)
+		idPays, dateCreation, loginCreation, infosAJour, loginInfosAJour, telephone)
 		VALUES (#idStructure#, #nom#, #batimentResidence#, #voie#, #commune#, #codeCommune#, #codePostal#,
-		#idPays#, CURRENT_TIMESTAMP(), #loginCreation#, CURDATE(), #loginInfosAJour#)
+		#idPays#, CURRENT_TIMESTAMP(), #loginCreation#, CURDATE(), #loginInfosAJour#, #telephone#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
      	</selectKey>
@@ -111,7 +113,7 @@
 	<update id="updateService">
 		UPDATE Service SET nom = #nom#, batimentResidence = #batimentResidence#, voie = #voie#, commune = #commune#,
 		codeCommune = #codeCommune#, codePostal=#codePostal#, idPays=#idPays#, dateModif = CURRENT_TIMESTAMP(), loginModif = #loginModif#,
-		infosAJour = CURDATE(), loginInfosAJour = #loginInfosAJour#
+		infosAJour = CURDATE(), loginInfosAJour = #loginInfosAJour#, telephone = #telephone#
 		WHERE idService = #idService#
     </update>
     

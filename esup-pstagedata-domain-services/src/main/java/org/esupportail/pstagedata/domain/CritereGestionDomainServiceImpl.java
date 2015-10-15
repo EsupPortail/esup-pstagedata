@@ -65,6 +65,13 @@ public class CritereGestionDomainServiceImpl implements CritereGestionDomainServ
 	}
 
 	/**
+	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#getCritereGestionFromIdCentreAndAnnee(int,String)
+	 */
+	public List<CritereGestionDTO> getCritereGestionFromIdCentreAndAnnee(int idCentreGestion,String anneeUniv){
+		return UtilsDTO.getCritereGestionListDTO(this.CritereGestionDaoService.getCritereGestionFromIdCentreAndAnnee(idCentreGestion,anneeUniv));
+	}
+	
+	/**
 	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#getCritereGestionSansVetFromCodeEtape(codeEtape)
 	 */
 	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape) {

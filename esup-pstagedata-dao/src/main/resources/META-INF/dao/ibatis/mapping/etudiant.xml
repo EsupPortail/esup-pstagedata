@@ -65,6 +65,12 @@
 		AND codeUniversite = #codeUniversite#
 		LIMIT 0,1
 	</statement>
+	
+        <statement id="getEtudiantFromUID"  resultMap="Etudiant">
+        SELECT * FROM Etudiant 
+        WHERE identEtudiant=#UID#
+        LIMIT 0,1
+    </statement>
     
     <insert id="addEtudiant">
         INSERT INTO Etudiant 
