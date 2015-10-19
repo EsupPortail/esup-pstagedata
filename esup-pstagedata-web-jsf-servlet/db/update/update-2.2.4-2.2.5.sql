@@ -1,0 +1,2 @@
+
+ALTER TABLE Service ADD telephone VARCHAR(20) NULL;
