@@ -1684,6 +1684,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		}
 		return b;
 	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCodesEtapesConventionsFromCodeUfrAndIdCentre(java.lang.String, int, java.lang.String)
+	 */
+	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(
+			String codeUfr, int idCentreGestion, String codeUniversite) {
+		return this.conventionDomainService.getCodesEtapesConventionsFromCodeUfrAndIdCentre(codeUfr,idCentreGestion,codeUniversite);
+	}
+	
 	/* ****************************************************************************
 	 * CRITERE GESTION
 	 *****************************************************************************/
@@ -5544,6 +5553,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			FicheEvaluationDomainService ficheEvaluationDomainService) {
 		this.ficheEvaluationDomainService = ficheEvaluationDomainService;
 	}
+
 
 }
 

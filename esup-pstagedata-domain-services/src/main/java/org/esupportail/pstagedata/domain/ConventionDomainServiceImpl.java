@@ -370,6 +370,13 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	}
 
 	/**
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getCodesEtapesConventionsFromCodeUfrAndIdCentre(java.lang.String, int, java.lang.String)
+	 */
+	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite) {
+		return this.conventionDaoService.getCodesEtapesConventionsFromCodeUfrAndIdCentre(codeUfr, idCentreGestion, codeUniversite);
+	}
+
+	/**
 	 * @return the ufrDaoService
 	 */
 	public UfrDaoService getUfrDaoService() {
@@ -393,6 +400,5 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public void setEtapeDaoService(EtapeDaoService etapeDaoService) {
 		this.etapeDaoService = etapeDaoService;
 	}
-
 
 }

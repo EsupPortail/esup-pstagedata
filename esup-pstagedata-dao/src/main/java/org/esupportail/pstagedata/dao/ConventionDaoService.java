@@ -153,4 +153,13 @@ public interface ConventionDaoService extends Serializable {
 	 * @return int
 	 */
 	public int getNbConventionsByAnneeAndEtu(String annee, String identEtudiant, String codeUniversite);
+	
+	/**
+	 * @param codeUfr
+	 * @param idCentreGestion
+	 * @param codeUniversite
+	 * @return List<String>
+	 */
+	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite);
+	
 }
