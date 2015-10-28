@@ -138,6 +138,8 @@ CREATE  TABLE IF NOT EXISTS `NAF_N1` (
 
   `libelleNAF_N1` VARCHAR(150) NOT NULL ,
 
+  `temEnServNAF_N1` VARCHAR(1) NOT NULL DEFAULT 'O',
+
   PRIMARY KEY (`codeNAF_N1`) )
 
 ENGINE = InnoDB
@@ -162,6 +164,8 @@ CREATE  TABLE IF NOT EXISTS `NAF_N5` (
   `libelleNAF_N5` VARCHAR(150) NULL ,
 
   `codeNAF_N1` VARCHAR(1) NOT NULL ,
+
+  `temEnServNAF_N5` VARCHAR(1) NOT NULL DEFAULT 'O',
 
   PRIMARY KEY (`codeNAF_N5`) )
 
@@ -302,6 +306,8 @@ CREATE  TABLE IF NOT EXISTS `Service` (
   `idPays` INT NOT NULL ,
 
   `codeCommune` VARCHAR(10) NULL ,
+
+  `telephone` VARCHAR(20) NULL ,
 
   PRIMARY KEY (`idService`))
 
