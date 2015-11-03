@@ -2113,6 +2113,8 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `commentaireRupture` TEXT NULL ,
 
+  `monnaieGratification` VARCHAR(50) NULL DEFAULT 'euros',
+
   PRIMARY KEY (`idAvenant`))
 
 ENGINE = InnoDB
