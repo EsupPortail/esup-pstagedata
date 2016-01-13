@@ -28,6 +28,13 @@ public class ContactDeleteException extends RuntimeException {
 	private boolean contactRefConvention;
 	
 	/**
+	 * Constructeur vide pour "contrer" l'exception lors de l'envoi via webservice
+	 */
+	public ContactDeleteException(){
+		
+	}
+	
+	/**
 	 * @param msg
 	 * @param contactAvecCompte 
 	 * @param contactRefAccord 

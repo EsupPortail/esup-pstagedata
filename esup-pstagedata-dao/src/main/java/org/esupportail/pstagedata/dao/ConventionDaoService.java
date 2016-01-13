@@ -161,5 +161,13 @@ public interface ConventionDaoService extends Serializable {
 	 * @return List<String>
 	 */
 	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite);
+
+	/**
+	 * @param convention
+	 * @return boolean
+	 * @throws DataUpdateDaoException
+	 * @throws DataBaseDaoException
+	 */
+	public boolean updateConventionValidation(Convention convention) throws DataUpdateDaoException, DataBaseDaoException;
 	
 }

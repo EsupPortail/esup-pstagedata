@@ -2041,6 +2041,14 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite);
 	
+	/**
+	 * @param convention
+	 * @return boolean
+	 * @throws DataUpdateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean updateConventionValidation(ConventionDTO convention) throws DataUpdateException, WebServiceDataBaseException;
+	
 	/* ****************************************************************************
 	 * Etudiant
 	 *****************************************************************************/

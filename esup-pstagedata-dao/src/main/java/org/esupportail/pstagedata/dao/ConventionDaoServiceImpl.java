@@ -509,4 +509,25 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		return listeCodes;
 	}
 	
+
+	/**
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#updateConventionValidation(org.esupportail.pstagedata.domain.beans.Convention)
+	 */
+	public boolean updateConventionValidation(Convention convention)
+			throws DataUpdateDaoException, DataBaseDaoException{
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("updateConventionValidation",convention)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
 }

@@ -422,29 +422,26 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
-						CURDATE())
+					<isEqual prepend="AND" property="dS" compareValue="1">
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+					<isEqual prepend="AND" property="dS" compareValue="2">
 						C.dateFinStage <![CDATA[ > ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -653,29 +650,26 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
-						CURDATE())
+					<isEqual prepend="AND" property="dS" compareValue="1">
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+					<isEqual prepend="AND" property="dS" compareValue="2">
 						C.dateFinStage <![CDATA[ > ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -880,29 +874,26 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
-						CURDATE())
+					<isEqual prepend="AND" property="dS" compareValue="1">
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
+					<isEqual prepend="AND" property="dS" compareValue="2">
 						C.dateFinStage <![CDATA[ > ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -1185,5 +1176,11 @@
 			C.codeUniversiteEtape = #codeUniversite#
 		</isNotNull>
 	</statement>
+		
+	<update id="updateConventionValidation">
+		UPDATE Convention SET loginValidation=#loginValidation#,dateValidation=CURRENT_TIMESTAMP(),
+		validationConvention=#validationConvention#, validationPedagogique=#validationPedagogique#
+		WHERE idConvention=#idConvention#
+	</update>
 	
 </sqlMap>

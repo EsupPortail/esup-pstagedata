@@ -1692,6 +1692,19 @@ public class RemoteServicesImpl implements RemoteServices{
 			String codeUfr, int idCentreGestion, String codeUniversite) {
 		return this.conventionDomainService.getCodesEtapesConventionsFromCodeUfrAndIdCentre(codeUfr,idCentreGestion,codeUniversite);
 	}
+
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConventionValidation(org.esupportail.pstagedata.domain.dto.ConventionDTO)
+	 */
+	public boolean updateConventionValidation(ConventionDTO convention)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		if(convention!=null){
+			b = this.conventionDomainService.updateConventionValidation(convention);
+		}
+		return b;
+	}
 	
 	/* ****************************************************************************
 	 * CRITERE GESTION
