@@ -423,14 +423,10 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ <= ]]>
-						CURDATE())
-						AND (C.dateFinStage <![CDATA[ >= ]]>
-						CURDATE())
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ < ]]>
-						CURDATE()
+						C.dateFinStage <![CDATA[ > ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
@@ -654,13 +650,10 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ <= ]]>
-						CURDATE())
-						AND C.dateFinStage <![CDATA[ >= ]]>
-						CURDATE()
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ < ]]>
+						C.dateFinStage <![CDATA[ > ]]>
 						CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
@@ -881,13 +874,10 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ <= ]]>
-						CURDATE())
-						AND C.dateFinStage <![CDATA[ >= ]]>
-						CURDATE())
+					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ < ]]>
+						C.dateFinStage <![CDATA[ > ]]>
 						CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
@@ -1185,5 +1175,11 @@
 			C.codeUniversiteEtape = #codeUniversite#
 		</isNotNull>
 	</statement>
+		
+	<update id="updateConventionValidation">
+		UPDATE Convention SET loginValidation=#loginValidation#,dateValidation=CURRENT_TIMESTAMP(),
+		validationConvention=#validationConvention#, validationPedagogique=#validationPedagogique#
+		WHERE idConvention=#idConvention#
+	</update>
 	
 </sqlMap>

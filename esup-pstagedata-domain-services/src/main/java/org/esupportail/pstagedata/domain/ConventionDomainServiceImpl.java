@@ -377,6 +377,22 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	}
 
 	/**
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#updateConventionValidation(org.esupportail.pstagedata.domain.dto.ConventionDTO)
+	 */
+	public boolean updateConventionValidation(ConventionDTO convention)
+			throws DataUpdateException, WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = this.conventionDaoService.updateConventionValidation(UtilsDTO.getConventionFromDTO(convention));
+		}catch (DataUpdateDaoException e) {
+			throw new DataUpdateException(e.getMessage());	
+		}catch (DataBaseDaoException e) {
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+	
+	/**
 	 * @return the ufrDaoService
 	 */
 	public UfrDaoService getUfrDaoService() {
