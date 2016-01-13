@@ -39,6 +39,6 @@
 	</update>
 
 	<delete id="deleteEffectif">
-		DELETE FROM Effectif WHERE idEffectif=#id#
+		UPDATE Effectif SET temEnServEffectif='N' WHERE idEffectif=#id#
 	</delete>
 </sqlMap>

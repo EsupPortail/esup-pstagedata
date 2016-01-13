@@ -5,6 +5,7 @@
 package org.esupportail.pstagedata.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -171,13 +172,15 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("nsS", StringUtils.hasText(critereRechercheConvention.getNumeroSiret())?critereRechercheConvention.getNumeroSiret():null);
 			parameterMap.put("cmS", StringUtils.hasText(critereRechercheConvention.getCommune())?critereRechercheConvention.getCommune():null);
 			parameterMap.put("cpS", StringUtils.hasText(critereRechercheConvention.getCodePostal())?critereRechercheConvention.getCodePostal():null);
-			
-			if (critereRechercheConvention.getEstEtrangere()) parameterMap.put("idPE", critereRechercheConvention.getPays().getId());
-			else{
+
+			if (critereRechercheConvention.getEstEtrangere()){
+				parameterMap.put("idPE",true);
+				parameterMap.put("idP",null);
+			} else {
+				parameterMap.put("idPE",null);
 				if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
 				else parameterMap.put("idP",null);
 			}
-			
 			if(critereRechercheConvention.getTypeStructure()!=null) parameterMap.put("idTS", critereRechercheConvention.getTypeStructure().getId());
 			else parameterMap.put("idTS",null);
 			if(critereRechercheConvention.getStatutJuridique()!=null) parameterMap.put("idSJ", critereRechercheConvention.getStatutJuridique().getId());
@@ -240,8 +243,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("nsS", StringUtils.hasText(critereRechercheConvention.getNumeroSiret())?critereRechercheConvention.getNumeroSiret():null);
 			parameterMap.put("cmS", StringUtils.hasText(critereRechercheConvention.getCommune())?critereRechercheConvention.getCommune():null);
 			parameterMap.put("cpS", StringUtils.hasText(critereRechercheConvention.getCodePostal())?critereRechercheConvention.getCodePostal():null);
-			if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
-			else parameterMap.put("idP",null);
+			if (critereRechercheConvention.getEstEtrangere()){
+				parameterMap.put("idPE",true);
+				parameterMap.put("idP",null);
+			} else {
+				parameterMap.put("idPE",null);
+				if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
+				else parameterMap.put("idP",null);
+			}
 			if(critereRechercheConvention.getTypeStructure()!=null) parameterMap.put("idTS", critereRechercheConvention.getTypeStructure().getId());
 			else parameterMap.put("idTS",null);
 			if(critereRechercheConvention.getStatutJuridique()!=null) parameterMap.put("idSJ", critereRechercheConvention.getStatutJuridique().getId());
@@ -304,8 +313,15 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			parameterMap.put("nsS", critereRechercheConvention.getNumeroSiret());
 			parameterMap.put("cmS", critereRechercheConvention.getCommune());
 			parameterMap.put("cpS", critereRechercheConvention.getCodePostal());
-			if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
-			else parameterMap.put("idP",null);
+			
+			if (critereRechercheConvention.getEstEtrangere()){
+				parameterMap.put("idPE",true);
+				parameterMap.put("idP",null);
+			} else {
+				parameterMap.put("idPE",null);
+				if(critereRechercheConvention.getPays()!=null) parameterMap.put("idP", critereRechercheConvention.getPays().getId());
+				else parameterMap.put("idP",null);
+			}
 			if(critereRechercheConvention.getTypeStructure()!=null) parameterMap.put("idTS", critereRechercheConvention.getTypeStructure().getId());
 			else parameterMap.put("idTS",null);
 			if(critereRechercheConvention.getStatutJuridique()!=null) parameterMap.put("idSJ", critereRechercheConvention.getStatutJuridique().getId());
@@ -470,6 +486,27 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		parameterMap.put("identEtudiant", identEtudiant);
 		parameterMap.put("codeUniversite", codeUniversite);
 		return (Integer)getSqlMapClientTemplate().queryForObject("getNbConventionsByAnneeAndEtu", parameterMap);
+	}
+
+
+	/**
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getCodesEtapesConventionsFromCodeUfrAndIdCentre(java.lang.String, int, java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite) {
+		
+		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("codeUfr", codeUfr);
+		parameterMap.put("idCentreGestion", idCentreGestion);
+		parameterMap.put("codeUniversite", codeUniversite);
+		
+		List<String> listeCodes = getSqlMapClientTemplate().queryForList("getCodesEtapesConventionsFromCodeUfrAndIdCentre",parameterMap);
+
+		if (listeCodes == null){
+			listeCodes = new ArrayList<String>();
+		}
+		
+		return listeCodes;
 	}
 	
 }

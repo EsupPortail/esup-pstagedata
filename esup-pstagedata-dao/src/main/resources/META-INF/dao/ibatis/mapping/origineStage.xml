@@ -39,6 +39,6 @@
 	</update>
 
 	<delete id="deleteOrigineStage">
-		DELETE FROM OrigineStage WHERE idOrigineStage=#id#
+		UPDATE OrigineStage SET temEnServOrigineStage='N' WHERE idOrigineStage=#id#
 	</delete>
 </sqlMap>

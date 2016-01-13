@@ -41,6 +41,6 @@
 	</update>
 
 	<delete id="deleteContratOffre">
-		DELETE FROM ContratOffre WHERE idContratOffre=#id#
+		UPDATE ContratOffre SET temEnServContratOffre='N' WHERE idContratOffre=#id#
 	</delete>
 </sqlMap>

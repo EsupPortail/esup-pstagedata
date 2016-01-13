@@ -40,6 +40,6 @@
 	</update>
 
 	<delete id="deleteTempsTravail">
-		DELETE FROM TempsTravail WHERE idTempsTravail=#id#
+		UPDATE TempsTravail SET temEnServTempsTravail='N' WHERE idTempsTravail=#id#
 	</delete>
 </sqlMap>

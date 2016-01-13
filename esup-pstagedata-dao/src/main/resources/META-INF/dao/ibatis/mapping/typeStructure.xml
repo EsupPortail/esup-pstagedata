@@ -48,6 +48,6 @@
 	</update>
 
 	<delete id="deleteTypeStructure">
-		DELETE FROM TypeStructure WHERE idTypeStructure=#id#
+		UPDATE TypeStructure SET temEnServTypeStructure='N' WHERE idTypeStructure=#id#
 	</delete>
 </sqlMap>

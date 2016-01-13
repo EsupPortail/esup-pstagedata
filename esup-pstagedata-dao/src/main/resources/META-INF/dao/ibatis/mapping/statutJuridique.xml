@@ -46,6 +46,7 @@
 	</update>
 
 	<delete id="deleteStatutJuridique">
-		DELETE FROM StatutJuridique WHERE idStatutJuridique=#id#
+		UPDATE StatutJuridique SET temEnServStatut='N'
+		WHERE idStatutJuridique=#id#
 	</delete>
 </sqlMap>

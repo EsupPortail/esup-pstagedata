@@ -70,7 +70,7 @@ ALTER TABLE `Convention` DROP INDEX `fk_Convention_Ufr1` ;
 ALTER TABLE `Convention` DROP INDEX `fk_Convention_Etape1` ;
 
 --Ajout index couple codeEtape/codeUniversiteEtape
-ALTER TABLE `Convention` ADD INDEX ( `codeEtape` , `codeUniversiteEtape` ) ;
+ALTER TABLE `Convention` ADD INDEX ( `codeEtape` , `codeVersionEtape` , `codeUniversiteEtape` ) ;
 
 --Ajout index couple codeUFR/codeUniversiteUFR
 ALTER TABLE `Convention` ADD INDEX ( `codeUFR` , `codeUniversiteUFR` ) ;
@@ -78,7 +78,7 @@ ALTER TABLE `Convention` ADD INDEX ( `codeUFR` , `codeUniversiteUFR` ) ;
 --Ajout clé étrangère codeEtape/codeUniversiteEtape
 ALTER TABLE Convention
 ADD CONSTRAINT `fk_Convention_Etape` FOREIGN KEY ( `codeEtape` , `codeUniversiteEtape` ) 
-REFERENCES `Etape` ( `codeEtape` , `codeUniversite` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
+REFERENCES `Etape` ( `codeEtape`, `codeVersionEtape` , `codeUniversite` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --Ajout clé étrangère codeUFR/codeUniversiteUFR
 ALTER TABLE Convention

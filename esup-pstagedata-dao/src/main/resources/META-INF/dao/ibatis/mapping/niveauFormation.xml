@@ -40,6 +40,6 @@
 	</update>
 
 	<delete id="deleteNiveauFormation">
-		DELETE FROM NiveauFormation WHERE idNiveauFormation=#id#
+		UPDATE NiveauFormation SET temEnServNiveauForm='N' WHERE idNiveauFormation=#id#
 	</delete>
 </sqlMap>

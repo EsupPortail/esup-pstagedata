@@ -39,7 +39,7 @@
 	</update>
 
 	<delete id="deleteModeValidationStage">
-		DELETE FROM ModeValidationStage WHERE idModeValidationStage=#id#
+		UPDATE ModeValidationStage SET temEnServModeValid='N' WHERE idModeValidationStage=#id#
 	</delete>
 	
 	

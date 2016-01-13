@@ -42,6 +42,6 @@
 	</update>
 
 	<delete id="deleteCaisseRegime">
-		DELETE FROM CaisseRegime WHERE codeCaisse=#codeCaisse#
+		UPDATE CaisseRegime SET temEnServCaisse='N' WHERE codeCaisse=#codeCaisse#
 	</delete>
 </sqlMap>

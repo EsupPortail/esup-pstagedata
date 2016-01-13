@@ -328,11 +328,11 @@
 				INNER JOIN Offre O ON C.idOffre = O.idOffre
 			</isNotNull>
 			INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idPE">
+				INNER JOIN Pays P ON (S.idPays = P.idPays AND P.idPays!=82)
+			</isNotNull>
 			<isNotNull property="idP">
 				INNER JOIN Pays P ON S.idPays = P.idPays
-			</isNotNull>
-			<isNotNull property="idPE">
-				INNER JOIN Pays P ON (S.idPays = P.idPays) AND (P.idPays!=82)
 			</isNotNull>
 			<isNotNull property="idTS">
 				INNER JOIN TypeStructure TS ON S.idTypeStructure =
@@ -422,29 +422,29 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
+					<isEqual prepend="AND" property="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ <= ]]>
 						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
+						AND (C.dateFinStage <![CDATA[ >= ]]>
 						CURDATE())
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
+					<isEqual prepend="AND" property="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ < ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -561,6 +561,9 @@
 				INNER JOIN Offre O ON C.idOffre = O.idOffre
 			</isNotNull>
 			INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idPE">
+				INNER JOIN Pays P ON (S.idPays = P.idPays AND P.idPays!=82)
+			</isNotNull>
 			<isNotNull property="idP">
 				INNER JOIN Pays P ON S.idPays = P.idPays
 			</isNotNull>
@@ -650,29 +653,29 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
+					<isEqual prepend="AND" property="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ <= ]]>
 						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
-						CURDATE())
-					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
+						AND C.dateFinStage <![CDATA[ >= ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ < ]]>
+						CURDATE()
+					</isEqual>
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -740,6 +743,7 @@
 				</isNotNull>
 			</isNull>
 		</dynamic>
+		ORDER BY C.dateCreation DESC
 		<isNotNull property="isLimit">
 			<isEqual property="isLimit" compareValue="1">
 				LIMIT 0,#nbRechercheMaxi#
@@ -782,6 +786,9 @@
 				INNER JOIN Offre O ON C.idOffre = O.idOffre
 			</isNotNull>
 			INNER JOIN Structure S ON S.idStructure = C.idStructure
+			<isNotNull property="idPE">
+				INNER JOIN Pays P ON (S.idPays = P.idPays AND P.idPays!=82)
+			</isNotNull>
 			<isNotNull property="idP">
 				INNER JOIN Pays P ON S.idPays = P.idPays
 			</isNotNull>
@@ -873,29 +880,29 @@
 					#cV#
 				</isNotNull>
 				<isNotNull property="dS">
-					<isEqual prepend="AND" compareProperty="dS" compareValue="1">
-						(C.dateDebutStage <![CDATA[ >= ]]>
+					<isEqual prepend="AND" property="dS" compareValue="1">
+						(C.dateDebutStage <![CDATA[ <= ]]>
 						CURDATE())
-						AND C.dateFinStage <![CDATA[ <= ]]>
+						AND C.dateFinStage <![CDATA[ >= ]]>
 						CURDATE())
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
+					<isEqual prepend="AND" property="dS" compareValue="2">
+						C.dateFinStage <![CDATA[ < ]]>
 						CURDATE()
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="3">
+					<isEqual prepend="AND" property="dS" compareValue="3">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+7 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="4">
+					<isEqual prepend="AND" property="dS" compareValue="4">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
 						( CURDATE( )+15 ))
 					</isEqual>
-					<isEqual prepend="AND" compareProperty="dS" compareValue="5">
+					<isEqual prepend="AND" property="dS" compareValue="5">
 						(C.dateDebutStage <![CDATA[ >= ]]>
 						( CURDATE( ))
 						AND C.dateDebutStage <![CDATA[ <= ]]>
@@ -1167,4 +1174,16 @@
 			ET.codeUniversite = #codeUniversite#
 		</isNotNull>
 	</statement>
+	
+	<!-- Ajout pour la methode permettant de remettre les bons centres de gestion
+	aux conventions lorsque l'on supprime le rattachement d'un critere ufr -->
+	<statement id="getCodesEtapesConventionsFromCodeUfrAndIdCentre"
+	    resultClass="java.lang.String">
+		SELECT DISTINCT CONCAT(C.codeEtape, IF(C.codeVersionEtape IS NULL OR C.codeVersionEtape = '','',';'), C.codeVersionEtape) FROM Convention C
+		WHERE C.codeUfr = #codeUfr# AND C.idCentreGestion = #idCentreGestion#
+		<isNotNull property="codeUniversite" prepend="AND">
+			C.codeUniversiteEtape = #codeUniversite#
+		</isNotNull>
+	</statement>
+	
 </sqlMap>

@@ -40,6 +40,6 @@
 	</update>
 
 	<delete id="deleteTypeOffre">
-		DELETE FROM TypeOffre WHERE idTypeOffre=#id#
+		UPDATE TypeOffre SET temEnServTypeOffre='N' WHERE idTypeOffre=#id#
 	</delete>
 </sqlMap>

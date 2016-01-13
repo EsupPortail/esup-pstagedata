@@ -2032,6 +2032,15 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException;
+	
+	/**
+	 * @param codeUfr
+	 * @param idCentreGestion
+	 * @param codeUniversite
+	 * @return List<String>
+	 */
+	public List<String> getCodesEtapesConventionsFromCodeUfrAndIdCentre(String codeUfr, int idCentreGestion, String codeUniversite);
+	
 	/* ****************************************************************************
 	 * Etudiant
 	 *****************************************************************************/
