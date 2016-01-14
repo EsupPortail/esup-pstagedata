@@ -845,7 +845,7 @@ CREATE  TABLE IF NOT EXISTS `PersonnelCentreGestion` (
 
   `typePersonne` VARCHAR(50) NULL ,
 
-  `campus` VARCHAR(50) NULL ,
+  `campus` VARCHAR(250) NULL ,
 
   `batiment` VARCHAR(50) NULL ,
 
@@ -1668,7 +1668,7 @@ CREATE  TABLE IF NOT EXISTS `Enseignant` (
 
   `fax` VARCHAR(50) NULL ,
 
-  `campus` VARCHAR(50) NULL ,
+  `campus` VARCHAR(250) NULL ,
 
   `bureau` VARCHAR(20) NULL ,
 
