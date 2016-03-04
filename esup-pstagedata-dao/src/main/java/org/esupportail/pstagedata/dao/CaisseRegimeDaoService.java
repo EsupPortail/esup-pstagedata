@@ -8,12 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.CaisseRegime;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
-
-
+import org.esupportail.pstagedata.exceptions.*;
 
 
 /**
@@ -43,7 +38,15 @@ public interface CaisseRegimeDaoService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteCaisseRegime(String codeCaisse) throws DataDeleteException,WebServiceDataBaseException;
-	
+
+	/**
+	 * @param codeCaisse
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException,WebServiceDataBaseException;
+
 	/**
 	 * @return List<CaisseRegime>
 	 */

@@ -141,6 +141,7 @@ import org.esupportail.pstagedata.exceptions.CentreReferenceException;
 import org.esupportail.pstagedata.exceptions.ContactDeleteException;
 import org.esupportail.pstagedata.exceptions.DataAddException;
 import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataReactivateException;
 import org.esupportail.pstagedata.exceptions.DataUpdateException;
 import org.esupportail.pstagedata.exceptions.EtapeAlreadyExistingForCodeException;
 import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
@@ -5247,6 +5248,19 @@ public class RemoteServicesImpl implements RemoteServices{
 		if(codeCaisse!=null){
 			b = this.caisseRegimeDomainService.deleteCaisseRegime(codeCaisse);
 		}
+		return b;
+	}
+	
+	/**
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#reactivateCaisseRegime(String)
+	 */
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		System.out.println("=====================>" + b);
+		if (codeCaisse != null) {
+			b = this.caisseRegimeDomainService.reactivateCaisseRegime(codeCaisse);
+		}
+		System.out.println("=====================>" + b);
 		return b;
 	}
 

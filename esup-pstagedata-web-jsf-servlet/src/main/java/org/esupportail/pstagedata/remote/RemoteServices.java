@@ -83,6 +83,7 @@ import org.esupportail.pstagedata.exceptions.CentreReferenceException;
 import org.esupportail.pstagedata.exceptions.ContactDeleteException;
 import org.esupportail.pstagedata.exceptions.DataAddException;
 import org.esupportail.pstagedata.exceptions.DataDeleteException;
+import org.esupportail.pstagedata.exceptions.DataReactivateException;
 import org.esupportail.pstagedata.exceptions.DataUpdateException;
 import org.esupportail.pstagedata.exceptions.EtapeAlreadyExistingForCodeException;
 import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
@@ -329,7 +330,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteCaisseRegime(String codeCaisse) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param codeCaisse
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException,WebServiceDataBaseException;
 	/**
 	 * @return int
 	 * @throws DataAddException 
