@@ -5,6 +5,9 @@ ALTER TABLE Enseignant CHANGE campus campus VARCHAR(250) NULL;
 -- Passage du codeCommune de la table offre en varchar pour prendre en compte les codes de la corse
 ALTER TABLE Offre CHANGE codeCommune codeCommune VARCHAR(10) NULL;
 
+-- Passage du codeCommune de la table Service en varchar pour prendre en compte les codes de la corse
+ALTER TABLE Service CHANGE codeCommune codeCommune VARCHAR(10) NULL;
+
 -- Recreation de l'index sur la table Etape car il semblerait qu'il ne soit pas bon pour certaines universités et entraine des erreurs lors de la creation de convention
 ALTER TABLE Etape DROP INDEX index_codeEtape_codeUniversite;
 
