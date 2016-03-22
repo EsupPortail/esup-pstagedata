@@ -26,7 +26,7 @@ import org.springframework.dao.DataAccessException;
 public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService implements CaisseRegimeDaoService {
 
 	/**
-	 *
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		}
 		return tmp;
 	}
-
+	
 	public boolean updateCaisseRegime(CaisseRegime cr, String codeCaisse)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -77,7 +77,7 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		}
 		return b;
 	}
-
+	
 	public boolean deleteCaisseRegime(String codeCaisse)
 			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
