@@ -16,7 +16,6 @@
 
 	<statement id="getOrigineStages" resultMap="OrigineStage">
 		SELECT * FROM OrigineStage
-		WHERE temEnServOrigineStage = 'O'
 	</statement>
 	
 	<statement id="getOrigineStageFromId" resultMap="OrigineStage">
@@ -41,4 +40,8 @@
 	<delete id="deleteOrigineStage">
 		UPDATE OrigineStage SET temEnServOrigineStage='N' WHERE idOrigineStage=#id#
 	</delete>
+
+	<update id="reactivateOrigineStage">
+		UPDATE OrigineStage SET temEnServOrigineStage='O' WHERE idOrigineStage=#id#
+	</update>
 </sqlMap>

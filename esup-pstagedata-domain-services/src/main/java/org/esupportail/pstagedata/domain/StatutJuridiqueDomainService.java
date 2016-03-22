@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.dto.StatutJuridiqueDTO;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 /**
  * StatutJuridique Domain service interface.
@@ -54,5 +51,11 @@ public interface StatutJuridiqueDomainService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateStatutJuridique(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

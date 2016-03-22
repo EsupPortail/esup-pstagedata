@@ -11,11 +11,9 @@ import java.util.List;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
+import org.esupportail.pstagedata.dao.exceptions.DataReactivateDaoException;
 import org.esupportail.pstagedata.domain.beans.CaisseRegime;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -28,7 +26,7 @@ import org.springframework.dao.DataAccessException;
 public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService implements CaisseRegimeDaoService {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +55,7 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		}
 		return tmp;
 	}
-	
+
 	public boolean updateCaisseRegime(CaisseRegime cr, String codeCaisse)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -73,13 +71,13 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
-			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
-	
+
 	public boolean deleteCaisseRegime(String codeCaisse)
 			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
@@ -90,9 +88,25 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
-			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		try {
+			b = getSqlMapClientTemplate().update("reactivateCaisseRegime", codeCaisse) > 0;
+        } catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if(error == 1452) {
+				throw new DataReactivateDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(),e.getCause());
+		} catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(),e.getCause());
 		}
 		return b;
 	}

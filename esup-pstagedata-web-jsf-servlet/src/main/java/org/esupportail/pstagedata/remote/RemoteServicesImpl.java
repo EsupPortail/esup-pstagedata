@@ -129,31 +129,7 @@ import org.esupportail.pstagedata.domain.dto.TypeStructureDTO;
 import org.esupportail.pstagedata.domain.dto.UfrDTO;
 import org.esupportail.pstagedata.domain.dto.UniteDureeDTO;
 import org.esupportail.pstagedata.domain.dto.UniteGratificationDTO;
-import org.esupportail.pstagedata.exceptions.AccordAlreadyExistingForContactException;
-import org.esupportail.pstagedata.exceptions.AccordAlreadyExistingForStructureException;
-import org.esupportail.pstagedata.exceptions.AccountAlreadyExistingForCoupleMailStructureException;
-import org.esupportail.pstagedata.exceptions.AdminStructureAccountException;
-import org.esupportail.pstagedata.exceptions.AdminStructureLoginEppnAlreadyUsedException;
-import org.esupportail.pstagedata.exceptions.AffectationAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.CentreEntrepriseDejaExistantException;
-import org.esupportail.pstagedata.exceptions.CentreEtablissementDejaExistantException;
-import org.esupportail.pstagedata.exceptions.CentreReferenceException;
-import org.esupportail.pstagedata.exceptions.ContactDeleteException;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.EtapeAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
-import org.esupportail.pstagedata.exceptions.MailAlreadyUsedForStructureException;
-import org.esupportail.pstagedata.exceptions.PersonalAlreadyExistingForCentreException;
-import org.esupportail.pstagedata.exceptions.RemoteException;
-import org.esupportail.pstagedata.exceptions.ServiceDeleteException;
-import org.esupportail.pstagedata.exceptions.StatsDomaineException;
-import org.esupportail.pstagedata.exceptions.StructureDeleteException;
-import org.esupportail.pstagedata.exceptions.StructureNumSiretException;
-import org.esupportail.pstagedata.exceptions.UfrAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.UnvalidNumSiretException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 import org.esupportail.pstagedata.utils.Utils;
 import org.springframework.util.StringUtils;
 
@@ -5251,6 +5227,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (codeCaisse != null) {
+			b = this.caisseRegimeDomainService.reactivateCaisseRegime(codeCaisse);
+		}
+		return b;
+	}
+
+	@Override
 	public int addNiveauFormation(NiveauFormationDTO nf)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5276,6 +5261,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		boolean b=false;
 		if(id>0){
 			b = this.niveauFormationDomainService.deleteNiveauFormation(id);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateNiveauFormation(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if(id > 0) {
+			b = this.niveauFormationDomainService.reactivateNiveauFormation(id);
 		}
 		return b;
 	}
@@ -5311,6 +5305,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateEffectif(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.effectifDomainService.reactivateEffectif(id);
+		}
+		return b;
+	}
+
+	@Override
 	public int addTempsTravail(TempsTravailDTO tt) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5341,6 +5344,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateTempsTravail(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (id > 0) {
+			b = this.tempsTravailDomainService.reactivateTempsTravail(id);
+		}
+		return b;
+	}
+
+	@Override
 	public int addOrigineStage(OrigineStageDTO os) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5366,6 +5378,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		boolean b=false;
 		if(id>0){
 			b = this.origineStageDomainService.deleteOrigineStage(id);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateOrigineStage(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (id > 0) {
+			b = this.origineStageDomainService.reactivateOrigineStage(id);
 		}
 		return b;
 	}
@@ -5431,6 +5452,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateTypeStructure(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (id > 0) {
+			b = this.typeStructureDomainService.reactivateTypeStructure(id);
+		}
+		return b;
+	}
+
+	@Override
 	public int addStatutJuridique(StatutJuridiqueDTO sj)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5456,6 +5486,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		boolean b=false;
 		if(id>0){
 			b = this.statutJuridiqueDomainService.deleteStatutJuridique(id);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateStatutJuridique(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (id > 0 ) {
+			b = this.statutJuridiqueDomainService.reactivateStatutJuridique(id);
 		}
 		return b;
 	}
@@ -5491,6 +5530,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateTypeOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if (id > 0) {
+			b = this.typeOffreDomainService.reactivateTypeOffre(id);
+		}
+		return b;
+	}
+
+	@Override
 	public int addContratOffre(ContratOffreDTO co) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5521,6 +5569,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	public boolean reactivateContratOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b=false;
+		if(id>0){
+			b = this.contratDomainService.reactivateContratOffre(id);
+		}
+		return b;
+	}
+
+	@Override
 	public int addModeValidationStage(ModeValidationStageDTO mv)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5546,6 +5603,15 @@ public class RemoteServicesImpl implements RemoteServices{
 		boolean b=false;
 		if(id>0){
 			b = this.modeValidationStageDomainService.deleteModeValidationStage(id);
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateModeValidationStage(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		if(id > 0) {
+			b = this.modeValidationStageDomainService.reactivateModeValidationStage(id);
 		}
 		return b;
 	}

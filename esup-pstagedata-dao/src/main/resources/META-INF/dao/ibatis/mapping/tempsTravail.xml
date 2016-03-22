@@ -17,7 +17,6 @@
 
 	<statement id="getTempsTravail" resultMap="TempsTravail">
 		SELECT * FROM TempsTravail
-		WHERE temEnServTempsTravail = 'O'
 	</statement>
 	
 	<statement id="getTempsTravailFromId" resultMap="TempsTravail">
@@ -42,4 +41,8 @@
 	<delete id="deleteTempsTravail">
 		UPDATE TempsTravail SET temEnServTempsTravail='N' WHERE idTempsTravail=#id#
 	</delete>
+
+	<update id="reactivateTempsTravail">
+		UPDATE TempsTravail SET temEnServTempsTravail='O' WHERE idTempsTravail=#id#
+	</update>
 </sqlMap>

@@ -16,7 +16,6 @@
 
 	<statement id="getEffectifs" resultMap="Effectif">
 		SELECT * FROM Effectif
-		WHERE temEnServEffectif = 'O'
 	</statement>
 	
 	<statement id="getEffectifFromId" resultMap="Effectif">
@@ -41,4 +40,8 @@
 	<delete id="deleteEffectif">
 		UPDATE Effectif SET temEnServEffectif='N' WHERE idEffectif=#id#
 	</delete>
+
+	<update id="reactivateEffectif">
+		UPDATE Effectif SET temEnServEffectif='O' WHERE idEffectif=#id#
+	</update>
 </sqlMap>

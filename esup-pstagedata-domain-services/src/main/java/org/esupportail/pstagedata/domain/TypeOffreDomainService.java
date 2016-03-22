@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.dto.TypeOffreDTO;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 /**
  * TypeOffre Domain service interface.
@@ -44,5 +41,11 @@ public interface TypeOffreDomainService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTypeOffre(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

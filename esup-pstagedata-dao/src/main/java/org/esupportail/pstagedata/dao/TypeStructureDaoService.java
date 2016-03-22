@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.TypeStructure;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 /**
  * TypeStructure DAO service interface.
@@ -55,5 +52,11 @@ public interface TypeStructureDaoService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTypeStructure(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

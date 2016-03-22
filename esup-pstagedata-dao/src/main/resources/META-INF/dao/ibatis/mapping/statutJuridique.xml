@@ -19,7 +19,6 @@
 
 	<statement id="getStatutsJuridiques" resultMap="StatutJuridique">
 		SELECT * FROM StatutJuridique
-		WHERE temEnServStatut = 'O'
 	</statement>
 	<statement id="getStatutJuridiqueFromStatutJuridique" resultMap="StatutJuridique">
 		SELECT * FROM StatutJuridique
@@ -49,4 +48,8 @@
 		UPDATE StatutJuridique SET temEnServStatut='N'
 		WHERE idStatutJuridique=#id#
 	</delete>
+
+	<update id="reactivateStatutJuridique">
+		UPDATE StatutJuridique SET temEnServStatut='O' WHERE idStatutJuridique=#id#
+	</update>
 </sqlMap>

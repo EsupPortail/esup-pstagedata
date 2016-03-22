@@ -12,10 +12,7 @@ import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.dto.NiveauFormationDTO;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 import org.esupportail.pstagedata.services.convertDto.UtilsDTO;
 
 
@@ -91,6 +88,18 @@ public class NiveauFormationDomainServiceImpl implements NiveauFormationDomainSe
 		}catch (DataDeleteDaoException e) {
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	public boolean reactivateNiveauFormation(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		try {
+			b = niveauFormationDaoService.reactivateNiveauFormation(id);
+		} catch (DataReactivateException e) {
+			throw new DataReactivateException(e.getMessage());
+		} catch(DataBaseDaoException e) {
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

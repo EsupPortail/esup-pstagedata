@@ -18,7 +18,6 @@
 	<statement id="getCaisseRegimes" resultMap="CaisseRegime">
 		SELECT * FROM
 		CaisseRegime
-		WHERE temEnServCaisse = 'O'
 	</statement>
 
 	<statement id="getCaisseRegimeFromId" resultMap="CaisseRegime">
@@ -44,4 +43,8 @@
 	<delete id="deleteCaisseRegime">
 		UPDATE CaisseRegime SET temEnServCaisse='N' WHERE codeCaisse=#codeCaisse#
 	</delete>
+
+	<update id="reactivateCaisseRegime">
+		UPDATE CaisseRegime SET temEnServCaisse='O' WHERE codeCaisse=#codeCaisse#
+	</update>
 </sqlMap>

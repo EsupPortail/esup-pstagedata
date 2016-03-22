@@ -71,30 +71,7 @@ import org.esupportail.pstagedata.domain.dto.TypeStructureDTO;
 import org.esupportail.pstagedata.domain.dto.UfrDTO;
 import org.esupportail.pstagedata.domain.dto.UniteDureeDTO;
 import org.esupportail.pstagedata.domain.dto.UniteGratificationDTO;
-import org.esupportail.pstagedata.exceptions.AccordAlreadyExistingForContactException;
-import org.esupportail.pstagedata.exceptions.AccordAlreadyExistingForStructureException;
-import org.esupportail.pstagedata.exceptions.AccountAlreadyExistingForCoupleMailStructureException;
-import org.esupportail.pstagedata.exceptions.AdminStructureAccountException;
-import org.esupportail.pstagedata.exceptions.AdminStructureLoginEppnAlreadyUsedException;
-import org.esupportail.pstagedata.exceptions.AffectationAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.CentreEntrepriseDejaExistantException;
-import org.esupportail.pstagedata.exceptions.CentreEtablissementDejaExistantException;
-import org.esupportail.pstagedata.exceptions.CentreReferenceException;
-import org.esupportail.pstagedata.exceptions.ContactDeleteException;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.EtapeAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.EtudiantAlreadyExistingForNumEtuCodeUnivException;
-import org.esupportail.pstagedata.exceptions.MailAlreadyUsedForStructureException;
-import org.esupportail.pstagedata.exceptions.PersonalAlreadyExistingForCentreException;
-import org.esupportail.pstagedata.exceptions.RemoteException;
-import org.esupportail.pstagedata.exceptions.ServiceDeleteException;
-import org.esupportail.pstagedata.exceptions.StructureDeleteException;
-import org.esupportail.pstagedata.exceptions.StructureNumSiretException;
-import org.esupportail.pstagedata.exceptions.UfrAlreadyExistingForCodeException;
-import org.esupportail.pstagedata.exceptions.UnvalidNumSiretException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 /**
  * @author Matthieu Manginot : matthieu.manginot@univ-nancy2.fr
@@ -331,6 +308,14 @@ public interface RemoteServices extends Serializable{
 	public boolean deleteCaisseRegime(String codeCaisse) throws DataDeleteException,WebServiceDataBaseException;
 
 	/**
+	 * @param codeCaisse
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException,WebServiceDataBaseException;
+
+	/**
 	 * @return int
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException 
@@ -348,6 +333,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteNiveauFormation(int id) throws DataDeleteException,WebServiceDataBaseException;
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateNiveauFormation(int id) throws DataReactivateException,WebServiceDataBaseException;
 
 	/**
 	 * @return int
@@ -367,7 +359,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteEffectif(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateEffectif(int id) throws DataReactivateException,WebServiceDataBaseException;
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -386,6 +384,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTempsTravail(int id) throws DataDeleteException,WebServiceDataBaseException;
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTempsTravail(int id) throws DataReactivateException,WebServiceDataBaseException;
 
 	/**
 	 * @return int
@@ -405,6 +410,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,WebServiceDataBaseException;
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateOrigineStage(int id) throws DataReactivateException,WebServiceDataBaseException;
 
 	/**
 	 * @return int
@@ -443,6 +455,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,WebServiceDataBaseException;
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTypeStructure(int id) throws DataReactivateException,WebServiceDataBaseException;
 
 	/**
 	 * @return int
@@ -462,6 +481,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,WebServiceDataBaseException;
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateStatutJuridique(int id) throws DataReactivateException,WebServiceDataBaseException;
 
 	/**
 	 * @return int
@@ -481,7 +507,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTypeOffre(int id) throws DataReactivateException,WebServiceDataBaseException;
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -500,7 +532,13 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteContratOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateContratOffre(int id) throws DataReactivateException,WebServiceDataBaseException;
 	/**
 	 * @return int
 	 * @throws DataAddException 
@@ -520,6 +558,7 @@ public interface RemoteServices extends Serializable{
 	 */
 	public boolean deleteModeValidationStage(int id) throws DataDeleteException,WebServiceDataBaseException;
 
+	public boolean reactivateModeValidationStage(int id) throws DataReactivateException,WebServiceDataBaseException;
 	/* ****************************************************************************
 	 * ACCORD PARTENARIAT
 	 *****************************************************************************/

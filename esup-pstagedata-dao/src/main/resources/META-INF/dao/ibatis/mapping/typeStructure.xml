@@ -19,7 +19,6 @@
 
 	<statement id="getTypesStructure" resultMap="TypeStructure">
 		SELECT * FROM TypeStructure
-		WHERE temEnServTypeStructure = 'O'
 	</statement>
 	
 	<statement id="getTypeStructureFromId" resultMap="TypeStructure">
@@ -50,4 +49,8 @@
 	<delete id="deleteTypeStructure">
 		UPDATE TypeStructure SET temEnServTypeStructure='N' WHERE idTypeStructure=#id#
 	</delete>
+
+	<update id="reactivateTypeStructure">
+		UPDATE TypeStructure SET temEnServTypeStructure='O' WHERE idTypeStructure=#id#
+	</update>
 </sqlMap>

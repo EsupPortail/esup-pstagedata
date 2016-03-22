@@ -17,7 +17,6 @@
 
 	<statement id="getTypesOffre" resultMap="TypeOffre">
 		SELECT * FROM TypeOffre
-		WHERE temEnServTypeOffre = 'O'
 	</statement>
 	
 	<statement id="getTypeOffreFromId" resultMap="TypeOffre">
@@ -42,4 +41,8 @@
 	<delete id="deleteTypeOffre">
 		UPDATE TypeOffre SET temEnServTypeOffre='N' WHERE idTypeOffre=#id#
 	</delete>
+
+	<update id="reactivateTypeOffre">
+		UPDATE TypeOffre SET temEnServTypeOffre='O' WHERE idTypeOffre=#id#
+	</update>
 </sqlMap>

@@ -16,7 +16,6 @@
 
 	<statement id="getModeValidationStages" resultMap="ModeValidationStage">
 		SELECT * FROM ModeValidationStage
-		WHERE temEnServModeValid = 'O'
 	</statement>
 	
 	<statement id="getModeValidationStageFromId" resultMap="ModeValidationStage">
@@ -41,6 +40,9 @@
 	<delete id="deleteModeValidationStage">
 		UPDATE ModeValidationStage SET temEnServModeValid='N' WHERE idModeValidationStage=#id#
 	</delete>
-	
+
+	<update id="reactivateModeValidationStage">
+		UPDATE ModeValidationStage SET temEnServModeValid='O' WHERE idModeValidationStage=#id#
+	</update>
 	
 </sqlMap>

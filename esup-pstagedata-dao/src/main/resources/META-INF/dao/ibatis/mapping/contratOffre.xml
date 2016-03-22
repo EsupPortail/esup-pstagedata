@@ -18,7 +18,6 @@
 
 	<statement id="getContratsOffre" resultMap="ContratOffre">
 		SELECT * FROM ContratOffre
-		WHERE temEnServContratOffre = 'O'
 	</statement>
 	
 	<statement id="getContratOffreFromId" resultMap="ContratOffre">
@@ -43,4 +42,8 @@
 	<delete id="deleteContratOffre">
 		UPDATE ContratOffre SET temEnServContratOffre='N' WHERE idContratOffre=#id#
 	</delete>
+
+	<update id="reactivateContratOffre">
+		UPDATE ContratOffre SET temEnServContratOffre='O' WHERE idContratOffre=#id#
+	</update>
 </sqlMap>

@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.OrigineStage;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 
 /**
@@ -37,17 +34,19 @@ public interface OrigineStageDaoService extends Serializable {
 	public boolean updateOrigineStage(OrigineStage os) throws DataUpdateException,WebServiceDataBaseException;
 	/**
 	 * @return boolean
-	 * @throws DataDeleteException 
+	 * @throws DataDeleteException
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,WebServiceDataBaseException;
-
-	
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateOrigineStage(int id) throws DataReactivateException,WebServiceDataBaseException;
 	/**
 	 * @return List<OrigineStage>
 	 */
 	public List<OrigineStage> getOrigineStages();
-	
-	
-
 }

@@ -7,15 +7,9 @@ package org.esupportail.pstagedata.domain;
 import java.util.List;
 
 import org.esupportail.pstagedata.dao.EffectifDaoService;
-import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
-import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
-import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
-import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
+import org.esupportail.pstagedata.dao.exceptions.*;
 import org.esupportail.pstagedata.domain.dto.EffectifDTO;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 import org.esupportail.pstagedata.services.convertDto.UtilsDTO;
 
 
@@ -89,6 +83,19 @@ public class EffectifDomainServiceImpl implements EffectifDomainService {
 			b = effectifDaoService.deleteEffectif(id);
 		}catch (DataDeleteDaoException e) {
 			throw new DataDeleteException(e.getMessage());	
+		}catch (DataBaseDaoException e) {
+			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateEffectif(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = effectifDaoService.reactivateEffectif(id);
+		}catch (DataReactivateDaoException e) {
+			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}

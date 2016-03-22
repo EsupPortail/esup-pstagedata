@@ -8,11 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.ContratOffre;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
-
+import org.esupportail.pstagedata.exceptions.*;
 
 
 /**
@@ -46,5 +42,11 @@ public interface ContratDaoService extends Serializable {
 	 * @throws WebServiceDataBaseException
 	 */
 	public boolean deleteContratOffre(int id) throws DataDeleteException,WebServiceDataBaseException;
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateContratOffre(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

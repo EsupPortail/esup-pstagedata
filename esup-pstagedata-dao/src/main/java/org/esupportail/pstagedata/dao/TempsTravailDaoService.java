@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.TempsTravail;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 /**
  * TempsTravail DAO service interface.
@@ -44,5 +41,11 @@ public interface TempsTravailDaoService extends Serializable {
 	 * @return List<TempsTravail>
 	 */
 	public List<TempsTravail> getTempsTravail();
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateTempsTravail(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

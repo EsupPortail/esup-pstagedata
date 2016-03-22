@@ -8,11 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.NiveauFormation;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
-
+import org.esupportail.pstagedata.exceptions.*;
 
 
 /**
@@ -46,5 +42,11 @@ public interface NiveauFormationDaoService extends Serializable {
 	 * @return List<NiveauFormation>
 	 */
 	public List<NiveauFormation> getNiveauxFormation();
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateNiveauFormation(int id) throws DataReactivateException,WebServiceDataBaseException;
 }

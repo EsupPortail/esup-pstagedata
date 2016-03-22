@@ -10,11 +10,9 @@ import java.util.List;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
+import org.esupportail.pstagedata.dao.exceptions.DataReactivateDaoException;
 import org.esupportail.pstagedata.domain.beans.ContratOffre;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 import org.springframework.dao.DataAccessException;
 
 /**
@@ -84,6 +82,23 @@ public class ContratDaoServiceImpl extends AbstractIBatisDaoService implements C
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
+		}catch (Exception e) {
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
+		}
+		return b;
+	}
+
+	@Override
+	public boolean reactivateContratOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
+		boolean b = false;
+		try{
+			b = getSqlMapClientTemplate().update("reactivateContratOffre",id)>0?true:false;
+		}catch (DataAccessException e) {
+			int error = ((SQLException)e.getCause()).getErrorCode();
+			if (error == 1452) {//Cannot add or update
+				throw new DataReactivateDaoException(e.getMessage(),e.getCause());
+			}
+			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}

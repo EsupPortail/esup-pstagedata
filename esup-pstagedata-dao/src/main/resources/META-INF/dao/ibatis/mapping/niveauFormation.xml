@@ -16,7 +16,6 @@
 
 	<statement id="getNiveauxFormation" resultMap="NiveauFormation">
 		SELECT * FROM NiveauFormation
-		WHERE temEnServNiveauForm = 'O'
 		ORDER BY libelleNiveauFormation ASC
 	</statement>
 
@@ -42,4 +41,8 @@
 	<delete id="deleteNiveauFormation">
 		UPDATE NiveauFormation SET temEnServNiveauForm='N' WHERE idNiveauFormation=#id#
 	</delete>
+
+	<update id="reactivateNiveauFormation">
+		UPDATE NiveauFormation SET temEnServNiveauForm='O' WHERE idNiveauFormation=#id#
+	</update>
 </sqlMap>

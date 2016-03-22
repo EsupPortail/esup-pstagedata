@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.ModeValidationStage;
-import org.esupportail.pstagedata.exceptions.DataAddException;
-import org.esupportail.pstagedata.exceptions.DataDeleteException;
-import org.esupportail.pstagedata.exceptions.DataUpdateException;
-import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
+import org.esupportail.pstagedata.exceptions.*;
 
 
 /**
@@ -48,5 +45,11 @@ public interface ModeValidationStageDaoService extends Serializable {
 	 * @return List<ModeValidationStage>
 	 */
 	public List<ModeValidationStage> getModeValidationStages();
-
+	/**
+	 * @param id
+	 * @return boolean
+	 * @throws DataReactivateException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean reactivateModeValidationStage(int id) throws DataReactivateException,WebServiceDataBaseException;
 }
