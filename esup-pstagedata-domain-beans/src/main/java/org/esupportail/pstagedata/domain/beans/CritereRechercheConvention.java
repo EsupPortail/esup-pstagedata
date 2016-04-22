@@ -395,7 +395,7 @@ public class CritereRechercheConvention implements Serializable{
 	 * @return the dateStage
 	 */
 	public String getDateStage() {
-		return dateStage;
+		return dateStage == null ? "" : dateStage;
 	}
 
 	/**

@@ -225,17 +225,21 @@
 	</bean>
 
 	<bean id="dataSourceJdbc"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
+		<property name="maxActive" value="100"/>
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxOpenPreparedStatements" value="100" />
+		<property name="initialSize" value="5" />
 	</bean>
 
-<!-- 	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean" -->
-<!-- 		lazy-init="true"> -->
-<!-- 		<property name="jndiName" value="${jndi.name}" /> -->
-<!-- 	</bean> -->
+ 	<!--<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean"-->
+ 		<!--lazy-init="true">-->
+ 		<!--<property name="jndiName" value="${jndi.name}" />-->
+ 	<!--</bean>-->
 	<jee:jndi-lookup id="JNDIDataSource" jndi-name="${jndi.name}" lookup-on-startup="false" expected-type="javax.sql.DataSource"/>
 
 
