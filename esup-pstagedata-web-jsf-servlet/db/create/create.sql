@@ -1686,7 +1686,7 @@ CREATE  TABLE IF NOT EXISTS `Enseignant` (
 
   `dateModif` DATETIME NULL ,
 
-  `codeAffectation` VARCHAR(10) NOT NULL ,
+  `codeAffectation` VARCHAR(10) NULL ,
 
   `codeUniversiteAffectation` VARCHAR(50) NOT NULL ,
 
