@@ -9,6 +9,9 @@
 	<typeAlias alias="ClassConvention"
 		type="org.esupportail.pstagedata.domain.beans.Convention" />
 
+	<typeAlias alias="ClassConventionExport"
+			   type="org.esupportail.pstagedata.domain.beans.ConventionExport" />
+
 	<resultMap id="Convention" class="ClassConvention">
 		<result property="idConvention" column="idConvention" />
 		<result property="idEtudiant" column="idEtudiant" />
@@ -150,7 +153,7 @@
 		<result property="idConvention" column="idConvention" />
 	</resultMap>
 
-	<resultMap id="ConventionExport" class="ClassConvention">
+	<resultMap id="ConventionExport" class="ClassConventionExport">
 		<result property="idConvention" column="idConvention" />
 		<result property="dateDebutStage" column="dateDebutStage" />
 		<result property="dateFinStage" column="dateFinStage" />
@@ -182,6 +185,9 @@
 		<result property="idTypeConvention" column="idTypeConvention" />
 		<result property="codeUFR" column="codeUFR" />
 		<result property="codeEtape" column="codeEtape" />
+		<result property="libelleEtape" column="libelleEtape" />
+		<result property="codeVersionEtape" column="codeVersionEtape" />
+		<result property="libelleUFR" column="libelleUFR" />
 		<result property="codeUniversiteUFR" column="codeUniversiteUFR" />
 		<result property="codeUniversiteEtape" column="codeUniversiteEtape" />
 		<result property="commentaireStage" column="commentaireStage" />
@@ -191,21 +197,75 @@
 		<result property="libelleELP" column="libelleELP" />
 		<result property="avantagesNature" column="avantagesNature" />
 		<result property="dateCreation" column="dateCreation" javaType="java.util.Date"
-			jdbcType="DATETIME" />
+				jdbcType="DATETIME" />
 		<result property="dateModif" column="dateModif" javaType="java.util.Date"
-			jdbcType="DATETIME" />
-
-		<result property="structure" column="idStructure" select="getStructureExportFromId" />
-		<result property="etudiant" column="idEtudiant" select="getEtudiantExportFromId" />
-		<result property="service" column="idService" select="getServiceExportFromId" />
-		<result property="enseignant" column="idEnseignant"
-			select="getEnseignantExportFromId" />
-		<result property="contact" column="idContact" select="getContactExportFromId" />
-		<result property="signataire" column="idSignataire" select="getContactExportFromId" />
-		<result property="nbAvenant" column="idConvention" select="getNombreAvenant" />
-		
+				jdbcType="DATETIME" />
 		<result property="idUniteDureeGratification" column="idUniteDureeGratification"/>
 		<result property="monnaieGratification" column="monnaieGratification" />
+
+		<result property="STRUCTURE_idStructure" column="idStructure" />
+		<result property="STRUCTURE_raisonSociale" column="raisonSociale" />
+		<result property="STRUCTURE_numeroSiret" column="numeroSiret" />
+		<result property="STRUCTURE_idEffectif" column="idEffectif" />
+		<result property="STRUCTURE_idTypeStructure" column="idTypeStructure" />
+		<result property="STRUCTURE_idStatutJuridique" column="idStatutJuridique" nullValue="0"/>
+		<result property="STRUCTURE_codeNAF_N5" column="codeNAF_N5" />
+		<result property="STRUCTURE_telephone" column="structure_telephone" />
+		<result property="STRUCTURE_fax" column="fax" />
+		<result property="STRUCTURE_mail" column="structure_mail" />
+		<result property="STRUCTURE_siteWeb" column="siteWeb" />
+		<result property="STRUCTURE_batimentResidence" column="structure_batimentResidence" />
+		<result property="STRUCTURE_voie" column="structure_voie" />
+		<result property="STRUCTURE_commune" column="structure_commune" />
+		<result property="STRUCTURE_codePostal" column="structure_codePostal" />
+		<result property="STRUCTURE_libCedex" column="libCedex" />
+		<result property="STRUCTURE_idPays" column="structure_idPays" />
+
+		<result property="ETUDIANT_numEtudiant" column="numEtudiant"/>
+		<result property="ETUDIANT_codeSexe" column="codeSexe"/>
+		<result property="ETUDIANT_id" column="idEtudiant" />
+		<result property="ETUDIANT_nom" column="etudiant_nom"/>
+		<result property="ETUDIANT_prenom" column="etudiant_prenom"/>
+		<result property="ETUDIANT_mail" column="etudiant_mail"/>
+
+		<result property="SERVICE_idService" column="service_idService" />
+		<result property="SERVICE_nom" column="service_nom" />
+		<result property="SERVICE_telephone" column="service_telephone" />
+		<result property="SERVICE_batimentResidence" column="service_batimentResidence" />
+		<result property="SERVICE_voie" column="service_voie" />
+		<result property="SERVICE_commune" column="service_commune" />
+		<result property="SERVICE_codeCommune" column="codeCommune" />
+		<result property="SERVICE_codePostal" column="service_codePostal" />
+		<result property="SERVICE_idPays" column="service_idPays" />
+
+		<result property="ENSEIGNANT_uidEnseignant" column="uidEnseignant" />
+		<result property="ENSEIGNANT_id" column="idEnseignant" />
+		<result property="ENSEIGNANT_nom" column="enseignant_nom" />
+		<result property="ENSEIGNANT_prenom" column="enseignant_prenom" />
+		<result property="ENSEIGNANT_mail" column="enseignant_mail" />
+		<result property="ENSEIGNANT_tel" column="enseignant_telephone" />
+
+		<result property="CONTACT_fonction" column="contact_fonction" />
+		<result property="CONTACT_idService" column="contact_idService" />
+		<result property="CONTACT_idCentreGestion" column="contact_idCentreGestion" />
+		<result property="CONTACT_id" column="contact_idContact" />
+		<result property="CONTACT_idCivilite" column="contact_idCivilite" />
+		<result property="CONTACT_nom" column="contact_nom" />
+		<result property="CONTACT_prenom" column="contact_prenom" />
+		<result property="CONTACT_mail" column="contact_mail" />
+		<result property="CONTACT_tel" column="contact_tel" />
+
+		<result property="SIGNATAIRE_fonction" column="signataire_fonction" />
+		<result property="SIGNATAIRE_idService" column="signataire_idService" />
+		<result property="SIGNATAIRE_idCentreGestion" column="signataire_idCentreGestion" />
+		<result property="SIGNATAIRE_id" column="signataire_idContact" />
+		<result property="SIGNATAIRE_idCivilite" column="signataire_idCivilite" />
+		<result property="SIGNATAIRE_nom" column="signataire_nom" />
+		<result property="SIGNATAIRE_prenom" column="signataire_prenom" />
+		<result property="SIGNATAIRE_mail" column="signataire_mail" />
+		<result property="SIGNATAIRE_tel" column="signataire_tel" />
+
+		<result property="nbAvenant" column="nbAvenant" />
 	</resultMap>
 
 	<statement id="getConventions" resultMap="Convention">
@@ -967,7 +1027,6 @@
 		</isNotNull>
 	</statement>
 
-
 	<statement id="getConventionsFromExport" resultMap="ConventionExport">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationConvention, C.validationPedagogique, C.interruptionStage, C.dateDebutInterruption,
@@ -980,12 +1039,88 @@
 		C.idStructure, C.idEtudiant, C.codeDepartement,
 		C.idService, C.idEnseignant, C.idContact, C.annee, C.idSignataire,
 		C.idTypeConvention,
-		C.codeUFR, C.codeEtape, C.codeUniversiteUFR, C.codeUniversiteETAPE, C.codeElp,
+		C.codeUFR, C.codeEtape, C.codeVersionEtape, C.codeUniversiteUFR, C.codeUniversiteEtape, C.codeElp,
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
 		C.adresseEtudiant, C.codePostalEtudiant, C.villeEtudiant, C.paysEtudiant, C.idUniteDureeGratification,
-		C.monnaieGratification, C.dateCreation, C.dateModif
+		C.monnaieGratification, C.dateCreation, C.dateModif,
+
+		S.idStructure,
+		S.raisonSociale,
+		S.numeroSiret,
+		S.batimentResidence AS 'structure_batimentResidence',
+		S.voie AS 'structure_voie',
+		S.commune AS 'structure_commune',
+		S.codePostal AS 'structure_codePostal',
+		S.libCedex,
+		S.idPays AS 'structure_idPays',
+		S.idEffectif,
+		S.idTypeStructure,
+		S.idStatutJuridique,
+		S.codeNAF_N5,
+		S.telephone AS 'structure_telephone',
+		S.fax,
+		S.mail AS 'structure_mail',
+		S.siteWeb,
+
+		E.idEtudiant,
+		E.nom AS 'etudiant_nom',
+		E.prenom AS 'etudiant_prenom',
+		E.mail AS 'etudiant_mail',
+		E.numEtudiant,
+		E.codeSexe,
+
+		SE.idService AS 'service_idService',
+		SE.nom AS 'service_nom',
+		SE.batimentResidence AS 'service_batimentResidence',
+		SE.voie AS 'service_voie',
+		SE.commune AS 'service_commune',
+		SE.codeCommune,
+		SE.codePostal AS 'service_codePostal',
+		SE.idPays AS 'service_idPays',
+		SE.telephone AS 'service_telephone',
+
+		ENS.idEnseignant,
+		ENS.uidEnseignant,
+		ENS.nom AS 'enseignant_nom',
+		ENS.prenom AS 'enseignant_prenom',
+		ENS.mail AS 'enseignant_mail',
+		ENS.telephone AS 'enseignant_telephone',
+
+		CO.idContact AS 'contact_idContact',
+		CO.idCivilite AS 'contact_idCivilite',
+		CO.nom AS 'contact_nom',
+		CO.prenom AS 'contact_prenom',
+		CO.mail AS 'contact_mail',
+		CO.tel AS 'contact_tel',
+		CO.fonction AS 'contact_fonction',
+		CO.idService AS 'contact_idService',
+		CO.idCentreGestion AS 'contact_idCentreGestion',
+
+		SI.idContact AS 'signataire_idContact',
+		SI.idCivilite AS 'signataire_idCivilite',
+		SI.nom AS 'signataire_nom',
+		SI.prenom AS 'signataire_prenom',
+		SI.mail AS 'signataire_mail',
+		SI.tel AS 'signataire_tel',
+		SI.fonction AS 'signataire_fonction',
+		SI.idService AS 'signataire_idService',
+		SI.idCentreGestion AS 'signataire_idCentreGestion',
+
+		U.libelleUFR,
+		ETA.libelleEtape,
+		(SELECT COUNT(*) FROM Avenant A
+		WHERE A.idConvention = C.idConvention) AS 'nbAvenant'
+
 		FROM Convention C
+		LEFT JOIN Structure AS S ON (S.idStructure = C.idStructure)
+		LEFT JOIN Etudiant AS E ON (E.idEtudiant = C.idEtudiant)
+		LEFT JOIN Service AS SE ON (SE.idService = C.idService)
+		LEFT JOIN Enseignant AS ENS ON (ENS.idEnseignant = C.idEnseignant)
+		LEFT JOIN Contact AS CO ON (CO.idContact = C.idContact)
+		LEFT JOIN Contact AS SI ON (SI.idContact = C.idSignataire)
+		LEFT JOIN Ufr AS U ON (U.codeUFR = C.codeUFR AND U.codeUniversite = C.codeUniversiteUFR)
+		LEFT JOIN Etape ETA ON (ETA.codeEtape = C.codeEtape AND ETA.codeUniversite = C.codeUniversiteEtape)
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND" property="idsConventionsExport"
 				open="(" close=")">
@@ -994,6 +1129,8 @@
 				</iterate>
 			</isNotNull>
 		</dynamic>
+		AND S.temEnServStructure = 'O'
+		GROUP BY C.idConvention
 		ORDER BY C.idConvention
 	</statement>
 

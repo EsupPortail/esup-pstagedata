@@ -14,6 +14,7 @@ import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.beans.Convention;
+import org.esupportail.pstagedata.domain.beans.ConventionExport;
 import org.esupportail.pstagedata.domain.beans.CritereRechercheConvention;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.StringUtils;
@@ -351,7 +352,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 //		return (Convention) getSqlMapClientTemplate().queryForObject("getConventionFromExport",id);
 //	}
 	@SuppressWarnings("unchecked")
-	public List<Convention> getConventionsFromExport(List<Integer> idsConventionsExport) {
+	public List<ConventionExport> getConventionsFromExport(List<Integer> idsConventionsExport) {
 		HashMap<String, Object> parameterMap = new HashMap<String,Object>();
 		parameterMap.put("idsConventionsExport", idsConventionsExport);
 		return getSqlMapClientTemplate().queryForList("getConventionsFromExport", parameterMap);

@@ -3,128 +3,8 @@ package org.esupportail.pstagedata.services.convertDto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.esupportail.pstagedata.domain.beans.AccordPartenariat;
-import org.esupportail.pstagedata.domain.beans.AdminStructure;
-import org.esupportail.pstagedata.domain.beans.Affectation;
-import org.esupportail.pstagedata.domain.beans.Assurance;
-import org.esupportail.pstagedata.domain.beans.Avenant;
-import org.esupportail.pstagedata.domain.beans.CaisseRegime;
-import org.esupportail.pstagedata.domain.beans.CentreGestion;
-import org.esupportail.pstagedata.domain.beans.CentreGestionSuperviseur;
-import org.esupportail.pstagedata.domain.beans.Civilite;
-import org.esupportail.pstagedata.domain.beans.Confidentialite;
-import org.esupportail.pstagedata.domain.beans.Contact;
-import org.esupportail.pstagedata.domain.beans.ContratOffre;
-import org.esupportail.pstagedata.domain.beans.Convention;
-import org.esupportail.pstagedata.domain.beans.CritereGestion;
-import org.esupportail.pstagedata.domain.beans.CritereRechercheConvention;
-import org.esupportail.pstagedata.domain.beans.CritereRechercheOffre;
-import org.esupportail.pstagedata.domain.beans.CritereRechercheStructureAdresse;
-import org.esupportail.pstagedata.domain.beans.CritereRechercheStructureAncien;
-import org.esupportail.pstagedata.domain.beans.DroitAdministration;
-import org.esupportail.pstagedata.domain.beans.DureeDiffusion;
-import org.esupportail.pstagedata.domain.beans.Effectif;
-import org.esupportail.pstagedata.domain.beans.Enseignant;
-import org.esupportail.pstagedata.domain.beans.Etape;
-import org.esupportail.pstagedata.domain.beans.Etudiant;
-import org.esupportail.pstagedata.domain.beans.FapN1;
-import org.esupportail.pstagedata.domain.beans.FapN2;
-import org.esupportail.pstagedata.domain.beans.FapN3;
-import org.esupportail.pstagedata.domain.beans.FapQualification;
-import org.esupportail.pstagedata.domain.beans.FapQualificationSimplifiee;
-import org.esupportail.pstagedata.domain.beans.FicheEvaluation;
-import org.esupportail.pstagedata.domain.beans.Fichier;
-import org.esupportail.pstagedata.domain.beans.Indemnisation;
-import org.esupportail.pstagedata.domain.beans.LangueConvention;
-import org.esupportail.pstagedata.domain.beans.ModeCandidature;
-import org.esupportail.pstagedata.domain.beans.ModeValidationStage;
-import org.esupportail.pstagedata.domain.beans.ModeVersGratification;
-import org.esupportail.pstagedata.domain.beans.NafN1;
-import org.esupportail.pstagedata.domain.beans.NafN5;
-import org.esupportail.pstagedata.domain.beans.NatureTravail;
-import org.esupportail.pstagedata.domain.beans.NiveauCentre;
-import org.esupportail.pstagedata.domain.beans.NiveauFormation;
-import org.esupportail.pstagedata.domain.beans.Offre;
-import org.esupportail.pstagedata.domain.beans.OffreDiffusion;
-import org.esupportail.pstagedata.domain.beans.OrigineStage;
-import org.esupportail.pstagedata.domain.beans.Pays;
-import org.esupportail.pstagedata.domain.beans.PersonnelCentreGestion;
-import org.esupportail.pstagedata.domain.beans.QuestionSupplementaire;
-import org.esupportail.pstagedata.domain.beans.ReponseEvaluation;
-import org.esupportail.pstagedata.domain.beans.ReponseSupplementaire;
-import org.esupportail.pstagedata.domain.beans.Service;
-import org.esupportail.pstagedata.domain.beans.StatutJuridique;
-import org.esupportail.pstagedata.domain.beans.Structure;
-import org.esupportail.pstagedata.domain.beans.TempsTravail;
-import org.esupportail.pstagedata.domain.beans.Theme;
-import org.esupportail.pstagedata.domain.beans.TicketStructure;
-import org.esupportail.pstagedata.domain.beans.TypeConvention;
-import org.esupportail.pstagedata.domain.beans.TypeOffre;
-import org.esupportail.pstagedata.domain.beans.TypeStructure;
-import org.esupportail.pstagedata.domain.beans.Ufr;
-import org.esupportail.pstagedata.domain.beans.UniteDuree;
-import org.esupportail.pstagedata.domain.beans.UniteGratification;
-import org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO;
-import org.esupportail.pstagedata.domain.dto.AdminStructureDTO;
-import org.esupportail.pstagedata.domain.dto.AffectationDTO;
-import org.esupportail.pstagedata.domain.dto.AssuranceDTO;
-import org.esupportail.pstagedata.domain.dto.AvenantDTO;
-import org.esupportail.pstagedata.domain.dto.CaisseRegimeDTO;
-import org.esupportail.pstagedata.domain.dto.CentreGestionDTO;
-import org.esupportail.pstagedata.domain.dto.CentreGestionSuperviseurDTO;
-import org.esupportail.pstagedata.domain.dto.CiviliteDTO;
-import org.esupportail.pstagedata.domain.dto.ConfidentialiteDTO;
-import org.esupportail.pstagedata.domain.dto.ContactDTO;
-import org.esupportail.pstagedata.domain.dto.ContratOffreDTO;
-import org.esupportail.pstagedata.domain.dto.ConventionDTO;
-import org.esupportail.pstagedata.domain.dto.CritereGestionDTO;
-import org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO;
-import org.esupportail.pstagedata.domain.dto.CritereRechercheOffreDTO;
-import org.esupportail.pstagedata.domain.dto.CritereRechercheStructureAdresseDTO;
-import org.esupportail.pstagedata.domain.dto.CritereRechercheStructureAncienDTO;
-import org.esupportail.pstagedata.domain.dto.DroitAdministrationDTO;
-import org.esupportail.pstagedata.domain.dto.DureeDiffusionDTO;
-import org.esupportail.pstagedata.domain.dto.EffectifDTO;
-import org.esupportail.pstagedata.domain.dto.EnseignantDTO;
-import org.esupportail.pstagedata.domain.dto.EtapeDTO;
-import org.esupportail.pstagedata.domain.dto.EtudiantDTO;
-import org.esupportail.pstagedata.domain.dto.FapN1DTO;
-import org.esupportail.pstagedata.domain.dto.FapN2DTO;
-import org.esupportail.pstagedata.domain.dto.FapN3DTO;
-import org.esupportail.pstagedata.domain.dto.FapQualificationDTO;
-import org.esupportail.pstagedata.domain.dto.FapQualificationSimplifieeDTO;
-import org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO;
-import org.esupportail.pstagedata.domain.dto.FichierDTO;
-import org.esupportail.pstagedata.domain.dto.IndemnisationDTO;
-import org.esupportail.pstagedata.domain.dto.LangueConventionDTO;
-import org.esupportail.pstagedata.domain.dto.ModeCandidatureDTO;
-import org.esupportail.pstagedata.domain.dto.ModeValidationStageDTO;
-import org.esupportail.pstagedata.domain.dto.ModeVersGratificationDTO;
-import org.esupportail.pstagedata.domain.dto.NafN1DTO;
-import org.esupportail.pstagedata.domain.dto.NafN5DTO;
-import org.esupportail.pstagedata.domain.dto.NatureTravailDTO;
-import org.esupportail.pstagedata.domain.dto.NiveauCentreDTO;
-import org.esupportail.pstagedata.domain.dto.NiveauFormationDTO;
-import org.esupportail.pstagedata.domain.dto.OffreDTO;
-import org.esupportail.pstagedata.domain.dto.OffreDiffusionDTO;
-import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
-import org.esupportail.pstagedata.domain.dto.PaysDTO;
-import org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO;
-import org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO;
-import org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO;
-import org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO;
-import org.esupportail.pstagedata.domain.dto.ServiceDTO;
-import org.esupportail.pstagedata.domain.dto.StatutJuridiqueDTO;
-import org.esupportail.pstagedata.domain.dto.StructureDTO;
-import org.esupportail.pstagedata.domain.dto.TempsTravailDTO;
-import org.esupportail.pstagedata.domain.dto.ThemeDTO;
-import org.esupportail.pstagedata.domain.dto.TicketStructureDTO;
-import org.esupportail.pstagedata.domain.dto.TypeConventionDTO;
-import org.esupportail.pstagedata.domain.dto.TypeOffreDTO;
-import org.esupportail.pstagedata.domain.dto.TypeStructureDTO;
-import org.esupportail.pstagedata.domain.dto.UfrDTO;
-import org.esupportail.pstagedata.domain.dto.UniteDureeDTO;
-import org.esupportail.pstagedata.domain.dto.UniteGratificationDTO;
+import org.esupportail.pstagedata.domain.beans.*;
+import org.esupportail.pstagedata.domain.dto.*;
 import org.esupportail.pstagedata.utils.Utils;
 import org.springframework.util.StringUtils;
 
@@ -2202,7 +2082,23 @@ public class UtilsDTO {
 		
 		return ld;
 	}
-	
+
+	/**
+	 * @param l
+	 * @return List<ConventionDTO>
+	 */
+	public static List<ConventionDTO> getConventionExportListDTO(List<ConventionExport> l) {
+		List<ConventionDTO> ld = new ArrayList<ConventionDTO>();
+		if (l!=null) {
+			for (ConventionExport o : l) {
+				ConventionDTO oDTO = new ConventionDTO(o.getConvention());
+				ld.add(oDTO);
+			}
+		}
+
+		return ld;
+	}
+
 	/**
 	 * @param l
 	 * @return List<EtudiantDTO> 

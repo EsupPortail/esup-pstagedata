@@ -22,11 +22,11 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	/**
 	 * Id Service
 	 */
-	private int idService;
+	private Integer idService;
 	/**
 	 * Id du centre de gestion
 	 */
-	private int idCentreGestion;
+	private Integer idCentreGestion;
 	/**
 	 * Fonction
 	 */
@@ -162,25 +162,25 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	/**
 	 * @return the idService
 	 */
-	public int getIdService() {
+	public Integer getIdService() {
 		return idService;
 	}
 	/**
 	 * @param idService the idService to set
 	 */
-	public void setIdService(int idService) {
+	public void setIdService(Integer idService) {
 		this.idService = idService;
 	}
 	/**
 	 * @return the idCentreGestion
 	 */
-	public int getIdCentreGestion() {
+	public Integer getIdCentreGestion() {
 		return idCentreGestion;
 	}
 	/**
 	 * @param idCentreGestion the idCentreGestion to set
 	 */
-	public void setIdCentreGestion(int idCentreGestion) {
+	public void setIdCentreGestion(Integer idCentreGestion) {
 		this.idCentreGestion = idCentreGestion;
 	}
 	/**

@@ -14,6 +14,7 @@ import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.beans.Convention;
+import org.esupportail.pstagedata.domain.beans.ConventionExport;
 import org.esupportail.pstagedata.domain.dto.ConventionDTO;
 import org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO;
 import org.esupportail.pstagedata.exceptions.DataAddException;
@@ -201,21 +202,9 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	//	}
 	public List<ConventionDTO> getConventionsFromExport(List<Integer> idsConventionsExport) {
 		List<ConventionDTO> lr = null;
-		List<Convention> l = this.conventionDaoService.getConventionsFromExport(idsConventionsExport);
+		List<ConventionExport> l = this.conventionDaoService.getConventionsFromExport(idsConventionsExport);
 		if(l!=null && !l.isEmpty()){
-			for (Convention c : l){
-				if(c.getCodeUFR()!=null){
-					c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-				}
-				if(c.getCodeEtape()!=null){
-					if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-					} else {
-						c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-					}
-				}
-			}
-			lr = UtilsDTO.getConventionListDTO(l);
+			lr = UtilsDTO.getConventionExportListDTO(l);
 		}
 		return lr;
 	}

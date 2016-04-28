@@ -12,6 +12,7 @@ import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataDeleteDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataUpdateDaoException;
 import org.esupportail.pstagedata.domain.beans.Convention;
+import org.esupportail.pstagedata.domain.beans.ConventionExport;
 import org.esupportail.pstagedata.domain.beans.CritereRechercheConvention;
 
 /**
@@ -64,7 +65,7 @@ public interface ConventionDaoService extends Serializable {
 	 * @return Convention pour export
 	 */
 //	public Convention getConventionFromExport(int id);
-	public List<Convention> getConventionsFromExport(List<Integer> idsConventionsExport);
+	public List<ConventionExport> getConventionsFromExport(List<Integer> idsConventionsExport);
 	
 	/**
 	 * @param identEtudiant
