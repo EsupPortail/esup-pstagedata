@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Etape">
+
+	<cacheModel id="cacheEtape" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassEtape" type="org.esupportail.pstagedata.domain.beans.Etape"/>
 	<resultMap id="Etape"
 		class="ClassEtape">
@@ -14,7 +20,7 @@
 		<result property="codeUniversite" column="codeUniversite" />
 	</resultMap>
 
-	<statement id="getEtapes" resultMap="Etape">
+	<statement id="getEtapes" resultMap="Etape" cacheModel="cacheEtape">
 		SELECT * FROM Etape
 		<dynamic prepend="WHERE">
 			<isNotNull property="codeUniversite">
@@ -23,7 +29,7 @@
 		</dynamic>
 	</statement>
 	
-	<statement id="getEtapesFromIdsCentreGestion" resultMap="Etape">	
+	<statement id="getEtapesFromIdsCentreGestion" resultMap="Etape" cacheModel="cacheEtape">
 		SELECT DISTINCT E.*
 		FROM Etape E
 		INNER JOIN Convention C ON E.codeEtape = C.codeEtape
@@ -40,7 +46,7 @@
 		</dynamic>
 	</statement>
 	
-	<statement id="getEtapeFromId" resultMap="Etape">
+	<statement id="getEtapeFromId" resultMap="Etape" cacheModel="cacheEtape">
 		SELECT * FROM Etape
 		WHERE codeEtape = #code#
 		<isNotNull property="codeVersionEtape" prepend="AND">

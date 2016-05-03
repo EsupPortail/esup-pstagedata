@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="ModeValidationStage">
+
+	<cacheModel id="cacheModeValidationStage" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassModeValidationStage" type="org.esupportail.pstagedata.domain.beans.ModeValidationStage"/>
 	<resultMap id="ModeValidationStage"
 		class="ClassModeValidationStage">
@@ -14,11 +20,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getModeValidationStages" resultMap="ModeValidationStage">
+	<statement id="getModeValidationStages" resultMap="ModeValidationStage" cacheModel="cacheModeValidationStage">
 		SELECT * FROM ModeValidationStage
 	</statement>
 	
-	<statement id="getModeValidationStageFromId" resultMap="ModeValidationStage">
+	<statement id="getModeValidationStageFromId" resultMap="ModeValidationStage" cacheModel="cacheModeValidationStage">
 		SELECT * FROM ModeValidationStage
 		WHERE idModeValidationStage = #id#
 		LIMIT 0, 1

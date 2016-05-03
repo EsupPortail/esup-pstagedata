@@ -6,6 +6,11 @@
 
 <sqlMap namespace="NiveauFormation">
 
+	<cacheModel id="cacheNiveauFormation" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="NiveauFormation"
 		class="org.esupportail.pstagedata.domain.beans.NiveauFormation">
 		<result property="id" column="idNiveauFormation" />
@@ -14,12 +19,12 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getNiveauxFormation" resultMap="NiveauFormation">
+	<statement id="getNiveauxFormation" resultMap="NiveauFormation" cacheModel="cacheNiveauFormation">
 		SELECT * FROM NiveauFormation
 		ORDER BY libelleNiveauFormation ASC
 	</statement>
 
-	<statement id="getNiveauFormationFromId" resultMap="NiveauFormation">
+	<statement id="getNiveauFormationFromId" resultMap="NiveauFormation" cacheModel="cacheNiveauFormation">
 		SELECT * FROM NiveauFormation
 		WHERE idNiveauFormation = #id#
 		LIMIT 0, 1

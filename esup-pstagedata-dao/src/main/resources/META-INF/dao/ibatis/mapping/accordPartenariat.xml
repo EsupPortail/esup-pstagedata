@@ -6,6 +6,11 @@
 
 <sqlMap namespace="AccordPartenariat">
 
+    <cacheModel id="cacheAccordPartenariat" type="OSCACHE" readOnly="true">
+        <flushInterval hours="12"/>
+        <property name="cache-size" value="50"/>
+    </cacheModel>
+
 	<typeAlias alias="ClassAccordPartenariat" type="org.esupportail.pstagedata.domain.beans.AccordPartenariat"/>
 	
 	<resultMap id="AccordPartenariat" class="ClassAccordPartenariat">
@@ -27,22 +32,22 @@
 		<result property="contact" column="idContact" select="getContactFromIdSimple"/>
      </resultMap>
 
-    <statement id="getAccordsNonValides"  resultMap="AccordPartenariat">
+    <statement id="getAccordsNonValides"  resultMap="AccordPartenariat" cacheModel="cacheAccordPartenariat">
         SELECT * FROM AccordPartenariat WHERE estValide=false ORDER BY dateCreation ASC
     </statement>
-    <statement id="getAccordFromId"  resultMap="AccordPartenariat">
+    <statement id="getAccordFromId"  resultMap="AccordPartenariat" cacheModel="cacheAccordPartenariat">
         SELECT * FROM AccordPartenariat WHERE idAccordPartenariat=#idAccord#
         LIMIT 0,1
     </statement>
-    <statement id="getAccordFromIdStructure"  resultMap="AccordPartenariat">
+    <statement id="getAccordFromIdStructure"  resultMap="AccordPartenariat" cacheModel="cacheAccordPartenariat">
         SELECT * FROM AccordPartenariat WHERE idStructure=#idStructure#
         LIMIT 0,1
     </statement>    
-    <statement id="getAccordFromIdContact"  resultMap="AccordPartenariat">
+    <statement id="getAccordFromIdContact"  resultMap="AccordPartenariat" cacheModel="cacheAccordPartenariat">
         SELECT * FROM AccordPartenariat WHERE idContact = #idContact#
         LIMIT 0,1
     </statement>    
-    <statement id="countAccordAValider" resultClass="java.lang.Integer">
+    <statement id="countAccordAValider" resultClass="java.lang.Integer" cacheModel="cacheAccordPartenariat">
         SELECT COUNT(*) FROM AccordPartenariat WHERE estValide = false
     </statement>
     

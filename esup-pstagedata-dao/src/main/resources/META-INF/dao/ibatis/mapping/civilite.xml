@@ -6,17 +6,22 @@
 
 <sqlMap namespace="Civilite">
 
+	<cacheModel id="cacheCivilite" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="Civilite"
 		class="org.esupportail.pstagedata.domain.beans.Civilite">
 		<result property="id" column="idCivilite" />
 		<result property="libelle" column="libelleCivilite" />
 	</resultMap>
 
-	<statement id="getCivilites" resultMap="Civilite">
+	<statement id="getCivilites" resultMap="Civilite" cacheModel="cacheCivilite">
 		SELECT * FROM Civilite
 	</statement>
 	
-	<statement id="getCiviliteFromId" resultMap="Civilite">
+	<statement id="getCiviliteFromId" resultMap="Civilite" cacheModel="cacheCivilite">
 		SELECT * FROM Civilite
 		WHERE idCivilite = #id#
 		LIMIT 0, 1

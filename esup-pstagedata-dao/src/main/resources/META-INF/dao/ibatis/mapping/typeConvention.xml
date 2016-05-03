@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="TypeConvention">
+
+	<cacheModel id="cacheTypeConvention" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassTypeConvention" type="org.esupportail.pstagedata.domain.beans.TypeConvention"/>
 	<resultMap id="TypeConvention"
 		class="ClassTypeConvention">
@@ -15,12 +21,12 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getTypeConventions" resultMap="TypeConvention">
+	<statement id="getTypeConventions" resultMap="TypeConvention" cacheModel="cacheTypeConvention">
 		SELECT * FROM TypeConvention
 		WHERE temEnServTypeConvention = 'O'
 	</statement>
 	
-	<statement id="getTypeConventionFromId" resultMap="TypeConvention">
+	<statement id="getTypeConventionFromId" resultMap="TypeConvention" cacheModel="cacheTypeConvention">
 		SELECT * FROM TypeConvention
 		WHERE idTypeConvention = #id#
 		LIMIT 0, 1

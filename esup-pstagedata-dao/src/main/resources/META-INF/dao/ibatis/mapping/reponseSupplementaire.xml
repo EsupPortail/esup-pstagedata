@@ -6,6 +6,11 @@
 
 <sqlMap namespace="ReponseSupplementaire">
 
+	<cacheModel id="cacheReponseSupplementaire" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassReponseSupplementaire"
 		type="org.esupportail.pstagedata.domain.beans.ReponseSupplementaire" />
 
@@ -17,7 +22,7 @@
 		<result property="reponseBool" column="reponseBool" nullValue="0"/>
 	</resultMap>
 	
-	<statement id="getReponseSupplementaire" resultMap="ReponseSupplementaire">
+	<statement id="getReponseSupplementaire" resultMap="ReponseSupplementaire" cacheModel="cacheReponseSupplementaire">
 		SELECT * FROM ReponseSupplementaire
 		WHERE idQuestionSupplementaire = #idQuestionSupplementaire# AND idConvention = #idConvention#
 	</statement>

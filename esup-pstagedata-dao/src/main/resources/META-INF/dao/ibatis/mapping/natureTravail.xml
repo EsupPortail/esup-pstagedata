@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="NatureTravail">
+
+	<cacheModel id="cacheNatureTravail" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassNatureTravail" type="org.esupportail.pstagedata.domain.beans.NatureTravail"/>
 	<resultMap id="NatureTravail"
 		class="ClassNatureTravail">
@@ -13,13 +19,13 @@
 		<result property="temEnServ" column="temEnServNatTrav" />
 	</resultMap>
 
-	<statement id="getNatureTravails" resultMap="NatureTravail">
+	<statement id="getNatureTravails" resultMap="NatureTravail" cacheModel="cacheNatureTravail">
 		SELECT * FROM NatureTravail
 		WHERE temEnServNatTrav = 'O'
 		ORDER BY libelleNatureTravail ASC
 	</statement>
 	
-	<statement id="getNatureTravailFromId" resultMap="NatureTravail">
+	<statement id="getNatureTravailFromId" resultMap="NatureTravail" cacheModel="cacheNatureTravail">
 		SELECT * FROM NatureTravail
 		WHERE idNatureTravail = #id#
 		LIMIT 0, 1

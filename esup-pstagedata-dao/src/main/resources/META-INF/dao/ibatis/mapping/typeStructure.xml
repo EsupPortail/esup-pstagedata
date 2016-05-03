@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="TypeStructure">
-	
+
+	<cacheModel id="cacheTypeStructure" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassTypeStructure" type="org.esupportail.pstagedata.domain.beans.TypeStructure"/>
 	
 	<resultMap id="TypeStructure"
@@ -17,17 +22,17 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getTypesStructure" resultMap="TypeStructure">
+	<statement id="getTypesStructure" resultMap="TypeStructure" cacheModel="cacheTypeStructure">
 		SELECT * FROM TypeStructure
 	</statement>
 	
-	<statement id="getTypeStructureFromId" resultMap="TypeStructure">
+	<statement id="getTypeStructureFromId" resultMap="TypeStructure" cacheModel="cacheTypeStructure">
 		SELECT * FROM TypeStructure
 		WHERE idTypeStructure = #id#
 		LIMIT 0,1
 	</statement>
 	
-	<statement id="getTypesStructureFromStatutJuridique" resultMap="TypeStructure">
+	<statement id="getTypesStructureFromStatutJuridique" resultMap="TypeStructure" cacheModel="cacheTypeStructure">
 		SELECT * FROM TypeStructure ts
 		INNER JOIN StatutJuridique sj ON ts.idTypeStructure=sj.idTypeStructure
 		WHERE idStatutJuridique = #id#

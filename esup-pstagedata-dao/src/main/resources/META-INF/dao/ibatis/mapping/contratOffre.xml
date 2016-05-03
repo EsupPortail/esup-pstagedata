@@ -6,6 +6,11 @@
 
 <sqlMap namespace="ContratOffre">
 
+	<cacheModel id="cacheContratOffre" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="ContratOffre"
 		class="org.esupportail.pstagedata.domain.beans.ContratOffre">
 		<result property="id" column="idContratOffre" />
@@ -16,11 +21,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getContratsOffre" resultMap="ContratOffre">
+	<statement id="getContratsOffre" resultMap="ContratOffre" cacheModel="cacheContratOffre">
 		SELECT * FROM ContratOffre
 	</statement>
 	
-	<statement id="getContratOffreFromId" resultMap="ContratOffre">
+	<statement id="getContratOffreFromId" resultMap="ContratOffre" cacheModel="cacheContratOffre">
 		SELECT * FROM ContratOffre
 		WHERE idContratOffre = #id#
 		LIMIT 0, 1

@@ -6,6 +6,8 @@
 <sqlMapConfig>
 	<!-- <settings useStatementNamespaces="true"/> -->
 
+	<settings cacheModelsEnabled="true"/>
+
 	<sqlMap resource="META-INF/dao/ibatis/mapping/accordPartenariat.xml"/>
 	<sqlMap resource="META-INF/dao/ibatis/mapping/adminStructure.xml"/>
 	<sqlMap resource="META-INF/dao/ibatis/mapping/affectation.xml"/>

@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="UniteGratification">
+
+	<cacheModel id="cacheUniteGratification" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassUniteGratification" type="org.esupportail.pstagedata.domain.beans.UniteGratification"/>
 	<resultMap id="UniteGratification"
 		class="ClassUniteGratification">
@@ -13,12 +19,12 @@
 		<result property="temEnServ" column="temEnServGrat" />
 	</resultMap>
 
-	<statement id="getUniteGratifications" resultMap="UniteGratification">
+	<statement id="getUniteGratifications" resultMap="UniteGratification" cacheModel="cacheUniteGratification">
 		SELECT * FROM UniteGratification
 		WHERE temEnServGrat = 'O'
 	</statement>
 	
-	<statement id="getUniteGratificationFromId" resultMap="UniteGratification">
+	<statement id="getUniteGratificationFromId" resultMap="UniteGratification" cacheModel="cacheUniteGratification">
 		SELECT * FROM UniteGratification
 		WHERE idUniteGratification = #id#
 		LIMIT 0, 1

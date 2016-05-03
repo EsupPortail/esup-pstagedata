@@ -6,6 +6,11 @@
 
 <sqlMap namespace="ReponseEvaluation">
 
+	<cacheModel id="cacheReponseEvaluation" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassReponseEvaluation"
 		type="org.esupportail.pstagedata.domain.beans.ReponseEvaluation" />
 
@@ -157,7 +162,7 @@
 		<result property="reponseEnsII11" column="reponseEnsII11" />
 	</resultMap>
 
-	<statement id="getReponseEvaluation" resultMap="ReponseEvaluation">
+	<statement id="getReponseEvaluation" resultMap="ReponseEvaluation" cacheModel="cacheReponseEvaluation">
 		SELECT * FROM
 		ReponseEvaluation
 		WHERE idFicheEvaluation = #idFicheEvaluation#
@@ -165,7 +170,7 @@
 		idConvention=#idConvention#
 	</statement>
 	
-	<statement id="getReponsesEvaluation" resultMap="ReponseEvaluation">
+	<statement id="getReponsesEvaluation" resultMap="ReponseEvaluation" cacheModel="cacheReponseEvaluation">
 		SELECT * FROM
 		ReponseEvaluation
 		WHERE idFicheEvaluation = #idFicheEvaluation#

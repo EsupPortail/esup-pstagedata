@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Effectif">
 
+	<cacheModel id="cacheEffectif" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="Effectif"
 		class="org.esupportail.pstagedata.domain.beans.Effectif">
 		<result property="id" column="idEffectif" />
@@ -14,11 +19,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getEffectifs" resultMap="Effectif">
+	<statement id="getEffectifs" resultMap="Effectif" cacheModel="cacheEffectif">
 		SELECT * FROM Effectif
 	</statement>
 	
-	<statement id="getEffectifFromId" resultMap="Effectif">
+	<statement id="getEffectifFromId" resultMap="Effectif" cacheModel="cacheEffectif">
 		SELECT * FROM Effectif
 		WHERE idEffectif = #id#
 		LIMIT 0, 1

@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CentreGestion">
-	
+
+	<cacheModel id="cacheCentreGestion" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassCentreGestion" type="org.esupportail.pstagedata.domain.beans.CentreGestion"/>
 
 	<resultMap id="CentreGestion"
@@ -52,14 +57,14 @@
 		<result property="nomCentre" column="nomCentre" />
 	</resultMap>
 	
-	<statement id="getCentreGestionSuperLightFromId" resultMap="CentreGestionSuperLight">
+	<statement id="getCentreGestionSuperLightFromId" resultMap="CentreGestionSuperLight" cacheModel="cacheCentreGestion">
 		SELECT C.idCentreGestion, C.nomCentre FROM CentreGestion C
 		WHERE C.idCentreGestion = #idCentreGestion#
 		LIMIT 0,1
 	</statement>
 	
 	<!-- Récupération des centres sans confidentialité pour l'université "codeUniversité" -->
-	<statement id="getIdsCentreGestionSansConfidentialiteFromCodeUniversite" resultClass="java.lang.Integer">
+	<statement id="getIdsCentreGestionSansConfidentialiteFromCodeUniversite" resultClass="java.lang.Integer" cacheModel="cacheCentreGestion">
 		SELECT idCentreGestion FROM CentreGestion
 		WHERE codeUniversite = #codeUniversite#
 		AND codeConfidentialite = '0'
@@ -69,32 +74,32 @@
 	</statement>
 	
 	<!-- Récupération de tous les centres-->
-	<statement id="getCentreGestionList" resultMap="CentreGestion">
+	<statement id="getCentreGestionList" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT * FROM CentreGestion
 		WHERE codeUniversite = #codeUniversite#
 	</statement>
 	
 	<!-- Récupération d'un centre-->
-	<statement id="getCentreGestion" resultMap="CentreGestion">
+	<statement id="getCentreGestion" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT * FROM CentreGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
 	
 	<!-- Récupération d'un centre via son nom-->
-	<statement id="getCentreGestionFromNomCentre" resultMap="CentreGestion">
+	<statement id="getCentreGestionFromNomCentre" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT * FROM CentreGestion 
 		WHERE nomCentre LIKE CONCAT('%',#nomCentre#,'%')
 		AND codeUniversite=#codeUniversite# 
 	</statement>
 	
 	<!-- Récupération du nombre de centres -->
-	<statement id="getNombreCentreGestion" resultClass="java.lang.Integer">
+	<statement id="getNombreCentreGestion" resultClass="java.lang.Integer" cacheModel="cacheCentreGestion">
 		SELECT COUNT(*) FROM CentreGestion
 		WHERE codeUniversite = #codeUniversite#
 	</statement>
 	
 	<!-- Récupération des centres de gestion d'une personne qui a les droits en ecriture ou admin -->
-	<statement id="getCentreDroitEcriture" resultMap="CentreGestion">
+	<statement id="getCentreDroitEcriture" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT C.* FROM CentreGestion as C, PersonnelCentreGestion as p, DroitAdministration as d
 		WHERE C.idCentreGestion = p.idCentreGestion
 		AND p.uidPersonnel=#uidPersonnel#
@@ -105,7 +110,7 @@
 	</statement>
 	
 	<!-- Récupération des centres de gestion d'une personne qui a des droits pour ce centre-->
-	<statement id="getCentreFromUid" resultMap="CentreGestion">
+	<statement id="getCentreFromUid" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT DISTINCT C.* FROM CentreGestion as C
 		INNER JOIN PersonnelCentreGestion as p
 		ON C.idCentreGestion = p.idCentreGestion
@@ -116,7 +121,7 @@
 	</statement>
 	
 	<!-- Récupération du centre ENTREPRISE-->
-	<statement id="getCentreEntreprise" resultMap="CentreGestion">
+	<statement id="getCentreEntreprise" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT C.* FROM CentreGestion as C
 		INNER JOIN NiveauCentre as n
 		ON C.idNiveauCentre = n.idNiveauCentre
@@ -125,7 +130,7 @@
 	</statement>
 	
 	<!-- Récupération du centre ETABLISSEMENT-->
-	<statement id="getCentreEtablissement" resultMap="CentreGestion">
+	<statement id="getCentreEtablissement" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT C.* FROM CentreGestion as C
 		INNER JOIN NiveauCentre as n
 		ON C.idNiveauCentre = n.idNiveauCentre
@@ -135,7 +140,7 @@
 	</statement>
 	
 	<!-- Récupération du centre ETABLISSEMENT-->
-	<statement id="getCentresEtablissement" resultMap="CentreGestion">
+	<statement id="getCentresEtablissement" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT C.* FROM CentreGestion C
 		INNER JOIN NiveauCentre N
 		ON C.idNiveauCentre = N.idNiveauCentre
@@ -146,7 +151,7 @@
 	</statement>
 	
 	<!--recherche des centres selon l'identifiant d'un critere -->
-	<statement id="getCentreFromCritere" resultMap="CentreGestion">
+	<statement id="getCentreFromCritere" resultMap="CentreGestion" cacheModel="cacheCentreGestion">
 		SELECT C.* FROM CentreGestion C 
 		INNER JOIN CritereGestion Cri
 		ON C.idCentreGestion=Cri.idCentreGestion 

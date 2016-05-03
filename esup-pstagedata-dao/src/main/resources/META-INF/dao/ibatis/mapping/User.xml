@@ -6,6 +6,14 @@
 
 <sqlMap namespace="pstagedata_user">
 
+  <cacheModel id="cachepstagedata_user" type="OSCACHE" readOnly="true">
+    <flushInterval hours="24"/>
+    <flushOnExecute statement="insertUser"/>
+    <flushOnExecute statement="deleteUser"/>
+    <flushOnExecute statement="updateUser"/>
+    <property name="cache-size" value="1000"/>
+  </cacheModel>
+
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="user" type="org.esupportail.pstagedata.domain.beans.User"/>
 
@@ -16,17 +24,17 @@
     <result property="language" column="lang"/>    
   </resultMap>         
 
-  <cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">
-		<flushInterval hours="24"/>
-		<property name="cache-size" value="1000" />
-  </cacheModel>
-  <select id="getUserById" parameterClass="string" resultMap="userResult">
+  <!--<cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">-->
+		<!--<flushInterval hours="24"/>-->
+		<!--<property name="cache-size" value="1000" />-->
+  <!--</cacheModel>-->
+  <select id="getUserById" parameterClass="string" resultMap="userResult" cacheModel="cachepstagedata_user">
     select * from pstagedata_user where id = #id#
   </select>  
-  <select id="getAllUsers" resultMap="userResult">
+  <select id="getAllUsers" resultMap="userResult" cacheModel="cachepstagedata_user">
       select * from pstagedata_user
   </select>
-  <select id="getAllAdmins" resultMap="userResult">
+  <select id="getAllAdmins" resultMap="userResult" cacheModel="cachepstagedata_user">
     select * from pstagedata_user where admi=1 order by disp_name asc
   </select>      
   <insert id="insertUser" parameterClass="user">

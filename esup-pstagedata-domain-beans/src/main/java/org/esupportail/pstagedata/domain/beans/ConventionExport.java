@@ -671,9 +671,6 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		c.setMonnaieGratification(this.monnaieGratification);
 		c.setMontantGratification(this.montantGratification);
 		c.setNbAvenant(this.nbAvenant);
-
-		System.out.println("nbAvenant : " + c.getNbAvenant());
-
 		c.setNbConges(this.nbConges);
 		c.setNbHeuresHebdo(this.nbHeuresHebdo);
 		c.setNbJoursHebdo(this.nbJoursHebdo);

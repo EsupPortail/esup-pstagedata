@@ -6,6 +6,11 @@
 
 <sqlMap namespace="NiveauCentre">
 
+	<cacheModel id="cacheNiveauCentre" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="NiveauCentre"
 		class="org.esupportail.pstagedata.domain.beans.NiveauCentre">
 		<result property="id" column="idNiveauCentre" />
@@ -13,12 +18,12 @@
 		<result property="temEnServ" column="temEnServNiveauCentre" />
 	</resultMap>
  
-	<statement id="getNiveauCentre" resultMap="NiveauCentre">
+	<statement id="getNiveauCentre" resultMap="NiveauCentre" cacheModel="cacheNiveauCentre">
 		SELECT * FROM NiveauCentre
 		WHERE temEnServNiveauCentre = 'O'
 	</statement>
 	
-	<statement id="getNiveauCentreFromId" resultMap="NiveauCentre">
+	<statement id="getNiveauCentreFromId" resultMap="NiveauCentre" cacheModel="cacheNiveauCentre">
 		SELECT * FROM NiveauCentre
 		WHERE IdNiveauCentre = #IdNiveauCentre#
 		LIMIT 0, 1

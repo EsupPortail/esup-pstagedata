@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Affectation">
-	
+
+	<cacheModel id="cacheAffectation" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassAffectation" type="org.esupportail.pstagedata.domain.beans.Affectation"/>
 
 	<resultMap id="Affectation"
@@ -15,7 +20,7 @@
 		<result property="codeUniversite" column="codeUniversite" />
 	</resultMap>
 
-	<statement id="getAffectation" resultMap="Affectation">
+	<statement id="getAffectation" resultMap="Affectation" cacheModel="cacheAffectation">
 		SELECT * FROM Affectation
 		<dynamic prepend="WHERE">
 			<isNotNull property="codeUniversite">
@@ -24,7 +29,7 @@
 		</dynamic>
 	</statement>
 	
-	<statement id="getAffectationFromCodeAffectation" resultMap="Affectation">
+	<statement id="getAffectationFromCodeAffectation" resultMap="Affectation" cacheModel="cacheAffectation">
 		SELECT * FROM Affectation
 		WHERE codeAffectation = #codeAffectation#
 		<isNotNull property="codeUniversite" prepend="AND">
@@ -34,7 +39,7 @@
 	</statement>
 	
 	<!--	Récupération du nombre d'affectations -->
-	<statement id="getNombreAffectation" resultClass="java.lang.Integer">
+	<statement id="getNombreAffectation" resultClass="java.lang.Integer" cacheModel="cacheAffectation">
 		SELECT COUNT(*) FROM Affectation
 	</statement>
 	

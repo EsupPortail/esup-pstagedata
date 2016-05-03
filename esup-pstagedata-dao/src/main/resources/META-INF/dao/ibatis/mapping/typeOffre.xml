@@ -6,6 +6,11 @@
 
 <sqlMap namespace="TypeOffre">
 
+	<cacheModel id="cacheTypeOffre" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="TypeOffre"
 		class="org.esupportail.pstagedata.domain.beans.TypeOffre">
 		<result property="id" column="idTypeOffre" />
@@ -15,11 +20,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getTypesOffre" resultMap="TypeOffre">
+	<statement id="getTypesOffre" resultMap="TypeOffre" cacheModel="cacheTypeOffre">
 		SELECT * FROM TypeOffre
 	</statement>
 	
-	<statement id="getTypeOffreFromId" resultMap="TypeOffre">
+	<statement id="getTypeOffreFromId" resultMap="TypeOffre" cacheModel="cacheTypeOffre">
 		SELECT * FROM TypeOffre
 		WHERE idTypeOffre = #id#
 		LIMIT 0, 1

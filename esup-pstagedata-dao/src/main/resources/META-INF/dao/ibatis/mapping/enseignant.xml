@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Enseignant">
+
+	<cacheModel id="cacheEnseignant" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassEnseignant"
 		type="org.esupportail.pstagedata.domain.beans.Enseignant" />
 	<resultMap id="Enseignant" class="ClassEnseignant">
@@ -37,7 +43,7 @@
 		<result property="tel" column="telephone" />
 	</resultMap>
 
-	<statement id="getEnseignants" resultMap="Enseignant">
+	<statement id="getEnseignants" resultMap="Enseignant" cacheModel="cacheEnseignant">
 		SELECT * FROM Enseignant
 		<dynamic prepend="WHERE">
 			<isNotNull property="codeUniversite">
@@ -46,13 +52,13 @@
 		</dynamic>
 	</statement>
 
-	<statement id="getEnseignantFromId" resultMap="Enseignant">
+	<statement id="getEnseignantFromId" resultMap="Enseignant" cacheModel="cacheEnseignant">
 		SELECT * FROM
 		Enseignant WHERE idEnseignant=#id#
 		LIMIT 0,1
 	</statement>
 
-	<statement id="getEnseignantExportFromId" resultMap="EnseignantExport">
+	<statement id="getEnseignantExportFromId" resultMap="EnseignantExport" cacheModel="cacheEnseignant">
 		SELECT
 		idEnseignant, uidEnseignant, nom, prenom, mail, telephone
 		FROM
@@ -60,7 +66,7 @@
 		LIMIT 0,1
 	</statement>
 
-	<statement id="getEnseignantFromUid" resultMap="Enseignant">
+	<statement id="getEnseignantFromUid" resultMap="Enseignant" cacheModel="cacheEnseignant">
 		SELECT * FROM
 		Enseignant
 		WHERE uidEnseignant = #uidEnseignant#
@@ -69,7 +75,7 @@
 		LIMIT 0,1
 	</statement>
 
-	<statement id="getNombreConventionByEnseignant" resultClass="java.lang.Integer">
+	<statement id="getNombreConventionByEnseignant" resultClass="java.lang.Integer" cacheModel="cacheEnseignant">
 		SELECT COUNT(DISTINCT C.idEtudiant) FROM Convention as C
 		INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
 		WHERE E.uidEnseignant = #uidEnseignant#
@@ -78,7 +84,7 @@
 		</isNotNull>
 	</statement>
 
-	<statement id="getNombreConventionByEnseignantByAnnee" resultClass="java.lang.Integer">
+	<statement id="getNombreConventionByEnseignantByAnnee" resultClass="java.lang.Integer" cacheModel="cacheEnseignant">
 		SELECT COUNT(C.idEtudiant) FROM Convention as C
 		INNER JOIN Enseignant E ON E.idEnseignant = C.idEnseignant
 		WHERE E.uidEnseignant = #uidEnseignant# AND C.annee = #annee#

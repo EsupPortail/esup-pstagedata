@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Confidentialite">
 
+	<cacheModel id="cacheConfidentialite" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="Confidentialite"
 		class="org.esupportail.pstagedata.domain.beans.Confidentialite">
 		<result property="code" column="codeConfidentialite" />
@@ -13,7 +18,7 @@
 		<result property="temEnServ" column="temEnServConfid" />
 	</resultMap>
 
-	<statement id="getConfidentialite" resultMap="Confidentialite">
+	<statement id="getConfidentialite" resultMap="Confidentialite" cacheModel="cacheConfidentialite">
 		SELECT * FROM Confidentialite
 		WHERE temEnServConfid = 'O'
 	</statement>

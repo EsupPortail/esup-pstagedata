@@ -6,6 +6,12 @@
 
 <sqlMap namespace="pstagedata_vers_mana">
 
+    <cacheModel id="pstagedata_vers_mana" type="OSCACHE" readOnly="true">
+        <flushInterval hours="24"/>
+        <flushOnExecute statement="updateVersion"/>
+        <property name="cache-size" value="1000"/>
+    </cacheModel>
+
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="versionManager" type="org.esupportail.pstagedata.domain.beans.VersionManager"/>
 
@@ -14,11 +20,11 @@
     <result property="version" column="vers"/> 
   </resultMap>         
 
-  <cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">
-		<flushInterval hours="24"/>
-		<property name="cache-size" value="1000" />
-  </cacheModel>
-  <select id="getVersion" parameterClass="string" resultMap="versionManagerResult">
+  <!--<cacheModel id="all-Base-cache" type ="LRU" readOnly="true" serialize="false">-->
+		<!--<flushInterval hours="24"/>-->
+		<!--<property name="cache-size" value="1000" />-->
+  <!--</cacheModel>-->
+  <select id="getVersion" parameterClass="string" resultMap="versionManagerResult" cacheModel="pstagedata_vers_mana">
     select * from pstagedata_vers_mana limit 0,1
   </select>  
   <update id="updateVersion" parameterClass="versionManager">

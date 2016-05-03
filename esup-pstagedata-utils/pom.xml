@@ -15,5 +15,15 @@
     		<artifactId>esup-commons2-exceptionHandling</artifactId>
     		<version>${esupcommons.version}</version>
     	</dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-bindings-soap</artifactId>
+            <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-core</artifactId>
+            <version>2.7.3</version>
+        </dependency>
     </dependencies>
 </project>

@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Convention">
 
+	<cacheModel id="cacheConvention" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassConvention"
 		type="org.esupportail.pstagedata.domain.beans.Convention" />
 
@@ -268,7 +273,7 @@
 		<result property="nbAvenant" column="nbAvenant" />
 	</resultMap>
 
-	<statement id="getConventions" resultMap="Convention">
+	<statement id="getConventions" resultMap="Convention" cacheModel="cacheConvention">
 		SELECT DISTINCT * FROM Convention C
 		INNER JOIN CentreGestion CG ON
 		C.idCentreGestion = CG.idCentreGestion
@@ -279,12 +284,12 @@
 		</dynamic>
 	</statement>
 
-	<statement id="getConventionFromId" resultMap="Convention">
+	<statement id="getConventionFromId" resultMap="Convention" cacheModel="cacheConvention">
 		SELECT * FROM Convention WHERE idConvention=#idConvention#
 		LIMIT 0,1
 	</statement>
 
-	<statement id="getConventionsEtudiant" resultMap="ConventionLight">
+	<statement id="getConventionsEtudiant" resultMap="ConventionLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
 		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape,
@@ -311,7 +316,7 @@
 		ORDER BY C.dateCreation DESC
 	</statement>
 
-	<statement id="getConventionsByEnseignant" resultMap="ConventionLight">
+	<statement id="getConventionsByEnseignant" resultMap="ConventionLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
 		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.codeVersionEtape, C.annee,
@@ -335,7 +340,7 @@
 		ORDER BY C.dateCreation DESC
 	</statement>
 
-	<statement id="getAnneesConvention" resultClass="java.lang.String">
+	<statement id="getAnneesConvention" resultClass="java.lang.String" cacheModel="cacheConvention">
 		SELECT DISTINCT C.annee FROM Convention C
 		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
 		<dynamic prepend="WHERE">
@@ -346,7 +351,7 @@
 		ORDER BY C.annee DESC
 	</statement>
 
-	<statement id="getConventionsFromCriteres" resultMap="ConventionLight">
+	<statement id="getConventionsFromCriteres" resultMap="ConventionLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
 		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape,
@@ -577,7 +582,7 @@
 	</statement>
 
 	<statement id="getConventionsFromCriteresByEnseignantTuteur"
-		resultMap="ConventionLight">
+		resultMap="ConventionLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
 		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.codeVersionEtape, C.annee,
@@ -804,7 +809,7 @@
 		</isNotNull>
 	</statement>
 
-	<statement id="getConventionsFromCriteresExport" resultMap="ConventionSuperLight">
+	<statement id="getConventionsFromCriteresExport" resultMap="ConventionSuperLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
@@ -1027,7 +1032,7 @@
 		</isNotNull>
 	</statement>
 
-	<statement id="getConventionsFromExport" resultMap="ConventionExport">
+	<statement id="getConventionsFromExport" resultMap="ConventionExport" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationConvention, C.validationPedagogique, C.interruptionStage, C.dateDebutInterruption,
 		C.dateFinInterruption,
@@ -1135,7 +1140,7 @@
 	</statement>
 
 	<statement id="getNombreConventionByCentreGestion"
-		resultClass="java.lang.Integer">
+		resultClass="java.lang.Integer" cacheModel="cacheConvention">
 		SELECT COUNT(*) FROM Convention C
 		INNER JOIN CentreGestion CG ON
 		C.idCentreGestion = CG.idCentreGestion

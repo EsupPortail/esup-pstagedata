@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="NAF_N5">
-	
+
+	<cacheModel id="cacheNAF_N5" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassNafN5" type="org.esupportail.pstagedata.domain.beans.NafN5"/>
 	
 	<resultMap id="NafN5"
@@ -16,16 +21,16 @@
 		<result property="temEnServ" column="temEnServNAF_N5" />
 	</resultMap>
 
-	<statement id="getNafN5" resultMap="NafN5">
+	<statement id="getNafN5" resultMap="NafN5" cacheModel="cacheNAF_N5">
 		SELECT * FROM NAF_N5
 		WHERE temEnServNAF_N5 = 'O'
 	</statement>
-	<statement id="getNafN5FromCodeNafN5" parameterClass="java.lang.String" resultMap="NafN5">
+	<statement id="getNafN5FromCodeNafN5" parameterClass="java.lang.String" resultMap="NafN5" cacheModel="cacheNAF_N5">
 		SELECT * FROM NAF_N5
 		WHERE codeNaf_N5 = #id#
 		LIMIT 0,1
 	</statement>
-	<statement id="getNafN5FromCodeNafN1" parameterClass="java.lang.String" resultMap="NafN5">
+	<statement id="getNafN5FromCodeNafN1" parameterClass="java.lang.String" resultMap="NafN5" cacheModel="cacheNAF_N5">
 		SELECT * FROM NAF_N5
 		WHERE codeNaf_N1 = #id#
     </statement>

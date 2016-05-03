@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="ModeVersGratification">
+
+	<cacheModel id="cacheModeVersGratification" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassModeVersGratification" type="org.esupportail.pstagedata.domain.beans.ModeVersGratification"/>
 	<resultMap id="ModeVersGratification"
 		class="ClassModeVersGratification">
@@ -13,12 +19,12 @@
 		<result property="temEnServ" column="temEnServModeVersGrat" />
 	</resultMap>
 
-	<statement id="getModeVersGratifications" resultMap="ModeVersGratification">
+	<statement id="getModeVersGratifications" resultMap="ModeVersGratification" cacheModel="cacheModeVersGratification">
 		SELECT * FROM ModeVersGratification
 		WHERE temEnServModeVersGrat = 'O'
 	</statement>
 	
-	<statement id="getModeVersGratificationFromId" resultMap="ModeVersGratification">
+	<statement id="getModeVersGratificationFromId" resultMap="ModeVersGratification" cacheModel="cacheModeVersGratification">
 		SELECT * FROM ModeVersGratification
 		WHERE idModeVersGratification = #id#
 		LIMIT 0, 1

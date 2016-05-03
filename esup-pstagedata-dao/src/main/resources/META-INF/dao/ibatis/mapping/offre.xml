@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Offre">
-	
+
+	<cacheModel id="cacheOffre" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassOffre" type="org.esupportail.pstagedata.domain.beans.Offre"/>
 
 	<resultMap id="Offre"
@@ -115,7 +120,7 @@
 		<result property="centreGestion" column="idCentreGestion" select="getCentreGestionSuperLightFromId"/>
 	</resultMap>
 	
-	<statement id="countOffreADiffuser" resultClass="java.lang.Integer">
+	<statement id="countOffreADiffuser" resultClass="java.lang.Integer" cacheModel="cacheOffre">
         SELECT COUNT(*) FROM Offre O
 		WHERE O.estDiffusee=false
 		AND O.estSupprimee=false
@@ -126,13 +131,13 @@
 		</isNotNull>
     </statement>
     
-	<statement id="getOffreFromId" resultMap="Offre">
+	<statement id="getOffreFromId" resultMap="Offre" cacheModel="cacheOffre">
 		SELECT O.* FROM Offre O
 		WHERE O.idOffre = #idOffre#
 		LIMIT 0, 1
 	</statement>
 
-	<statement id="getOffresFromIdStructureAndIdsCentreGestion" resultMap="Offre">
+	<statement id="getOffresFromIdStructureAndIdsCentreGestion" resultMap="Offre" cacheModel="cacheOffre">
 		SELECT DISTINCT O.*
 		FROM Offre O
 		INNER JOIN CentreGestion CG ON CG.idCentreGestion = O.idCentreGestion
@@ -172,7 +177,7 @@
 		ORDER BY intitule ASC
 	</statement>
 	
-	<statement id="getIdOffresEntrepriseCiblees" resultClass="java.lang.Integer">
+	<statement id="getIdOffresEntrepriseCiblees" resultClass="java.lang.Integer" cacheModel="cacheOffre">
 		SELECT DISTINCT OD.idOffre
 		FROM OffreDiffusion OD
 		LEFT OUTER JOIN Offre O ON O.idOffre = OD.idOffre
@@ -191,7 +196,7 @@
 		</isNotNull>
 	</statement>
 	
-	<statement id="getOffresFromCriteres" resultMap="OffreLight">
+	<statement id="getOffresFromCriteres" resultMap="OffreLight" cacheModel="cacheOffre">
 		SELECT DISTINCT O.idOffre,O.idStructure,O.idCentreGestion,O.intitule,O.idTypeOffre,O.idContratOffre,O.lieuCodePostal,O.lieuCommune,O.idLieuPays,O.dateDiffusion,
 		O.estAccessERQTH,O.estPrioERQTH,O.avecFichier,O.avecLien,O.dateCreation,O.dateFinDiffusion,
 		O.estDiffusee,O.estValidee,O.etatValidation,O.estSupprimee,O.anneeUniversitaire
@@ -385,11 +390,11 @@
 		LIMIT 0, 200
 	</statement>
 	
-	<statement id="getAnneesUnivOffre" resultClass="java.lang.String">
+	<statement id="getAnneesUnivOffre" resultClass="java.lang.String" cacheModel="cacheOffre">
         SELECT DISTINCT anneeUniversitaire FROM Offre ORDER BY anneeUniversitaire DESC
     </statement>
     
-	<statement id="getNombreOffreByCentreGestion" resultClass="java.lang.Integer">
+	<statement id="getNombreOffreByCentreGestion" resultClass="java.lang.Integer" cacheModel="cacheOffre">
 		SELECT COUNT(*) FROM Offre
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>

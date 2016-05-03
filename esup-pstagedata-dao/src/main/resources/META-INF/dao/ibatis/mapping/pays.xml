@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Pays">
-	
+
+	<cacheModel id="cachePays" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassPays" type="org.esupportail.pstagedata.domain.beans.Pays"/>
 	
 	<resultMap id="Pays"
@@ -19,10 +24,10 @@
 		<result property="siretObligatoire" column="siretObligatoire" />
 	</resultMap>
 
-	<statement id="getPays" resultMap="Pays">
+	<statement id="getPays" resultMap="Pays" cacheModel="cachePays">
 		SELECT * FROM Pays WHERE temEnServPays = 'O'
 	</statement>
-	<statement id="getPaysFromId" resultMap="Pays">
+	<statement id="getPaysFromId" resultMap="Pays" cacheModel="cachePays">
 		SELECT * FROM Pays
 		WHERE idPays = #id#
 		LIMIT 0,1

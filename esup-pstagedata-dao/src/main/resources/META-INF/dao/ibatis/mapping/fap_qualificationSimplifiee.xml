@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Fap_QualificationSimplifiee">
-	
+
+	<cacheModel id="cacheFap_QualificationSimplifiee" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassFapQualificationSimplifiee" type="org.esupportail.pstagedata.domain.beans.FapQualificationSimplifiee"/>
 	
 	<resultMap id="FapQualificationSimplifiee"
@@ -14,17 +19,17 @@
 		<result property="libelle" column="libelleQualification" />
 	</resultMap>
 
-	<statement id="getFapQualificationsSimplifiees" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+	<statement id="getFapQualificationsSimplifiees" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee" cacheModel="cacheFap_QualificationSimplifiee">
 		SELECT * FROM FAP_QualificationSimplifiee
 	</statement>
 	
-	<statement id="getFapQualificationSimplifieeFromId" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+	<statement id="getFapQualificationSimplifieeFromId" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee" cacheModel="cacheFap_QualificationSimplifiee">
 		SELECT * FROM FAP_QualificationSimplifiee
 		WHERE idQualificationSimplifiee = #id#
 		LIMIT 0, 1
 	</statement>
 	
-	<statement id="getFapQualificationSimplifieeFromNumFapQualification" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee">
+	<statement id="getFapQualificationSimplifieeFromNumFapQualification" parameterClass="java.lang.String" resultMap="FapQualificationSimplifiee" cacheModel="cacheFap_QualificationSimplifiee">
 		SELECT * FROM FAP_QualificationSimplifiee fqs
 		INNER JOIN FAP_Qualification fq ON fq.idQualificationSimplifiee = fqs.idQualificationSimplifiee
 		WHERE numFap_Qualification = #id#

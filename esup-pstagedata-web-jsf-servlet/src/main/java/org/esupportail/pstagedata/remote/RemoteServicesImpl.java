@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jws.WebService;
 
+import org.esupportail.pstagedata.cache.Cache;
+import org.esupportail.pstagedata.cache.FlushCache;
 import org.esupportail.pstagedata.domain.AccordPartenariatDomainService;
 import org.esupportail.pstagedata.domain.AdminStructureDomainService;
 import org.esupportail.pstagedata.domain.AffectationDomainService;
@@ -410,6 +412,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addFicheEvaluation(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
+	@FlushCache({Cache.FICHE_EVALUATION, Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_EVALUATION})
 	public int addFicheEvaluation(FicheEvaluationDTO fe) throws DataAddException,WebServiceDataBaseException {
 		int tmp = 0;
 		if (fe != null){
@@ -420,6 +423,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
+	@FlushCache({Cache.FICHE_EVALUATION, Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_EVALUATION})
 	public boolean updateFicheEvaluationEtudiant(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -430,6 +434,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
+	@FlushCache({Cache.FICHE_EVALUATION, Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_EVALUATION})
 	public boolean updateFicheEvaluationEntreprise(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -440,6 +445,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
+	@FlushCache({Cache.FICHE_EVALUATION, Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_EVALUATION})
 	public boolean updateFicheEvaluationEnseignant(FicheEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -451,6 +457,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteFicheEvaluation(int)
 	 */
+	@FlushCache({Cache.FICHE_EVALUATION, Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_EVALUATION})
 	public boolean deleteFicheEvaluation(int idFicheEvaluation) throws DataDeleteException,WebServiceDataBaseException{
 		boolean b = false;
 		if (idFicheEvaluation > 0){
@@ -479,6 +486,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addReponseEvaluation(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public int addReponseEvaluation(ReponseEvaluationDTO fe) throws DataAddException,WebServiceDataBaseException {
 		int tmp = 0;
 		if (fe != null){
@@ -489,6 +497,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean updateReponseEvaluationEtudiant(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -499,6 +508,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean updateReponseEvaluationEntreprise(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -509,6 +519,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean updateReponseEvaluationEnseignant(ReponseEvaluationDTO fe) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if (fe != null){
@@ -520,6 +531,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteReponseEvaluation(int, int)
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteException,WebServiceDataBaseException{
 		boolean b = false;
 		if (idFicheEvaluation > 0 && idConvention > 0){
@@ -531,36 +543,42 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEtudiant(idFicheEvaluation, idConvention);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEnseignant(idFicheEvaluation, idConvention);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
 	 */
+	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEntreprise(idFicheEvaluation, idConvention);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEtudiant()
 	 */
+	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setEnvoiMailEtudiant(idConvention);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEnseignant()
 	 */
+	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setEnvoiMailEnseignant(idConvention);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEntreprise()
 	 */
+	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setEnvoiMailEntreprise(idConvention);
 	}
@@ -583,6 +601,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
 	 */
+	@FlushCache({Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_SUPPLEMENTAIRE})
 	public int addQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataAddException, WebServiceDataBaseException {
 		int tmp = 0;
 		if (qs != null){
@@ -593,6 +612,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
 	 */
+	@FlushCache({Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_SUPPLEMENTAIRE})
 	public boolean updateQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (qs != null){
@@ -603,6 +623,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteQuestionSupplementaire(int)
 	 */
+	@FlushCache({Cache.QUESTION_SUPPLEMENTAIRE, Cache.REPONSE_SUPPLEMENTAIRE})
 	public boolean deleteQuestionSupplementaire(int idQuestionSupplementaire) throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
 		if (idQuestionSupplementaire > 0){
@@ -623,6 +644,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
 	 */
+	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public int addReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataAddException, WebServiceDataBaseException {
 		int tmp = 0;
 		if (rs != null){
@@ -633,6 +655,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponsesSupplementaires(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
 	 */
+	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public int addReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataAddException, WebServiceDataBaseException {
 		int tmp = 0;
 		for (ReponseSupplementaireDTO reponse : lr){
@@ -643,6 +666,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
 	 */
+	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public boolean updateReponseSupplementaire(ReponseSupplementaireDTO rs) throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (rs != null){
@@ -653,6 +677,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateReponsesSupplementaires(java.util.List)
 	 */
+	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public boolean updateReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (lr != null && !lr.isEmpty()){
@@ -665,6 +690,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteReponseSupplementaire(int,int)
 	 */
+	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire, int idConvention) throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
 		if (idQuestionSupplementaire > 0 && idConvention > 0){
@@ -728,6 +754,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAccord(org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
 	public int addAccord(AccordPartenariatDTO accord) throws DataAddException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
 		int b=0;
 		if(accord!=null){
@@ -750,6 +777,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateAccord(org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
 	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
 		boolean b = false;
 		if(accord!=null){
@@ -772,6 +800,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteAccord(int)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
 	public boolean deleteAccord(int idAccord) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idAccord>0){
@@ -823,6 +852,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAdminStructure(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
+	@FlushCache({Cache.ADMIN_STRUCTURE})
 	public int addAdminStructure(AdminStructureDTO admin) throws DataAddException, WebServiceDataBaseException, AdminStructureLoginEppnAlreadyUsedException, AdminStructureAccountException{
 		int b=0;
 		if(admin!=null){
@@ -858,6 +888,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateAdminStructure(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
+	@FlushCache({Cache.ADMIN_STRUCTURE})
 	public boolean updateAdminStructure(AdminStructureDTO admin) throws DataUpdateException, WebServiceDataBaseException, AdminStructureLoginEppnAlreadyUsedException, AdminStructureAccountException{
 		boolean b = false;
 		if(admin!=null && admin.getId()>0){
@@ -893,6 +924,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateAdminStructureDerniereConnexion(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
+	@FlushCache({Cache.ADMIN_STRUCTURE})
 	public boolean updateAdminStructureDerniereConnexion(AdminStructureDTO admin) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(admin!=null && admin.getId()>0){
@@ -904,6 +936,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteAdminStructure(int)
 	 */
+	@FlushCache({Cache.ADMIN_STRUCTURE})
 	public boolean deleteAdminStructure(int idAdminStructure) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b=false;
 		if(idAdminStructure>0){
@@ -951,6 +984,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAffectation(org.esupportail.pstagedata.domain.dto.AffectationDTO)
 	 */
+	@FlushCache({Cache.AFFECTATION, Cache.ENSEIGNANT, Cache.PERSONNEL_CENTRE_GESTION})
 	public int addAffectation(AffectationDTO a) throws DataAddException,WebServiceDataBaseException,AffectationAlreadyExistingForCodeException{
 		int b=0;
 		if(a!=null){
@@ -992,6 +1026,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException 
 	 */
+	@FlushCache({Cache.AVENANT, Cache.CONVENTION})
 	public int addAvenant(AvenantDTO a) throws DataAddException, WebServiceDataBaseException{
 		int b=0;
 		if(a!=null){
@@ -1005,6 +1040,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @throws DataUpdateException 
 	 * @throws WebServiceDataBaseException 
 	 */
+	@FlushCache({Cache.AVENANT, Cache.CONVENTION})
 	public boolean updateAvenant(AvenantDTO a) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b=false;
 		if(a!=null){
@@ -1018,6 +1054,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @throws DataDeleteException 
 	 * @throws WebServiceDataBaseException
 	 */
+	@FlushCache({Cache.AVENANT, Cache.CONVENTION})
 	public boolean deleteAvenant(int idAvenant) throws DataDeleteException,WebServiceDataBaseException{
 		boolean b = false;
 		b = this.avenantDomainService.deleteAvenant(idAvenant);
@@ -1148,6 +1185,20 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addCentreGestion(org.esupportail.pstagedata.domain.dto.CentreGestionDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION,
+			Cache.CENTRE_GESTION_SUPERVISEUR,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ETAPE,
+			Cache.FICHE_EVALUATION,
+			Cache.OFFRE,
+			Cache.OFFRE_DIFFUSION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.UFR})
 	public int addCentreGestion(CentreGestionDTO cg) throws DataAddException,WebServiceDataBaseException,CentreEtablissementDejaExistantException,CentreEntrepriseDejaExistantException{
 		int b=0;
 		if(cg!=null){
@@ -1163,6 +1214,20 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCentreGestion(org.esupportail.pstagedata.domain.dto.CentreGestionDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION,
+			Cache.CENTRE_GESTION_SUPERVISEUR,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ETAPE,
+			Cache.FICHE_EVALUATION,
+			Cache.OFFRE,
+			Cache.OFFRE_DIFFUSION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.UFR})
 	public boolean updateCentreGestion(CentreGestionDTO cg) throws DataUpdateException,WebServiceDataBaseException,CentreEtablissementDejaExistantException,CentreEntrepriseDejaExistantException{
 		boolean b=false;
 		if(cg!=null){
@@ -1179,6 +1244,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateIdFichier(int, int)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.FICHIERS, Cache.OFFRE})
 	public boolean updateIdFichier(int idCentreGestion, int idFichier) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b=false;
 		if(idCentreGestion > 0 && idFichier > 0){
@@ -1189,6 +1255,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#setIdFichierNull(int)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION})
 	public boolean setIdFichierNull(int idCentreGestion) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b=false;
 		if(idCentreGestion > 0 ){
@@ -1199,6 +1266,20 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteCentreGestion(int)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION,
+			Cache.CENTRE_GESTION_SUPERVISEUR,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ETAPE,
+			Cache.FICHE_EVALUATION,
+			Cache.OFFRE,
+			Cache.OFFRE_DIFFUSION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.UFR})
 	public boolean deleteCentreGestion(int idCentreGestion) throws DataDeleteException,WebServiceDataBaseException,CentreReferenceException{
 		boolean b = false;
 
@@ -1240,6 +1321,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addCentreGestionSuperviseur(org.esupportail.pstagedata.domain.dto.CentreGestionSuperviseurDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION_SUPERVISEUR, Cache.CENTRE_GESTION})
 	public int addCentreGestionSuperviseur(CentreGestionSuperviseurDTO cg) throws DataAddException,WebServiceDataBaseException{
 		int b=0;
 		if(cg!=null){
@@ -1326,6 +1408,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public int addContact(ContactDTO c) throws DataAddException, WebServiceDataBaseException, MailAlreadyUsedForStructureException{
 		int b=0;
 		if(c!=null){
@@ -1346,6 +1435,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateContact(ContactDTO c) throws DataUpdateException, WebServiceDataBaseException, MailAlreadyUsedForStructureException{
 		boolean b = false;
 		if(c!=null){
@@ -1366,6 +1462,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCompteContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateCompteContact(ContactDTO c) throws DataUpdateException, WebServiceDataBaseException, AccountAlreadyExistingForCoupleMailStructureException{
 		boolean b = false;
 		if(c!=null){
@@ -1384,6 +1487,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateContactInfosAJour(int, java.lang.String)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateContactInfosAJour(int idContact, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idContact>0 && StringUtils.hasText(loginInfosAJour)){
@@ -1395,6 +1505,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateContactDerniereConnexion(int, java.util.Date)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateContactDerniereConnexion(int idContact, Date avantDerniereConnexion) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idContact>0){
@@ -1406,6 +1523,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteContact(int)
 	 */
+	@FlushCache({Cache.ACCORD_PARTENARIAT,
+			Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean deleteContact(int idContact) throws DataDeleteException, WebServiceDataBaseException, ContactDeleteException{
 		boolean b = false;
 		if(idContact>0){
@@ -1439,6 +1563,22 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ENSEIGNANT,
+			Cache.ETAPE,
+			Cache.LANGUE_CONVENTION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.REPONSE_SUPPLEMENTAIRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE,
+			Cache.TYPE_CONVENTION,
+			Cache.UFR})
 	public int addConvention(ConventionDTO convention) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -1451,6 +1591,22 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteConvention(int)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ENSEIGNANT,
+			Cache.ETAPE,
+			Cache.LANGUE_CONVENTION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.REPONSE_SUPPLEMENTAIRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE,
+			Cache.TYPE_CONVENTION,
+			Cache.UFR})
 	public boolean deleteConvention(int idConvention)
 			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1570,6 +1726,22 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConvention(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ENSEIGNANT,
+			Cache.ETAPE,
+			Cache.LANGUE_CONVENTION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.REPONSE_SUPPLEMENTAIRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE,
+			Cache.TYPE_CONVENTION,
+			Cache.UFR})
 	public boolean updateConvention(ConventionDTO convention)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1588,6 +1760,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCentreConventionByUfr(java.lang.String, int, java.lang.String)
 	 */
+	@FlushCache({Cache.CONVENTION, Cache.CENTRE_GESTION})
 	public boolean updateCentreConventionByUfrCodUniv(String code, int idCentreGestion, String codeUniversite)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1600,6 +1773,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateCentreConventionByEtape(java.lang.String, int, java.lang.String)
 	 */
+	@FlushCache({Cache.CONVENTION, Cache.CENTRE_GESTION})
 	public boolean updateCentreConventionByEtapeCodUniv(String code, int idCentreGestion, String codeUniversite)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1652,6 +1826,22 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ENSEIGNANT,
+			Cache.ETAPE,
+			Cache.LANGUE_CONVENTION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.REPONSE_SUPPLEMENTAIRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE,
+			Cache.TYPE_CONVENTION,
+			Cache.UFR})
 	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1673,6 +1863,22 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateConventionValidation(org.esupportail.pstagedata.domain.dto.ConventionDTO)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.CRITERE_GESTION,
+			Cache.ENSEIGNANT,
+			Cache.ETAPE,
+			Cache.LANGUE_CONVENTION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.REPONSE_SUPPLEMENTAIRE,
+			Cache.SERVICE,
+			Cache.STRUCTURE,
+			Cache.TYPE_CONVENTION,
+			Cache.UFR})
 	public boolean updateConventionValidation(ConventionDTO convention)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -1723,6 +1929,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addCritere(org.esupportail.pstagedata.domain.dto.CritereGestionDTO)
 	 */
+	@FlushCache({Cache.CRITERE_GESTION})
 	public int addCritere(CritereGestionDTO critere) throws DataAddException,WebServiceDataBaseException{
 		int b=0;
 		if(critere!=null){
@@ -1733,6 +1940,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteCritere(String)
 	 */
+	@FlushCache({Cache.CRITERE_GESTION})
 	public boolean deleteCritere(String codeCritere) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b=false;
 		if(codeCritere != null && !(codeCritere.isEmpty())){
@@ -1775,6 +1983,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEnseignant(org.esupportail.pstagedata.domain.dto.EnseignantDTO)
 	 */
+	@FlushCache({Cache.ENSEIGNANT,
+			Cache.AVENANT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION})
 	public int addEnseignant(EnseignantDTO enseignant) throws DataAddException,	WebServiceDataBaseException {
 		int b=0;
 		if(enseignant!=null){
@@ -1791,6 +2006,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteEnseignant(int)
 	 */
+	@FlushCache({Cache.ENSEIGNANT,
+			Cache.AVENANT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION})
 	public boolean deleteEnseignant(int idEnseignant) throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
 		if(idEnseignant>0){
@@ -1856,6 +2078,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateEnseignant(org.esupportail.pstagedata.domain.dto.EnseignantDTO)
 	 */
+	@FlushCache({Cache.ENSEIGNANT,
+			Cache.AVENANT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION})
 	public boolean updateEnseignant(EnseignantDTO enseignant) throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(enseignant!=null){
@@ -1877,6 +2106,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEtape(org.esupportail.pstagedata.domain.dto.EtapeDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.CRITERE_GESTION, Cache.ETAPE})
 	public int addEtape(EtapeDTO etape) throws DataAddException, WebServiceDataBaseException,EtapeAlreadyExistingForCodeException {
 		int b=0;
 		if(etape!=null){
@@ -1942,6 +2172,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addEtudiant(org.esupportail.pstagedata.domain.dto.EtudiantDTO)
 	 */
+	@FlushCache({Cache.ETUDIANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONVENTION,
+			Cache.ENSEIGNANT,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.STATISTIC_ITEM})
 	public int addEtudiant(EtudiantDTO etudiant) throws DataAddException,WebServiceDataBaseException,EtudiantAlreadyExistingForNumEtuCodeUnivException{
 		int b=0;
 		if(etudiant!=null){
@@ -1962,6 +2200,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteEtudiant(int)
 	 */
+	@FlushCache({Cache.ETUDIANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONVENTION,
+			Cache.ENSEIGNANT,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.STATISTIC_ITEM})
 	public boolean deleteEtudiant(int idEtudiant) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b = false;
@@ -1999,6 +2245,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateEtudiant(org.esupportail.pstagedata.domain.dto.EtudiantDTO)
 	 */
+	@FlushCache({Cache.ETUDIANT,
+			Cache.CENTRE_GESTION,
+			Cache.CONVENTION,
+			Cache.ENSEIGNANT,
+			Cache.FICHE_EVALUATION,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.REPONSE_EVALUATION,
+			Cache.STATISTIC_ITEM})
 	public boolean updateEtudiant(EtudiantDTO etudiant)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
@@ -2217,6 +2471,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addOffre(org.esupportail.pstagedata.domain.dto.OffreDTO)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public int addOffre(OffreDTO o) throws DataAddException, WebServiceDataBaseException{
 		int b=0;
 		if(o!=null){
@@ -2227,6 +2492,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateOffre(org.esupportail.pstagedata.domain.dto.OffreDTO)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateOffre(OffreDTO o) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(o!=null){
@@ -2238,6 +2514,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteOffreLogique(int)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean deleteOffreLogique(int idOffre) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2249,6 +2536,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateValidationOffre(int, java.lang.String)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateValidationOffre(int idOffre, String loginValidation) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2260,6 +2558,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStopValidationOffre(int, java.lang.String)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateStopValidationOffre(int idOffre, String loginStopValidation) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2271,6 +2580,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateDiffusionOffre(int, java.lang.String, java.util.Date)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateDiffusionOffre(int idOffre, String loginDiffusion, Date dateFinDiffusion) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2282,6 +2602,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStopDiffusionOffre(int, java.lang.String)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateStopDiffusionOffre(int idOffre, String loginStopDiffusion) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2293,6 +2624,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateRejetOffre(int, java.lang.String)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateRejetOffre(int idOffre, String loginRejetValidation) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2315,6 +2657,17 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateOffrePourvue(int, boolean)
 	 */
+	@FlushCache({Cache.OFFRE,
+			Cache.CONTACT,
+			Cache.CONTRAT_OFFRE,
+			Cache.CONVENTION,
+			Cache.OFFRE_DIFFUSION,
+			Cache.OFFRE_MODE_CANDIDATURE,
+			Cache.PERSONNEL_CENTRE_GESTION,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STRUCTURE,
+			Cache.TYPE_OFFRE})
 	public boolean updateOffrePourvue(int idOffre, boolean estPourvue) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2338,24 +2691,28 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addFichier(org.esupportail.pstagedata.domain.dto.FichierDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.FICHIERS, Cache.OFFRE})
 	public int addFichier(FichierDTO o) throws DataAddException, WebServiceDataBaseException{
 		return this.fichierDomainService.addFichier(o);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateFichier(org.esupportail.pstagedata.domain.dto.FichierDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.FICHIERS, Cache.OFFRE})
 	public boolean updateFichier(FichierDTO o) throws DataUpdateException, WebServiceDataBaseException{
 		return this.fichierDomainService.updateFichier(o);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteFichier(int)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.FICHIERS, Cache.OFFRE})
 	public boolean deleteFichier(int idFichier) throws DataDeleteException, WebServiceDataBaseException{
 		return this.fichierDomainService.deleteFichier(idFichier);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#cleanFichiers()
 	 */
+	@FlushCache({Cache.FICHIERS})
 	public boolean cleanFichiers() throws DataDeleteException, WebServiceDataBaseException{
 		return this.fichierDomainService.cleanFichiers();
 	}
@@ -2366,6 +2723,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addOffreModeCandidature(int, java.util.List)
 	 */
+	@FlushCache({Cache.OFFRE_MODE_CANDIDATURE})
 	public int addOffreModeCandidature(int idOffre, List<Integer> idsModeCandidature) throws DataAddException, DataDeleteException, WebServiceDataBaseException{
 		int b=0;
 		if(idOffre>0){
@@ -2377,6 +2735,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteOffreModeCandidatureFromId(int)
 	 */
+	@FlushCache({Cache.OFFRE_MODE_CANDIDATURE})
 	public boolean deleteOffreModeCandidatureFromId(int idOffre) throws DataAddException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2404,6 +2763,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addOffreDiffusion(java.util.List)
 	 */
+	@FlushCache({Cache.OFFRE, Cache.OFFRE_DIFFUSION})
 	public int addOffreDiffusion(List<OffreDiffusionDTO> lod) throws DataAddException, DataDeleteException, WebServiceDataBaseException{
 		int b=0;
 		if(lod!=null && !lod.isEmpty()){
@@ -2415,6 +2775,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteOffreDiffusionFromId(int)
 	 */
+	@FlushCache({Cache.OFFRE, Cache.OFFRE_DIFFUSION})
 	public boolean deleteOffreDiffusionFromId(int idOffre) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idOffre>0){
@@ -2486,6 +2847,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addPersonnelCentreGestion(org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
 	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException,PersonalAlreadyExistingForCentreException{
 		int b=0;
 		if(pg!=null){
@@ -2511,6 +2873,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updatePersonnelCentreGestion(org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
 	public boolean updatePersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if(pg!=null && pg.getId()>0){
@@ -2522,6 +2885,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deletePersonnelCentreGestion(int, int)
 	 */
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
 	public boolean deletePersonnelCentreGestion(int idCentreGestion, int idPersonnelCentreGestion) throws DataDeleteException,WebServiceDataBaseException{
 		boolean b = false;
 		if(idPersonnelCentreGestion>0 && idCentreGestion>0){
@@ -2568,6 +2932,12 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addService(org.esupportail.pstagedata.domain.dto.ServiceDTO)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public int addService(ServiceDTO s) throws DataAddException, WebServiceDataBaseException{
 		int b=0;
 		if(s!=null){
@@ -2579,6 +2949,12 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateService(org.esupportail.pstagedata.domain.dto.ServiceDTO)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateService(ServiceDTO s) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(s!=null){
@@ -2590,6 +2966,12 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateServiceInfosAJour(int, java.lang.String)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean updateServiceInfosAJour(int idService, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idService>0){
@@ -2601,6 +2983,12 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteService(int)
 	 */
+	@FlushCache({Cache.AVENANT,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.SERVICE,
+			Cache.STRUCTURE})
 	public boolean deleteService(int idService) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idService>0){
@@ -2869,6 +3257,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addStructure(org.esupportail.pstagedata.domain.dto.StructureDTO)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public int addStructure(StructureDTO s) throws DataAddException, WebServiceDataBaseException, UnvalidNumSiretException, StructureNumSiretException{
 		int b=0;
 		if(s!=null){
@@ -2888,6 +3288,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStructure(org.esupportail.pstagedata.domain.dto.StructureDTO)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public boolean updateStructure(StructureDTO s) throws DataUpdateException, WebServiceDataBaseException, UnvalidNumSiretException, StructureNumSiretException{
 		boolean b = false;
 		if(s!=null && s.getIdStructure()>0){
@@ -2908,6 +3320,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStructureInfosAJour(int, java.lang.String)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public boolean updateStructureInfosAJour(int idStructure, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idStructure>0){
@@ -2919,6 +3343,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStructureValidation(int, java.lang.String)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public boolean updateStructureValidation(int idStructure, String loginValidation) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idStructure>0){
@@ -2930,6 +3366,18 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateStructureStopValidation(int, java.lang.String)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public boolean updateStructureStopValidation(int idStructure, String loginStopValidation) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idStructure>0){
@@ -2941,6 +3389,12 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteStructureBase(int)
 	 */
+	@FlushCache({Cache.STRUCTURE,
+			Cache.SERVICE,
+			Cache.CONTACT,
+			Cache.OFFRE,
+			Cache.CONVENTION,
+			Cache.ACCORD_PARTENARIAT})
 	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
@@ -2964,6 +3418,18 @@ public class RemoteServicesImpl implements RemoteServices{
 		return b;
 	}
 
+	@FlushCache({Cache.STRUCTURE,
+			Cache.ACCORD_PARTENARIAT,
+			Cache.ADMIN_STRUCTURE,
+			Cache.CONTACT,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.SERVICE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.TICKET_STRUCTURE,
+			Cache.TYPE_STRUCTURE})
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException, StructureDeleteException{
 		boolean b = false;
 		if(idStructure>0){
@@ -3061,6 +3527,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addUfr(org.esupportail.pstagedata.domain.dto.UfrDTO)
 	 */
+	@FlushCache({Cache.UFR, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.CRITERE_GESTION})
 	public int addUfr(UfrDTO ufr) throws DataAddException,WebServiceDataBaseException,UfrAlreadyExistingForCodeException {
 		int b=0;
 		if(ufr!=null){
@@ -3157,6 +3624,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addTicketStructure(org.esupportail.pstagedata.domain.dto.TicketStructureDTO)
 	 */
+	@FlushCache({Cache.TICKET_STRUCTURE})
 	public int addTicketStructure(TicketStructureDTO ticketStructure)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -3170,6 +3638,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deleteTicketStructure(java.lang.String)
 	 */
+	@FlushCache({Cache.TICKET_STRUCTURE})
 	public boolean deleteTicketStructure(String ticket)
 			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b = false;
@@ -5197,6 +5666,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/*** AJOUTS/UPDATES/SUPPRESSIONS ***/
 	/***********************************/
 	@Override
+	@FlushCache({Cache.CAISSE_REGIME})
 	public int addCaisseRegime(CaisseRegimeDTO cr) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5207,6 +5677,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CAISSE_REGIME})
 	public boolean updateCaisseRegime(CaisseRegimeDTO cr, String codeCaisse)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5217,6 +5688,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CAISSE_REGIME})
 	public boolean deleteCaisseRegime(String codeCaisse)
 			throws DataDeleteException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5227,6 +5699,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CAISSE_REGIME})
 	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (codeCaisse != null) {
@@ -5236,6 +5709,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.NIVEAU_FORMATION, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public int addNiveauFormation(NiveauFormationDTO nf)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5246,6 +5720,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.NIVEAU_FORMATION, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean updateNiveauFormation(NiveauFormationDTO nf)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5256,6 +5731,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.NIVEAU_FORMATION, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean deleteNiveauFormation(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5266,6 +5742,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.NIVEAU_FORMATION, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean reactivateNiveauFormation(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(id > 0) {
@@ -5275,6 +5752,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.EFFECTIF, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.STATISTIC_ITEM, Cache.STRUCTURE})
 	public int addEffectif(EffectifDTO ef) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5285,6 +5763,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.EFFECTIF, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.STATISTIC_ITEM, Cache.STRUCTURE})
 	public boolean updateEffectif(EffectifDTO ef) throws DataUpdateException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5295,6 +5774,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.EFFECTIF, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.STATISTIC_ITEM, Cache.STRUCTURE})
 	public boolean deleteEffectif(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5305,6 +5785,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.EFFECTIF, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.STATISTIC_ITEM, Cache.STRUCTURE})
 	public boolean reactivateEffectif(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
@@ -5314,6 +5795,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TEMPS_TRAVAIL, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.OFFRE})
 	public int addTempsTravail(TempsTravailDTO tt) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5324,6 +5806,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TEMPS_TRAVAIL, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.OFFRE})
 	public boolean updateTempsTravail(TempsTravailDTO tt)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5334,6 +5817,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TEMPS_TRAVAIL, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.OFFRE})
 	public boolean deleteTempsTravail(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5344,6 +5828,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TEMPS_TRAVAIL, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.OFFRE})
 	public boolean reactivateTempsTravail(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (id > 0) {
@@ -5353,6 +5838,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.ORIGINE_STAGE})
 	public int addOrigineStage(OrigineStageDTO os) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5363,6 +5849,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.ORIGINE_STAGE})
 	public boolean updateOrigineStage(OrigineStageDTO os)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5373,6 +5860,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.ORIGINE_STAGE})
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5383,6 +5871,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM, Cache.ORIGINE_STAGE})
 	public boolean reactivateOrigineStage(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (id > 0) {
@@ -5392,6 +5881,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_CONVENTION, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM})
 	public int addTypeConvention(TypeConventionDTO tc) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5402,6 +5892,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_CONVENTION, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM})
 	public boolean updateTypeConvention(TypeConventionDTO tc)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5412,6 +5903,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_CONVENTION, Cache.CONVENTION, Cache.CONVENTION_STATISTIC_ITEM})
 	public boolean deleteTypeConvention(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5422,6 +5914,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_STRUCTURE,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.STRUCTURE})
 	public int addTypeStructure(TypeStructureDTO ts) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5432,6 +5931,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_STRUCTURE,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.STRUCTURE})
 	public boolean updateTypeStructure(TypeStructureDTO ts)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5442,6 +5948,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_STRUCTURE,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.STRUCTURE})
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5452,6 +5965,13 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_STRUCTURE,
+			Cache.CONVENTION,
+			Cache.CONVENTION_STATISTIC_ITEM,
+			Cache.OFFRE,
+			Cache.STATISTIC_ITEM,
+			Cache.STATUT_JURIDIQUE,
+			Cache.STRUCTURE})
 	public boolean reactivateTypeStructure(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (id > 0) {
@@ -5461,6 +5981,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.STATUT_JURIDIQUE, Cache.STRUCTURE, Cache.TYPE_STRUCTURE})
 	public int addStatutJuridique(StatutJuridiqueDTO sj)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5471,6 +5992,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.STATUT_JURIDIQUE, Cache.STRUCTURE, Cache.TYPE_STRUCTURE})
 	public boolean updateStatutJuridique(StatutJuridiqueDTO sj)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5481,6 +6003,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.STATUT_JURIDIQUE, Cache.STRUCTURE, Cache.TYPE_STRUCTURE})
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5491,6 +6014,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONVENTION, Cache.STATUT_JURIDIQUE, Cache.STRUCTURE, Cache.TYPE_STRUCTURE})
 	public boolean reactivateStatutJuridique(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (id > 0 ) {
@@ -5500,6 +6024,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_OFFRE, Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public int addTypeOffre(TypeOffreDTO to) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5510,6 +6035,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_OFFRE, Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean updateTypeOffre(TypeOffreDTO to) throws DataUpdateException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5520,6 +6046,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_OFFRE, Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5530,6 +6057,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.TYPE_OFFRE, Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.STATISTIC_ITEM})
 	public boolean reactivateTypeOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if (id > 0) {
@@ -5539,6 +6067,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
 	public int addContratOffre(ContratOffreDTO co) throws DataAddException,
 	WebServiceDataBaseException {
 		int b=0;
@@ -5549,6 +6078,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
 	public boolean updateContratOffre(ContratOffreDTO co)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5559,6 +6089,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
 	public boolean deleteContratOffre(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5569,6 +6100,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
 	public boolean reactivateContratOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){
@@ -5578,6 +6110,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CENTRE_GESTION, Cache.CONVENTION, Cache.MODE_VALIDATION_STAGE})
 	public int addModeValidationStage(ModeValidationStageDTO mv)
 			throws DataAddException, WebServiceDataBaseException {
 		int b=0;
@@ -5588,6 +6121,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CENTRE_GESTION, Cache.CONVENTION, Cache.MODE_VALIDATION_STAGE})
 	public boolean updateModeValidationStage(ModeValidationStageDTO mv)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -5598,6 +6132,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CENTRE_GESTION, Cache.CONVENTION, Cache.MODE_VALIDATION_STAGE})
 	public boolean deleteModeValidationStage(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -5608,6 +6143,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
+	@FlushCache({Cache.CENTRE_GESTION, Cache.CONVENTION, Cache.MODE_VALIDATION_STAGE})
 	public boolean reactivateModeValidationStage(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b = false;
 		if(id > 0) {

@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CaisseRegime">
+
+	<cacheModel id="cacheCaisseRegime" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassCaisseRegime"
 		type="org.esupportail.pstagedata.domain.beans.CaisseRegime" />
 	<resultMap id="CaisseRegime" class="ClassCaisseRegime">
@@ -15,12 +21,12 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getCaisseRegimes" resultMap="CaisseRegime">
+	<statement id="getCaisseRegimes" resultMap="CaisseRegime" cacheModel="cacheCaisseRegime">
 		SELECT * FROM
 		CaisseRegime
 	</statement>
 
-	<statement id="getCaisseRegimeFromId" resultMap="CaisseRegime">
+	<statement id="getCaisseRegimeFromId" resultMap="CaisseRegime" cacheModel="cacheCaisseRegime">
 		SELECT * FROM
 		CaisseRegime
 		WHERE codeCaisse = #code#

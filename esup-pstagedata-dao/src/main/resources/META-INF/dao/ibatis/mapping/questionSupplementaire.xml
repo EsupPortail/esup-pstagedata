@@ -6,6 +6,11 @@
 
 <sqlMap namespace="QuestionSupplementaire">
 
+	<cacheModel id="cacheQuestionSupplementaire" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassQuestionSupplementaire"
 		type="org.esupportail.pstagedata.domain.beans.QuestionSupplementaire" />
 
@@ -17,12 +22,12 @@
 		<result property="typeQuestion" column="typeQuestion" />
 	</resultMap>
 	
-	<statement id="getQuestionsSupplementaires" resultMap="QuestionSupplementaire">
+	<statement id="getQuestionsSupplementaires" resultMap="QuestionSupplementaire" cacheModel="cacheQuestionSupplementaire">
 		SELECT * FROM QuestionSupplementaire
 		WHERE idFicheEvaluation = #idFicheEvaluation#
 	</statement>
 
-	<statement id="getQuestionsSupplementairesFromIdPlacement" resultMap="QuestionSupplementaire">
+	<statement id="getQuestionsSupplementairesFromIdPlacement" resultMap="QuestionSupplementaire" cacheModel="cacheQuestionSupplementaire">
 		SELECT * FROM QuestionSupplementaire
 		WHERE idFicheEvaluation = #idFicheEvaluation# AND idPlacement=#idPlacement#
 	</statement>

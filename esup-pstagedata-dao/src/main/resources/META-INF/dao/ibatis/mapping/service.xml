@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Service">
-	
+
+	<cacheModel id="cacheService" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassService" type="org.esupportail.pstagedata.domain.beans.Service"/>
 	
 	<resultMap id="Service"
@@ -41,30 +46,30 @@
 		<result property="telephone" column="telephone" />
 	</resultMap>
 
-	<statement id="getServiceFromId" resultMap="Service">
+	<statement id="getServiceFromId" resultMap="Service" cacheModel="cacheService">
 		SELECT * FROM Service
 		WHERE idService = #idService#
 		LIMIT 0,1
 	</statement>
 	
-	<statement id="getServiceExportFromId" resultMap="ServiceExport">
+	<statement id="getServiceExportFromId" resultMap="ServiceExport" cacheModel="cacheService">
 		SELECT S.idService, S.nom, S.batimentResidence,
 		S.voie, S.commune, S.codeCommune, S.codePostal, S.idPays, S.telephone
 		FROM Service S
 		WHERE S.idService = #idService#
 		LIMIT 0,1
 	</statement>
-	<statement id="getServiceFromIdContact" resultMap="Service">
+	<statement id="getServiceFromIdContact" resultMap="Service" cacheModel="cacheService">
 		SELECT s.* FROM Service s
 		INNER JOIN Contact c ON s.idService=c.idService
 		LIMIT 0,1
     </statement>
-	<statement id="getServicesFromIdStructure" resultMap="Service">
+	<statement id="getServicesFromIdStructure" resultMap="Service" cacheModel="cacheService">
 		SELECT * FROM Service
 		WHERE idStructure = #idStructure#
     </statement>
     
-    <statement id="countContactRefOffre" resultClass="java.lang.Integer">
+    <statement id="countContactRefOffre" resultClass="java.lang.Integer" cacheModel="cacheService">
     	SELECT COUNT(*) FROM Offre O
 		INNER JOIN Structure S ON S.idStructure = O.idStructure
 		INNER JOIN Service Se ON Se.idStructure = S.idStructure
@@ -74,7 +79,7 @@
 		AND C.idService = #idService#
     </statement>
     
-    <statement id="countContactRefConvention" resultClass="java.lang.Integer">
+    <statement id="countContactRefConvention" resultClass="java.lang.Integer" cacheModel="cacheService">
     	SELECT COUNT(*) FROM Convention Co
 		INNER JOIN Structure S ON S.idStructure = Co.idStructure
 		INNER JOIN Service Se ON Se.idStructure = S.idStructure
@@ -84,7 +89,7 @@
 		AND C.idService = #idService#
     </statement>
     
-    <statement id="countContactRefAccord" resultClass="java.lang.Integer">
+    <statement id="countContactRefAccord" resultClass="java.lang.Integer" cacheModel="cacheService">
     	SELECT COUNT(*) FROM AccordPartenariat A
 		INNER JOIN Service Se ON Se.idStructure = A.idStructure
 		INNER JOIN Contact C ON C.idService = Se.idService
@@ -92,7 +97,7 @@
 		AND C.idService = #idService#
     </statement>
     
-    <statement id="countContactAvecCompte" resultClass="java.lang.Integer">
+    <statement id="countContactAvecCompte" resultClass="java.lang.Integer" cacheModel="cacheService">
     	SELECT COUNT(*) FROM Contact C
 		INNER JOIN Service Se ON C.idService = Se.idService
 		WHERE C.idService = #idService#

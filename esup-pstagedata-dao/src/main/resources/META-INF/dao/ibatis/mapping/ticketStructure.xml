@@ -6,6 +6,11 @@
 
 <sqlMap namespace="TicketStructure">
 
+	<cacheModel id="cacheTicketStructure" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassTicketStructure"
 		type="org.esupportail.pstagedata.domain.beans.TicketStructure" />
 
@@ -14,7 +19,7 @@
 		<result property="idStructure" column="idStructure" />
 	</resultMap>
 
-	<statement id="getTicketStructureValide" resultMap="TicketStructure">
+	<statement id="getTicketStructureValide" resultMap="TicketStructure" cacheModel="cacheTicketStructure">
 		SELECT *
 		FROM TicketStructure
 		WHERE ticket = #ticket#

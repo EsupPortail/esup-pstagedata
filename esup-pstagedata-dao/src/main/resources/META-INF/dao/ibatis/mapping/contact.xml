@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Contact">
 
+	<cacheModel id="cacheContact" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassContact"
 		type="org.esupportail.pstagedata.domain.beans.Contact" />
 
@@ -49,7 +54,7 @@
 		<result property="idCentreGestion" column="idCentreGestion" />
 	</resultMap>
 
-	<statement id="getContactFromId" resultMap="Contact">
+	<statement id="getContactFromId" resultMap="Contact" cacheModel="cacheContact">
 		SELECT C.* FROM
 		Contact C
 		WHERE C.idContact = #idContact#
@@ -58,14 +63,14 @@
 	<!--
 		Uniquement pour remplissage auto d'un objet accord ou d'une offre
 	-->
-	<statement id="getContactFromIdSimple" resultMap="Contact">
+	<statement id="getContactFromIdSimple" resultMap="Contact" cacheModel="cacheContact">
 		SELECT C.*
 		FROM Contact C
 		WHERE C.idContact = #idContact#
 		LIMIT 0,1
     </statement>
     
-    <statement id="getContactExportFromId" resultMap="ContactExport">
+    <statement id="getContactExportFromId" resultMap="ContactExport" cacheModel="cacheContact">
 		SELECT C.idContact, C.idCivilite, C.nom, C.prenom, C.mail, C.tel, C.fonction,
 		C.idService, C.idCentreGestion
 		FROM Contact C
@@ -77,7 +82,7 @@
 		"codeUniversité"
 	-->
 	<statement id="getContactsFromIdServiceAndCodeUniversite"
-		resultMap="Contact" parameterClass="java.util.HashMap">
+		resultMap="Contact" parameterClass="java.util.HashMap" cacheModel="cacheContact">
 		SELECT C.* FROM Contact C
 		INNER JOIN
 		CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
@@ -89,13 +94,13 @@
 		Récupération des contacts d'un service pour le centre de gestion "idCentreGestion"
 	-->
 	<statement id="getContactsFromIdServiceAndIdCentreGestion"
-		resultMap="Contact" parameterClass="java.util.HashMap">
+		resultMap="Contact" parameterClass="java.util.HashMap" cacheModel="cacheContact">
 		SELECT C.* FROM Contact C
 		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
 		WHERE C.idService = #idService#
 		AND CG.idCentreGestion = #idCentreGestion#
 	</statement>
-	<statement id="getContactFromLogin" resultMap="Contact">
+	<statement id="getContactFromLogin" resultMap="Contact" cacheModel="cacheContact">
 		SELECT C.* FROM	Contact C
 		INNER JOIN CentreGestion CG ON CG.idCentreGestion = C.idCentreGestion
 		INNER JOIN NiveauCentre N ON N.idNiveauCentre =	CG.idNiveauCentre
@@ -104,7 +109,7 @@
 		LIMIT 0,1
     </statement>
 	<statement id="getContactEntrepriseAvecCompteFromMailAndIdStructure"
-		resultMap="Contact">
+		resultMap="Contact" cacheModel="cacheContact">
 		SELECT
 		C.idContact, C.idService, C.idCivilite, C.idCentreGestion, C.nom, C.prenom,
 		C.mail, C.tel, C.fax,C.login, C.mdp,
@@ -124,7 +129,7 @@
 		LIMIT 0, 1
 	</statement>
 	<statement id="getContactEntrepriseFromMailAndIdStructure"
-		resultMap="Contact">
+		resultMap="Contact" cacheModel="cacheContact">
 		SELECT C.*
 		FROM Contact C
 		INNER JOIN CentreGestion CG ON
@@ -141,7 +146,7 @@
 		#idStructure#
 		LIMIT 0, 1
     </statement>
-	<statement id="countOffreRefContact" resultClass="java.lang.Integer">
+	<statement id="countOffreRefContact" resultClass="java.lang.Integer" cacheModel="cacheContact">
 		SELECT COUNT(*) FROM Offre O
 		INNER JOIN Structure S ON S.idStructure =
 		O.idStructure
@@ -152,7 +157,7 @@
 		OR O.idContactInfo = #idContact#
 	</statement>
 
-	<statement id="countConventionRefContact" resultClass="java.lang.Integer">
+	<statement id="countConventionRefContact" resultClass="java.lang.Integer" cacheModel="cacheContact">
 		SELECT COUNT(*) FROM Convention Co
 		INNER JOIN Structure S ON S.idStructure =
 		Co.idStructure
@@ -163,7 +168,7 @@
 		OR Co.idSignataire = #idContact#
     </statement>
 
-	<statement id="getNombreContactByCentreGestion" resultClass="java.lang.Integer">
+	<statement id="getNombreContactByCentreGestion" resultClass="java.lang.Integer" cacheModel="cacheContact">
 		SELECT COUNT(*) FROM Contact
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>

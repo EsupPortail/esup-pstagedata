@@ -6,6 +6,11 @@
 
 <sqlMap namespace="UniteDuree">
 
+	<cacheModel id="cacheUniteDuree" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="UniteDuree"
 		class="org.esupportail.pstagedata.domain.beans.UniteDuree">
 		<result property="id" column="idUniteDuree" />
@@ -13,13 +18,13 @@
 		<result property="temEnServ" column="temEnServUniteDuree" />
 	</resultMap>
 
-	<statement id="getUnitesDurees" resultMap="UniteDuree">
+	<statement id="getUnitesDurees" resultMap="UniteDuree" cacheModel="cacheUniteDuree">
 		SELECT * FROM UniteDuree
 		WHERE temEnServUniteDuree = 'O' 
 		AND libelleUniteDuree IS NOT NULL
 	</statement>
 	
-	<statement id="getUniteDureeFromId" resultMap="UniteDuree">
+	<statement id="getUniteDureeFromId" resultMap="UniteDuree" cacheModel="cacheUniteDuree">
 		SELECT * FROM UniteDuree
 		WHERE idUniteDuree = #id#
 		LIMIT 0, 1

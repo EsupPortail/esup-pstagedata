@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="OrigineStage">
+
+	<cacheModel id="cacheOrigineStage" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassOrigineStage" type="org.esupportail.pstagedata.domain.beans.OrigineStage"/>
 	<resultMap id="OrigineStage"
 		class="ClassOrigineStage">
@@ -14,11 +20,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getOrigineStages" resultMap="OrigineStage">
+	<statement id="getOrigineStages" resultMap="OrigineStage" cacheModel="cacheOrigineStage">
 		SELECT * FROM OrigineStage
 	</statement>
 	
-	<statement id="getOrigineStageFromId" resultMap="OrigineStage">
+	<statement id="getOrigineStageFromId" resultMap="OrigineStage" cacheModel="cacheOrigineStage">
 		SELECT * FROM OrigineStage
 		WHERE idOrigineStage = #id#
 		LIMIT 0, 1

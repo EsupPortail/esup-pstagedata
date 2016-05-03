@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Avenant">
-	
+
+	<cacheModel id="cacheAvenant" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassAvenant" type="org.esupportail.pstagedata.domain.beans.Avenant"/>
 
 	<resultMap id="Avenant"
@@ -43,13 +48,13 @@
 		<result property="monnaieGratification" column="monnaieGratification" nullValue="euros"/>
 	</resultMap>
 
-	<statement id="getAvenant" resultMap="Avenant">
+	<statement id="getAvenant" resultMap="Avenant" cacheModel="cacheAvenant">
 		SELECT * FROM Avenant
 		WHERE idConvention = #idConvention#
 	</statement>
 	
 	<!--	Récupération du nombre d'Avenants pour une convention donnée -->
-	<statement id="getNombreAvenant" resultClass="java.lang.Integer">
+	<statement id="getNombreAvenant" resultClass="java.lang.Integer" cacheModel="cacheAvenant">
 		SELECT COUNT(*) FROM Avenant
 		WHERE idConvention = #idConvention#
 	</statement>

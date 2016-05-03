@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Niveau">
-	
+
+	<cacheModel id="cacheNiveau" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassNiveau" type="org.esupportail.pstagedata.domain.beans.Niveau"/>
 	
 	<resultMap id="resultNiveau" class="ClassNiveau">
@@ -15,7 +20,7 @@
 	</resultMap>
 
 
-	<statement id="niveauParValeur" resultMap="resultNiveau">
+	<statement id="niveauParValeur" resultMap="resultNiveau" cacheModel="cacheNiveau">
 		SELECT * FROM Niveau where  valeur=#value#
 	</statement>
 	

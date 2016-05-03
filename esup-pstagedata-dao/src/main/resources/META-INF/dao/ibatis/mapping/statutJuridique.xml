@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="StatutJuridique">
-	
+
+	<cacheModel id="cacheStatutJuridique" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassStatutJuridique" type="org.esupportail.pstagedata.domain.beans.StatutJuridique"/>
 	
 	<resultMap id="StatutJuridique"
@@ -17,15 +22,15 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getStatutsJuridiques" resultMap="StatutJuridique">
+	<statement id="getStatutsJuridiques" resultMap="StatutJuridique" cacheModel="cacheStatutJuridique">
 		SELECT * FROM StatutJuridique
 	</statement>
-	<statement id="getStatutJuridiqueFromStatutJuridique" resultMap="StatutJuridique">
+	<statement id="getStatutJuridiqueFromStatutJuridique" resultMap="StatutJuridique" cacheModel="cacheStatutJuridique">
 		SELECT * FROM StatutJuridique
 		WHERE idStatutJuridique = #id#
 		LIMIT 0,1
 	</statement>
-	<statement id="getStatutsJuridiquesFromId" resultMap="StatutJuridique">
+	<statement id="getStatutsJuridiquesFromId" resultMap="StatutJuridique" cacheModel="cacheStatutJuridique">
 		SELECT * FROM StatutJuridique
 		WHERE idStatutJuridique=#id#
 		LIMIT 0,1

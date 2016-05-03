@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Fichiers">
 
+	<cacheModel id="cacheFichiers" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="100"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassFichier"
 		type="org.esupportail.pstagedata.domain.beans.Fichier" />
 
@@ -15,7 +20,7 @@
 		<result property="nomReel" column="nomReel" />
 	</resultMap>
 
-	<statement id="getFichierFromIdFichier" resultMap="Fichier">
+	<statement id="getFichierFromIdFichier" resultMap="Fichier" cacheModel="cacheFichiers">
 		SELECT *
 		FROM Fichiers
 		WHERE idFichier = #idFichier#

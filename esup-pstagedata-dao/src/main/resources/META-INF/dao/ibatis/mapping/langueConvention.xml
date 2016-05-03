@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="LangueConvention">
+
+	<cacheModel id="cacheLangueConvention" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassLangueConvention" type="org.esupportail.pstagedata.domain.beans.LangueConvention"/>
 	<resultMap id="LangueConvention"
 		class="ClassLangueConvention">
@@ -13,12 +19,12 @@
 		<result property="temEnServ" column="temEnServLangue" />
 	</resultMap>
 
-	<statement id="getLangueConventions" resultMap="LangueConvention">
+	<statement id="getLangueConventions" resultMap="LangueConvention" cacheModel="cacheLangueConvention">
 		SELECT * FROM LangueConvention
 		WHERE temEnServLangue = 'O'
 	</statement>
 	
-	<statement id="getLangueConventionFromId" resultMap="LangueConvention">
+	<statement id="getLangueConventionFromId" resultMap="LangueConvention" cacheModel="cacheLangueConvention">
 		SELECT * FROM LangueConvention
 		WHERE codeLangueConvention = #code#
 		LIMIT 0, 1

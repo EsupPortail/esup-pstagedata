@@ -6,6 +6,11 @@
 
 <sqlMap namespace="Etudiant">
 
+	<cacheModel id="cacheEtudiant" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassEtudiant" type="org.esupportail.pstagedata.domain.beans.Etudiant"/>
 	
 	<resultMap id="Etudiant" class="ClassEtudiant">
@@ -40,26 +45,26 @@
 		<result property="codeSexe" column="codeSexe"/>
      </resultMap>
  
-    <statement id="getEtudiants" resultMap="Etudiant">
+    <statement id="getEtudiants" resultMap="Etudiant" cacheModel="cacheEtudiant">
 		SELECT * FROM Etudiant
 	</statement>
   
-    <statement id="getEtudiantFromId"  resultMap="Etudiant">
+    <statement id="getEtudiantFromId"  resultMap="Etudiant" cacheModel="cacheEtudiant">
         SELECT * FROM Etudiant WHERE idEtudiant=#id#
         LIMIT 0,1
     </statement>
     
-    <statement id="getEtudiantLightFromId"  resultMap="EtudiantLight">
+    <statement id="getEtudiantLightFromId"  resultMap="EtudiantLight" cacheModel="cacheEtudiant">
         SELECT E.idEtudiant, E.nom, E.prenom FROM Etudiant E WHERE idEtudiant=#id#
         LIMIT 0,1
     </statement>
     
-    <statement id="getEtudiantExportFromId"  resultMap="EtudiantExport">
+    <statement id="getEtudiantExportFromId"  resultMap="EtudiantExport" cacheModel="cacheEtudiant">
         SELECT E.idEtudiant, E.nom, E.prenom, E.mail, E.numEtudiant, E.codeSexe FROM Etudiant E WHERE idEtudiant=#id#
         LIMIT 0,1
     </statement>
     
-    <statement id="getEtudiantFromUid" resultMap="Etudiant">
+    <statement id="getEtudiantFromUid" resultMap="Etudiant" cacheModel="cacheEtudiant">
 		SELECT * FROM Etudiant
 		WHERE identEtudiant = #identEtudiant#
 		AND codeUniversite = #codeUniversite#

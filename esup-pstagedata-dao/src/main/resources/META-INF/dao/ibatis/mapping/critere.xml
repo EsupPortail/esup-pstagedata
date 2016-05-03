@@ -5,10 +5,13 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Critere">
-	
+
+	<cacheModel id="cacheCritere" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassCritere" type="org.esupportail.pstagedata.domain.beans.Critere"/>
-	
-	
 	
 	<resultMap id="Critere" class="ClassCritere">
 		<result property="idCritere" column="idCritere" />
@@ -20,16 +23,16 @@
 
 	
 	
-	<statement id="getCriteresByNiveau" resultMap="Critere" parameterClass="java.lang.Integer" >
+	<statement id="getCriteresByNiveau" resultMap="Critere" parameterClass="java.lang.Integer" cacheModel="cacheCritere">
 		SELECT * FROM Critere where  niveau=#value#
 	</statement>
 	
-	<statement id="criteresParCategorie" resultMap="Critere" parameterClass="java.lang.Integer" >
+	<statement id="criteresParCategorie" resultMap="Critere" parameterClass="java.lang.Integer" cacheModel="cacheCritere">
 		SELECT * FROM Critere where  typeCategorie=#value#
 	</statement>
 	
 	
-	<statement id="criteresParCategorieEtParNiveau" resultMap="Critere" parameterClass="java.util.HashMap">
+	<statement id="criteresParCategorieEtParNiveau" resultMap="Critere" parameterClass="java.util.HashMap" cacheModel="cacheCritere">
 		SELECT * FROM Critere where  typeCategorie=#typeCategorie# AND niveau=#niveau#
 	</statement>
 	

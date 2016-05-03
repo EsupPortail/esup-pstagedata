@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CritereGestion">
-	
+
+	<cacheModel id="cacheCritereGestion" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassCritereGestion" type="org.esupportail.pstagedata.domain.beans.CritereGestion"/>
 
 	<resultMap id="CritereGestion"
@@ -16,16 +21,16 @@
 		<result property="idCentreGestion" column="idCentreGestion" />
 	</resultMap>
 
-	<statement id="getCritereGestion" resultMap="CritereGestion">
+	<statement id="getCritereGestion" resultMap="CritereGestion" cacheModel="cacheCritereGestion">
 		SELECT * FROM CritereGestion
 	</statement>
 	
-	<statement id="getCritereGestionFromIdCentre" resultMap="CritereGestion">
+	<statement id="getCritereGestionFromIdCentre" resultMap="CritereGestion" cacheModel="cacheCritereGestion">
 		SELECT * FROM CritereGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
 	
-	<statement id="getCritereGestionFromIdCentreAndAnnee" resultMap="CritereGestion">
+	<statement id="getCritereGestionFromIdCentreAndAnnee" resultMap="CritereGestion" cacheModel="cacheCritereGestion">
 		SELECT DISTINCT Crit.idCentreGestion, Crit.codeCritere, Crit.codeVersionEtape, Crit.libelleCritere FROM CritereGestion Crit
 		INNER JOIN Convention C 
 		ON (C.annee = #anneeUniv# AND (C.codeEtape = Crit.codeCritere OR C.codeUfr = Crit.codeCritere) AND C.validationConvention=true
@@ -33,13 +38,13 @@
 	</statement>
 	
 	<!-- 	Recuperation d'un critere de gestion sans code version etape a partir du code etape -->
-	<statement id="getCritereGestionSansVetFromCodeEtape" resultMap="CritereGestion">
+	<statement id="getCritereGestionSansVetFromCodeEtape" resultMap="CritereGestion" cacheModel="cacheCritereGestion">
 		SELECT * FROM CritereGestion
 		WHERE codeCritere = #codeEtape# AND codeVersionEtape = ''
 	</statement>
 	
 	<!--	Récupération du nombre de criteres de gestion -->
-	<statement id="getNombreCritereGestion" resultClass="java.lang.Integer">
+	<statement id="getNombreCritereGestion" resultClass="java.lang.Integer" cacheModel="cacheCritereGestion">
 		SELECT COUNT(*) FROM CritereGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>

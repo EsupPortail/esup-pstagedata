@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Ufr">
+
+	<cacheModel id="cacheUfr" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassUfr" type="org.esupportail.pstagedata.domain.beans.Ufr"/>
 	<resultMap id="Ufr"
 		class="ClassUfr">
@@ -13,7 +19,7 @@
 		<result property="codeUniversite" column="codeUniversite" />
 	</resultMap>
 
-	<statement id="getUfrs" resultMap="Ufr">
+	<statement id="getUfrs" resultMap="Ufr" cacheModel="cacheUfr">
 		SELECT * FROM Ufr
 		<dynamic prepend="WHERE">
 			<isNotNull property="codeUniversite">
@@ -22,7 +28,7 @@
 		</dynamic>
 	</statement>
 	
-	<statement id="getUfrsFromIdsCentreGestion" resultMap="Ufr">
+	<statement id="getUfrsFromIdsCentreGestion" resultMap="Ufr" cacheModel="cacheUfr">
 		SELECT DISTINCT	U.*
 		FROM Ufr U
 		INNER JOIN Convention C ON U.codeUfr = C.codeUfr
@@ -39,7 +45,7 @@
 		</dynamic>
 	</statement>
 	
-	<statement id="getUfrFromId" resultMap="Ufr">
+	<statement id="getUfrFromId" resultMap="Ufr" cacheModel="cacheUfr">
 		SELECT * FROM Ufr
 		WHERE codeUFR = #code#
 		<isNotNull property="codeUniversite" prepend="AND">

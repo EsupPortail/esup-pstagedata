@@ -5,8 +5,13 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="OffreModeCandidature">
-	
-	<statement id="getOffreIdsModeCandidatureFromIdOffre" resultClass="java.lang.Integer">
+
+	<cacheModel id="cacheOffreModeCandidature" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
+	<statement id="getOffreIdsModeCandidatureFromIdOffre" resultClass="java.lang.Integer" cacheModel="cacheOffreModeCandidature">
 		SELECT idModeCandidature FROM OffreModeCandidature
 		WHERE idOffre = #id#
 	</statement>

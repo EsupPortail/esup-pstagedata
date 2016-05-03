@@ -5,10 +5,15 @@
 
 <typeAlias alias="ClassStatisticItem" type="org.esupportail.pstagedata.domain.beans.StatisticItem"/>
 
+	<cacheModel id="cacheClassStatisticItem" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<!--requetes pour creation des statistiques-->
 	
 		<!--annee universitaires des conventions pour le centre-->
-	<statement id="getYears" resultClass="java.lang.String">
+	<statement id="getYears" resultClass="java.lang.String" cacheModel="cacheClassStatisticItem">
 	SELECT DISTINCT c.annee FROM Convention c
 	WHERE c.idCentreGestion=#idCentreGestion#
 	AND c.validationConvention = 1
@@ -16,7 +21,7 @@
 	</statement>
 	
 		<!--annee universitaires des conventions validees  pour l'ensemble de l'universite-->
-	<statement id="getAllYears" resultClass="java.lang.String">
+	<statement id="getAllYears" resultClass="java.lang.String" cacheModel="cacheClassStatisticItem">
 	SELECT DISTINCT c.annee FROM Convention c
 	WHERE  c.validationConvention = 1
 	ORDER BY c.annee             
@@ -25,7 +30,7 @@
 	
 	
 		<!--nombre de conventions pour l'annee-->
-	<statement id="getNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.annee  AS id, c.annee AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c
@@ -35,7 +40,7 @@
 	</statement>
 	
 		<!--nombre de conventions pour l'annee  pour l'ensemble de l'universite -->
-	<statement id="getAllNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventions" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.annee  AS id, c.annee AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c
@@ -44,7 +49,7 @@
 	</statement>
 	
 		<!--nombre de conventions selon le type obligatoire/conseille -->
-	<statement id="getNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
 	FROM Convention c
 	JOIN TypeConvention tc
@@ -57,7 +62,7 @@
 	</statement>
 	
 			<!--nombre de conventions selon le type obligatoire/conseille  pour l'ensemble de l'universite -->
-	<statement id="getAllNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
 	FROM Convention c
 	JOIN TypeConvention tc
@@ -69,7 +74,7 @@
 	</statement>
 	
 			<!--nombre de conventions selon la thematique du stage-->
-	<statement id="getNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT t.libelleTheme AS lib,	count( c.idConvention ) AS number
 	FROM Convention c, Theme t
 	WHERE c.idCentreGestion = #idCentreGestion#
@@ -81,7 +86,7 @@
 	</statement>
 	
 	<!--nombre de conventions selon la thematique du stage pour l'ensemble de l'universite-->
-	<statement id="getAllNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT t.libelleTheme AS lib,	count( c.idConvention ) AS number
 	FROM Convention c, Theme t
 	WHERE c.idTheme = t.idTheme
@@ -93,7 +98,7 @@
 	
 	<!--nombre de conventions selon la gratification -->
 	<!-- Ajouts pour afficher par tranches -->
-	<statement id="getNumberOfConventionsByIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		(SELECT 'Moins de 436 euros' AS lib,
 		count(c.idConvention) AS number
 		FROM Convention c
@@ -140,7 +145,7 @@
 		AND ind.libelleIndemnisation='Ne sait pas'
 		GROUP BY lib)
 	</statement>
-	<statement id="getNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT ind.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
@@ -151,7 +156,7 @@
 		ORDER BY lib             
 	</statement>
 	
-	<statement id="getAllNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT ind.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c JOIN Indemnisation ind USING(idIndemnisation)
@@ -163,7 +168,7 @@
 	
 	
 	<!--nombre de conventions selon la duree de travail-->
-	<statement id="getNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT tt.libelleTempsTravail AS lib,
 	count( c.idConvention) AS number
 	FROM Convention c JOIN TempsTravail tt USING(idTempsTravail)
@@ -175,7 +180,7 @@
 	</statement>
 
 <!--nombre de conventions selon la duree de travail pour l'ensemble de l'universite-->
-	<statement id="getAllNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT tt.libelleTempsTravail AS lib,
 	count( c.idConvention) AS number
 	FROM Convention c JOIN TempsTravail tt USING(idTempsTravail)
@@ -187,7 +192,7 @@
 
 
 	<!--nombre de conventions selon la nb de jours de travail par semaine-->
-	<statement id="getNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT c.nbJoursHebdo AS lib,
 	count( c.idConvention) AS number
@@ -201,7 +206,7 @@
 	</statement>
 	
 		<!--nombre de conventions selon la nb de jours de travail par semaine-->
-	<statement id="getAllNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT c.nbJoursHebdo AS lib,
 	count( c.idConvention) AS number
@@ -215,7 +220,7 @@
 	
 			
 					<!--nombre de conventions selon l'origine du stage-->
-	<statement id="getNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT os.libelleOrigineStage AS lib,
 	count( c.idConvention) AS number
@@ -228,7 +233,7 @@
 			]]>		          
 	</statement>
 						<!--nombre de conventions selon l'origine du stage pour l'ensemble de l'établissement-->
-	<statement id="getAllNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT os.libelleOrigineStage AS lib,
 	count( c.idConvention) AS number
@@ -242,7 +247,7 @@
 	
 
 					<!--nombre de conventions par enseignant-->
-	<statement id="getNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib, 
 	count( c.idConvention) AS number
@@ -257,7 +262,7 @@
 			
 	
 					<!--nombre de conventions par enseignant pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib, 
 	count( c.idConvention) AS number
@@ -270,7 +275,7 @@
 	</statement>
 	
 			<!--nombre de conventions par structure-->
-	<statement id="getNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT s.idStructure AS idStatisticItem, s.raisonSociale AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c  JOIN Structure s USING(idStructure)
@@ -282,7 +287,7 @@
 	</statement>
 		
 				<!--nombre de conventions par structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT s.idStructure AS idStatisticItem, s.raisonSociale AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c  JOIN Structure s USING(idStructure)
@@ -294,7 +299,7 @@
 		
 	
 	<!--nombre de conventions selon le domaine d'activite de la structure-->
-	<statement id="getNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 	SELECT n1.codeNAF_N1 AS id, n1.LibelleNAF_N1 AS lib, count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
@@ -310,7 +315,7 @@
 	</statement>
 	
 		<!--nombre de conventions selon le domaine d'activite de la structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStructureActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 	SELECT n1.codeNAF_N1 AS id, n1.LibelleNAF_N1 AS lib, count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
@@ -325,7 +330,7 @@
 	</statement> 	
 		
 		<!--nombre de conventions selon le type de structure-->
-	<statement id="getNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT ts.libelleTypeStructure AS id, ts.libelleTypeStructure AS lib, 
 	count(c.idConvention ) AS number
@@ -340,7 +345,7 @@
 	
 			
 		<!--nombre de conventions selon le type de structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	 <![CDATA[
 	SELECT ts.libelleTypeStructure AS id, ts.libelleTypeStructure AS lib, 
 	count(c.idConvention ) AS number
@@ -352,7 +357,7 @@
 	]]>	                
 	</statement>	
 				<!--nombre de conventions selon la taille de la structure-->
-	<statement id="getNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">	
+	<statement id="getNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT ef.libelleEffectif AS id, ef.libelleEffectif AS lib, count( c.idConvention ) AS number
 		FROM Convention c
 			JOIN Structure s USING ( idStructure ) JOIN Effectif ef USING ( idEffectif )
@@ -364,7 +369,7 @@
 	</statement>
 	
 					<!--nombre de conventions selon la taille de la structure  pour l'ensemble de l'etablissement -->
-	<statement id="getAllNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">	
+	<statement id="getAllNumberOfConventionsByStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT ef.libelleEffectif AS id, ef.libelleEffectif AS lib, count( c.idConvention ) AS number
 		FROM Convention c
 			JOIN Structure s USING ( idStructure ) JOIN Effectif ef USING ( idEffectif )
@@ -377,7 +382,7 @@
 
 				<!--nombre de conventions selon le departement du lieu de stage-->
 				
-	<statement id="getNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
+	<statement id="getNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
 	FROM Convention c JOIN Service sv USING ( idService ) JOIN Pays p USING ( idPays )
 		WHERE c.idCentreGestion =  #idCentreGestion#
@@ -390,7 +395,7 @@
 	    ORDER BY id                
 	</statement>
 				
-	<statement id="getAllNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem"> 
+	<statement id="getAllNumberOfConventionsByServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT  SUBSTRING(sv.codePostal,1,2) AS id, SUBSTRING(sv.codePostal,1,2) AS lib, count( c.idConvention ) AS number
 	FROM Convention c JOIN Service sv USING ( idService )
 		WHERE c.annee = #annee#
@@ -404,7 +409,7 @@
 
 
 					<!--nombre de conventions selon le pays du lieu de stage-->
-	<statement id="getNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT p.lib AS id, p.lib  AS lib,
 	count(c.idConvention) AS number
 	FROM Convention c JOIN Service sv USING (idService) JOIN Pays p USING (idPays)
@@ -416,7 +421,7 @@
 	</statement>
 	
 						<!--nombre de conventions selon le pays du lieu de stage pour l'ensemble de l'etablissement -->
-	<statement id="getAllNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT p.lib AS id, p.lib  AS lib,
 	count(c.idConvention) AS number
 	FROM Convention c JOIN Service sv USING (idService) JOIN Pays p USING (idPays)
@@ -430,7 +435,7 @@
 
 	
 			<!--nombre de conventions par UFR-->
-	<statement id="getNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		 <![CDATA[ 
 		 SELECT uf.codeUFR AS id, uf.libelleUFR AS libPriorCriteria, count( c.idConvention ) AS number
 		FROM Convention c JOIN Ufr uf USING ( codeUFR )
@@ -442,7 +447,7 @@
 	</statement>
 	
 			<!--nombre de conventions par UFR pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudy" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		 <![CDATA[ 
 		 SELECT uf.codeUFR AS id, uf.libelleUFR AS libPriorCriteria, count( c.idConvention ) AS number
 		FROM Convention c JOIN Ufr uf USING ( codeUFR )
@@ -452,7 +457,7 @@
 	</statement>
 	
 				<!--nombre de conventions par UFR et  type de convention-->
-	<statement id="getNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[ 
 		SELECT uf.codeUFR  AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
@@ -468,7 +473,7 @@
 	
 	  
 	<!--nombre de conventions par UFR et  type de convention pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[ 
 		SELECT uf.codeUFR  AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	tc.libelleTypeConvention AS lib, count( c.idConvention ) AS number
@@ -482,7 +487,7 @@
 	
 	<!--nombre de conventions par UFR et  gratification-->
 	<!-- Ajouts pour afficher par tranches -->
-	<statement id="getNumberOfConventionsByStudyAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		(SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,'Moins de 436 euros' AS lib,
 		count(c.idConvention) AS number
 		FROM Convention c JOIN Ufr uf on c.codeUFR = uf.codeUFR 
@@ -533,7 +538,7 @@
 		GROUP BY idPriorCriteria, lib)
 		ORDER BY idPriorCriteria, lib
 	</statement>
-	<statement id="getNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 		SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	          ind.libelleIndemnisation AS lib, count( c.idConvention ) AS number
@@ -547,7 +552,7 @@
 	</statement>
 	
 						<!--nombre de conventions par UFR et  gratification pour l'ensemble de l'etablissement -->
-	<statement id="getAllNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 		SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	          ind.libelleIndemnisation AS lib, count( c.idConvention ) AS number
@@ -561,7 +566,7 @@
 	
 	
 				<!--nombre de conventions par UFR et  nb jours travail-->
-	<statement id="getNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	c.nbJoursHebdo AS lib, count( c.idConvention ) AS number
 	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR 
@@ -572,7 +577,7 @@
 	ORDER by idPriorCriteria, lib        
 	</statement>
 	 
-	<statement id="getAllNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	c.nbJoursHebdo AS lib, count( c.idConvention ) AS number
 	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR 
@@ -584,7 +589,7 @@
 	</statement>
 	 
 	<!--nombre de conventions par UFR et  origine du stage-->
-	<statement id="getNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		<![CDATA[
 	 SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 			os.libelleOrigineStage AS lib,count( c.idConvention ) AS number
@@ -597,7 +602,7 @@
 	]]>	     
 	</statement>
 	
-	<statement id="getAllNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		<![CDATA[
 	 SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 			os.libelleOrigineStage AS lib,count( c.idConvention ) AS number
@@ -611,7 +616,7 @@
 	</statement>	
 	
 	<!--nombre de conventions par UFR et enseignant-->
-	<statement id="getNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib,  count( c.idConvention ) AS number
@@ -626,7 +631,7 @@
 	</statement>
 	
 	<!--nombre de conventions par UFR et enseignant pour l'ensemble de l'etablissement -->
-	<statement id="getAllNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	<![CDATA[
 	SELECT uf.codeUFR  AS  idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	ens.uidEnseignant AS id, CONCAT(ens.prenom," ",ens.nom) AS lib,  count( c.idConvention ) AS number
@@ -640,7 +645,7 @@
 	</statement>
 	
 	<!--nombre de conventions par UFR et temps de travail-->
-	<statement id="getNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 		tt.libelleTempsTravail AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Ufr uf, TempsTravail tt
@@ -654,7 +659,7 @@
 	</statement>
 	
 		<!--nombre de conventions par UFR et temps de travail pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 		tt.libelleTempsTravail AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Ufr uf, TempsTravail tt
@@ -667,7 +672,7 @@
 	</statement>
 	
 		<!--nombre de conventions par UFR et Structure-->
-	<statement id="getNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		s.idStructure AS id, s.raisonSociale AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf
@@ -681,7 +686,7 @@
 	</statement>
 			                
 		<!--nombre de conventions par UFR et Structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		s.idStructure AS id, s.raisonSociale AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf
@@ -694,7 +699,7 @@
 	</statement>
 	
 			<!--nombre de conventions par UFR et l'activite de la structure-->
-	<statement id="getNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria,LibelleUFR AS libPriorCriteria,
 		n5.codeNAF_n1 AS id, n1.libelleNAF_n1 as lib, count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Ufr uf
@@ -710,7 +715,7 @@
 	</statement>
 
 			<!--nombre de conventions par UFR et l'activite de la structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria,LibelleUFR AS libPriorCriteria,
 		n5.codeNAF_n1 AS id, n1.libelleNAF_n1 as lib, count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Ufr uf
@@ -725,7 +730,7 @@
 	</statement>
 	
 			<!--nombre de conventions par UFR et type Structure-->
-	<statement id="getNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		ts.libelleTypeStructure AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf, TypeStructure ts
@@ -740,7 +745,7 @@
 	</statement>
 	
 				<!--nombre de conventions par UFR et type Structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		ts.libelleTypeStructure AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf, TypeStructure ts
@@ -754,7 +759,7 @@
 	</statement>
 
 			<!--nombre de conventions par UFR et taille Structure-->
-	<statement id="getNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		e.libelleEffectif AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf, Effectif e
@@ -769,7 +774,7 @@
 	</statement>
 	
 				<!--nombre de conventions par UFR et taille Structure pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		e.libelleEffectif AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Ufr uf, Effectif e
@@ -783,7 +788,7 @@
 	</statement>
 	
 				<!--nombre de conventions par UFR et departement du service-->
-	<statement id="getNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	 	SUBSTRING(s.codePostal,1,2) AS lib, count( c.idConvention ) AS number
 	FROM Convention c,Service s, Ufr uf, Pays p
@@ -801,7 +806,7 @@
 	</statement>
 	
 					<!--nombre de conventions par UFR et departement du service pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	 	SUBSTRING(s.codePostal,1,2) AS lib, count( c.idConvention ) AS number
 	FROM Convention c,Service s, Ufr uf, Pays p
@@ -818,7 +823,7 @@
 	</statement>
 	
 					<!--nombre de conventions par UFR et pays du service-->
-	<statement id="getNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	 	p.lib AS lib, count( c.idConvention ) AS number
 	FROM Convention c,Service s, Ufr uf, Pays p
@@ -833,7 +838,7 @@
 	</statement>
 
 					<!--nombre de conventions par UFR et pays du service pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	 	p.lib AS lib, count( c.idConvention ) AS number
 	FROM Convention c,Service s, Ufr uf, Pays p
@@ -847,7 +852,7 @@
 	</statement>
 
 			<!--nombre de conventions par UFR et  theme -->
-	<statement id="getNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		t.libelleTheme AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Ufr uf, Theme t
@@ -861,7 +866,7 @@
 	</statement>
 	
 				<!--nombre de conventions par UFR et  theme pour l'ensemble de l'etablissement-->
-	<statement id="getAllNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getAllNumberOfConventionsByStudyAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeUFR AS idPriorCriteria, libelleUFR AS libPriorCriteria,
 		t.libelleTheme AS lib, count( c.idConvention ) AS number
 	FROM Convention c, Ufr uf, Theme t
@@ -876,7 +881,7 @@
 	<!-- DEPARTEMENT -->
 	
 	<!--nombre de conventions par Departement-->
-	<statement id="getNumberOfConventionsByDepartment" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartment" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria,
 	count( c.idConvention ) AS number
 	FROM Convention c
@@ -888,7 +893,7 @@
 	</statement>
 	
 	<!--nombre de conventions par department et  type de convention-->
-	<statement id="getNumberOfConventionsByDepartmentAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, tc.libelleTypeConvention AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, TypeConvention tc
@@ -901,7 +906,7 @@
 	</statement>
 	
 	<!--nombre de conventions par department et  thematique de stage-->
-	<statement id="getNumberOfConventionsByDepartmentAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, t.libelleTheme AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Theme t
@@ -915,7 +920,7 @@
 	
 	<!--nombre de conventions par departement et  gratification-->
 	<!-- Ajouts pour afficher par tranches -->
-	<statement id="getNumberOfConventionsByDepartmentAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		(SELECT c.codeDepartement AS libPriorCriteria,'Moins de 436 euros' AS lib,
 		count(c.idConvention) AS number
 		FROM Convention c
@@ -966,7 +971,7 @@
 		GROUP BY libPriorCriteria, lib)
 		ORDER BY libPriorCriteria,lib
 	</statement>
-	<statement id="getNumberOfConventionsByDepartmentAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, i.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Indemnisation i
@@ -979,7 +984,7 @@
 	</statement>
 	
 	<!--nombre de conventions par departement et  temps de travail-->
-	<statement id="getNumberOfConventionsByDepartmentAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, tt.libelleTempsTravail AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, TempsTravail tt
@@ -992,7 +997,7 @@
 	</statement>
 	
 		<!--nombre de conventions par departement et  nb jours hebdos travaille-->
-	<statement id="getNumberOfConventionsByDepartmentAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, c.nbJoursHebdo AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c
@@ -1004,7 +1009,7 @@
 	</statement>
 	
 		<!--nombre de conventions par departement et  origine du stage-->
-	<statement id="getNumberOfConventionsByDepartmentAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, os.libelleOrigineStage AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, OrigineStage os
@@ -1017,7 +1022,7 @@
 	</statement>
 
 		<!--nombre de conventions par departement et enseignant-tuteur-->
-	<statement id="getNumberOfConventionsByDepartmentAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, CONCAT(e.prenom," ",e.nom) AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Enseignant e
@@ -1030,7 +1035,7 @@
 	</statement>
 
 		<!--nombre de conventions par departement et structure-->
-	<statement id="getNumberOfConventionsByDepartmentAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, s.raisonSociale AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Structure s
@@ -1043,7 +1048,7 @@
 	</statement>
 	
 			<!--nombre de conventions par departement et activite de la structure-->
-	<statement id="getNumberOfConventionsByDepartmentAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, n1.libelleNAF_n1 as lib, 
 		count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c
@@ -1058,7 +1063,7 @@
 	</statement>
 
 		<!--nombre de conventions par departement et type structure-->
-	<statement id="getNumberOfConventionsByDepartmentAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, ts.libelleTypeStructure AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Structure s, TypeStructure ts
@@ -1072,7 +1077,7 @@
 	</statement>
 	
 			<!--nombre de conventions par departement et taille structure-->
-	<statement id="getNumberOfConventionsByDepartmentAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, e.libelleEffectif AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Structure s, Effectif e
@@ -1086,7 +1091,7 @@
 	</statement>
 	
 				<!--nombre de conventions par departement et departement du lieu de stage-->
-	<statement id="getNumberOfConventionsByDepartmentAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, SUBSTRING(se.codePostal,1,2) AS lib, 
 		count( c.idConvention ) AS number
 	FROM Convention c,Service se, Pays p
@@ -1103,7 +1108,7 @@
 	</statement>
 	
 				<!--nombre de conventions par departement et pays du lieu de stage -->
-	<statement id="getNumberOfConventionsByDepartmentAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT c.codeDepartement AS libPriorCriteria, p.lib AS lib, 
 		count( c.idConvention ) AS number
 	FROM Convention c,Service s, Pays p
@@ -1120,7 +1125,7 @@
 <!-- ETAPE -->
 	
 	<!--nombre de conventions par Step-->
-	<statement id="getNumberOfConventionsByStep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e
@@ -1134,7 +1139,7 @@
 	</statement>
 
 	<!--nombre de conventions par Step et  type de convention-->
-	<statement id="getNumberOfConventionsByStepAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, tc.libelleTypeConvention AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, TypeConvention tc
@@ -1149,7 +1154,7 @@
 	</statement>
 
 	<!--nombre de conventions par Step et  thematique de stage-->
-	<statement id="getNumberOfConventionsByStepAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndTheme" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, t.libelleTheme AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Theme t
@@ -1165,7 +1170,7 @@
 	
 	<!--nombre de conventions par Step et  gratification-->
 	<!-- Ajouts pour afficher par tranches -->
-	<statement id="getNumberOfConventionsByStepAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndIndemnitySlices" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 		(SELECT e.libelleEtape AS libPriorCriteria,'Moins de 436 euros' AS lib,
 		count(c.idConvention) AS number
 		FROM Convention c, Etape e
@@ -1228,7 +1233,7 @@
 		GROUP BY libPriorCriteria, lib)
 		ORDER BY libPriorCriteria,lib
 	</statement>
-	<statement id="getNumberOfConventionsByStepAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndIndemnity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, i.libelleIndemnisation AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Indemnisation i
@@ -1243,7 +1248,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et  temps de travail-->
-	<statement id="getNumberOfConventionsByStepAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndWorkDuration" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, tt.libelleTempsTravail AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, TempsTravail tt
@@ -1258,7 +1263,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et  nb jours hebdos travaille-->
-	<statement id="getNumberOfConventionsByStepAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndNbDaysPerWeek" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, c.nbJoursHebdo AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c,  Etape e
@@ -1272,7 +1277,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et  origine du stage-->
-	<statement id="getNumberOfConventionsByStepAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndWayToFind" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, os.libelleOrigineStage AS lib,
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, OrigineStage os
@@ -1287,7 +1292,7 @@
 	</statement>
 
 	<!--nombre de conventions par Step et enseignant-tuteur-->
-	<statement id="getNumberOfConventionsByStepAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndTeacherGuide" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, CONCAT(en.prenom," ",en.nom) AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Enseignant en
@@ -1302,7 +1307,7 @@
 	</statement>
 
 	<!--nombre de conventions par Step et structure-->
-	<statement id="getNumberOfConventionsByStepAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndStructure" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, s.raisonSociale AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Structure s
@@ -1317,7 +1322,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et activite de la structure-->
-	<statement id="getNumberOfConventionsByStepAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndActivity" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, n1.libelleNAF_n1 as lib, 
 		count( c.idConvention ) AS number
 	FROM NAF_N1 n1, NAF_N5 n5, Structure s, Convention c, Etape e
@@ -1334,7 +1339,7 @@
 	</statement>
 
 	<!--nombre de conventions par Step et type structure-->
-	<statement id="getNumberOfConventionsByStepAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndStructureType" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, ts.libelleTypeStructure AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Structure s, TypeStructure ts
@@ -1350,7 +1355,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et taille structure-->
-	<statement id="getNumberOfConventionsByStepAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndStructureSize" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT et.libelleEtape AS libPriorCriteria, e.libelleEffectif AS lib, 
 	count( c.idConvention ) AS number
 	FROM Convention c, Etape et, Structure s, Effectif e
@@ -1365,7 +1370,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et departement du lieu de stage-->
-	<statement id="getNumberOfConventionsByStepAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndServiceDep" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, SUBSTRING(se.codePostal,1,2) AS lib, 
 		count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Service se, Pays p
@@ -1384,7 +1389,7 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et pays du lieu de stage -->
-	<statement id="getNumberOfConventionsByStepAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	SELECT e.libelleEtape AS libPriorCriteria, p.lib AS lib, 
 		count( c.idConvention ) AS number
 	FROM Convention c, Etape e, Service s, Pays p
@@ -1401,7 +1406,7 @@
 
 
 	<!--Ajout duree-->
-	<statement id="getNumberOfConventionsByNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	(SELECT 'Moins de 2 mois' AS lib,
 	count(c.idConvention) AS number
 	FROM Convention c
@@ -1418,7 +1423,7 @@
 	AND c.validationConvention=1
 	AND c.dureeStage <![CDATA[ >= ]]>9)
 	</statement>
-	<statement id="getNumberOfConventionsByStudyAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStudyAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	(SELECT uf.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
 	'Moins de 2 mois' AS lib, count(c.idConvention) AS number
 	FROM Convention c JOIN  Ufr uf on c.codeUFR = uf.codeUFR 
@@ -1439,7 +1444,7 @@
 	GROUP BY idPriorCriteria, lib
 	ORDER by libPriorCriteria)
 	</statement>
-	<statement id="getNumberOfConventionsByDepartmentAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByDepartmentAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	(SELECT c.codeDepartement AS libPriorCriteria,
 	'Moins de 2 mois' AS lib, count(c.idConvention) AS number
 	FROM Convention c
@@ -1460,7 +1465,7 @@
 	GROUP BY libPriorCriteria, lib
 	ORDER by libPriorCriteria)           
 	</statement>
-	<statement id="getNumberOfConventionsByStepAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem">
+	<statement id="getNumberOfConventionsByStepAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	(SELECT e.libelleEtape AS libPriorCriteria,
 	'Moins de 2 mois' AS lib, count(c.idConvention) AS number
 	FROM Convention c, Etape e

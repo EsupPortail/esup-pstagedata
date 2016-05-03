@@ -6,6 +6,11 @@
 
 <sqlMap namespace="TempsTravail">
 
+	<cacheModel id="cacheTempsTravail" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="TempsTravail"
 		class="org.esupportail.pstagedata.domain.beans.TempsTravail">
 		<result property="id" column="idTempsTravail" />
@@ -15,11 +20,11 @@
 		<result property="modifiable" column="modifiable" />
 	</resultMap>
 
-	<statement id="getTempsTravail" resultMap="TempsTravail">
+	<statement id="getTempsTravail" resultMap="TempsTravail" cacheModel="cacheTempsTravail">
 		SELECT * FROM TempsTravail
 	</statement>
 	
-	<statement id="getTempsTravailFromId" resultMap="TempsTravail">
+	<statement id="getTempsTravailFromId" resultMap="TempsTravail" cacheModel="cacheTempsTravail">
 		SELECT * FROM TempsTravail
 		WHERE idTempsTravail = #id#
 		LIMIT 0, 1

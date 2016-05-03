@@ -6,6 +6,11 @@
 
 <sqlMap namespace="OffreDiffusion">
 
+	<cacheModel id="cacheOffreDiffusion" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="OffreDiffusion"
 		class="org.esupportail.pstagedata.domain.beans.OffreDiffusion">
 		<result property="idCentreGestion" column="idCentreGestion" />
@@ -14,7 +19,7 @@
 		<result property="nomCentre" column="nomCentre" />
 	</resultMap>
 	
-	<statement id="getOffreDiffusionFromIdOffre" resultMap="OffreDiffusion">
+	<statement id="getOffreDiffusionFromIdOffre" resultMap="OffreDiffusion" cacheModel="cacheOffreDiffusion">
 		SELECT OD.*, CG.nomCentre as nomCentre FROM OffreDiffusion OD
 		INNER JOIN CentreGestion CG ON OD.idCentreGestion = CG.idCentreGestion
 		WHERE idOffre = #idOffre#

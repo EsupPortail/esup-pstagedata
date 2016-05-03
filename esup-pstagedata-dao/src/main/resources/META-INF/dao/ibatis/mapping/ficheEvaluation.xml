@@ -6,6 +6,11 @@
 
 <sqlMap namespace="FicheEvaluation">
 
+	<cacheModel id="cacheFicheEvaluation" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassFicheEvaluation"
 		type="org.esupportail.pstagedata.domain.beans.FicheEvaluation" />
 
@@ -80,7 +85,7 @@
 		<result property="questionEnsII11" column="questionEnsII11" nullValue="1" />
 	</resultMap>
 
-	<statement id="getFicheEvaluationFromIdCentre" resultMap="FicheEvaluation">
+	<statement id="getFicheEvaluationFromIdCentre" resultMap="FicheEvaluation" cacheModel="cacheFicheEvaluation">
 		SELECT * FROM FicheEvaluation
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>

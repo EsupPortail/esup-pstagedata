@@ -6,6 +6,11 @@
 
 <sqlMap namespace="AdminStructure">
 
+	<cacheModel id="cacheAdminStructure" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassAdminStructure" type="org.esupportail.pstagedata.domain.beans.AdminStructure"/>
 
 	<resultMap id="AdminStructure"
@@ -26,15 +31,15 @@
 		<result property="loginModif" column="loginModif" />
 	</resultMap>
 
-	<statement id="getAdminsStructure" resultMap="AdminStructure">
+	<statement id="getAdminsStructure" resultMap="AdminStructure" cacheModel="cacheAdminStructure">
 		SELECT * FROM AdminStructure ORDER BY nom ASC
 	</statement>
-	<statement id="getAdminStructureFromLogin" resultMap="AdminStructure">
+	<statement id="getAdminStructureFromLogin" resultMap="AdminStructure" cacheModel="cacheAdminStructure">
 		SELECT * FROM AdminStructure
 		WHERE login = #login#
 		LIMIT 0,1
     </statement>
-    <statement id="getAdminStructureFromEppn" resultMap="AdminStructure">
+    <statement id="getAdminStructureFromEppn" resultMap="AdminStructure" cacheModel="cacheAdminStructure">
 		SELECT * FROM AdminStructure
 		WHERE eppn = #eppn#
 		LIMIT 0,1

@@ -5,6 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Theme">
+
+	<cacheModel id="cacheTheme" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassTheme" type="org.esupportail.pstagedata.domain.beans.Theme"/>
 	<resultMap id="Theme"
 		class="ClassTheme">
@@ -13,12 +19,12 @@
 		<result property="temEnServ" column="temEnServTheme" />
 	</resultMap>
 
-	<statement id="getThemes" resultMap="Theme">
+	<statement id="getThemes" resultMap="Theme" cacheModel="cacheTheme">
 		SELECT * FROM Theme
 		WHERE temEnServTheme = 'O'
 	</statement>
 	
-	<statement id="getThemeFromId" resultMap="Theme">
+	<statement id="getThemeFromId" resultMap="Theme" cacheModel="cacheTheme">
 		SELECT * FROM Theme
 		WHERE idTheme = #id#
 		LIMIT 0, 1

@@ -6,6 +6,11 @@
 
 <sqlMap namespace="DroitAdministration">
 
+	<cacheModel id="cacheDroitAdministration" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<resultMap id="DroitAdministration"
 		class="org.esupportail.pstagedata.domain.beans.DroitAdministration">
 		<result property="id" column="idDroitAdministration" />
@@ -13,11 +18,11 @@
 		<result property="temEnServ" column="temEnServDroitAdmin" />
 	</resultMap>
 
-	<statement id="getDroitAdministration" resultMap="DroitAdministration">
+	<statement id="getDroitAdministration" resultMap="DroitAdministration" cacheModel="cacheDroitAdministration">
 		SELECT * FROM DroitAdministration
 	</statement>
 
-	<statement id="getDroitAdministrationFromId" resultMap="DroitAdministration">
+	<statement id="getDroitAdministrationFromId" resultMap="DroitAdministration" cacheModel="cacheDroitAdministration">
 		SELECT * FROM DroitAdministration
 		WHERE idDroitAdministration = #idDroitAdministration#
 		LIMIT 0, 1

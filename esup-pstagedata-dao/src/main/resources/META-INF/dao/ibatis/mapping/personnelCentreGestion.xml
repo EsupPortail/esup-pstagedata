@@ -5,7 +5,12 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="PersonnelCentreGestion">
-	
+
+	<cacheModel id="cachePersonnelCentreGestion" type="OSCACHE" readOnly="true">
+		<flushInterval hours="12"/>
+		<property name="cache-size" value="50"/>
+	</cacheModel>
+
 	<typeAlias alias="ClassPersonnelCentreGestion" type="org.esupportail.pstagedata.domain.beans.PersonnelCentreGestion"/>
 
 	<resultMap id="PersonnelCentreGestion"
@@ -39,49 +44,49 @@
 		<result property="droitEvaluationEntreprise" column="droitEvaluationEntreprise" />
 	</resultMap>
 
-	<statement id="getPersonnelCentreGestionList" resultMap="PersonnelCentreGestion">
+	<statement id="getPersonnelCentreGestionList" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
 	
-	<statement id="getPersonnelCentreGestion" resultMap="PersonnelCentreGestion">
+	<statement id="getPersonnelCentreGestion" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE idPersonnelCentreGestion = #idPersonnelCentreGestion#
 	</statement>
 	
 	<!-- Récuperation des membres interlocuteurs du centre	-->
-	<statement id="getInterlocuteur" resultMap="PersonnelCentreGestion">
+	<statement id="getInterlocuteur" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE idCentreGestion = #idCentreGestion#
 		AND ImpressionConvention = 1
 	</statement>
 	
 	<statement id="getPersonnelCentreGestionFromIdAndCentre" resultMap="PersonnelCentreGestion"
-		parameterClass="java.util.HashMap">
+		parameterClass="java.util.HashMap" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE idPersonnelCentreGestion = #idPersonnelCentreGestion#
 		AND idCentreGestion = #idCentreGestion#
 	</statement>
 	
-	<statement id="getPersonnelCentreGestionFromUid" resultMap="PersonnelCentreGestion">
+	<statement id="getPersonnelCentreGestionFromUid" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE uidPersonnel = #uidPersonnel#
 		AND codeUniversite = #codeUniversite#
 	</statement>
 
-	<statement id="getPersonnelCentreGestionFromNom" resultMap="PersonnelCentreGestion">
+	<statement id="getPersonnelCentreGestionFromNom" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE nom = #nom#
 		AND codeUniversite = #codeUniversite#		
 	</statement>
 	
-	<statement id="getPersonnelCentreGestionFromType" resultMap="PersonnelCentreGestion">
+	<statement id="getPersonnelCentreGestionFromType" resultMap="PersonnelCentreGestion" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
 		WHERE fonction = #fonction#
 		AND codeUniversite = #codeUniversite#	
 	</statement>
 	
-	<statement id="getNombrePersonnelCentreGestion" resultClass="java.lang.Integer">
+	<statement id="getNombrePersonnelCentreGestion" resultClass="java.lang.Integer" cacheModel="cachePersonnelCentreGestion">
 		SELECT COUNT(*) FROM PersonnelCentreGestion
 		WHERE idCentreGestion = #idCentreGestion#
 	</statement>
