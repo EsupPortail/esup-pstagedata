@@ -709,29 +709,22 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
+						CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
-						CURDATE()
+						C.dateFinStage <![CDATA[ < ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+7 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 7 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="4">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+15 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 15 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="5">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+31 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 31 DAY
 					</isEqual>
 				</isNotNull>
 				<isNotNull prepend="AND" property="aU">
@@ -933,29 +926,22 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
+						CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
-						CURDATE()
+						C.dateFinStage <![CDATA[ < ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+7 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 7 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="4">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+15 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 15 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="5">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+31 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 31 DAY
 					</isEqual>
 				</isNotNull>
 				<isNotNull prepend="AND" property="aU">
