@@ -2056,6 +2056,23 @@ public class UtilsDTO {
 	 * @param light 
 	 * @return List<ConventionDTO>
 	 */
+	public static List<ConventionDTO> getConventionListExportDTO(List<ConventionExport> l, boolean light) {
+		List<ConventionDTO> ld = new ArrayList<ConventionDTO>();
+		if (l!=null) {
+			for (ConventionExport o : l) {
+				ConventionDTO oDTO = new ConventionDTO(o.getConvention(), light);
+				ld.add(oDTO);
+			}
+		}
+		
+		return ld;
+	}
+
+	/**
+	 * @param l
+	 * @param light
+	 * @return List<ConventionDTO>
+	 */
 	public static List<ConventionDTO> getConventionListDTO(List<Convention> l, boolean light) {
 		List<ConventionDTO> ld = new ArrayList<ConventionDTO>();
 		if (l!=null) {
@@ -2064,9 +2081,10 @@ public class UtilsDTO {
 				ld.add(oDTO);
 			}
 		}
-		
+
 		return ld;
 	}
+
 	/**
 	 * @param l
 	 * @return List<ConventionDTO>
