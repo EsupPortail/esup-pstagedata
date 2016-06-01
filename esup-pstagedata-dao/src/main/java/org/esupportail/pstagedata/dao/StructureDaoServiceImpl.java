@@ -36,7 +36,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	
 	// Ajout moderation Entreprise
 	/**
-	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getStructuresFromVerification(int)
 	 */
 	@SuppressWarnings({ "unchecked", "cast" })
 	public List<Structure> getStructuresFromVerification(int estValidee){

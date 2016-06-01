@@ -32,7 +32,7 @@ public enum Cache {
     STRUCTURE("Structure.cacheStructure"),
     AVENANT("Avenant.cacheAvenant"),
     CENTRE_GESTION_SUPERVISEUR("CentreGestionSuperviseur.cacheCentreGestionSuperviseur"),
-    CONVENTION_STATISTIC_ITEM("ClassStatisticItem.cacheClassStatisticItem"),
+    CONVENTION_STATISTIC_ITEM("StatisticItem.cacheStatisticItem"),
     CRITERE_GESTION("CritereGestion.cacheCritereGestion"),
     ETAPE("Etape.cacheEtape"),
     FICHE_EVALUATION("FicheEvaluation.cacheFicheEvaluation"),
