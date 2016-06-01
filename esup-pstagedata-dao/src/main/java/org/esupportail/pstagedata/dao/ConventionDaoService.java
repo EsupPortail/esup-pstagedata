@@ -45,14 +45,14 @@ public interface ConventionDaoService extends Serializable {
 	 * @param critereRechercheConvention
 	 * @return Convention
 	 */
-	public List<Convention> getConventionsFromCriteres(CritereRechercheConvention critereRechercheConvention);
+	public List<ConventionExport> getConventionsFromCriteres(CritereRechercheConvention critereRechercheConvention);
 	
 	/**
 	 * @param idEnseignant 
 	 * @param critereRechercheConvention
 	 * @return Convention
 	 */
-	public List<Convention> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConvention critereRechercheConvention);
+	public List<ConventionExport> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConvention critereRechercheConvention);
 	
 	/**
 	 * @param critereRechercheConvention
@@ -87,7 +87,7 @@ public interface ConventionDaoService extends Serializable {
 	 * @param annee
 	 * @return List<Convention>
 	 */
-	public List<Convention> getConventionsByEnseignant(int idEnseignant, String annee);
+	public List<ConventionExport> getConventionsByEnseignant(int idEnseignant, String annee);
 	/**
 	 * @param convention
 	 * @return int

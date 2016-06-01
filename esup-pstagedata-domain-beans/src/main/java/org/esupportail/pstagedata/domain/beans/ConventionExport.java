@@ -575,30 +575,42 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		c.setLoginCreation(this.getLoginCreation());
 		c.setLoginModif(this.getLoginModif());
 
-		Ufr u = new Ufr();
-		u.setCodeUniversite(this.codeUniversiteUFR);
-		u.setCode(this.codeUFR);
-		u.setLibelle(this.libelleUFR);
-		c.setUfr(u);
+		if(getUfr() == null) {
+			Ufr u = new Ufr();
+			u.setCodeUniversite(this.codeUniversiteUFR);
+			u.setCode(this.codeUFR);
+			u.setLibelle(this.libelleUFR);
+			c.setUfr(u);
+		} else {
+			c.setUfr(getUfr());
+		}
 
-		Etape e = new Etape();
-		e.setCodeUniversite(this.codeUniversiteEtape);
-		e.setCode(this.codeEtape);
-		e.setLibelle(this.libelleEtape);
-		e.setCodeVersionEtape(this.codeVersionEtape);
-		c.setEtape(e);
+		if(getEtape() == null) {
+			Etape e = new Etape();
+			e.setCodeUniversite(this.codeUniversiteEtape);
+			e.setCode(this.codeEtape);
+			e.setLibelle(this.libelleEtape);
+			e.setCodeVersionEtape(this.codeVersionEtape);
+			c.setEtape(e);
+		} else {
+			c.setEtape(getEtape());
+		}
 
-		Contact contact = new Contact();
-		contact.setFonction(this.CONTACT_fonction);
-		contact.setId(this.CONTACT_id);
-		contact.setIdCentreGestion(this.CONTACT_idCentreGestion);
-		contact.setIdCivilite(this.CONTACT_idCivilite);
-		contact.setIdService(this.CONTACT_idService);
-		contact.setMail(this.CONTACT_mail);
-		contact.setNom(this.CONTACT_nom);
-		contact.setPrenom(this.CONTACT_prenom);
-		contact.setTel(this.CONTACT_tel);
-		c.setContact(contact);
+		if(getContact() == null) {
+			Contact contact = new Contact();
+			contact.setFonction(this.CONTACT_fonction);
+			contact.setId(this.CONTACT_id);
+			contact.setIdCentreGestion(this.CONTACT_idCentreGestion);
+			contact.setIdCivilite(this.CONTACT_idCivilite);
+			contact.setIdService(this.CONTACT_idService);
+			contact.setMail(this.CONTACT_mail);
+			contact.setNom(this.CONTACT_nom);
+			contact.setPrenom(this.CONTACT_prenom);
+			contact.setTel(this.CONTACT_tel);
+			c.setContact(contact);
+		} else {
+			c.setContact(getContact());
+		}
 
 		c.setConventionStructure(this.conventionStructure);
 		c.setConversionEnContrat(this.conversionEnContrat);
@@ -617,27 +629,35 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		c.setDureeExceptionnelle(this.dureeExceptionnelle);
 		c.setDureeStage(this.dureeStage);
 
-		Enseignant ens = new Enseignant();
-		ens.setId(this.ENSEIGNANT_id);
-		ens.setMail(this.ENSEIGNANT_mail);
-		ens.setNom(this.ENSEIGNANT_nom);
-		ens.setPrenom(this.ENSEIGNANT_prenom);
-		ens.setTel(this.ENSEIGNANT_tel);
-		ens.setUidEnseignant(this.ENSEIGNANT_uidEnseignant);
-		c.setEnseignant(ens);
+		if(getEnseignant() == null) {
+			Enseignant ens = new Enseignant();
+			ens.setId(this.ENSEIGNANT_id);
+			ens.setMail(this.ENSEIGNANT_mail);
+			ens.setNom(this.ENSEIGNANT_nom);
+			ens.setPrenom(this.ENSEIGNANT_prenom);
+			ens.setTel(this.ENSEIGNANT_tel);
+			ens.setUidEnseignant(this.ENSEIGNANT_uidEnseignant);
+			c.setEnseignant(ens);
+		} else {
+			c.setEnseignant(getEnseignant());
+		}
 
 		c.setEnvoiMailEtudiant(this.envoiMailEtudiant);
 		c.setEnvoiMailTuteurPedago(this.envoiMailTuteurPedago);
 		c.setEnvoiMailTuteurPro(this.envoiMailTuteurPro);
 
-		Etudiant etu = new Etudiant();
-		etu.setCodeSexe(this.ETUDIANT_codeSexe);
-		etu.setId(this.ETUDIANT_id);
-		etu.setMail(this.ETUDIANT_mail);
-		etu.setNom(this.ETUDIANT_nom);
-		etu.setNumEtudiant(this.ETUDIANT_numEtudiant);
-		etu.setPrenom(this.ETUDIANT_prenom);
-		c.setEtudiant(etu);
+		if(getEtudiant() == null) {
+			Etudiant etu = new Etudiant();
+			etu.setCodeSexe(this.ETUDIANT_codeSexe);
+			etu.setId(this.ETUDIANT_id);
+			etu.setMail(this.ETUDIANT_mail);
+			etu.setNom(this.ETUDIANT_nom);
+			etu.setNumEtudiant(this.ETUDIANT_numEtudiant);
+			etu.setPrenom(this.ETUDIANT_prenom);
+			c.setEtudiant(etu);
+		} else {
+			c.setEtudiant(getEtudiant());
+		}
 
 		c.setFonctionsEtTaches(this.fonctionsEtTaches);
 		c.setIdAssurance(this.idAssurance);
@@ -681,49 +701,61 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		c.setQualiteSignataire(this.qualiteSignataire);
 		c.setQuotiteTravail(this.quotiteTravail);
 
-		Service ser = new Service();
-		ser.setBatimentResidence(this.SERVICE_batimentResidence);
-		ser.setCodeCommune(this.SERVICE_codeCommune);
-		ser.setCodePostal(this.SERVICE_codePostal);
-		ser.setCommune(this.SERVICE_commune);
-		ser.setIdPays(this.SERVICE_idPays);
-		ser.setIdService(this.SERVICE_idService);
-		ser.setNom(this.SERVICE_nom);
-		ser.setTelephone(this.SERVICE_telephone);
-		ser.setVoie(this.SERVICE_voie);
-		c.setService(ser);
+		if(getService() == null) {
+			Service ser = new Service();
+			ser.setBatimentResidence(this.SERVICE_batimentResidence);
+			ser.setCodeCommune(this.SERVICE_codeCommune);
+			ser.setCodePostal(this.SERVICE_codePostal);
+			ser.setCommune(this.SERVICE_commune);
+			ser.setIdPays(this.SERVICE_idPays);
+			ser.setIdService(this.SERVICE_idService);
+			ser.setNom(this.SERVICE_nom);
+			ser.setTelephone(this.SERVICE_telephone);
+			ser.setVoie(this.SERVICE_voie);
+			c.setService(ser);
+		} else {
+			c.setService(getService());
+		}
 
-		Contact sig = new Contact();
-		sig.setFonction(this.SIGNATAIRE_fonction);
-		sig.setId(this.SIGNATAIRE_id);
-		sig.setIdCentreGestion(this.SIGNATAIRE_idCentreGestion);
-		sig.setIdCivilite(this.SIGNATAIRE_idCivilite);
-		sig.setIdService(this.SIGNATAIRE_idService);
-		sig.setMail(this.SIGNATAIRE_mail);
-		sig.setNom(this.SIGNATAIRE_nom);
-		sig.setPrenom(this.SIGNATAIRE_prenom);
-		sig.setTel(this.SIGNATAIRE_tel);
-		c.setSignataire(sig);
+		if(getSignataire() == null) {
+			Contact sig = new Contact();
+			sig.setFonction(this.SIGNATAIRE_fonction);
+			sig.setId(this.SIGNATAIRE_id);
+			sig.setIdCentreGestion(this.SIGNATAIRE_idCentreGestion);
+			sig.setIdCivilite(this.SIGNATAIRE_idCivilite);
+			sig.setIdService(this.SIGNATAIRE_idService);
+			sig.setMail(this.SIGNATAIRE_mail);
+			sig.setNom(this.SIGNATAIRE_nom);
+			sig.setPrenom(this.SIGNATAIRE_prenom);
+			sig.setTel(this.SIGNATAIRE_tel);
+			c.setSignataire(sig);
+		} else {
+			c.setSignataire(getSignataire());
+		}
 
-		Structure struct = new Structure();
-		struct.setBatimentResidence(this.STRUCTURE_batimentResidence);
-		struct.setCodeNAF_N5(this.STRUCTURE_codeNAF_N5);
-		struct.setCodePostal(this.STRUCTURE_codePostal);
-		struct.setCommune(this.STRUCTURE_commune);
-		struct.setFax(this.STRUCTURE_fax);
-		struct.setIdEffectif(this.STRUCTURE_idEffectif);
-		struct.setIdPays(this.STRUCTURE_idPays);
-		struct.setIdStatutJuridique(this.STRUCTURE_idStatutJuridique);
-		struct.setIdStructure(this.STRUCTURE_idStructure);
-		struct.setIdTypeStructure(this.STRUCTURE_idTypeStructure);
-		struct.setLibCedex(this.STRUCTURE_libCedex);
-		struct.setMail(this.STRUCTURE_mail);
-		struct.setNumeroSiret(this.STRUCTURE_numeroSiret);
-		struct.setRaisonSociale(this.STRUCTURE_raisonSociale);
-		struct.setSiteWeb(this.STRUCTURE_siteWeb);
-		struct.setTelephone(this.STRUCTURE_telephone);
-		struct.setVoie(this.STRUCTURE_voie);
-		c.setStructure(struct);
+		if(getStructure() == null) {
+			Structure struct = new Structure();
+			struct.setBatimentResidence(this.STRUCTURE_batimentResidence);
+			struct.setCodeNAF_N5(this.STRUCTURE_codeNAF_N5);
+			struct.setCodePostal(this.STRUCTURE_codePostal);
+			struct.setCommune(this.STRUCTURE_commune);
+			struct.setFax(this.STRUCTURE_fax);
+			struct.setIdEffectif(this.STRUCTURE_idEffectif);
+			struct.setIdPays(this.STRUCTURE_idPays);
+			struct.setIdStatutJuridique(this.STRUCTURE_idStatutJuridique);
+			struct.setIdStructure(this.STRUCTURE_idStructure);
+			struct.setIdTypeStructure(this.STRUCTURE_idTypeStructure);
+			struct.setLibCedex(this.STRUCTURE_libCedex);
+			struct.setMail(this.STRUCTURE_mail);
+			struct.setNumeroSiret(this.STRUCTURE_numeroSiret);
+			struct.setRaisonSociale(this.STRUCTURE_raisonSociale);
+			struct.setSiteWeb(this.STRUCTURE_siteWeb);
+			struct.setTelephone(this.STRUCTURE_telephone);
+			struct.setVoie(this.STRUCTURE_voie);
+			c.setStructure(struct);
+		} else {
+			c.setStructure(getStructure());
+		}
 
 		c.setSujetStage(this.sujetStage);
 		c.setTelEtudiant(this.telEtudiant);

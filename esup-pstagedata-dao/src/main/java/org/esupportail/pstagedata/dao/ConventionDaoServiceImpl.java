@@ -113,7 +113,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 	 * @return List<Convention>
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Convention> getConventionsByEnseignant(int idEnseignant, String annee) {
+	public List<ConventionExport> getConventionsByEnseignant(int idEnseignant, String annee) {
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("idEnseignant", idEnseignant);
 		parameterMap.put("annee", annee);
@@ -134,7 +134,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionsFromCriteres(org.esupportail.pstagedata.domain.beans.CritereRechercheConvention)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Convention> getConventionsFromCriteres(CritereRechercheConvention critereRechercheConvention){
+	public List<ConventionExport> getConventionsFromCriteres(CritereRechercheConvention critereRechercheConvention){
 		if(critereRechercheConvention!=null){
 			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 			if(critereRechercheConvention.getIdsCentreGestion()!=null) parameterMap.put("idsCG", critereRechercheConvention.getIdsCentreGestion());
@@ -206,7 +206,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionsFromCriteresByEnseignantTuteur(int, org.esupportail.pstagedata.domain.beans.CritereRechercheConvention)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Convention> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConvention critereRechercheConvention) {
+	public List<ConventionExport> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConvention critereRechercheConvention) {
 		if(critereRechercheConvention!=null){
 			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 			parameterMap.put("idEnseignant", idEnseignant);

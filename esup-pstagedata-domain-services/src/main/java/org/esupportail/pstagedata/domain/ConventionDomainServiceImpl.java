@@ -123,22 +123,8 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public List<ConventionDTO> getConventionsFromCriteres(CritereRechercheConventionDTO critereRechercheConvention){
 		List<ConventionDTO> lr = null;
 		if(critereRechercheConvention!=null && critereRechercheConvention.getIdsCentreGestion()!=null && !critereRechercheConvention.getIdsCentreGestion().isEmpty()){
-			List<Convention> l = this.conventionDaoService.getConventionsFromCriteres(UtilsDTO.getCritereRechercheConventionFromDTO(critereRechercheConvention));
-			if(l!=null){
-				for(Convention c : l){
-					if(c.getCodeUFR()!=null){
-						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-					}
-					if(c.getCodeEtape()!=null){
-						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						} else {
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						}
-					}
-				}
-			}
-			lr = UtilsDTO.getConventionListDTO(l,true);
+			List<ConventionExport> l = this.conventionDaoService.getConventionsFromCriteres(UtilsDTO.getCritereRechercheConventionFromDTO(critereRechercheConvention));
+			lr = UtilsDTO.getConventionListExportDTO(l,true);
 		}
 		return lr;
 	}
@@ -147,25 +133,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	/**
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsFromCriteresByEnseignantTuteur(int, org.esupportail.pstagedata.domain.dto.CritereRechercheConventionDTO)
 	 */
-	public List<ConventionDTO> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConventionDTO critereRechercheConvention) {		
+	public List<ConventionDTO> getConventionsFromCriteresByEnseignantTuteur(int idEnseignant, CritereRechercheConventionDTO critereRechercheConvention) {
 		List<ConventionDTO> lr = null;
 		if(critereRechercheConvention!=null ){
-			List<Convention> l = this.conventionDaoService.getConventionsFromCriteresByEnseignantTuteur(idEnseignant ,UtilsDTO.getCritereRechercheConventionFromDTO(critereRechercheConvention));
-			if(l!=null){
-				for(Convention c : l){
-					if(c.getCodeUFR()!=null){
-						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-					}
-					if(c.getCodeEtape()!=null){
-						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						} else {
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						}
-					}
-				}
-			}
-			lr = UtilsDTO.getConventionListDTO(l,true);
+			List<ConventionExport> l = this.conventionDaoService.getConventionsFromCriteresByEnseignantTuteur(idEnseignant ,UtilsDTO.getCritereRechercheConventionFromDTO(critereRechercheConvention));
+			lr = UtilsDTO.getConventionListExportDTO(l,true);
 		}
 		return lr;
 	}
@@ -223,20 +195,6 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		List<ConventionDTO> lr = null;
 		if (identEtudiant != null) {
 			List<Convention> l = this.conventionDaoService.getConventionsEtudiant(identEtudiant, codeUniversite);
-			if(l!=null){
-				for(Convention c : l){
-					if(c.getCodeUFR()!=null){
-						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-					}
-					if(c.getCodeEtape()!=null){
-						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						} else {
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						}
-					}
-				}
-			}
 			lr = UtilsDTO.getConventionListDTO(l,true);
 		}
 		return lr;
@@ -256,22 +214,8 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public List<ConventionDTO> getConventionsByEnseignant(int idEnseignant, String annee) {
 		List<ConventionDTO> lr = null;
 		if (idEnseignant > 0) {
-			List<Convention> l = this.conventionDaoService.getConventionsByEnseignant(idEnseignant,annee);
-			if(l!=null){
-				for(Convention c : l){
-					if(c.getCodeUFR()!=null){
-						c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-					}
-					if(c.getCodeEtape()!=null){
-						if (c.getCodeVersionEtape()!=null && !c.getCodeVersionEtape().isEmpty()){
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape()+";"+c.getCodeVersionEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						} else {
-							c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-						}
-					}
-				}
-			}
-			lr = UtilsDTO.getConventionListDTO(l,true);
+			List<ConventionExport> l = this.conventionDaoService.getConventionsByEnseignant(idEnseignant,annee);
+			lr = UtilsDTO.getConventionListExportDTO(l,true);
 		}
 		return lr;
 	}

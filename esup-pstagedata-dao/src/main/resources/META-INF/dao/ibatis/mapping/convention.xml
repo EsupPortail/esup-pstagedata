@@ -126,7 +126,7 @@
 		<result property="monnaieGratification" column="monnaieGratification" nullValue="euros"/>
 	</resultMap>
 
-	<resultMap id="ConventionLight" class="ClassConvention">
+	<resultMap id="ConventionLight" class="ClassConventionExport">
 		<result property="idConvention" column="idConvention" />
 		<result property="dateDebutStage" column="dateDebutStage" />
 		<result property="dateFinStage" column="dateFinStage" />
@@ -137,6 +137,8 @@
 		<result property="codeEtape" column="codeEtape" />
 		<result property="codeVersionEtape" column="codeVersionEtape" />
 		<result property="codeUniversiteUFR" column="codeUniversiteUFR" />
+		<result property="libelleUFR" column="libelleUFR" />
+		<result property="libelleEtape" column="libelleEtape" />
 		<result property="codeUniversiteEtape" column="codeUniversiteEtape" />
 		<result property="idCentreGestion" column="idCentreGestion" />
 		<result property="envoiMailEtudiant" column="envoiMailEtudiant" />
@@ -149,9 +151,12 @@
 		<result property="dateEnvoiMailTuteurPro" column="dateEnvoiMailTuteurPro"
 			javaType="java.util.Date" jdbcType="DATETIME" />
 
-		<result property="structure" column="idStructure" select="getStructureSuperLightFromId" />
-		<result property="etudiant" column="idEtudiant" select="getEtudiantLightFromId" />
-		<result property="nbAvenant" column="idConvention" select="getNombreAvenant" />
+		<result property="STRUCTURE_idStructure" column="STRUCTURE_idStructure" />
+		<result property="STRUCTURE_raisonSociale" column="STRUCTURE_raisonSociale" />
+		<result property="ETUDIANT_id" column="ETUDIANT_id" />
+		<result property="ETUDIANT_nom" column="ETUDIANT_nom" />
+		<result property="ETUDIANT_prenom" column="ETUDIANT_prenom" />
+		<result property="nbAvenant" column="nbAvenant" />
 	</resultMap>
 
 	<resultMap id="ConventionSuperLight" class="ClassConvention">
@@ -297,17 +302,28 @@
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
-		C.dateEnvoiMailTuteurPro
+		C.dateEnvoiMailTuteurPro,
+		U.libelleUFR,
+		E.libelleEtape,
+		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite =
 		C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
+		INNER JOIN Etape E ON (CASE WHEN EXISTS
+		(SELECT 1 FROM Etape tmp
+		WHERE tmp.codeEtape = C.codeEtape AND tmp.codeVersionEtape = C.codeVersionEtape
+		AND tmp.codeUniversite = C.codeUniversiteEtape)
+		THEN (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+		AND E.codeVersionEtape = C.codeVersionEtape)
+		ELSE (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+		AND (
+		(C.codeVersionEtape != '' AND E.codeVersionEtape = '')
 		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')
+		)
+		)
+		END)
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		WHERE ET.identEtudiant = #identEtudiant#
 		<isNotNull property="codeUniversite" prepend="AND">
@@ -323,17 +339,34 @@
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
-		C.dateEnvoiMailTuteurPro
+		C.dateEnvoiMailTuteurPro,
+		S.idStructure AS 'STRUCTURE_idStructure',
+		S.raisonSociale AS 'STRUCTURE_raisonSociale',
+		ET.idEtudiant AS 'ETUDIANT_id',
+		ET.nom AS 'ETUDIANT_nom',
+		ET.prenom AS 'ETUDIANT_prenom',
+		U.libelleUFR,
+		E.libelleEtape,
+		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+		INNER JOIN Structure S ON S.idStructure = C.idStructure
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite =
 		C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		INNER JOIN Etape E ON (CASE WHEN EXISTS
+								(SELECT 1 FROM Etape tmp
+									WHERE tmp.codeEtape = C.codeEtape AND tmp.codeVersionEtape = C.codeVersionEtape
+									AND tmp.codeUniversite = C.codeUniversiteEtape)
+								THEN (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+																AND E.codeVersionEtape = C.codeVersionEtape)
+								ELSE (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+																AND (
+																	(C.codeVersionEtape != '' AND E.codeVersionEtape = '')
+																	OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+																	OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')
+																)
+								)
+							  END)
 		INNER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		LEFT JOIN Avenant AV ON (AV.idConvention = C.idConvention and AV.validationAvenant = true)
 		WHERE (ES.idEnseignant=#idEnseignant# OR AV.idEnseignant=#idEnseignant#) and C.annee LIKE CONCAT('%',#annee#,'%')
@@ -359,16 +392,32 @@
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
-		C.dateEnvoiMailTuteurPro
+		C.dateEnvoiMailTuteurPro,
+		S.idStructure AS 'STRUCTURE_idStructure',
+		S.raisonSociale AS 'STRUCTURE_raisonSociale',
+		ET.idEtudiant AS 'ETUDIANT_id',
+		ET.nom AS 'ETUDIANT_nom',
+		ET.prenom AS 'ETUDIANT_prenom',
+		U.libelleUFR,
+		E.libelleEtape,
+		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		INNER JOIN Etape E ON (CASE WHEN EXISTS
+								(SELECT 1 FROM Etape tmp
+									WHERE tmp.codeEtape = C.codeEtape AND tmp.codeVersionEtape = C.codeVersionEtape
+									AND tmp.codeUniversite = C.codeUniversiteEtape)
+								THEN (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+																AND E.codeVersionEtape = C.codeVersionEtape)
+								ELSE (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+																AND (
+																	(C.codeVersionEtape != '' AND E.codeVersionEtape = '')
+																	OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
+																	OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')
+																)
+								)
+							  END)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -488,28 +537,22 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
+						CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]> CURDATE()
+						C.dateFinStage <![CDATA[ < ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+7 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 7 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="4">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+15 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 15 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="5">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+31 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 31 DAY
 					</isEqual>
 				</isNotNull>
 				<isNotNull prepend="AND" property="aU">
@@ -589,16 +632,32 @@
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
-		C.dateEnvoiMailTuteurPro
+		C.dateEnvoiMailTuteurPro,
+		S.idStructure AS 'STRUCTURE_idStructure',
+		S.raisonSociale AS 'STRUCTURE_raisonSociale',
+		ET.idEtudiant AS 'ETUDIANT_id',
+		ET.nom AS 'ETUDIANT_nom',
+		ET.prenom AS 'ETUDIANT_prenom',
+		U.libelleUFR,
+		E.libelleEtape,
+		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
+		INNER JOIN Etape E ON (CASE WHEN EXISTS
+		(SELECT 1 FROM Etape tmp
+		WHERE tmp.codeEtape = C.codeEtape AND tmp.codeVersionEtape = C.codeVersionEtape
+		AND tmp.codeUniversite = C.codeUniversiteEtape)
+		THEN (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+		AND E.codeVersionEtape = C.codeVersionEtape)
+		ELSE (E.codeEtape = C.codeEtape AND E.codeUniversite = C.codeUniversiteEtape
+		AND (
+		(C.codeVersionEtape != '' AND E.codeVersionEtape = '')
 		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')
+		)
+		)
+		END)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		<isNull property="idC">
@@ -715,29 +774,22 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
+						CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
-						CURDATE()
+						C.dateFinStage <![CDATA[ < ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+7 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 7 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="4">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+15 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 15 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="5">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+31 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 31 DAY
 					</isEqual>
 				</isNotNull>
 				<isNotNull prepend="AND" property="aU">
@@ -814,12 +866,22 @@
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		INNER JOIN Etape E ON (CASE WHEN EXISTS (SELECT 1 FROM Etape tmp
+		WHERE tmp.codeEtape = C.codeEtape
+		AND tmp.codeVersionEtape = C.codeVersionEtape AND tmp.codeUniversite = C.codeUniversiteEtape)
+		THEN (E.codeEtape = C.codeEtape
+		AND E.codeUniversite = C.codeUniversiteEtape
+		AND E.codeVersionEtape = C.codeVersionEtape)
+		ELSE (
+		E.codeEtape = C.codeEtape
+		AND E.codeUniversite = C.codeUniversiteEtape
+		AND ((C.codeVersionEtape != ''
+		AND E.codeVersionEtape = '')
+		OR (C.codeVersionEtape = ''
+		AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = ''
+		AND E.codeVersionEtape = '')))
+		END)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
@@ -939,29 +1001,22 @@
 				</isNotNull>
 				<isNotNull property="dS">
 					<isEqual prepend="AND" property="dS" compareValue="1">
-					    (CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage)
+						CURDATE() BETWEEN C.dateDebutStage AND C.dateFinStage
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="2">
-						C.dateFinStage <![CDATA[ > ]]>
-						CURDATE()
+						C.dateFinStage <![CDATA[ < ]]> CURDATE()
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="3">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+7 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 7 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="4">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+15 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 15 DAY
 					</isEqual>
 					<isEqual prepend="AND" property="dS" compareValue="5">
-						(C.dateDebutStage <![CDATA[ >= ]]>
-						( CURDATE( ))
-						AND C.dateDebutStage <![CDATA[ <= ]]>
-						( CURDATE( )+31 ))
+						C.dateDebutStage <![CDATA[ >= ]]> CURDATE()
+						AND C.dateDebutStage <![CDATA[ <= ]]> CURDATE() + INTERVAL 31 DAY
 					</isEqual>
 				</isNotNull>
 				<isNotNull prepend="AND" property="aU">
