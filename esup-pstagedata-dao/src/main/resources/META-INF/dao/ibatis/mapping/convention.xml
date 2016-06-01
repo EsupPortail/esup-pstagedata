@@ -866,12 +866,22 @@
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
-		INNER JOIN Etape E ON (E.codeEtape = C.codeEtape AND E.codeUniversite =
-		C.codeUniversiteEtape AND 
-		((C.codeVersionEtape != '' AND E.codeVersionEtape != '' AND E.codeVersionEtape = C.codeVersionEtape)
-		OR (C.codeVersionEtape != '' AND E.codeVersionEtape = '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape != '')
-		OR (C.codeVersionEtape = '' AND E.codeVersionEtape = '')))
+		INNER JOIN Etape E ON (CASE WHEN EXISTS (SELECT 1 FROM Etape tmp
+		WHERE tmp.codeEtape = C.codeEtape
+		AND tmp.codeVersionEtape = C.codeVersionEtape AND tmp.codeUniversite = C.codeUniversiteEtape)
+		THEN (E.codeEtape = C.codeEtape
+		AND E.codeUniversite = C.codeUniversiteEtape
+		AND E.codeVersionEtape = C.codeVersionEtape)
+		ELSE (
+		E.codeEtape = C.codeEtape
+		AND E.codeUniversite = C.codeUniversiteEtape
+		AND ((C.codeVersionEtape != ''
+		AND E.codeVersionEtape = '')
+		OR (C.codeVersionEtape = ''
+		AND E.codeVersionEtape != '')
+		OR (C.codeVersionEtape = ''
+		AND E.codeVersionEtape = '')))
+		END)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
