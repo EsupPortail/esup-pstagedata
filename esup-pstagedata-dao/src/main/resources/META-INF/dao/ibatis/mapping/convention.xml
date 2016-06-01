@@ -1189,7 +1189,6 @@
 				</iterate>
 			</isNotNull>
 		</dynamic>
-		AND S.temEnServStructure = 'O'
 		GROUP BY C.idConvention
 		ORDER BY C.idConvention
 	</statement>
