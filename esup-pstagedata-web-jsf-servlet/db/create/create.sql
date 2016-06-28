@@ -1404,7 +1404,7 @@ CREATE  TABLE IF NOT EXISTS `LangueConvention` (
 
   `codeLangueConvention` VARCHAR(2) NOT NULL ,
 
-  `libelleLangueConvention` VARCHAR(50) NOT NULL ,
+  `libelleLangueConvention` VARCHAR(100) NOT NULL ,
 
   `temEnServLangue` VARCHAR(1) NULL DEFAULT 'O' ,
 

@@ -346,15 +346,17 @@ COMMIT;
 
 SET AUTOCOMMIT=0;
 
-INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('fr', 'Français (Convention nationale, stage en FRANCE) ', 'O');
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('fr', 'Français (stage en France)', 'O');
 
-INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('en', 'Anglais (Convention, stage étranger)', 'O');
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('en', 'Anglais (stage étranger)', 'O');
 
-INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('fo', 'Français (Convention, stage étranger francophone)', 'O');
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('fo', 'Francophone (stage étranger dans un pays francophone)', 'O');
 
-INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('es', 'Espagnol (Convention, stage étranger)', 'O');
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('es', 'Espagnol (stage étranger)', 'O');
 
-INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('al', 'Allemand (Convention, stage étranger)', 'O');
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('al', 'Allemand (stage étranger)', 'O');
+
+INSERT INTO `LangueConvention` (`codeLangueConvention`, `libelleLangueConvention`, `temEnServLangue`) VALUES ('it', 'Italien (stage étranger)', 'O');
 
 
 

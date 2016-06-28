@@ -463,14 +463,12 @@ CREATE INDEX `fk_Convention_ModeValidationStage1` ON `Convention` (`idModeValida
 CREATE INDEX `fk_Convention_UniteDuree1` ON `Convention` (`idUniteDureeExceptionnelle` ASC) ;
 CREATE INDEX `fk_Convention_UniteGratification1` ON `Convention` (`idUniteGratification` ASC) ;
 CREATE INDEX `fk_Convention_Contact1` ON `Convention` (`idContact` ASC) ;
-CREATE INDEX `fk_Convention_Assurance1` ON `Convention` (`idAssurance` ASC) ;
 CREATE INDEX `fk_Convention_Offre1` ON `Convention` (`idOffre` ASC) ;
 CREATE INDEX `fk_Convention_Structure1` ON `Convention` (`idStructure` ASC) ;
 CREATE INDEX `fk_Convention_Service1` ON `Convention` (`idService` ASC) ;
 CREATE INDEX `fk_Convention_Signataire` ON `Convention` (`idSignataire` ASC) ;
 CREATE INDEX `fk_Convention_Enseignant1` ON `Convention` (`idEnseignant` ASC) ;
 CREATE INDEX `fk_Convention_Etudiant1` ON `Convention` (`idEtudiant` ASC) ;
-CREATE INDEX `fk_Convention_CaisseRegime1` ON `Convention` (`codeCaisse` ASC) ;
 CREATE INDEX `fk_Convention_OrigineStage1` ON `Convention` (`idOrigineStage` ASC) ;
 -- CREATE INDEX `fk_Convention_Etape1` ON `Convention` (`codeEtape` ASC, `codeUniversiteEtape` ASC) ; --
 CREATE INDEX `fk_Convention_Ufr1` ON `Convention` (`codeUFR` ASC, `codeUniversiteUFR` ASC) ;
@@ -531,11 +529,6 @@ ADD( CONSTRAINT `fk_Convention_CentreGestion1`
     REFERENCES `Contact` (`idContact` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Convention_Assurance1`
-    FOREIGN KEY (`idAssurance` )
-    REFERENCES `Assurance` (`idAssurance` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_Offre1`
     FOREIGN KEY (`idOffre` )
     REFERENCES `Offre` (`idOffre` )
@@ -564,11 +557,6 @@ ADD( CONSTRAINT `fk_Convention_CentreGestion1`
   CONSTRAINT `fk_Convention_Etudiant1`
     FOREIGN KEY (`idEtudiant` )
     REFERENCES `Etudiant` (`idEtudiant` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Convention_CaisseRegime1`
-    FOREIGN KEY (`codeCaisse` )
-    REFERENCES `CaisseRegime` (`codeCaisse` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Convention_OrigineStage1`
