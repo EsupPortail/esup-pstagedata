@@ -33,7 +33,18 @@ ALTER TABLE Convention DROP INDEX fk_Convention_Assurance1 ;
 ALTER TABLE Convention DROP FOREIGN KEY fk_Convention_CaisseRegime1 ;
 ALTER TABLE Convention DROP INDEX fk_Convention_CaisseRegime1 ;
 
--- Recreation de l'index sur la table Etape car il semblerait qu'il ne soit pas bon pour certaines universités et entraine des erreurs lors de la creation de convention
+UPDATE PersonnelCentreGestion SET impressionConvention = true;
+
+-- Recreation de l'index et la clé primaire sur la table Etape car il semblerait qu'il ne soit pas bon pour certaines universités
+SET FOREIGN_KEY_CHECKS=0;
+
 ALTER TABLE Etape DROP INDEX index_codeEtape_codeUniversite;
 
 CREATE UNIQUE INDEX index_codeEtape_codeUniversite ON Etape (codeEtape ASC, codeVersionEtape ASC, codeUniversite ASC) ;
+
+ALTER TABLE `Etape` DROP PRIMARY KEY, ADD PRIMARY KEY(
+     `codeEtape`,
+     `codeVersionEtape`,
+     `codeUniversite`);
+
+SET FOREIGN_KEY_CHECKS=1;

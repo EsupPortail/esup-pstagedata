@@ -6,6 +6,10 @@ public class RemoteException extends CoreException {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public RemoteException(){
+
+	}
+
 	/**
 	 * Constructor.
 	 * @param message 

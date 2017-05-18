@@ -541,42 +541,42 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setImpressionEtudiant(int, int)
 	 */
 	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEtudiant(idFicheEvaluation, idConvention);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setImpressionEnseignant(int, int)
 	 */
 	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEnseignant(idFicheEvaluation, idConvention);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEstImprimee()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setImpressionEntreprise(int, int)
 	 */
 	@FlushCache({Cache.REPONSE_EVALUATION})
 	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setImpressionEntreprise(idFicheEvaluation, idConvention);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEtudiant()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEtudiant(int)
 	 */
 	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setEnvoiMailEtudiant(idConvention);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEnseignant()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEnseignant(int)
 	 */
 	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
 		return this.ficheEvaluationDomainService.setEnvoiMailEnseignant(idConvention);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEntreprise()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#setEnvoiMailEntreprise(int)
 	 */
 	@FlushCache({Cache.CONVENTION})
 	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateException, WebServiceDataBaseException{
@@ -653,7 +653,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		return tmp;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponsesSupplementaires(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#addReponsesSupplementaires(java.util.List)
 	 */
 	@FlushCache({Cache.REPONSE_SUPPLEMENTAIRE})
 	public int addReponsesSupplementaires(List<ReponseSupplementaireDTO> lr) throws DataAddException, WebServiceDataBaseException {
@@ -778,7 +778,8 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateAccord(org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO)
 	 */
 	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
-	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
+	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException,
+			AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
 		boolean b = false;
 		if(accord!=null){
 			if(accord.getIdStructure()>0 && accord.getIdContact()>0){
@@ -949,14 +950,14 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * AFFECTATION
 	 *****************************************************************************/
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAffectation(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAffectationFromCodUniv(java.lang.String)
 	 */
 	public List<AffectationDTO> getAffectationFromCodUniv(String codeUniversite) {
 		return this.affectationDomainService.getAffectation(codeUniversite);
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAffectationFromCodeAffectation(java.lang.String, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAffectationFromCodeAffectationCodUniv(java.lang.String, java.lang.String)
 	 */
 	public AffectationDTO getAffectationFromCodeAffectationCodUniv(String codeAffectation, String codeUniversite) {
 		return this.affectationDomainService.getAffectationFromCodeAffectation(codeAffectation, codeUniversite);
@@ -1021,7 +1022,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		return this.avenantDomainService.getNombreAvenant(idConvention);
 	}
 	/**
-	 * @param cg
+	 * @param a
 	 * @return int
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException 
@@ -1035,7 +1036,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		return b;
 	}
 	/**
-	 * @param cg
+	 * @param a
 	 * @return boolean
 	 * @throws DataUpdateException 
 	 * @throws WebServiceDataBaseException 
@@ -1124,13 +1125,13 @@ public class RemoteServicesImpl implements RemoteServices{
 		return this.centreGestionDomainService.getNombreCentreGestion(codeUniversite);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentreDroitEcriture(java.lang.String, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentreDroitEcritureFromCodUniv(java.lang.String, java.lang.String)
 	 */
 	public List<CentreGestionDTO> getCentreDroitEcritureFromCodUniv(String uidPersonnel, String codeUniversite){
 		return this.centreGestionDomainService.getCentreDroitEcriture(uidPersonnel, codeUniversite);
 	}
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentreFromUid(java.lang.String, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentreFromUidFromCodUniv(java.lang.String, java.lang.String)
 	 */
 	public List<CentreGestionDTO> getCentreFromUidFromCodUniv(String uidPersonnel, String codeUniversite){
 		return this.centreGestionDomainService.getCentreFromUid(uidPersonnel, codeUniversite);
@@ -1149,7 +1150,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentresEtablissement(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentresEtablissementFromCodUniv(java.lang.String)
 	 */
 	public List<CentreGestionDTO> getCentresEtablissementFromCodUniv(String codeUniversite){
 		return this.centreGestionDomainService.getCentresEtablissement(codeUniversite);
@@ -1622,6 +1623,7 @@ public class RemoteServicesImpl implements RemoteServices{
 		ConventionDTO tmp=null;
 		if(id>0){
 			tmp=this.conventionDomainService.getConventionFromId(id);
+			System.out.println("avant retour remote : " + tmp.getLoginValidation());
 		}
 		return tmp;
 	}
@@ -2824,10 +2826,10 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getPersonnelCentreGestionFromIdAndCentre(int,int)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getPersonnelCentreGestionFromUidAndCentre(String,int)
 	 */
-	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion){
-		return this.personnelCentreGestionDomainService.getPersonnelCentreGestionFromIdAndCentre(idPersonnelCentreGestion, idCentreGestion);
+	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion){
+		return this.personnelCentreGestionDomainService.getPersonnelCentreGestionFromUidAndCentre(uidPersonnelCentreGestion, idCentreGestion);
 	}
 
 	/**
@@ -2847,18 +2849,19 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addPersonnelCentreGestion(org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO)
 	 */
-	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION, Cache.UFR, Cache.ETAPE})
 	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException,PersonalAlreadyExistingForCentreException{
 		int b=0;
 		if(pg!=null){
 			try{
+				// CET APPEL RECHARGE LE CACHE APRES LE FLUSH DONC EMPECHE DE LE REFRESH
 				List<PersonnelCentreGestionDTO> tmp = getPersonnelCentreGestionFromUid(pg.getUidPersonnel(), pg.getCodeUniversite());
 
 				if(tmp != null){
 					for(int i=0; i<tmp.size();i++){
 						if(pg.getUidPersonnel().equals(tmp.get(i).getUidPersonnel())
 								&& pg.getIdCentreGestion() == tmp.get(i).getIdCentreGestion()){
-							throw new PersonalAlreadyExistingForCentreException("Personnel déjàrattaché : " + tmp);
+							throw new PersonalAlreadyExistingForCentreException("Personnel déjà rattaché : " + tmp);
 						}
 					}
 				}
@@ -2873,7 +2876,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updatePersonnelCentreGestion(org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO)
 	 */
-	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION, Cache.UFR, Cache.ETAPE})
 	public boolean updatePersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataUpdateException,WebServiceDataBaseException{
 		boolean b = false;
 		if(pg!=null && pg.getId()>0){
@@ -2885,7 +2888,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#deletePersonnelCentreGestion(int, int)
 	 */
-	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION})
+	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION, Cache.UFR, Cache.ETAPE})
 	public boolean deletePersonnelCentreGestion(int idCentreGestion, int idPersonnelCentreGestion) throws DataDeleteException,WebServiceDataBaseException{
 		boolean b = false;
 		if(idPersonnelCentreGestion>0 && idCentreGestion>0){
@@ -6078,7 +6081,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
-	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.TYPE_OFFRE})
 	public boolean updateContratOffre(ContratOffreDTO co)
 			throws DataUpdateException, WebServiceDataBaseException {
 		boolean b=false;
@@ -6089,7 +6092,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
-	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.TYPE_OFFRE})
 	public boolean deleteContratOffre(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
 		boolean b=false;
@@ -6100,7 +6103,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	@Override
-	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE})
+	@FlushCache({Cache.CONTRAT_OFFRE, Cache.OFFRE, Cache.TYPE_OFFRE})
 	public boolean reactivateContratOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
 		boolean b=false;
 		if(id>0){

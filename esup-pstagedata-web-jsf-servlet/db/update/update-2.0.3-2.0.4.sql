@@ -77,7 +77,7 @@ ALTER TABLE `Convention` ADD INDEX ( `codeUFR` , `codeUniversiteUFR` ) ;
 
 --Ajout clé étrangère codeEtape/codeUniversiteEtape
 ALTER TABLE Convention
-ADD CONSTRAINT `fk_Convention_Etape` FOREIGN KEY ( `codeEtape` , `codeUniversiteEtape` ) 
+ADD CONSTRAINT `fk_Convention_Etape` FOREIGN KEY ( `codeEtape` , `codeUniversiteEtape` )
 REFERENCES `Etape` ( `codeEtape`, `codeVersionEtape` , `codeUniversite` ) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --Ajout clé étrangère codeUFR/codeUniversiteUFR

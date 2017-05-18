@@ -173,7 +173,6 @@ ALTER TABLE `ContratOffre`
 CREATE INDEX `fk_PersonnelCentreGestion_CentreGestion1` ON `PersonnelCentreGestion` (`idCentreGestion` ASC) ;
 CREATE INDEX `fk_PersonnelCentreGestion_DroitAdministration1` ON `PersonnelCentreGestion` (`idDroitAdministration` ASC) ;
 CREATE INDEX `fk_PersonnelCentreGestion_Civilite1` ON `PersonnelCentreGestion` (`idCivilite` ASC) ;
-CREATE INDEX `fk_PersonnelCentreGestion_Affectation1` ON `PersonnelCentreGestion` (`codeAffectation` ASC, `codeUniversiteAffectation` ASC) ;
 
 ALTER TABLE `PersonnelCentreGestion`
   ADD (CONSTRAINT `fk_PersonnelCentreGestion_CentreGestion1`
@@ -189,11 +188,6 @@ ALTER TABLE `PersonnelCentreGestion`
   CONSTRAINT `fk_PersonnelCentreGestion_Civilite1`
     FOREIGN KEY (`idCivilite` )
     REFERENCES `Civilite` (`idCivilite` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_PersonnelCentreGestion_Affectation1`
-    FOREIGN KEY (`codeAffectation` , `codeUniversiteAffectation` )
-    REFERENCES `Affectation` (`codeAffectation` , `codeUniversite` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

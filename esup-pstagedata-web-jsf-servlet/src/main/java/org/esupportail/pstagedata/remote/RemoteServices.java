@@ -1356,11 +1356,11 @@ public interface RemoteServices extends Serializable{
 	 */
 	public List<PersonnelCentreGestionDTO> getInterlocuteur(int idCentreGestion);
 	/**
-	 * @param idPersonnelCentreGestion 
+	 * @param uidPersonnelCentreGestion
 	 * @param idCentreGestion
-	 * @return List<PersonnelCentreGestionDTO>
+	 * @return PersonnelCentreGestionDTO
 	 */
-	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion);
+	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion);
 	/**
 	 * @param uidPersonnel 
 	 * @param codeUniversite 

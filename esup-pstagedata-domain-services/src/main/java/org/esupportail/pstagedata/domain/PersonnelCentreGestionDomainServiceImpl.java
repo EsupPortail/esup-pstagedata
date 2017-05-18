@@ -80,10 +80,10 @@ public class PersonnelCentreGestionDomainServiceImpl implements PersonnelCentreG
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.PersonnelCentreGestionDomainService#getPersonnelCentreGestionFromIdAndCentre(int,int)
+	 * @see org.esupportail.pstagedata.domain.PersonnelCentreGestionDomainService#getPersonnelCentreGestionFromUidAndCentre(String,int)
 	 */
-	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion){
-		PersonnelCentreGestion pg = personnelCentreGestionDaoService.getPersonnelCentreGestionFromIdAndCentre(idPersonnelCentreGestion, idCentreGestion);
+	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion){
+		PersonnelCentreGestion pg = personnelCentreGestionDaoService.getPersonnelCentreGestionFromUidAndCentre(uidPersonnelCentreGestion, idCentreGestion);
 		return pg==null?null:new PersonnelCentreGestionDTO(pg);
 	}
 
@@ -125,7 +125,7 @@ public class PersonnelCentreGestionDomainServiceImpl implements PersonnelCentreG
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.PersonnelCentreGestionDomainService#deletePersonnelCentreGestion(int)
+	 * @see org.esupportail.pstagedata.domain.PersonnelCentreGestionDomainService#deletePersonnelCentreGestion(int,int)
 	 */
 	public boolean deletePersonnelCentreGestion(int idCentreGestion, int idPersonnelCentreGestion) throws DataDeleteException,WebServiceDataBaseException{
 		return personnelCentreGestionDaoService.deletePersonnelCentreGestion(idCentreGestion, idPersonnelCentreGestion);

@@ -421,6 +421,7 @@
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
 		INNER JOIN CentreGestion CT ON C.idCentreGestion = CT.idCentreGestion
+		INNER JOIN Structure S ON S.idStructure = C.idStructure
 		<isNull property="idC">
 			<isNotNull property="idTC">
 				INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention
@@ -441,7 +442,6 @@
 			<isNotNull property="idO">
 				INNER JOIN Offre O ON C.idOffre = O.idOffre
 			</isNotNull>
-			INNER JOIN Structure S ON S.idStructure = C.idStructure
 			<isNotNull property="idPE">
 				INNER JOIN Pays P ON (S.idPays = P.idPays AND P.idPays!=82)
 			</isNotNull>
@@ -660,6 +660,7 @@
 		END)
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		LEFT OUTER JOIN Enseignant ES ON C.idEnseignant = ES.idEnseignant
+		INNER JOIN Structure S ON S.idStructure = C.idStructure
 		<isNull property="idC">
 			<isNotNull property="idTC">
 				INNER JOIN TypeConvention TC ON C.idTypeConvention = TC.idTypeConvention
@@ -680,7 +681,6 @@
 			<isNotNull property="idO">
 				INNER JOIN Offre O ON C.idOffre = O.idOffre
 			</isNotNull>
-			INNER JOIN Structure S ON S.idStructure = C.idStructure
 			<isNotNull property="idPE">
 				INNER JOIN Pays P ON (S.idPays = P.idPays AND P.idPays!=82)
 			</isNotNull>

@@ -48,10 +48,10 @@ public interface PersonnelCentreGestionDomainService extends Serializable {
 	public List<PersonnelCentreGestionDTO> getInterlocuteur(int idCentreGestion);
 
 	/**
-	 * @param idPersonnelCentreGestion, idCentreGestion
-	 * @return List<PersonnelCentreGestionDTO>
+	 * @param uidPersonnelCentreGestion, idCentreGestion
+	 * @return PersonnelCentreGestionDTO
 	 */
-	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion);
+	public PersonnelCentreGestionDTO getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion);
 
 	/**
 	 * @param uidPersonnel, codeUniversite

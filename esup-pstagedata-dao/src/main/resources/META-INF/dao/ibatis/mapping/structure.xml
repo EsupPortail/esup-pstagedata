@@ -462,7 +462,9 @@
 	
 	<statement id="getRaisonsSociales" resultClass="java.lang.String">
 		SELECT S.raisonSociale FROM Structure S
-		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%') 
+		WHERE S.raisonSociale LIKE CONCAT(#raisonSociale#,'%')
+		AND temEnServStructure = 'O'
+		GROUP BY S.raisonSociale
 	</statement>
 
 	<statement id="getStructuresTemEnServFalse" resultMap="Structure">

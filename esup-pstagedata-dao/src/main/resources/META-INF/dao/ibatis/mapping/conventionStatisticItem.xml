@@ -1379,7 +1379,7 @@
 		AND c.codeVersionEtape = e.codeVersionEtape
 		AND c.idCentreGestion = #idCentreGestion#
 		AND c.validationConvention = 1	
-		AND c.annee = #annee#	
+		AND c.annee = #annee#
 		AND se.idPays = p.idPays
 		AND (se.idPays=7 OR se.idPays=82 OR se.idPays=92 OR se.idPays=100
 		OR se.idPays=148 OR se.idPays=151 OR se.idPays=170 OR se.idPays=187 OR se.idPays=191
@@ -1389,21 +1389,70 @@
 	</statement>
 	
 	<!--nombre de conventions par Step et pays du lieu de stage -->
+	<!--<statement id="getNumberOfConventionsByStepAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">-->
+	<!--SELECT e.libelleEtape AS libPriorCriteria, p.lib AS lib, -->
+		<!--count( c.idConvention ) AS number-->
+	<!--FROM Convention c, Etape e, Service s, Pays p-->
+	<!--WHERE c.idService = s.idService-->
+		<!--AND c.codeEtape = e.codeEtape-->
+		<!--AND c.codeVersionEtape = e.codeVersionEtape-->
+		<!--AND c.idCentreGestion = #idCentreGestion#-->
+		<!--AND c.validationConvention = 1	-->
+		<!--AND c.annee = #annee#	-->
+		<!--AND s.idPays = p.idPays-->
+	<!--GROUP BY libPriorCriteria, lib-->
+	<!--ORDER by libPriorCriteria, lib              -->
+	<!--</statement>-->
+	<!--nombre de conventions par Step et pays/region du lieu de stage -->
 	<statement id="getNumberOfConventionsByStepAndServiceCountry" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
-	SELECT e.libelleEtape AS libPriorCriteria, p.lib AS lib, 
-		count( c.idConvention ) AS number
-	FROM Convention c, Etape e, Service s, Pays p
-	WHERE c.idService = s.idService
+		(SELECT e.libelleEtape AS libPriorCriteria,
+		'Département du lieu d\'étude' AS lib, count(c.idConvention) AS number
+		FROM Convention c, Etape e, Service se, Pays p
+		WHERE c.idCentreGestion = #idCentreGestion#
 		AND c.codeEtape = e.codeEtape
 		AND c.codeVersionEtape = e.codeVersionEtape
-		AND c.idCentreGestion = #idCentreGestion#
-		AND c.validationConvention = 1	
-		AND c.annee = #annee#	
-		AND s.idPays = p.idPays
-	GROUP BY libPriorCriteria, lib
-	ORDER by libPriorCriteria, lib              
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.idService = se.idService
+		AND se.idPays = p.idPays
+		AND se.idPays=82
+		AND SUBSTRING(se.codePostal,1,2) = '62'
+		GROUP BY libPriorCriteria, lib
+		ORDER by libPriorCriteria)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,
+		'Autre département' AS lib, count(c.idConvention) AS number
+		FROM Convention c, Etape e, Service se, Pays p
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.idService = se.idService
+		AND se.idPays = p.idPays
+		AND (se.idPays=7 OR se.idPays=82 OR se.idPays=92 OR se.idPays=100
+		OR se.idPays=148 OR se.idPays=151 OR se.idPays=170 OR se.idPays=187 OR se.idPays=191
+		OR se.idPays=197 OR se.idPays=202 OR se.idPays=203 OR se.idPays=231 OR se.idPays=248)
+		AND SUBSTRING(se.codePostal,1,2) != '62'
+		GROUP BY libPriorCriteria, lib
+		ORDER by libPriorCriteria)
+		UNION
+		(SELECT e.libelleEtape AS libPriorCriteria,
+		'Stage à l\'étranger' AS lib, count(c.idConvention) AS number
+		FROM Convention c, Etape e, Service se, Pays p
+		WHERE c.idCentreGestion = #idCentreGestion#
+		AND c.codeEtape = e.codeEtape
+		AND c.codeVersionEtape = e.codeVersionEtape
+		AND c.annee = #annee#
+		AND c.validationConvention=1
+		AND c.idService = se.idService
+		AND se.idPays = p.idPays
+		AND !(se.idPays=7 OR se.idPays=82 OR se.idPays=92 OR se.idPays=100
+		OR se.idPays=148 OR se.idPays=151 OR se.idPays=170 OR se.idPays=187 OR se.idPays=191
+		OR se.idPays=197 OR se.idPays=202 OR se.idPays=203 OR se.idPays=231 OR se.idPays=248)
+		GROUP BY libPriorCriteria, lib
+		ORDER by libPriorCriteria)
 	</statement>
-
 
 	<!--Ajout duree-->
 	<statement id="getNumberOfConventionsByNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
@@ -1413,7 +1462,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ < ]]> 9)
+	AND c.dureeExceptionnelle <![CDATA[ < ]]> 308)
 	UNION
 	(SELECT 'Plus de 2 mois' AS lib,
 	count(c.idConvention) AS number
@@ -1421,7 +1470,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ >= ]]>9)
+	AND c.dureeStage <![CDATA[ >= ]]>308)
 	</statement>
 	<statement id="getNumberOfConventionsByStudyAndNbWeeks" resultClass="org.esupportail.pstagedata.domain.beans.StatisticItem" cacheModel="cacheClassStatisticItem">
 	(SELECT uf.codeUFR AS idPriorCriteria, uf.libelleUFR AS libPriorCriteria,
@@ -1430,7 +1479,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ < ]]> 9
+	AND c.dureeExceptionnelle <![CDATA[ < ]]> 308
 	GROUP BY idPriorCriteria, lib
 	ORDER by libPriorCriteria)
 	UNION
@@ -1440,7 +1489,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ >= ]]>9
+	AND c.dureeExceptionnelle <![CDATA[ >= ]]>308
 	GROUP BY idPriorCriteria, lib
 	ORDER by libPriorCriteria)
 	</statement>
@@ -1451,7 +1500,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ < ]]> 9
+	AND c.dureeExceptionnelle <![CDATA[ < ]]> 308
 	GROUP BY libPriorCriteria, lib
 	ORDER by lib)
 	UNION
@@ -1461,7 +1510,7 @@
 	WHERE c.idCentreGestion = #idCentreGestion#
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ >= ]]>9
+	AND c.dureeExceptionnelle <![CDATA[ >= ]]>308
 	GROUP BY libPriorCriteria, lib
 	ORDER by libPriorCriteria)           
 	</statement>
@@ -1474,7 +1523,7 @@
 	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ < ]]> 9
+	AND c.dureeExceptionnelle <![CDATA[ < ]]> 308
 	GROUP BY libPriorCriteria, lib
 	ORDER by libPriorCriteria)
 	UNION
@@ -1486,7 +1535,7 @@
 	AND c.codeVersionEtape = e.codeVersionEtape
 	AND c.annee = #annee#
 	AND c.validationConvention=1
-	AND c.dureeStage <![CDATA[ >= ]]>9
+	AND c.dureeExceptionnelle <![CDATA[ >= ]]>308
 	GROUP BY libPriorCriteria, lib
 	ORDER by libPriorCriteria)
 	</statement>

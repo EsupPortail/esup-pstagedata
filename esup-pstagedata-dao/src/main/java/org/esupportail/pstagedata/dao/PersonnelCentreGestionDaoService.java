@@ -51,10 +51,10 @@ public interface PersonnelCentreGestionDaoService extends Serializable {
 	public List<PersonnelCentreGestion> getInterlocuteur(int idCentreGestion);
 
 	/**
-	 * @param idPersonnelCentreGestion, idCentreGestion
-	 * @return List<PersonnelCentreGestion>
+	 * @param uidPersonnelCentreGestion, idCentreGestion
+	 * @return PersonnelCentreGestion
 	 */
-	public PersonnelCentreGestion getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion);
+	public PersonnelCentreGestion getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion);
 
 	/**
 	 * @param uidPersonnel, codeUniversite

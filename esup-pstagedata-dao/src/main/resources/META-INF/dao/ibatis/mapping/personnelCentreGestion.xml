@@ -61,10 +61,10 @@
 		AND ImpressionConvention = 1
 	</statement>
 	
-	<statement id="getPersonnelCentreGestionFromIdAndCentre" resultMap="PersonnelCentreGestion"
+	<statement id="getPersonnelCentreGestionFromUidAndCentre" resultMap="PersonnelCentreGestion"
 		parameterClass="java.util.HashMap" cacheModel="cachePersonnelCentreGestion">
 		SELECT * FROM PersonnelCentreGestion
-		WHERE idPersonnelCentreGestion = #idPersonnelCentreGestion#
+		WHERE uidPersonnel = #uidPersonnel#
 		AND idCentreGestion = #idCentreGestion#
 	</statement>
 	

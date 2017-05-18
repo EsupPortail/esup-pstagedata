@@ -60,13 +60,13 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.dao.PersonnelCentreGestionDaoService#getPersonnelCentreGestionFromIdAndCentre(int,int)
+	 * @see org.esupportail.pstagedata.dao.PersonnelCentreGestionDaoService#getPersonnelCentreGestionFromUidAndCentre(String,int)
 	 */
-	public PersonnelCentreGestion getPersonnelCentreGestionFromIdAndCentre(int idPersonnelCentreGestion, int idCentreGestion){
+	public PersonnelCentreGestion getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idPersonnelCentreGestion", ""+idPersonnelCentreGestion);
+		parameterMap.put("uidPersonnel", ""+uidPersonnelCentreGestion);
 		parameterMap.put("idCentreGestion", ""+idCentreGestion);
-		return (PersonnelCentreGestion) getSqlMapClientTemplate().queryForObject("getPersonnelCentreGestionFromIdAndCentre", parameterMap);
+		return (PersonnelCentreGestion) getSqlMapClientTemplate().queryForObject("getPersonnelCentreGestionFromUidAndCentre", parameterMap);
 	}
 	
 	/**

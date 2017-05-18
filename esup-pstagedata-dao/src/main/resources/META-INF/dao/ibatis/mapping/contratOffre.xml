@@ -27,7 +27,7 @@
 	
 	<statement id="getContratOffreFromId" resultMap="ContratOffre" cacheModel="cacheContratOffre">
 		SELECT * FROM ContratOffre
-		WHERE idContratOffre = #id#
+		WHERE idContratOffre = #id# AND temEnServContratOffre = 'O'
 		LIMIT 0, 1
 	</statement>
 
