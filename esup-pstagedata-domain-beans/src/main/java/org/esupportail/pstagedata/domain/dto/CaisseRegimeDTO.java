@@ -75,6 +75,15 @@ public class CaisseRegimeDTO extends NomenclatureCodeDTO implements Serializable
 	}
 
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @return the modifiable
 	 */

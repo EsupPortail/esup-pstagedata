@@ -69,5 +69,14 @@ public class FapN3DTO extends NomenclatureCodeEnfantDTO implements Serializable{
 	public String toString(){
 		return super.toString()+", numQualification : "+this.numQualification;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

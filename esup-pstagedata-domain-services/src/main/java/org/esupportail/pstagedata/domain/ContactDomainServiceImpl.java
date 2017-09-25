@@ -10,6 +10,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.CentreGestionDaoService;
 import org.esupportail.pstagedata.dao.ContactDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
@@ -40,6 +42,11 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * ContactDaoService
 	 */
@@ -78,12 +85,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#addContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
 	public int addContact(ContactDTO c) throws DataAddException, WebServiceDataBaseException{
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.contactDaoService.addContact(UtilsDTO.getContactFromDTO(c));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -93,12 +102,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#deleteContact(int)
 	 */
 	public boolean deleteContact(int idContact) throws DataDeleteException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.deleteContact(idContact);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -108,12 +119,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#deleteContactFromIdService(int)
 	 */
 	public boolean deleteContactFromIdService(int idService) throws DataDeleteException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.deleteContactFromIdService(idService);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -155,7 +168,7 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 */
 	public List<ContactDTO> getContactsFromIdService(int idService, List<Integer> idsCentresGestion, String codeUniversite){
 		List<ContactDTO> lRet = new ArrayList<ContactDTO>();
-		List<ContactDTO> lTmp = null;
+		List<ContactDTO> lTmp;
 		boolean entrepriseOnly=false;
 		if(idService>0 && idsCentresGestion!=null && !idsCentresGestion.isEmpty() && StringUtils.hasText(codeUniversite)){
 			// Recup cg Entreprise
@@ -313,12 +326,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#updateContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
 	public boolean updateContact(ContactDTO c) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.updateContact(UtilsDTO.getContactFromDTO(c));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -328,12 +343,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#updateCompteContact(org.esupportail.pstagedata.domain.dto.ContactDTO)
 	 */
 	public boolean updateCompteContact(ContactDTO c) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.updateCompteContact(UtilsDTO.getContactFromDTO(c));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -343,12 +360,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#updateContactDerniereConnexion(int, java.util.Date)
 	 */
 	public boolean updateContactDerniereConnexion(int idContact, Date avantDerniereConnexion) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.updateContactDerniereConnexion(idContact,avantDerniereConnexion);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -358,12 +377,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#updateContactInfosAJour(int, java.lang.String)
 	 */
 	public boolean updateContactInfosAJour(int idContact , String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.updateContactInfosAJour(idContact, loginInfosAJour);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -372,12 +393,14 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#deleteComptesContactFromIdService(int)
 	 */
 	public boolean deleteComptesContactFromIdService(int idService) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.contactDaoService.deleteComptesContactFromIdService(idService);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

@@ -81,7 +81,12 @@ public class ReponseSupplementaireDTO extends ObjetMetiersDTO implements Seriali
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.ObjetMetiersDTO#toString()
 	 */

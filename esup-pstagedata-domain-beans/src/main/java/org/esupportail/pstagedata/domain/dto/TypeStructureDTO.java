@@ -41,7 +41,29 @@ public class TypeStructureDTO extends NomenclatureIdDTO implements Serializable{
 		this.siretObligatoire=t.isSiretObligatoire();
 		this.modifiable = t.getModifiable();
 	}
-	
+
+	/* ***************************************************************
+	 * Methodes
+	 ****************************************************************/
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString(){
+		return super.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	
@@ -58,18 +80,6 @@ public class TypeStructureDTO extends NomenclatureIdDTO implements Serializable{
 	 */
 	public void setSiretObligatoire(boolean siretObligatoire) {
 		this.siretObligatoire = siretObligatoire;
-	}
-	
-	/* ***************************************************************
-	 * M�thodes
-	 ****************************************************************/
-	
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString(){
-		return super.toString();
 	}
 
 	/**

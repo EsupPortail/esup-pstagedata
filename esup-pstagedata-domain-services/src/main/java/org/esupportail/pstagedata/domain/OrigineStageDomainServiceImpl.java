@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.OrigineStageDaoService;
 import org.esupportail.pstagedata.dao.exceptions.*;
 import org.esupportail.pstagedata.domain.dto.OrigineStageDTO;
@@ -24,6 +26,11 @@ public class OrigineStageDomainServiceImpl implements OrigineStageDomainService 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * langueConventionDaoService
@@ -54,12 +61,14 @@ public class OrigineStageDomainServiceImpl implements OrigineStageDomainService 
 
 	public int addOrigineStage(OrigineStageDTO ef) throws DataAddException,
 			WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.origineStageDaoService.addOrigineStage(UtilsDTO.getOrigineStageFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -67,12 +76,14 @@ public class OrigineStageDomainServiceImpl implements OrigineStageDomainService 
 
 	public boolean updateOrigineStage(OrigineStageDTO ef) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = origineStageDaoService.updateOrigineStage(UtilsDTO.getOrigineStageFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -80,12 +91,14 @@ public class OrigineStageDomainServiceImpl implements OrigineStageDomainService 
 
 	public boolean deleteOrigineStage(int id) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = origineStageDaoService.deleteOrigineStage(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -93,12 +106,14 @@ public class OrigineStageDomainServiceImpl implements OrigineStageDomainService 
 
 	@Override
 	public boolean reactivateOrigineStage(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = origineStageDaoService.reactivateOrigineStage(id);
 		}catch (DataReactivateDaoException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

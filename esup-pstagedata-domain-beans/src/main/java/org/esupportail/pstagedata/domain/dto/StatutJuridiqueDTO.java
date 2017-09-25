@@ -55,6 +55,16 @@ public class StatutJuridiqueDTO extends NomenclatureIdEnfantDTO implements Seria
 		return super.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	

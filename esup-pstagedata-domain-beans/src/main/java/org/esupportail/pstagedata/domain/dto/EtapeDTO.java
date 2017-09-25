@@ -43,7 +43,29 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 			this.codeVersionEtape=e.getCodeVersionEtape();
 		}
 	}
-	
+
+	/* ***************************************************************
+	 * Methodes
+	 ****************************************************************/
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString(){
+		return super.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	
@@ -60,18 +82,6 @@ public class EtapeDTO extends NomenclatureCodeDTO implements Serializable{
 	 */
 	public void setCodeUniversite(String codeUniversite) {
 		this.codeUniversite = codeUniversite;
-	}
-	
-	/* ***************************************************************
-	 * Methodes
-	 ****************************************************************/
-	
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString(){
-		return super.toString();
 	}
 
 	/**

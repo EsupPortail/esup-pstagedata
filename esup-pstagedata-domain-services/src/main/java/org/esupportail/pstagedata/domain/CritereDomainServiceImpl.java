@@ -11,17 +11,16 @@ public class CritereDomainServiceImpl implements CritereDomainService {
 
 
 	private CritereDaoService critereDaoService;
-	
-	private CritereDTOManager critereDTOManager;
-	
+
+	private transient CritereDTOManager critereDTOManager;
+
 	@Override
-	//TODO exception a gerer
 	public List<CritereDTO> getCriteresParCategorieEtParNiveau(
 			Integer typeCategorie, Integer niveau) {
 		List<Critere> criteresParNandCat = critereDaoService.getCriteresParCategorieEtParNiveau(typeCategorie, niveau);
 		List<CritereDTO> criteresDTO = new ArrayList<CritereDTO>(criteresParNandCat.size());
-		CritereDTO critereDTO = null;
-		for( Critere critere : criteresParNandCat){			
+		CritereDTO critereDTO;
+		for( Critere critere : criteresParNandCat){
 			critereDTO = critereDTOManager.createCritereDTO();
 			critereDTO.setCritere(critere);
 			criteresDTO.add(critereDTO);

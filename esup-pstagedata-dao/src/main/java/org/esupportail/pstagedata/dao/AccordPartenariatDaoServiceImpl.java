@@ -72,12 +72,14 @@ public class AccordPartenariatDaoServiceImpl extends AbstractIBatisDaoService im
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addAccord",accord);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -91,12 +93,14 @@ public class AccordPartenariatDaoServiceImpl extends AbstractIBatisDaoService im
 		try{
 			b = getSqlMapClientTemplate().update("updateAccord",accord)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -109,11 +113,13 @@ public class AccordPartenariatDaoServiceImpl extends AbstractIBatisDaoService im
 		try{
 			b = getSqlMapClientTemplate().delete("deleteAccord",idAccord)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			if(e.getMessage().contains("Cannot delete or update")){
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

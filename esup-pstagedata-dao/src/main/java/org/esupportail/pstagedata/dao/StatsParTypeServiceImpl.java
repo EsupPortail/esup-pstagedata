@@ -37,6 +37,7 @@ public class StatsParTypeServiceImpl  extends AbstractIBatisDaoService  implemen
 					liste = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList(requete, parametres);
 				}
 			} catch (DataAccessException dataAe) {
+				logger.debug(dataAe);
 				StringBuilder sb = new StringBuilder();
 				sb.append(" Dans ");
 				sb.append(this.getClass().getSimpleName());
@@ -64,10 +65,12 @@ public class StatsParTypeServiceImpl  extends AbstractIBatisDaoService  implemen
 				 annees = (List<String>)this.getSqlMapClientTemplate().queryForList(requete,idCentreGestion); //$NON-NLS-1$
 			}
 			catch (final DataAccessException dae) {
+				logger.debug(dae);
 				throw new DataAccessDaoException(CoreMessages.getString("stats.erreur.db.acces"), dae) ; //$NON-NLS-1$
 			}
 			catch(final Exception npe)
 			{
+				logger.debug(npe);
 				throw new DataAccessDaoException(CoreMessages.getString("stats.erreur.inattendue"), npe);
 				
 			}
@@ -83,10 +86,12 @@ public class StatsParTypeServiceImpl  extends AbstractIBatisDaoService  implemen
 				 nbCvts = (List<StatisticItem>)this.getSqlMapClientTemplate().queryForList(requete, idCentreGestion); //$NON-NLS-1$
 			}
 			catch (final DataAccessException dae) {
+				logger.debug(dae);
 				throw new DataAccessDaoException(CoreMessages.getString("stats.erreur.db.acces"), dae) ; //$NON-NLS-1$
 			}
 			catch(final Exception npe)
 			{
+				logger.debug(npe);
 				throw new DataAccessDaoException(CoreMessages.getString("stats.erreur.inattendue"), npe);
 				
 			}

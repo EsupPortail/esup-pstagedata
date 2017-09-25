@@ -2,6 +2,8 @@ package org.esupportail.pstagedata.domain.dto;
 
 import java.io.Serializable;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.domain.beans.Fichier;
 
 /**
@@ -13,6 +15,11 @@ public class FichierDTO implements Serializable, Cloneable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/* ***************************************************************
 	 * Propriétés
 	 ****************************************************************/
@@ -114,6 +121,7 @@ public class FichierDTO implements Serializable, Cloneable{
 		try {
 			return super.clone();
 		}catch(CloneNotSupportedException e){
+			logger.error(e);
 			return null;
 		}
 	} 

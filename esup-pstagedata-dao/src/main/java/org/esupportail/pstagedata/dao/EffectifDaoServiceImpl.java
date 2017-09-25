@@ -43,12 +43,14 @@ public class EffectifDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			b = getSqlMapClientTemplate().update("reactivateEffectif",id)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataReactivateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -61,12 +63,14 @@ public class EffectifDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addEffectif",ef);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -79,12 +83,14 @@ public class EffectifDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			b = getSqlMapClientTemplate().update("updateEffectif",ef)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -97,12 +103,14 @@ public class EffectifDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			b = getSqlMapClientTemplate().delete("deleteEffectif",id)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

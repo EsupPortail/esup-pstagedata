@@ -28,7 +28,7 @@ public class DureeDiffusionDTO extends NomenclatureIdDTO implements Serializable
 
 	/**
 	 * Constructeur
-	 * @param da 
+	 * @param d
 	 */
 	public DureeDiffusionDTO(DureeDiffusion d){
 		super(d);
@@ -67,4 +67,13 @@ public class DureeDiffusionDTO extends NomenclatureIdDTO implements Serializable
 		return super.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

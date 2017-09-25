@@ -593,7 +593,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws AccordAlreadyExistingForContactException 
 	 * @throws AccordAlreadyExistingForStructureException 
 	 */
-	public int addAccord(AccordPartenariatDTO accord) throws DataAddException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException;
+	public int addAccord(AccordPartenariatDTO accord) throws DataAddException, WebServiceDataBaseException;
 	/**
 	 * @param accord
 	 * @return boolean
@@ -602,7 +602,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws AccordAlreadyExistingForContactException 
 	 * @throws AccordAlreadyExistingForStructureException 
 	 */
-	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException;
+	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException;
 	/**
 	 * @param idAccord
 	 * @return boolean
@@ -709,14 +709,12 @@ public interface RemoteServices extends Serializable{
 	 */
 	public int getNombreAvenant(int idConvention);
 	/**
-	 * @param cg
 	 * @return int
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException 
 	 */
 	public int addAvenant(AvenantDTO a) throws DataAddException, WebServiceDataBaseException;
 	/**
-	 * @param cg
 	 * @return boolean
 	 * @throws DataUpdateException 
 	 * @throws WebServiceDataBaseException 
@@ -952,6 +950,14 @@ public interface RemoteServices extends Serializable{
 	 * @throws WebServiceDataBaseException 
 	 */
 	public boolean updateContactInfosAJour(int idContact, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException;
+
+	/**
+	 * @param idService
+	 * @return boolean
+	 * @throws DataDeleteException
+	 * @throws WebServiceDataBaseException
+	 */
+	public boolean deleteComptesContactFromIdService(int idService) throws DataDeleteException, WebServiceDataBaseException;
 
 	/**
 	 * @param idContact 
@@ -1386,7 +1392,7 @@ public interface RemoteServices extends Serializable{
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException
 	 */
-	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException, PersonalAlreadyExistingForCentreException;
+	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException;
 	/**
 	 * @param pg 
 	 * @return boolean
@@ -1940,7 +1946,6 @@ public interface RemoteServices extends Serializable{
 	public List<ConventionDTO> getConventionsFromCriteresExport(CritereRechercheConventionDTO critereRechercheConvention);
 
 	/**
-	 * @param id
 	 * @return ConventionDTO pour export
 	 */
 	//	public ConventionDTO getConventionFromExport(int id);
@@ -2103,7 +2108,6 @@ public interface RemoteServices extends Serializable{
 	public EtudiantDTO getEtudiantFromId(int id);
 
 	/**
-	 * @param UID
 	 * @return EtudiantDTO
 	 */
 	public EtudiantDTO getEtudiantFromUid(String uidEtudiant, String codeUniversite);

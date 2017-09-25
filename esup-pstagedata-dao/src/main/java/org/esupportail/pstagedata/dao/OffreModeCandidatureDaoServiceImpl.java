@@ -38,12 +38,13 @@ public class OffreModeCandidatureDaoServiceImpl extends AbstractIBatisDaoService
 			if(idsModeCandidature!=null&&!idsModeCandidature.isEmpty()){
 				for(int i : idsModeCandidature){
 					HashMap<String, String> parameterMap = new HashMap<String, String>();
-					parameterMap.put("idOffre", ""+idOffre);
-					parameterMap.put("idModeCandidature", i+"");
+					parameterMap.put("idOffre", Integer.toString(idOffre));
+					parameterMap.put("idModeCandidature", Integer.toString(i));
 					tmp = (Integer) getSqlMapClientTemplate().insert("addOffreModeCandidature", parameterMap);
 				}
 			}
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -53,6 +54,7 @@ public class OffreModeCandidatureDaoServiceImpl extends AbstractIBatisDaoService
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -66,11 +68,13 @@ public class OffreModeCandidatureDaoServiceImpl extends AbstractIBatisDaoService
 		try{
 			b = getSqlMapClientTemplate().delete("deleteOffreModeCandidatureFromId",idOffre)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			if(e.getMessage().contains("Cannot delete or update")){
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

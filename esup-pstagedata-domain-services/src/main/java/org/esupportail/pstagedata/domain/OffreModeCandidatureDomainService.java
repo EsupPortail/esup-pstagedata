@@ -29,7 +29,7 @@ public interface OffreModeCandidatureDomainService extends Serializable {
 	 * @throws DataDeleteException 
 	 * @throws WebServiceDataBaseException 
 	 */
-	public int addOffreModeCandidature(int idOffre, List<Integer> idsModeCandidature) throws DataAddException, DataDeleteException, WebServiceDataBaseException;
+	public int addOffreModeCandidature(int idOffre, List<Integer> idsModeCandidature) throws DataAddException;
 	
 	/**
 	 * @param idOffre

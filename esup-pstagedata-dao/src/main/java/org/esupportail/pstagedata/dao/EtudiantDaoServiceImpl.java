@@ -38,6 +38,7 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addEtudiant",etudiant);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -52,16 +53,17 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 						etudiant.setId(tmp);
 					}
 					etudiant.setLoginModif(etudiant.getLoginCreation());
-					
-					@SuppressWarnings("unused")
-					boolean b = getSqlMapClientTemplate().update("updateEtudiant",etudiant)>0?true:false;
+
+					getSqlMapClientTemplate().update("updateEtudiant",etudiant);
 				} catch (DataAccessException eu) {
+					logger.debug(eu);
 					error = ((SQLException)eu.getCause()).getErrorCode();
 					if (error == 1452) {//Cannot add or update
 						throw new DataUpdateDaoException(eu.getMessage(),eu.getCause());
 					}
 					throw new DataBaseDaoException(eu.getMessage(), eu.getCause());	
 				} catch (Exception eu) {
+					logger.debug(eu);
 					throw new DataBaseDaoException(eu.getMessage(), eu.getCause());
 				}
 				
@@ -69,6 +71,7 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -82,6 +85,7 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			b = getSqlMapClientTemplate().delete("deleteEtudiant",idEtudiant)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			// cas  e.getMessage().contains("Cannot delete or update"), code erreur 1451
 			if (error == 1451) {
@@ -89,6 +93,7 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -118,12 +123,14 @@ public class EtudiantDaoServiceImpl extends AbstractIBatisDaoService implements 
 		try{
 			b = getSqlMapClientTemplate().update("updateEtudiant",etudiant)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

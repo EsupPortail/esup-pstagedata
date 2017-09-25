@@ -36,15 +36,10 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 		super(n);
 		this.modifiable = n.getModifiable();
 	}
-	
-	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
 
 	/* ***************************************************************
 	 * Methodes
 	 ****************************************************************/
-	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
@@ -53,6 +48,19 @@ public class NiveauFormationDTO extends NomenclatureIdDTO implements Serializabl
 		return super.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	/* ***************************************************************
+	 * Getters / Setters
+	 ****************************************************************/
 	/**
 	 * @return the modifiable
 	 */

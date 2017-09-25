@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.ConventionDaoService;
 import org.esupportail.pstagedata.dao.EtapeDaoService;
 import org.esupportail.pstagedata.dao.UfrDaoService;
@@ -36,6 +38,11 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 
 	/**
 	 * ConventionDaoService
@@ -71,12 +78,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 */
 	public int addConvention(ConventionDTO convention) throws DataAddException,
 	WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.conventionDaoService.addConvention(UtilsDTO.getConventionFromDTO(convention));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -87,12 +96,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 */
 	public boolean deleteConvention(int idConvention)
 			throws DataDeleteException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.deleteConvention(idConvention);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -154,24 +165,9 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 		return lr;
 	}
 
-
 	/**
-	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionFromExport(int)
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getConventionsFromExport(List)
 	 */
-	//	public ConventionDTO getConventionFromExport(int id) {
-	//		ConventionDTO cr = null;
-	//		Convention c = this.conventionDaoService.getConventionFromExport(id);
-	//		if(c!=null){
-	//			if(c.getCodeUFR()!=null){
-	//				c.setUfr(ufrDaoService.getUfrFromId(c.getCodeUFR(), c.getCodeUniversiteUFR()!=null?c.getCodeUniversiteUFR():" "));
-	//			}
-	//			if(c.getCodeEtape()!=null){
-	//				c.setEtape(etapeDaoService.getEtapeFromId(c.getCodeEtape(), c.getCodeUniversiteEtape()!=null?c.getCodeUniversiteEtape():" "));
-	//			}
-	//			cr = new ConventionDTO(c,false);
-	//		}
-	//		return cr;
-	//	}
 	public List<ConventionDTO> getConventionsFromExport(List<Integer> idsConventionsExport) {
 		List<ConventionDTO> lr = null;
 		List<ConventionExport> l = this.conventionDaoService.getConventionsFromExport(idsConventionsExport);
@@ -194,15 +190,15 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public List<ConventionDTO> getConventionsEtudiant(String identEtudiant, String codeUniversite) {
 		List<ConventionDTO> lr = null;
 		if (identEtudiant != null) {
-			List<Convention> l = this.conventionDaoService.getConventionsEtudiant(identEtudiant, codeUniversite);
-			lr = UtilsDTO.getConventionListDTO(l,true);
+			List<ConventionExport> l = this.conventionDaoService.getConventionsEtudiant(identEtudiant, codeUniversite);
+			lr = UtilsDTO.getConventionListExportDTO(l,true);
 		}
 		return lr;
 	}
 
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.ContactDomainService#getNombreConventionByCentreGestion(int, java.lang.String)
+	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#getNombreConventionByCentreGestion(int, String)
 	 */
 	public int getNombreConventionByCentreGestion(int idCentreGestion, String codeUniversite){
 		return this.conventionDaoService.getNombreConventionByCentreGestion(idCentreGestion, codeUniversite);
@@ -226,12 +222,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public boolean updateConvention(ConventionDTO convention)
 			throws DataUpdateException, WebServiceDataBaseException {
 
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.updateConvention(UtilsDTO.getConventionFromDTO(convention));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -243,12 +241,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public boolean updateCentreConventionByUfr(String code, int idCentreGestion, String codeUniversite)
 			throws DataUpdateException, WebServiceDataBaseException {
 
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.updateCentreConventionByUfr(code, idCentreGestion, codeUniversite);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -260,12 +260,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	public boolean updateCentreConventionByEtape(String code, int idCentreGestion, String codeUniversite)
 			throws DataUpdateException, WebServiceDataBaseException {
 
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.updateCentreConventionByEtape(code, idCentreGestion, codeUniversite);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -283,12 +285,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 * @see org.esupportail.pstagedata.domain.ConventionDomainService#updateConventionSetCodeVersionEtape(java.lang.String, java.lang.String)
 	 */
 	public boolean updateConventionSetCodeVersionEtape(String codeEtape, String codeVersionEtape) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.updateConventionSetCodeVersionEtape(codeEtape, codeVersionEtape);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -314,12 +318,14 @@ public class ConventionDomainServiceImpl implements ConventionDomainService {
 	 */
 	public boolean updateConventionValidation(ConventionDTO convention)
 			throws DataUpdateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.conventionDaoService.updateConventionValidation(UtilsDTO.getConventionFromDTO(convention));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

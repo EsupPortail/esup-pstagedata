@@ -65,4 +65,14 @@ public class NomenclatureIdEnfantDTO extends NomenclatureIdDTO implements Serial
 	public String toString(){
 		return super.toString()+", idParent : "+idParent;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

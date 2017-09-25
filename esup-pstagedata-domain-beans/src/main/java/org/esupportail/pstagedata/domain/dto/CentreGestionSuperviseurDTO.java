@@ -69,6 +69,10 @@ public class CentreGestionSuperviseurDTO extends AdresseDTO implements Serializa
 		"nomCentreGestionSuperviseur : "+nomCentreGestionSuperviseur+", "+super.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/

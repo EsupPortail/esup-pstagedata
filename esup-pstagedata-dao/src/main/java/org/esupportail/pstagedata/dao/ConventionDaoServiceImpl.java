@@ -45,12 +45,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			if(convention.getCodeUniversiteEtape()==null) convention.setCodeUniversiteEtape(" ");
 			tmp = (Integer) getSqlMapClientTemplate().insert("addConvention",convention);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -66,12 +68,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().delete("deleteConvention",idConvention)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -90,7 +94,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionsEtudiant(java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Convention> getConventionsEtudiant(String identEtudiant, String codeUniversite) {
+	public List<ConventionExport> getConventionsEtudiant(String identEtudiant, String codeUniversite) {
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("identEtudiant", identEtudiant);
 		parameterMap.put("codeUniversite", codeUniversite);
@@ -380,12 +384,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 			if(convention.getCodeUniversiteEtape()==null) convention.setCodeUniversiteEtape(" ");
 			b = getSqlMapClientTemplate().update("updateConvention",convention)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -404,12 +410,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().update("updateCentreConventionByUfr",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -420,7 +428,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 	 */
 	public boolean updateCentreConventionByEtape(String code, int idCentreGestion, String codeUniversite)
 			throws DataUpdateDaoException, DataBaseDaoException{
-		boolean b = false;
+		boolean b;
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		if (code.contains(";")){
 			String [] tabCodes = code.split(";");
@@ -435,12 +443,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().update("updateCentreConventionByEtape",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -466,12 +476,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().update("updateConventionSetCodeVersionEtape",parameterMap)>0?true:false;
 		} catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		} catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -520,12 +532,14 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().update("updateConventionValidation",convention)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

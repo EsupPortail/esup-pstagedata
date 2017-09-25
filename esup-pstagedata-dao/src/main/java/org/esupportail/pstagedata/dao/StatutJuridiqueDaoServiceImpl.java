@@ -58,12 +58,14 @@ public class StatutJuridiqueDaoServiceImpl extends AbstractIBatisDaoService impl
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addStatutJuridique",sj);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -76,12 +78,14 @@ public class StatutJuridiqueDaoServiceImpl extends AbstractIBatisDaoService impl
 		try{
 			b = getSqlMapClientTemplate().update("updateStatutJuridique",sj)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -94,12 +98,14 @@ public class StatutJuridiqueDaoServiceImpl extends AbstractIBatisDaoService impl
 		try{
 			b = getSqlMapClientTemplate().delete("deleteStatutJuridique",id)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -111,12 +117,14 @@ public class StatutJuridiqueDaoServiceImpl extends AbstractIBatisDaoService impl
 		try{
 			b = getSqlMapClientTemplate().update("reactivateStatutJuridique",id)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataReactivateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

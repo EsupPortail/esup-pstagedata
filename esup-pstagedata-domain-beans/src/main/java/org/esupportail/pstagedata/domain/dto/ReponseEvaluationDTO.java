@@ -659,7 +659,12 @@ public class ReponseEvaluationDTO extends ObjetMetiersDTO implements Serializabl
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.ObjetMetiersDTO#toString()
 	 */

@@ -10,21 +10,21 @@ public class StatisticsDtoManagerImpl implements StatisticsDtoManager {
 
 	@Override
 	public StatisticItemDTO createStatisticItemDTO() {
-		
+
 		return new StatisticItemDTO();
 	}
-	
+
 	public  List <StatisticItemDTO> transformToDto(List<StatisticItem>  stats){
 
-		List<StatisticItemDTO>  statsDTO= null;
-		StatisticItemDTO statisticItemDTO=null;
-		if(stats!=null && stats.size() > 0){
+		List<StatisticItemDTO> statsDTO = null;
+		StatisticItemDTO statisticItemDTO;
+		if(stats!=null && !stats.isEmpty()){
 			statsDTO = new ArrayList<StatisticItemDTO>(stats.size());
-		for(StatisticItem itemstat : stats){
-			 statisticItemDTO = createStatisticItemDTO();
-			 statisticItemDTO.setStatisticItem(itemstat);
-			 statsDTO.add(statisticItemDTO);
-		}
+			for(StatisticItem itemstat : stats){
+				statisticItemDTO = createStatisticItemDTO();
+				statisticItemDTO.setStatisticItem(itemstat);
+				statsDTO.add(statisticItemDTO);
+			}
 		}
 		return statsDTO;
 	}

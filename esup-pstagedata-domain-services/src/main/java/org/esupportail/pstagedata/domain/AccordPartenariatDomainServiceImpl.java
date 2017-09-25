@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.AccordPartenariatDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -32,11 +34,16 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * AccordPartenariatDaoService
 	 */
-	public AccordPartenariatDaoService accordPartenariatDaoService;
+	private AccordPartenariatDaoService accordPartenariatDaoService;
 	
 	/**
 	 * @return the accordPartenariatDaoService
@@ -44,6 +51,7 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 	public AccordPartenariatDaoService getAccordPartenariatDaoService() {
 		return accordPartenariatDaoService;
 	}
+
 	/**
 	 * @param accordPartenariatDaoService the accordPartenariatDaoService to set
 	 */
@@ -73,6 +81,7 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 	}
 	/**
 	 * @see org.esupportail.pstagedata.domain.AccordPartenariatDomainService#getAccordFromIdContact(int)
+	 *
 	 */
 	public AccordPartenariatDTO getAccordFromIdContact(int idContact){
 		AccordPartenariat a = this.accordPartenariatDaoService.getAccordFromIdContact(idContact);
@@ -92,8 +101,10 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 		try{
 			tmp = this.accordPartenariatDaoService.addAccord(UtilsDTO.getAccordPartenariatFromDTO(accord));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -106,8 +117,10 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 		try{
 			b = this.accordPartenariatDaoService.updateAccord(UtilsDTO.getAccordPartenariatFromDTO(accord));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -120,8 +133,10 @@ public class AccordPartenariatDomainServiceImpl implements AccordPartenariatDoma
 		try{
 			b = this.accordPartenariatDaoService.deleteAccord(idAccord);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

@@ -64,8 +64,8 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 	 */
 	public PersonnelCentreGestion getPersonnelCentreGestionFromUidAndCentre(String uidPersonnelCentreGestion, int idCentreGestion){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("uidPersonnel", ""+uidPersonnelCentreGestion);
-		parameterMap.put("idCentreGestion", ""+idCentreGestion);
+		parameterMap.put("uidPersonnel", uidPersonnelCentreGestion);
+		parameterMap.put("idCentreGestion", Integer.toString(idCentreGestion));
 		return (PersonnelCentreGestion) getSqlMapClientTemplate().queryForObject("getPersonnelCentreGestionFromUidAndCentre", parameterMap);
 	}
 	
@@ -99,12 +99,14 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 			if(pg.getCodeUniversiteAffectation()==null) pg.setCodeUniversiteAffectation(" ");
 			tmp = (Integer) getSqlMapClientTemplate().insert("addPersonnelCentreGestion", pg);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -119,12 +121,14 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 			if(pg.getCodeUniversiteAffectation()==null) pg.setCodeUniversiteAffectation(" ");
 			b = getSqlMapClientTemplate().update("updatePersonnelCentreGestion", pg)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -143,11 +147,13 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 				b = getSqlMapClientTemplate().update("deletePersonnelCentreGestion",parameterMap)>0?true:false;
 			}
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			if(e.getMessage().contains("Cannot delete or update")){
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -156,10 +162,8 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 	@SuppressWarnings({ "unchecked", "cast" })
 	private boolean isInterlocutor(int idPersonnelCentreGestion) {
 		List<Integer> listeOffres = (List<Integer>) getSqlMapClientTemplate().queryForList("getOffresForPersonnelCentreGestion", idPersonnelCentreGestion);
-		if (listeOffres!=null && !listeOffres.isEmpty()){
-			return true;
-		}
-		return false;
+
+		return (listeOffres != null)?true:false;
 	}
 	
 }

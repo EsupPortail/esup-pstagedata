@@ -5,18 +5,16 @@ import java.util.Map;
 import org.esupportail.pstagedata.utils.CoreMessages;
 
 public class OffreStatsDomaineManagerImpl implements OffreStatsDomaineManager{
+
 	/**
 	 * liste clef, valeur des domaines services pour les offres
 	 */
-private Map<String, OffreStatsDomaineService> offreStatsDomaineServices;
+	private transient Map<String, OffreStatsDomaineService> offreStatsDomaineServices;
 
-
-
-/*
- * 
- * (non-Javadoc)
- * @see org.esupportail.pstagedata.domain.stats.OffreStatsDomaineManager#create(java.lang.String)
- */
+	/*
+	 * (non-Javadoc)
+	 * @see org.esupportail.pstagedata.domain.stats.OffreStatsDomaineManager#create(java.lang.String)
+	 */
 	@Override
 	public OffreStatsDomaineService create(String etat) {
 		OffreStatsDomaineService oStatsDomaineService = offreStatsDomaineServices.get(etat);
@@ -26,7 +24,7 @@ private Map<String, OffreStatsDomaineService> offreStatsDomaineServices;
 		else {
 			throw new IllegalArgumentException(CoreMessages.getString("offre.domaine.non.impl"));
 		}
-		
+
 	}
 
 
@@ -39,5 +37,5 @@ private Map<String, OffreStatsDomaineService> offreStatsDomaineServices;
 	}
 
 
-	
+
 }

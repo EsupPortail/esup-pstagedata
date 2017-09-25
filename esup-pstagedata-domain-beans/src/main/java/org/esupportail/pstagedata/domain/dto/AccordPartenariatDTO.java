@@ -112,7 +112,11 @@ public class AccordPartenariatDTO extends ObjetMetiersDTO implements Serializabl
 		"dateSuppressionComptes : "+dateSuppressionComptes+", "+"estValide : "+estValide+", "+"comptesSupprimes : "+comptesSupprimes
 		+", "+super.toString();
 	}
-		
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	

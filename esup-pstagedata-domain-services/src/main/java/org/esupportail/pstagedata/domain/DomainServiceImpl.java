@@ -27,7 +27,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * For Logging.
 	 */
 	@SuppressWarnings("unused")
-	private final Logger logger = new LoggerImpl(this.getClass());
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 
 	/**
 	 * En l'absence de Dao et de Ldap, on constitue ici une liste... limitee de

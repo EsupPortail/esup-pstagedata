@@ -36,10 +36,6 @@ public class TypeOffreDTO extends NomenclatureIdDTO implements Serializable{
 		super(t);
 		this.modifiable = t.getModifiable();
 	}
-	
-	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
 
 	/* ***************************************************************
 	 * M�thodes
@@ -53,6 +49,19 @@ public class TypeOffreDTO extends NomenclatureIdDTO implements Serializable{
 		return super.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+	/* ***************************************************************
+	 * Getters / Setters
+	 ****************************************************************/
 	/**
 	 * @return the modifiable
 	 */

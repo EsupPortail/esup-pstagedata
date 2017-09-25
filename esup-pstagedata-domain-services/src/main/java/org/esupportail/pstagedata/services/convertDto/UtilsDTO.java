@@ -212,8 +212,6 @@ public class UtilsDTO {
 			c.setPresenceTuteurEns(cd.getPresenceTuteurEns());
 			c.setPresenceTuteurPro(cd.getPresenceTuteurPro());
 			c.setSaisieTuteurProParEtudiant(cd.getSaisieTuteurProParEtudiant());
-			c.setChoixAnneeAvantDebutAnnee(cd.getChoixAnneeAvantDebutAnnee());
-			c.setChoixAnneeApresDebutAnnee(cd.getChoixAnneeApresDebutAnnee());
 			c.setCodeUniversite(cd.getCodeUniversite());
 			c.setDepotAnonyme(cd.isDepotAnonyme());
 			c.setAutoriserImpressionConvention(cd.isAutoriserImpressionConvention());
@@ -235,6 +233,8 @@ public class UtilsDTO {
 			c.setAutorisationEtudiantCreationConvention(cd.isAutorisationEtudiantCreationConvention());
 			if(cd.getIdModeValidationStage()>=0) c.setIdModeValidationStage(cd.getIdModeValidationStage());
 			c.setVisibiliteEvalPro(cd.isVisibiliteEvalPro());
+			c.setRecupInscriptionAnterieure(cd.isRecupInscriptionAnterieure());
+			c.setDureeRecupInscriptionAnterieure(cd.getDureeRecupInscriptionAnterieure());
 		}
 		return c;
 	}
@@ -1312,6 +1312,9 @@ public class UtilsDTO {
 			// Ajout nouvelle convention
 			o.setCompetences(oDTO.getCompetences());
 			o.setNbConges(oDTO.getNbConges());
+
+			o.setVolumeHoraireFormation(oDTO.getVolumeHoraireFormation());
+			o.setTypePresence(oDTO.getTypePresence());
 		}
 		return o;
 	}
@@ -1369,7 +1372,7 @@ public class UtilsDTO {
 	 */
 	public static List<AccordPartenariatDTO> getAccordPartenaraitListDTO(List<AccordPartenariat> l){
 		List<AccordPartenariatDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<AccordPartenariatDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(AccordPartenariat a : l){
 				ld.add(new AccordPartenariatDTO(a));
 			}
@@ -1382,7 +1385,7 @@ public class UtilsDTO {
 	 */
 	public static List<AdminStructureDTO> getAdminStructureListDTO(List<AdminStructure> l){
 		List<AdminStructureDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<AdminStructureDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(AdminStructure a : l){
 				ld.add(new AdminStructureDTO(a));
 			}
@@ -1396,7 +1399,7 @@ public class UtilsDTO {
 	 */
 	public static List<AffectationDTO> getAffectationListDTO(List<Affectation> l){
 		List<AffectationDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<AffectationDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Affectation a : l){
 				ld.add(new AffectationDTO(a));
 			}
@@ -1410,7 +1413,7 @@ public class UtilsDTO {
 	 */
 	public static List<AvenantDTO> getAvenantListDTO(List<Avenant> l){
 		List<AvenantDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<AvenantDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Avenant a : l){
 				ld.add(new AvenantDTO(a));
 			}
@@ -1424,7 +1427,7 @@ public class UtilsDTO {
 	 */
 	public static List<CentreGestionDTO> getCentreGestionListDTO(List<CentreGestion> l){
 		List<CentreGestionDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<CentreGestionDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(CentreGestion cg : l){
 				ld.add(new CentreGestionDTO(cg));
 			}
@@ -1438,7 +1441,7 @@ public class UtilsDTO {
 	 */
 	public static List<CentreGestionSuperviseurDTO> getCentreGestionSuperviseurListDTO(List<CentreGestionSuperviseur> l){
 		List<CentreGestionSuperviseurDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<CentreGestionSuperviseurDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(CentreGestionSuperviseur cg : l){
 				ld.add(new CentreGestionSuperviseurDTO(cg));
 			}
@@ -1452,7 +1455,7 @@ public class UtilsDTO {
 	 */
 	public static List<CiviliteDTO> getCiviliteListDTO(List<Civilite> l){
 		List<CiviliteDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<CiviliteDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Civilite c : l){
 				ld.add(new CiviliteDTO(c));
 			}
@@ -1466,7 +1469,7 @@ public class UtilsDTO {
 	 */
 	public static List<ConfidentialiteDTO> getConfidentialiteListDTO(List<Confidentialite> l){
 		List<ConfidentialiteDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<ConfidentialiteDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Confidentialite c : l){
 				ld.add(new ConfidentialiteDTO(c));
 			}
@@ -1480,7 +1483,7 @@ public class UtilsDTO {
 	 */
 	public static List<ContactDTO> getContactListDTO(List<Contact> l){
 		List<ContactDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<ContactDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Contact c : l){
 				ld.add(new ContactDTO(c));
 			}
@@ -1493,7 +1496,7 @@ public class UtilsDTO {
 	 */
 	public static List<ContratOffreDTO> getContratOffreListDTO(List<ContratOffre> l){
 		List<ContratOffreDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<ContratOffreDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(ContratOffre c : l){
 				ld.add(new ContratOffreDTO(c));
 			}
@@ -1506,7 +1509,7 @@ public class UtilsDTO {
 	 */
 	public static List<CritereGestionDTO> getCritereGestionListDTO(List<CritereGestion> l){
 		List<CritereGestionDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<CritereGestionDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(CritereGestion c : l){
 				ld.add(new CritereGestionDTO(c));
 			}
@@ -1519,7 +1522,7 @@ public class UtilsDTO {
 	 */
 	public static List<DroitAdministrationDTO> getDroitAdministrationListDTO(List<DroitAdministration> l){
 		List<DroitAdministrationDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<DroitAdministrationDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(DroitAdministration d : l){
 				ld.add(new DroitAdministrationDTO(d));
 			}
@@ -1532,7 +1535,7 @@ public class UtilsDTO {
 	 */
 	public static List<DureeDiffusionDTO> getDureeDiffusionListDTO(List<DureeDiffusion> l){
 		List<DureeDiffusionDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<DureeDiffusionDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(DureeDiffusion d : l){
 				ld.add(new DureeDiffusionDTO(d));
 			}
@@ -1545,7 +1548,7 @@ public class UtilsDTO {
 	 */
 	public static List<EffectifDTO> getEffectifListDTO(List<Effectif> l){
 		List<EffectifDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<EffectifDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Effectif e : l){
 				ld.add(new EffectifDTO(e));
 			}
@@ -1558,7 +1561,7 @@ public class UtilsDTO {
 	 */
 	public static List<FapN1DTO> getFapN1ListDTO(List<FapN1> l){
 		List<FapN1DTO> ld = (l==null||l.isEmpty())?null:new ArrayList<FapN1DTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(FapN1 f : l){
 				ld.add(new FapN1DTO(f));
 			}
@@ -1571,7 +1574,7 @@ public class UtilsDTO {
 	 */
 	public static List<FapN2DTO> getFapN2ListDTO(List<FapN2> l){
 		List<FapN2DTO> ld = (l==null||l.isEmpty())?null:new ArrayList<FapN2DTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(FapN2 f : l){
 				ld.add(new FapN2DTO(f));
 			}
@@ -1584,7 +1587,7 @@ public class UtilsDTO {
 	 */
 	public static List<FapN3DTO> getFapN3ListDTO(List<FapN3> l){
 		List<FapN3DTO> ld = (l==null||l.isEmpty())?null:new ArrayList<FapN3DTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(FapN3 f : l){
 				ld.add(new FapN3DTO(f));
 			}
@@ -1597,7 +1600,7 @@ public class UtilsDTO {
 	 */
 	public static List<FapQualificationDTO> getFapQualificationListDTO(List<FapQualification> l){
 		List<FapQualificationDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<FapQualificationDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(FapQualification f : l){
 				ld.add(new FapQualificationDTO(f));
 			}
@@ -1610,7 +1613,7 @@ public class UtilsDTO {
 	 */
 	public static List<FapQualificationSimplifieeDTO> getFapQualificationSimplifieeListDTO(List<FapQualificationSimplifiee> l){
 		List<FapQualificationSimplifieeDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<FapQualificationSimplifieeDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(FapQualificationSimplifiee f : l){
 				ld.add(new FapQualificationSimplifieeDTO(f));
 			}
@@ -1623,7 +1626,7 @@ public class UtilsDTO {
 	 */
 	public static List<ModeCandidatureDTO> getModeCandidatureListDTO(List<ModeCandidature> l){
 		List<ModeCandidatureDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<ModeCandidatureDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(ModeCandidature m : l){
 				ld.add(new ModeCandidatureDTO(m));
 			}
@@ -1636,7 +1639,7 @@ public class UtilsDTO {
 	 */
 	public static List<NafN1DTO> getNafN1ListDTO(List<NafN1> l){
 		List<NafN1DTO> ld = (l==null||l.isEmpty())?null:new ArrayList<NafN1DTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(NafN1 n : l){
 				ld.add(new NafN1DTO(n));
 			}
@@ -1649,7 +1652,7 @@ public class UtilsDTO {
 	 */
 	public static List<NafN5DTO> getNafN5ListDTO(List<NafN5> l){
 		List<NafN5DTO> ld = (l==null||l.isEmpty())?null:new ArrayList<NafN5DTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(NafN5 n : l){
 				ld.add(new NafN5DTO(n));
 			}
@@ -1662,7 +1665,7 @@ public class UtilsDTO {
 	 */
 	public static List<NiveauCentreDTO> getNiveauCentreListDTO(List<NiveauCentre> l){
 		List<NiveauCentreDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<NiveauCentreDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(NiveauCentre n : l){
 				ld.add(new NiveauCentreDTO(n));
 			}
@@ -1675,7 +1678,7 @@ public class UtilsDTO {
 	 */
 	public static List<NiveauFormationDTO> getNiveauFormationListDTO(List<NiveauFormation> l){
 		List<NiveauFormationDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<NiveauFormationDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(NiveauFormation n : l){
 				ld.add(new NiveauFormationDTO(n));
 			}
@@ -1688,7 +1691,7 @@ public class UtilsDTO {
 	 */
 	public static List<OffreDTO> getOffreListDTO(List<Offre> l){
 		List<OffreDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<OffreDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Offre o : l){
 				ld.add(new OffreDTO(o,false));
 			}
@@ -1701,7 +1704,7 @@ public class UtilsDTO {
 	 */
 	public static List<OffreDTO> getOffreListDTOLight(List<Offre> l){
 		List<OffreDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<OffreDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Offre o : l){
 				ld.add(new OffreDTO(o,true));
 			}
@@ -1714,7 +1717,7 @@ public class UtilsDTO {
 	 */
 	public static List<OffreDiffusionDTO> getOffreDiffusionListDTO(List<OffreDiffusion> l){
 		List<OffreDiffusionDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<OffreDiffusionDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(OffreDiffusion o : l){
 				ld.add(new OffreDiffusionDTO(o));
 			}
@@ -1727,7 +1730,7 @@ public class UtilsDTO {
 	 */
 	public static List<PaysDTO> getPaysListDTO(List<Pays> l){
 		List<PaysDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<PaysDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Pays p : l){
 				ld.add(new PaysDTO(p));
 			}
@@ -1740,7 +1743,7 @@ public class UtilsDTO {
 	 */
 	public static List<PersonnelCentreGestionDTO> getPersonnelCentreGestionListDTO(List<PersonnelCentreGestion> l){
 		List<PersonnelCentreGestionDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<PersonnelCentreGestionDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(PersonnelCentreGestion p : l){
 				ld.add(new PersonnelCentreGestionDTO(p));
 			}
@@ -1753,7 +1756,7 @@ public class UtilsDTO {
 	 */
 	public static List<ServiceDTO> getServiceListDTO(List<Service> l){
 		List<ServiceDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<ServiceDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Service s : l){
 				ld.add(new ServiceDTO(s));
 			}
@@ -1766,7 +1769,7 @@ public class UtilsDTO {
 	 */
 	public static List<StatutJuridiqueDTO> getStatutJuridiqueListDTO(List<StatutJuridique> l){
 		List<StatutJuridiqueDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<StatutJuridiqueDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(StatutJuridique s : l){
 				ld.add(new StatutJuridiqueDTO(s));
 			}
@@ -1779,7 +1782,7 @@ public class UtilsDTO {
 	 */
 	public static List<StructureDTO> getStructureListDTO(List<Structure> l){
 		List<StructureDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<StructureDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(Structure s : l){
 				ld.add(new StructureDTO(s,false));
 			}
@@ -1792,7 +1795,7 @@ public class UtilsDTO {
 	 */
 	public static List<TempsTravailDTO> getTempsTravailListDTO(List<TempsTravail> l){
 		List<TempsTravailDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<TempsTravailDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(TempsTravail t : l){
 				ld.add(new TempsTravailDTO(t));
 			}
@@ -1805,7 +1808,7 @@ public class UtilsDTO {
 	 */
 	public static List<TypeOffreDTO> getTypeOffreListDTO(List<TypeOffre> l){
 		List<TypeOffreDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<TypeOffreDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(TypeOffre t : l){
 				ld.add(new TypeOffreDTO(t));
 			}
@@ -1818,7 +1821,7 @@ public class UtilsDTO {
 	 */
 	public static List<TypeStructureDTO> getTypeStructureListDTO(List<TypeStructure> l){
 		List<TypeStructureDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<TypeStructureDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(TypeStructure t : l){
 				ld.add(new TypeStructureDTO(t));
 			}
@@ -1831,7 +1834,7 @@ public class UtilsDTO {
 	 */
 	public static List<UniteDureeDTO> getUniteDureeListDTO(List<UniteDuree> l){
 		List<UniteDureeDTO> ld = (l==null||l.isEmpty())?null:new ArrayList<UniteDureeDTO>();
-		if(l!=null){
+		if(ld!=null){
 			for(UniteDuree u : l){
 				ld.add(new UniteDureeDTO(u));
 			}
@@ -2160,7 +2163,7 @@ public class UtilsDTO {
 		return ld;
 	}
 	/**
-	 * @param fe
+	 * @param fed
 	 * @return FicheEvaluation
 	 */
 	public static FicheEvaluation getFicheEvaluationFromDTO(FicheEvaluationDTO fed){
@@ -2252,7 +2255,7 @@ public class UtilsDTO {
 		return ld;
 	}
 	/**
-	 * @param fe
+	 * @param red
 	 * @return ReponseEvaluation
 	 */
 	public static ReponseEvaluation getReponseEvaluationFromDTO(ReponseEvaluationDTO red){
@@ -2427,7 +2430,7 @@ public class UtilsDTO {
 		return lr;
 	}
 	/**
-	 * @param qsd
+	 * @param rsd
 	 * @return ReponseSupplementaire
 	 */
 	public static ReponseSupplementaire getReponseSupplementaireFromDTO(ReponseSupplementaireDTO rsd){

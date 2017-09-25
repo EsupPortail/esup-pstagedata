@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.AvenantDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -32,6 +34,11 @@ public class AvenantDomainServiceImpl implements AvenantDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * AvenantDaoService
 	 */
@@ -51,14 +58,14 @@ public class AvenantDomainServiceImpl implements AvenantDomainService {
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.AvenantDomainService#getAvenant()
+	 * @see org.esupportail.pstagedata.domain.AvenantDomainService#getAvenant(int)
 	 */
 	public List<AvenantDTO> getAvenant(int idConvention) {
 		return UtilsDTO.getAvenantListDTO(this.AvenantDaoService.getAvenant(idConvention));
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.domain.AvenantDomainService#getNombreAvenant()
+	 * @see org.esupportail.pstagedata.domain.AvenantDomainService#getNombreAvenant(int)
 	 */
 	public int getNombreAvenant(int idConvention) {
 		return this.AvenantDaoService.getNombreAvenant(idConvention);
@@ -72,8 +79,10 @@ public class AvenantDomainServiceImpl implements AvenantDomainService {
 		try {
 			tmp = this.AvenantDaoService.addAvenant(UtilsDTO.getAvenantFromDTO(a));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -86,8 +95,10 @@ public class AvenantDomainServiceImpl implements AvenantDomainService {
 		try{
 			b = this.AvenantDaoService.updateAvenant(UtilsDTO.getAvenantFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -101,8 +112,10 @@ public class AvenantDomainServiceImpl implements AvenantDomainService {
 		try{
 			b = this.AvenantDaoService.deleteAvenant(idAvenant);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

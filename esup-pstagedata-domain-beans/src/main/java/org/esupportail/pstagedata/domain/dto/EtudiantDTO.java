@@ -47,8 +47,6 @@ public class EtudiantDTO extends PersonneDTO implements Serializable{
 	 */
 	private Date dateNais;
 
-	
-		
 	/* **
 	 * Objets
 	 */
@@ -95,8 +93,16 @@ public class EtudiantDTO extends PersonneDTO implements Serializable{
 		", "+super.toString();
 
 	}
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	/* ***************************************************************
 	 * Getters / Setters

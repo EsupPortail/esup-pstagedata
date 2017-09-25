@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.TypeOffreDaoService;
 import org.esupportail.pstagedata.dao.exceptions.*;
 import org.esupportail.pstagedata.domain.dto.TypeOffreDTO;
@@ -26,6 +28,11 @@ public class TypeOffreDomainServiceImpl implements TypeOffreDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * TypeOffreDaoService
 	 */
@@ -53,12 +60,14 @@ public class TypeOffreDomainServiceImpl implements TypeOffreDomainService {
 
 	public int addTypeOffre(TypeOffreDTO ef) throws DataAddException,
 			WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.typeOffreDaoService.addTypeOffre(UtilsDTO.getTypeOffreFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -66,12 +75,14 @@ public class TypeOffreDomainServiceImpl implements TypeOffreDomainService {
 
 	public boolean updateTypeOffre(TypeOffreDTO ef) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeOffreDaoService.updateTypeOffre(UtilsDTO.getTypeOffreFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -79,12 +90,14 @@ public class TypeOffreDomainServiceImpl implements TypeOffreDomainService {
 
 	public boolean deleteTypeOffre(int id) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeOffreDaoService.deleteTypeOffre(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -92,12 +105,14 @@ public class TypeOffreDomainServiceImpl implements TypeOffreDomainService {
 
 	@Override
 	public boolean reactivateTypeOffre(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeOffreDaoService.reactivateTypeOffre(id);
 		}catch (DataReactivateDaoException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

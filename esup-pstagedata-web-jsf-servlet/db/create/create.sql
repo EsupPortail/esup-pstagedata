@@ -104,9 +104,9 @@ CREATE  TABLE IF NOT EXISTS `Pays` (
 
   `COG` INT(5) NOT NULL ,
 
-  `actual` INT(1) NOT NULL COMMENT '1=actuel,\n3=territoire n\'ayant pas son propre code officiel g�ographique\n4=territoire ayant son propre code officiel g�ographique' ,
+  `actual` INT(1) NOT NULL,
 
-  `CRPAY` INT(5) NULL COMMENT 'Code officiel g�ographique du pays de rattachement du territoire.' ,
+  `CRPAY` INT(5) NULL,
 
   `lib` VARCHAR(70) NOT NULL ,
 
@@ -492,10 +492,6 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
 
   `saisieTuteurProParEtudiant` TINYINT(1) NOT NULL DEFAULT false ,
 
-  `choixAnneeAvantDebutAnnee` TINYINT(1) NULL DEFAULT false ,
-
-  `choixAnneeApresDebutAnnee` TINYINT(1) NULL DEFAULT false ,
-
   `depotAnonyme` TINYINT(1) NOT NULL DEFAULT false ,
 
   `codeUniversite` VARCHAR(50) NOT NULL ,
@@ -508,7 +504,7 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
 
   `loginModif` VARCHAR(50) NULL ,
 
-  `nomViseur` VARCHAR(50) NULL COMMENT 'pr�nom , nom viseur - signature\n' ,
+  `nomViseur` VARCHAR(50) NULL COMMENT 'prenom , nom viseur - signature\n' ,
 
   `prenomViseur` VARCHAR(50) NULL ,
 
@@ -531,6 +527,10 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
   `idModeValidationStage` INT(11) NOT NULL,
 
   `visibiliteEvalPro` TINYINT(1) NULL DEFAULT 0,
+
+  `recupInscriptionAnterieure` TINYINT(1) NULL DEFAULT 0,
+
+  `dureeRecupInscriptionAnterieure` INT NULL DEFAULT 0 ,
 
   PRIMARY KEY (`idCentreGestion`)) 
 
@@ -839,7 +839,7 @@ CREATE  TABLE IF NOT EXISTS `PersonnelCentreGestion` (
 
   `idCivilite` INT NULL ,
 
-  `impressionConvention` TINYINT(1) NOT NULL DEFAULT false ,
+  `impressionConvention` TINYINT(1) NOT NULL DEFAULT true ,
 
   `codeUniversite` VARCHAR(50) NULL ,
 
@@ -2030,6 +2030,10 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
   `envoiMailTuteurPro` TINYINT(1) DEFAULT 0,
 
   `dateEnvoiMailTuteurPro` DATETIME NULL,
+
+  `volumeHoraireFormation` VARCHAR(10) DEFAULT '0',
+
+  `typePresence` VARCHAR(30) NULL;
 
   PRIMARY KEY (`idConvention`))
 

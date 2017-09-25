@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>esup-pstagedata</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>2.2.4-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-pstagedata-domain-services</artifactId>
@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-pstagedata-dao</artifactId>
-			<version>2.2.4-SNAPSHOT</version>
+			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

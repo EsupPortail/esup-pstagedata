@@ -42,7 +42,7 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	@SuppressWarnings("unchecked")
 	public List<Contact> getContactsFromIdServiceAndCodeUniversite(int idService, String codeUniversite){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idService", ""+idService);
+		parameterMap.put("idService", Integer.toString(idService));
 		parameterMap.put("codeUniversite", ""+codeUniversite);
 		return getSqlMapClientTemplate().queryForList("getContactsFromIdServiceAndCodeUniversite", parameterMap);
 	}
@@ -52,8 +52,8 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	@SuppressWarnings("unchecked")
 	public List<Contact> getContactsFromIdServiceAndIdCentreGestion(int idService, int idCentreGestion){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idService", ""+idService);
-		parameterMap.put("idCentreGestion", ""+idCentreGestion);
+		parameterMap.put("idService", Integer.toString(idService));
+		parameterMap.put("idCentreGestion", Integer.toString(idCentreGestion));
 		return getSqlMapClientTemplate().queryForList("getContactsFromIdServiceAndIdCentreGestion", parameterMap);
 	}
 	
@@ -71,8 +71,8 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	 */
 	public Contact getContactEntrepriseAvecCompteFromMailAndIdStructure(String mail, int idStructure){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("mail", ""+mail);
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("mail", mail);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		return  (Contact) getSqlMapClientTemplate().queryForObject("getContactEntrepriseAvecCompteFromMailAndIdStructure", parameterMap);
 	}
 	/**
@@ -80,8 +80,8 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	 */
 	public Contact getContactEntrepriseFromMailAndIdStructure(String mail, int idStructure){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("mail", ""+mail);
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("mail", mail);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		return  (Contact) getSqlMapClientTemplate().queryForObject("getContactEntrepriseFromMailAndIdStructure", parameterMap);
 	}
 	/**
@@ -110,12 +110,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addContact",c);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -130,12 +132,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			b = getSqlMapClientTemplate().update("updateContact", c)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -149,12 +153,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			b = getSqlMapClientTemplate().update("updateCompteContact", c)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -165,18 +171,20 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	 */
 	public boolean updateContactInfosAJour(int idContact, String loginInfosAJour) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idContact", ""+idContact);
+		parameterMap.put("idContact", Integer.toString(idContact));
 		parameterMap.put("loginInfosAJour", loginInfosAJour);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateContactInfosAJour", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -187,18 +195,20 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 	 */
 	public boolean updateContactDerniereConnexion(int idContact, Date avantDerniereConnexion) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("idContact", ""+idContact);
+		parameterMap.put("idContact", Integer.toString(idContact));
 		parameterMap.put("avantDerniereConnexion", avantDerniereConnexion);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateContactDerniereConnexion",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -212,12 +222,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			b = getSqlMapClientTemplate().update("deleteComptesContactFromIdService", idService)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -231,12 +243,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			b = getSqlMapClientTemplate().delete("deleteContact", idContact)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -249,12 +263,14 @@ public class ContactDaoServiceImpl extends AbstractIBatisDaoService implements C
 		try{
 			b = getSqlMapClientTemplate().delete("deleteContactFromIdService", idService)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

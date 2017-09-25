@@ -51,12 +51,14 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		try{
 			tmp = (Integer)getSqlMapClientTemplate().insert("addStructure", s);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -70,33 +72,37 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		try{
 			b = getSqlMapClientTemplate().delete("deleteStructureBase", idStructure)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			if(e.getMessage().contains("Cannot delete or update")){
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.dao.StructureDaoService#deleteStructure(int)
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#deleteStructure(int,String)
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateDaoException, DataBaseDaoException{
 		boolean b = false;
 		try{
 			HashMap<String, String> parameterMap = new HashMap<String, String>();
-			parameterMap.put("idStructure", ""+idStructure);
-			parameterMap.put("loginCurrentUser", ""+loginCurrentUser);
+			parameterMap.put("idStructure", Integer.toString(idStructure));
+			parameterMap.put("loginCurrentUser", loginCurrentUser);
 			b = getSqlMapClientTemplate().update("deleteStructure", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -133,7 +139,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	public List<Structure> getStructuresFromRaisonSocialeEtPays(String raisonSociale, int cog){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
 		parameterMap.put("raisonSociale", ""+raisonSociale);
-		parameterMap.put("cog", ""+(cog==0?999999:cog));
+		parameterMap.put("cog", Integer.toString(cog==0?999999:cog));
 		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromRaisonSocialeEtPays", parameterMap);
 	}
 	/**
@@ -246,7 +252,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	@SuppressWarnings({ "cast", "unchecked" })
 	public List<Structure> getStructuresFromTypeStructureNafN1EtDepartement(int typeStructure, String nafN1, String departement){
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("typeStructure", typeStructure>0?""+typeStructure:null);
+		parameterMap.put("typeStructure", typeStructure>0?Integer.toString(typeStructure):null);
 		parameterMap.put("nafN1", nafN1);
 		parameterMap.put("codePostal", departement);
 		return (List<Structure>) getSqlMapClientTemplate().queryForList("getStructuresFromTypeStructureNafN1EtDepartement", parameterMap);
@@ -257,7 +263,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	@SuppressWarnings({ "cast", "unchecked" })
 	public List<Structure> getStructuresAvecAccordAValiderFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin){
 		//Heure dedébut positionnée à 00:00:00 pour inclure les structures du jour actuel
-		String dateD00="";
+		String dateD00;
 		if(dateDebut!=null){
 			dateD00=Utils.convertDateToString(dateDebut, Utils.DATE_PATTERN_SQL);
 			dateD00 += " 00:00:00";
@@ -265,7 +271,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 			dateD00 = Utils.DATE_YEAR2000+" 00:00:00";
 		}
 		//Heure de début  positionnée à 23:59:59 pour inclure les structures du jour actuel
-		String dateF23="";
+		String dateF23;
 		if(dateFin!=null){
 			dateF23=Utils.convertDateToString(dateFin, Utils.DATE_PATTERN_SQL);
 			dateF23 += " 23:59:59";
@@ -285,7 +291,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	@SuppressWarnings({ "cast", "unchecked" })
 	public List<Structure> getStructuresAvecAccordValidesFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin){
 		//Heure dedébut positionnée à 00:00:00 pour inclure les structures du jour actuel
-		String dateD00="";
+		String dateD00;
 		if(dateDebut!=null){
 			dateD00=Utils.convertDateToString(dateDebut, Utils.DATE_PATTERN_SQL);
 			dateD00 += " 00:00:00";
@@ -293,7 +299,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 			dateD00 = Utils.DATE_YEAR2000+" 00:00:00";
 		}
 		//Heure dedébut positionnée à 23:59:59 pour inclure les structures du jour actuel
-		String dateF23="";
+		String dateF23;
 		if(dateFin!=null){
 			dateF23=Utils.convertDateToString(dateFin, Utils.DATE_PATTERN_SQL);
 			dateF23 += " 23:59:59";
@@ -376,7 +382,6 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	 * @see org.esupportail.pstagedata.dao.StructureDaoService#countCompteContactFromIdStructure(int)
 	 */
 	public int countCompteContactFromIdStructure(int id){
-		System.out.println( getSqlMapClientTemplate().queryForObject("countCompteContactFromIdStructure", id));
 		return (Integer) getSqlMapClientTemplate().queryForObject("countCompteContactFromIdStructure", id);
 	}
 	
@@ -388,12 +393,14 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 		try{
 			b = getSqlMapClientTemplate().update("updateStructure", s)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -405,18 +412,20 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	public boolean updateStructureInfosAJour(int idStructure,
 			String loginInfosAJour) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		parameterMap.put("loginInfosAJour", loginInfosAJour);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateStructureInfosAJour", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -428,18 +437,20 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	public boolean updateStructureStopValidation(int idStructure,
 			String loginStopValidation) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		parameterMap.put("loginStopValidation", loginStopValidation);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateStructureStopValidation", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -450,18 +461,20 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 	 */
 	public boolean updateStructureValidation(int idStructure, String loginValidation) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		parameterMap.put("loginValidation", loginValidation);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateStructureValidation", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -469,7 +482,7 @@ public class StructureDaoServiceImpl extends AbstractIBatisDaoService implements
 
 
 	/**
-	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getRaisonsSociales()
+	 * @see org.esupportail.pstagedata.dao.StructureDaoService#getRaisonsSociales(String)
 	 */
 	@SuppressWarnings("unchecked")
 	public List<String> getRaisonsSociales(String raisonSociale) {

@@ -13,11 +13,11 @@ import org.esupportail.pstagedata.domain.beans.Convention;
  */
 public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * 
+	 *
 	 */
 	/* ***************************************************************
 	 * Proprietes
@@ -344,7 +344,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * variable pour la listCheckBox de validation en masse
 	 */
 	private boolean selected;
-	
+
 	/**
 	 * competences
 	 */
@@ -361,6 +361,16 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * monnaieGratification
 	 */
 	private String monnaieGratification;
+
+	/**
+	 * volumeHoraireFormation
+	 */
+	private String volumeHoraireFormation;
+
+	/**
+	 * typePresence
+	 */
+	private String typePresence;
 
 	/* **
 	 * Objets
@@ -449,7 +459,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 * uniteDureeGratification
 	 */
 	private UniteDureeDTO uniteDureeGratification;
-	
+
 	/**
 	 * tempsTravail
 	 */
@@ -546,7 +556,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 
 	/**
 	 * @param c
-	 * @param light 
+	 * @param light
 	 */
 	public ConventionDTO(Convention c, boolean light){
 		super(c);
@@ -664,12 +674,11 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				if (c.getSignataire() != null) {
 					this.signataire = new ContactDTO(c.getSignataire());
 				}
-				
-				// Ajout nouvelle convention
 				this.nbConges = c.getNbConges();
 				this.competences = c.getCompetences();
-				
 				this.monnaieGratification = c.getMonnaieGratification();
+				this.volumeHoraireFormation = c.getVolumeHoraireFormation();
+				this.typePresence = c.getTypePresence();
 			}else{
 				this.structure=new StructureDTO(c.getStructure(),true);
 				this.etudiant=new EtudiantDTO(c.getEtudiant(),true);
@@ -797,91 +806,93 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	 */
 	@Override
 	public String toString(){
-		return 
+		return
 				"idConvention : "+idConvention+", "+
-				"idEtudiant : "+idEtudiant+", "+
-				"idCentreGestion : "+idCentreGestion+", "+
-				"codeUFR : "+codeUFR+", "+
-				"codeDepartement : "+codeDepartement+", "+
-				"codeEtape : "+codeEtape+", "+
-				"codeVersionEtape : "+codeVersionEtape+", "+
-				"idStructure : "+idStructure+", "+
-				"idService: "+idService+", "+
-				"idContact : "+idContact+", "+
-				"idSignataire : "+idSignataire+", "+
-				"idTypeConvention : "+idTypeConvention+", "+
-				"idOffre : "+idOffre+", "+
-				"sujetStage : "+sujetStage+", "+
-				"dateDebutStage : "+dateDebutStage+", "+
-				"dateFinStage : "+dateFinStage+", "+
-				"interruptionStage : "+interruptionStage+", "+
-				"dateDebutInterruption : "+dateDebutInterruption+", "+
-				"dateFinInterruption : "+dateFinInterruption+", "+
-				"nbJoursHebdo : "+nbJoursHebdo+", "+
-				"idTempsTravail : "+idTempsTravail+", "+
-				"commentaireDureeTravail : "+commentaireDureeTravail+", "+
-				"codeLangueConvention : "+codeLangueConvention+", "+
-				"idOrigineStage : "+idOrigineStage+", "+
-				"idTheme : "+idTheme+", "+
-				"conventionStructure : "+conventionStructure+", "+
-				"validationConvention : "+validationConvention+", "+
-				"validationPedagogique : "+validationPedagogique+", "+
-				"conversionEnContrat : "+conversionEnContrat+", "+
-				"commentaireStage : "+commentaireStage+", "+
-				"adresseEtudiant : "+adresseEtudiant+", "+
-				"codePostalEtudiant : "+codePostalEtudiant+", "+
-				"villeEtudiant : "+villeEtudiant+", "+
-				"paysEtudiant : "+paysEtudiant+", "+
-				"courrielPersoEtudiant : "+courrielPersoEtudiant+", "+
-				"telEtudiant : "+telEtudiant+", "+
-				"telPortableEtudiant : "+telPortableEtudiant+", "+
-				"idIndemnisation : "+idIndemnisation+", "+
-				"montantGratification : "+montantGratification+", "+
-				"fonctionsEtTaches : "+fonctionsEtTaches+", "+
-				"details : "+details+", "+
-				"annee : "+annee+", "+
-				"idAssurance : "+idAssurance+", "+
-				"insee : "+insee+", "+
-				"codeCaisse : "+codeCaisse+", "+
-				"temConfSujetTeme : "+temConfSujetTeme+", "+
-				"nbHeuresHebdo : "+nbHeuresHebdo+", "+
-				"quotiteTravail : "+quotiteTravail+", "+
-				"modeEncadreSuivi : "+modeEncadreSuivi+", "+
-				"idModeVersGratification : "+idModeVersGratification+", "+
-				"avantagesNature : "+avantagesNature+", "+
-				"idNatureTravail : "+idNatureTravail+", "+
-				"idModeValidationStage : "+idModeValidationStage+", "+
-				"codeElp : "+codeElp+", "+
-				"libelleELP : "+libelleELP+", "+
-				"creditECTS : "+creditECTS+", "+
-				"travailNuitFerie : "+travailNuitFerie+", "+
-				"dureeStage : "+dureeStage+", "+
-				"nomEtabRef : "+nomEtabRef+", "+
-				"adresseEtabRef : "+adresseEtabRef+", "+
-				"nomSignataireComposante : "+nomSignataireComposante+", "+
-				"qualiteSignataire : "+qualiteSignataire+", "+
-				"libelleCPAM: "+libelleCPAM+", "+
-				"dureeExceptionnelle : "+dureeExceptionnelle+", "+
-				"idUniteDureeExceptionnelle : "+idUniteDureeExceptionnelle+", "+
-				"idUniteDureeGratification : "+idUniteDureeGratification+", "+
-				"monnaieGratification : "+monnaieGratification+", "+
-				"idUniteGratification : "+idUniteGratification+", "+
-				"codeFinalite : "+codeFinalite+", "+
-				"libelleFinalite : "+libelleFinalite+", "+
-				"codeCursusLMD : "+codeCursusLMD+", "+
-				"priseEnChargeFraisMission : "+priseEnChargeFraisMission+", "+
-				"codeRGI : "+codeRGI+", "+
-				"loginValidation : "+loginValidation+", "+
-				"dateValidation : "+dateValidation+", "+
-				"loginSignature : "+loginSignature+", "+
-				"dateSignature : "+dateSignature+", "+
-				"envoiMailEtudiant : "+envoiMailEtudiant+", "+
-				"dateEnvoiMailEtudiant : "+dateEnvoiMailEtudiant+", "+
-				"envoiMailTuteurPedago : "+envoiMailTuteurPedago+", "+
-				"dateEnvoiMailTuteurPedago : "+dateEnvoiMailTuteurPedago+", "+
-				"envoiMailTuteurPro : "+envoiMailTuteurPro+", "+
-				"dateEnvoiMailTuteurPro : "+dateEnvoiMailTuteurPro+", "+
-				", "+super.toString();
+						"idEtudiant : "+idEtudiant+", "+
+						"idCentreGestion : "+idCentreGestion+", "+
+						"codeUFR : "+codeUFR+", "+
+						"codeDepartement : "+codeDepartement+", "+
+						"codeEtape : "+codeEtape+", "+
+						"codeVersionEtape : "+codeVersionEtape+", "+
+						"idStructure : "+idStructure+", "+
+						"idService: "+idService+", "+
+						"idContact : "+idContact+", "+
+						"idSignataire : "+idSignataire+", "+
+						"idTypeConvention : "+idTypeConvention+", "+
+						"idOffre : "+idOffre+", "+
+						"sujetStage : "+sujetStage+", "+
+						"dateDebutStage : "+dateDebutStage+", "+
+						"dateFinStage : "+dateFinStage+", "+
+						"interruptionStage : "+interruptionStage+", "+
+						"dateDebutInterruption : "+dateDebutInterruption+", "+
+						"dateFinInterruption : "+dateFinInterruption+", "+
+						"nbJoursHebdo : "+nbJoursHebdo+", "+
+						"idTempsTravail : "+idTempsTravail+", "+
+						"commentaireDureeTravail : "+commentaireDureeTravail+", "+
+						"codeLangueConvention : "+codeLangueConvention+", "+
+						"idOrigineStage : "+idOrigineStage+", "+
+						"idTheme : "+idTheme+", "+
+						"conventionStructure : "+conventionStructure+", "+
+						"validationConvention : "+validationConvention+", "+
+						"validationPedagogique : "+validationPedagogique+", "+
+						"conversionEnContrat : "+conversionEnContrat+", "+
+						"commentaireStage : "+commentaireStage+", "+
+						"adresseEtudiant : "+adresseEtudiant+", "+
+						"codePostalEtudiant : "+codePostalEtudiant+", "+
+						"villeEtudiant : "+villeEtudiant+", "+
+						"paysEtudiant : "+paysEtudiant+", "+
+						"courrielPersoEtudiant : "+courrielPersoEtudiant+", "+
+						"telEtudiant : "+telEtudiant+", "+
+						"telPortableEtudiant : "+telPortableEtudiant+", "+
+						"idIndemnisation : "+idIndemnisation+", "+
+						"montantGratification : "+montantGratification+", "+
+						"fonctionsEtTaches : "+fonctionsEtTaches+", "+
+						"details : "+details+", "+
+						"annee : "+annee+", "+
+						"idAssurance : "+idAssurance+", "+
+						"insee : "+insee+", "+
+						"codeCaisse : "+codeCaisse+", "+
+						"temConfSujetTeme : "+temConfSujetTeme+", "+
+						"nbHeuresHebdo : "+nbHeuresHebdo+", "+
+						"quotiteTravail : "+quotiteTravail+", "+
+						"modeEncadreSuivi : "+modeEncadreSuivi+", "+
+						"idModeVersGratification : "+idModeVersGratification+", "+
+						"avantagesNature : "+avantagesNature+", "+
+						"idNatureTravail : "+idNatureTravail+", "+
+						"idModeValidationStage : "+idModeValidationStage+", "+
+						"codeElp : "+codeElp+", "+
+						"libelleELP : "+libelleELP+", "+
+						"creditECTS : "+creditECTS+", "+
+						"travailNuitFerie : "+travailNuitFerie+", "+
+						"dureeStage : "+dureeStage+", "+
+						"nomEtabRef : "+nomEtabRef+", "+
+						"adresseEtabRef : "+adresseEtabRef+", "+
+						"nomSignataireComposante : "+nomSignataireComposante+", "+
+						"qualiteSignataire : "+qualiteSignataire+", "+
+						"libelleCPAM: "+libelleCPAM+", "+
+						"dureeExceptionnelle : "+dureeExceptionnelle+", "+
+						"idUniteDureeExceptionnelle : "+idUniteDureeExceptionnelle+", "+
+						"idUniteDureeGratification : "+idUniteDureeGratification+", "+
+						"monnaieGratification : "+monnaieGratification+", "+
+						"idUniteGratification : "+idUniteGratification+", "+
+						"codeFinalite : "+codeFinalite+", "+
+						"libelleFinalite : "+libelleFinalite+", "+
+						"codeCursusLMD : "+codeCursusLMD+", "+
+						"priseEnChargeFraisMission : "+priseEnChargeFraisMission+", "+
+						"codeRGI : "+codeRGI+", "+
+						"loginValidation : "+loginValidation+", "+
+						"dateValidation : "+dateValidation+", "+
+						"loginSignature : "+loginSignature+", "+
+						"dateSignature : "+dateSignature+", "+
+						"envoiMailEtudiant : "+envoiMailEtudiant+", "+
+						"dateEnvoiMailEtudiant : "+dateEnvoiMailEtudiant+", "+
+						"envoiMailTuteurPedago : "+envoiMailTuteurPedago+", "+
+						"dateEnvoiMailTuteurPedago : "+dateEnvoiMailTuteurPedago+", "+
+						"envoiMailTuteurPro : "+envoiMailTuteurPro+", "+
+						"dateEnvoiMailTuteurPro : "+dateEnvoiMailTuteurPro+", "+
+						"volumeHoraireFormation : "+volumeHoraireFormation+", "+
+						"typePresence : "+typePresence+", "+
+						", "+super.toString();
 
 	}
 
@@ -922,7 +933,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 
 	/* ***************************************************************
 	 * Methodes pour export , boolean
-	 ****************************************************************/	
+	 ****************************************************************/
 
 	/**
 	 * @return isInterruptionStage
@@ -937,9 +948,9 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public boolean getValidationConventionExport() {
 		return isValidationConvention();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return isValidationPedagogique
 	 */
 	public boolean getValidationPedagogiqueExport() {
@@ -950,7 +961,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 
 	/* ***************************************************************
 	 * Getters / Setters
-	 ****************************************************************/	
+	 ****************************************************************/
 	/**
 	 * @return the idConvention
 	 */
@@ -1594,7 +1605,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public void setInsee(String insee) {
 		this.insee = insee;
 	}
-	
+
 	/**
 	 * @return the temConfSujetTeme
 	 */
@@ -1948,7 +1959,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 	public void setPriseEnChargeFraisMission(boolean priseEnChargeFraisMission) {
 		this.priseEnChargeFraisMission = priseEnChargeFraisMission;
 	}
-	
+
 	/**
 	 * @return the loginValidation
 	 */
@@ -2639,4 +2650,20 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 		this.monnaieGratification = monnaieGratification;
 	}
 
+
+	public String getVolumeHoraireFormation() {
+		return volumeHoraireFormation;
+	}
+
+	public void setVolumeHoraireFormation(String volumeHoraireFormation) {
+		this.volumeHoraireFormation = volumeHoraireFormation;
+	}
+
+	public String getTypePresence() {
+		return typePresence;
+	}
+
+	public void setTypePresence(String typePresence) {
+		this.typePresence = typePresence;
+	}
 }

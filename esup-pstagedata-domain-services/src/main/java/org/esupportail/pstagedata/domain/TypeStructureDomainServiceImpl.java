@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.TypeStructureDaoService;
 import org.esupportail.pstagedata.dao.exceptions.*;
 import org.esupportail.pstagedata.domain.beans.TypeStructure;
@@ -28,6 +30,11 @@ public class TypeStructureDomainServiceImpl implements TypeStructureDomainServic
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * TypeStructureDaoService
 	 */
@@ -71,12 +78,14 @@ public class TypeStructureDomainServiceImpl implements TypeStructureDomainServic
 
 	public int addTypeStructure(TypeStructureDTO ef) throws DataAddException,
 			WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.typeStructureDaoService.addTypeStructure(UtilsDTO.getTypeStructureFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -84,12 +93,14 @@ public class TypeStructureDomainServiceImpl implements TypeStructureDomainServic
 
 	public boolean updateTypeStructure(TypeStructureDTO ef) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeStructureDaoService.updateTypeStructure(UtilsDTO.getTypeStructureFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -97,12 +108,14 @@ public class TypeStructureDomainServiceImpl implements TypeStructureDomainServic
 
 	public boolean deleteTypeStructure(int id) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeStructureDaoService.deleteTypeStructure(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -110,12 +123,14 @@ public class TypeStructureDomainServiceImpl implements TypeStructureDomainServic
 
 	@Override
 	public boolean reactivateTypeStructure(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = typeStructureDaoService.reactivateTypeStructure(id);
 		}catch (DataReactivateDaoException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

@@ -65,6 +65,7 @@ public class EtapeDaoServiceImpl extends AbstractIBatisDaoService implements Eta
 			if(etape.getCodeUniversite()==null) etape.setCodeUniversite(" ");
 			tmp = (Integer) getSqlMapClientTemplate().insert("addEtape",etape);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -74,6 +75,7 @@ public class EtapeDaoServiceImpl extends AbstractIBatisDaoService implements Eta
 			}			
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;

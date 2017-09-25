@@ -154,4 +154,13 @@ public class PaysDTO extends NomenclatureIdDTO implements Serializable {
 		return super.toString()+", actual : "+this.actual+", cog : "+this.cog+", iso2 : "+this.iso2+", siretObligatoire : "+this.siretObligatoire;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

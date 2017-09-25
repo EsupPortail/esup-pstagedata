@@ -52,6 +52,7 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 		if(enseignant.getCodeUniversiteAffectation()==null) enseignant.setCodeUniversiteAffectation(" ");
 		tmp = (Integer) getSqlMapClientTemplate().insert("addEnseignant",enseignant);
 	}catch (DataAccessException e) {
+		logger.debug(e);
 		int error = ((SQLException)e.getCause()).getErrorCode();
 		if (error == 1452) {//Cannot add or update
 			throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -61,6 +62,7 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 		}
 		throw new DataBaseDaoException(e.getMessage(), e.getCause());
 	}catch (Exception e) {
+		logger.debug(e);
 		throw new DataBaseDaoException(e.getMessage(), e.getCause());
 	}
 	return tmp;
@@ -77,6 +79,7 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 		try{
 			b = getSqlMapClientTemplate().delete("deleteEnseignant",idEnseignant)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			// cas  e.getMessage().contains("Cannot delete or update"), code erreur 1451
 			if (error == 1451) {
@@ -84,6 +87,7 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -126,12 +130,14 @@ public class EnseignantDaoServiceImpl extends AbstractIBatisDaoService implement
 			if(enseignant.getCodeUniversiteAffectation()==null) enseignant.setCodeUniversiteAffectation(" ");
 			b = getSqlMapClientTemplate().update("updateEnseignant",enseignant)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

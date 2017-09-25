@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>esup-pstagedata</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>2.2.4-SNAPSHOT</version>
+		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-pstagedata-dao</artifactId>
@@ -27,10 +27,15 @@
 			<artifactId>esup-commons2-jsf2-exception</artifactId>
 			<version>${esupcommons.version}</version>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.ibatis</groupId>-->
+			<!--<artifactId>ibatis-sqlmap</artifactId>-->
+			<!--<version>2.3.4.726</version>-->
+		<!--</dependency>-->
 		<dependency>
-			<groupId>org.apache.ibatis</groupId>
-			<artifactId>ibatis-sqlmap</artifactId>
-			<version>2.3.4.726</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>2.3.5</version>
 		</dependency>
 		<dependency>
 			<groupId>opensymphony</groupId>
@@ -48,7 +53,7 @@
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-pstagedata-domain-beans</artifactId>
-			<version>2.2.4-SNAPSHOT</version>
+			<version>3.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

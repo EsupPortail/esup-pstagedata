@@ -38,10 +38,6 @@ public class TypeConventionDTO extends NomenclatureIdDTO implements Serializable
 	}
 	
 	/* ***************************************************************
-	 * Getters / Setters
-	 ****************************************************************/	
-	
-	/* ***************************************************************
 	 * M�thodes
 	 ****************************************************************/
 	
@@ -53,6 +49,18 @@ public class TypeConventionDTO extends NomenclatureIdDTO implements Serializable
 		return super.toString();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	/* ***************************************************************
+	 * Getters / Setters
+	 ****************************************************************/
 	/**
 	 * @return the modifiable
 	 */

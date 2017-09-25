@@ -3,6 +3,8 @@ package org.esupportail.pstagedata.domain.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.domain.beans.Service;
 
 /**
@@ -14,6 +16,11 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/* ***************************************************************
 	 * Propriétés
 	 ****************************************************************/
@@ -98,7 +105,12 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 		", "+"nom : "+nom+", "+
 		"infosAJour : "+infosAJour+", "+"loginInfosAJour : "+loginInfosAJour+", "+super.toString();
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see java.lang.Object#clone()
 	 */
@@ -107,6 +119,7 @@ public class ServiceDTO extends AdresseDTO implements Serializable, Cloneable{
 		try {
 			return super.clone();
 		}catch(CloneNotSupportedException e){
+			logger.error(e);
 			return null;
 		}
 	} 

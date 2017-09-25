@@ -7,6 +7,8 @@ package org.esupportail.pstagedata.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.StructureDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -36,6 +38,11 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * StructureDaoService
 	 */
@@ -55,7 +62,7 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	
 	// Ajout moderation Entreprise
 	/**
-	 * @see org.esupportail.pstage.domain.StructureDomainService#getStructuresFromVerification(boolean)
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getStructuresFromVerification(int)
 	 */
 	public List<StructureDTO> getStructuresFromVerification(int estValidee){
 		return UtilsDTO.getStructureListDTO(this.structureDaoService.getStructuresFromVerification(estValidee));
@@ -65,12 +72,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#addStructure(org.esupportail.pstagedata.domain.dto.StructureDTO)
 	 */
 	public int addStructure(StructureDTO s) throws DataAddException, WebServiceDataBaseException{
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.structureDaoService.addStructure(UtilsDTO.getStructureFromDTO(s));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -80,27 +89,31 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructureBase(int)
 	 */
 	public boolean deleteStructureBase(int idStructure) throws DataDeleteException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.deleteStructureBase(idStructure);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructure(int)
+	 * @see org.esupportail.pstagedata.domain.StructureDomainService#deleteStructure(int,String)
 	 */
 	public boolean deleteStructure(int idStructure, String loginCurrentUser) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.deleteStructure(idStructure,loginCurrentUser);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -264,12 +277,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#updateStructure(org.esupportail.pstagedata.domain.dto.StructureDTO)
 	 */
 	public boolean updateStructure(StructureDTO s) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.updateStructure(UtilsDTO.getStructureFromDTO(s));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -280,12 +295,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 */
 	public boolean updateStructureInfosAJour(int idStructure,
 			String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.updateStructureInfosAJour(idStructure,loginInfosAJour);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -296,12 +313,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 */
 	public boolean updateStructureStopValidation(int idStructure,
 			String loginStopValidation) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.updateStructureStopValidation(idStructure, loginStopValidation);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -312,12 +331,14 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 */
 	public boolean updateStructureValidation(int idStructure,
 			String loginValidation) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.structureDaoService.updateStructureValidation(idStructure, loginValidation);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -327,7 +348,7 @@ public class StructureDomainServiceImpl implements StructureDomainService {
 	 * @see org.esupportail.pstagedata.domain.StructureDomainService#getRaisonsSociales(java.lang.String)
 	 */
 	public List<String> getRaisonsSociales(String raisonSociale){
-		return (List<String>) getStructureDaoService().getRaisonsSociales(raisonSociale);
+		return getStructureDaoService().getRaisonsSociales(raisonSociale);
 	}
 
 	/**

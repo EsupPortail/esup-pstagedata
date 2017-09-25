@@ -72,7 +72,7 @@ public interface ConventionDaoService extends Serializable {
 	 * @param codeUniversite 
 	 * @return List<Convention>
 	 */
-	public List<Convention> getConventionsEtudiant(String identEtudiant, String codeUniversite);
+	public List<ConventionExport> getConventionsEtudiant(String identEtudiant, String codeUniversite);
 	
 	/**
 	 * @param idCentreGestion

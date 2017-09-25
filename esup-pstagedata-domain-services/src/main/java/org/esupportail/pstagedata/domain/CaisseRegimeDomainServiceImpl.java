@@ -4,6 +4,8 @@
  */
 package org.esupportail.pstagedata.domain;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.CaisseRegimeDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -28,6 +30,11 @@ public class CaisseRegimeDomainServiceImpl implements CaisseRegimeDomainService 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 
 	/**
 	 * caisseRegimeDaoService
@@ -60,8 +67,10 @@ public class CaisseRegimeDomainServiceImpl implements CaisseRegimeDomainService 
 		try{
 			tmp = this.caisseRegimeDaoService.addCaisseRegime(UtilsDTO.getCaisseRegimeFromDTO(cr));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -73,8 +82,10 @@ public class CaisseRegimeDomainServiceImpl implements CaisseRegimeDomainService 
 		try{
 			b = caisseRegimeDaoService.updateCaisseRegime(UtilsDTO.getCaisseRegimeFromDTO(cr), codeCaisse);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -86,8 +97,10 @@ public class CaisseRegimeDomainServiceImpl implements CaisseRegimeDomainService 
 		try{
 			b = caisseRegimeDaoService.deleteCaisseRegime(codeCaisse);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -98,8 +111,10 @@ public class CaisseRegimeDomainServiceImpl implements CaisseRegimeDomainService 
 		try {
 			b = caisseRegimeDaoService.reactivateCaisseRegime(codeCaisse);
 		} catch (DataReactivateException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		} catch(DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(),e.getCause());
 		}
 		return b;

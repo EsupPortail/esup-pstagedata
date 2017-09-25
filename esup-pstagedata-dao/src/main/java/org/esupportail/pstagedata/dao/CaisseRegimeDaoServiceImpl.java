@@ -39,18 +39,19 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		return getSqlMapClientTemplate().queryForList("getCaisseRegimes");
 	}
 
-	public int addCaisseRegime(CaisseRegime cr) throws DataAddException,
-	WebServiceDataBaseException {
-		int tmp=0;
+	public int addCaisseRegime(CaisseRegime cr) throws WebServiceDataBaseException {
+		int tmp;
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addCaisseRegime",cr);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -67,12 +68,14 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		try{
 			b = getSqlMapClientTemplate().update("updateCaisseRegime",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -84,28 +87,32 @@ public class CaisseRegimeDaoServiceImpl extends AbstractIBatisDaoService impleme
 		try{
 			b = getSqlMapClientTemplate().delete("deleteCaisseRegime",codeCaisse)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 
-	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException, WebServiceDataBaseException {
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException {
 		boolean b = false;
 		try {
 			b = getSqlMapClientTemplate().update("reactivateCaisseRegime", codeCaisse) > 0;
         } catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if(error == 1452) {
 				throw new DataReactivateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(),e.getCause());
 		} catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(),e.getCause());
 		}
 		return b;

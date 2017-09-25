@@ -78,7 +78,10 @@ public class EnseignantDTO extends PersonneDTO implements Serializable{
 			this.codeUniversiteAffectation=e.getCodeUniversiteAffectation();
 		}
 	}
-	
+
+	/* ***************************************************************
+	 * Methodes
+	 ****************************************************************/
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.PersonneDTO#toString()
 	 */
@@ -91,11 +94,17 @@ public class EnseignantDTO extends PersonneDTO implements Serializable{
 		"batiment : "+batiment+", "+
 		"codeAffectation : "+codeAffectation+", "+
 		", "+super.toString();
-
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	/* ***************************************************************
 	 * Getters / Setters

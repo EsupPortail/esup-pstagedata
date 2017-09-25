@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.CritereGestionDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -31,6 +33,11 @@ public class CritereGestionDomainServiceImpl implements CritereGestionDomainServ
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * CritereGestionDaoService
 	 */
@@ -72,7 +79,7 @@ public class CritereGestionDomainServiceImpl implements CritereGestionDomainServ
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#getCritereGestionSansVetFromCodeEtape(codeEtape)
+	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#getCritereGestionSansVetFromCodeEtape(String)
 	 */
 	public CritereGestionDTO getCritereGestionSansVetFromCodeEtape(String codeEtape) {
 		CritereGestion c = this.CritereGestionDaoService.getCritereGestionSansVetFromCodeEtape(codeEtape);
@@ -90,26 +97,30 @@ public class CritereGestionDomainServiceImpl implements CritereGestionDomainServ
 	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#addCritere(org.esupportail.pstagedata.domain.dto.CritereGestionDTO)
 	 */
 	public int addCritere(CritereGestionDTO critere) throws DataAddException,WebServiceDataBaseException{
-		int tmp = 0;
+		int tmp;
 		try {
 			tmp = this.CritereGestionDaoService.addCritere(UtilsDTO.getCritereGestionFromDTO(critere));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
 	}
 	/**
-	 * @see org.esupportail.pstage.domain.CritereGestionDomainService#deleteCritere(String)
+	 * @see org.esupportail.pstagedata.domain.CritereGestionDomainService#deleteCritere(String)
 	 */
 	public boolean deleteCritere(String codeCritere) throws DataDeleteException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.CritereGestionDaoService.deleteCritere(codeCritere);
 		} catch (DataDeleteDaoException e){
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

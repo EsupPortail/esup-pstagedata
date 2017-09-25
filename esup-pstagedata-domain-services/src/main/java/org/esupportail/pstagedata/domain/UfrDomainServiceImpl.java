@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.UfrDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -27,6 +29,11 @@ public class UfrDomainServiceImpl implements UfrDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * natureTravailDaoService
@@ -71,12 +78,14 @@ public class UfrDomainServiceImpl implements UfrDomainService {
 	 * @see org.esupportail.pstagedata.domain.UfrDomainService#addUfr(org.esupportail.pstagedata.domain.dto.UfrDTO)
 	 */
 	public int addUfr(UfrDTO ufr) throws DataAddException, WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.ufrDaoService.addUfr(UtilsDTO.getUfrFromDTO(ufr));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;

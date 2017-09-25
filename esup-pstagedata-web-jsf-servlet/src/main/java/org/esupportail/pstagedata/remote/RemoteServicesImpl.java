@@ -403,7 +403,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * Fiche Evaluation
 	 *****************************************************************************/	
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getFicheEvaluationFromIdCentre(java.lang.int)
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getFicheEvaluationFromIdCentre(int)
 	 */
 	public FicheEvaluationDTO getFicheEvaluationFromIdCentre(int idCentreGestion) {
 		return this.ficheEvaluationDomainService.getFicheEvaluationFromIdCentre(idCentreGestion);
@@ -470,7 +470,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * Reponse Evaluation
 	 *****************************************************************************/	
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluation(java.lang.int,java.lang.int)
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluation(int,int)
 	 */
 	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention) {
 		return this.ficheEvaluationDomainService.getReponseEvaluation(idFicheEvaluation,idConvention);
@@ -755,19 +755,10 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addAccord(org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO)
 	 */
 	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
-	public int addAccord(AccordPartenariatDTO accord) throws DataAddException, WebServiceDataBaseException, AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
+	public int addAccord(AccordPartenariatDTO accord) throws DataAddException, WebServiceDataBaseException{
 		int b=0;
 		if(accord!=null){
 			if(accord.getIdStructure()>0 && accord.getIdContact()>0){
-				AccordPartenariatDTO tmp = null;
-				tmp=this.accordPartenariatDomainService.getAccordFromIdStructure(accord.getIdStructure());
-				if(tmp!=null){
-					throw new AccordAlreadyExistingForStructureException("Accord déjà existant pour cette structure : "+accord.getIdStructure());
-				}
-				tmp=this.accordPartenariatDomainService.getAccordFromIdContact(accord.getIdContact());
-				if(tmp!=null){
-					throw new AccordAlreadyExistingForContactException("Accord déjà existant pour ce contact : "+accord.getIdContact());
-				}
 				b = this.accordPartenariatDomainService.addAccord(accord);
 			}
 		}
@@ -778,20 +769,10 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateAccord(org.esupportail.pstagedata.domain.dto.AccordPartenariatDTO)
 	 */
 	@FlushCache({Cache.ACCORD_PARTENARIAT, Cache.STRUCTURE})
-	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException,
-			AccordAlreadyExistingForContactException, AccordAlreadyExistingForStructureException{
+	public boolean updateAccord(AccordPartenariatDTO accord) throws DataUpdateException, WebServiceDataBaseException{
 		boolean b = false;
 		if(accord!=null){
 			if(accord.getIdStructure()>0 && accord.getIdContact()>0){
-				AccordPartenariatDTO tmp = null;
-				tmp=this.accordPartenariatDomainService.getAccordFromIdStructure(accord.getIdStructure());
-				if(tmp!=null && !tmp.equals(accord)){
-					throw new AccordAlreadyExistingForStructureException("Accord déjà existant pour cette structure : "+accord.getIdStructure());
-				}
-				tmp=this.accordPartenariatDomainService.getAccordFromIdContact(accord.getIdContact());
-				if(tmp!=null && !tmp.equals(accord)){
-					throw new AccordAlreadyExistingForContactException("Accord déjà existant pour ce contact : "+accord.getIdContact());
-				}
 				b = this.accordPartenariatDomainService.updateAccord(accord);
 			}
 		}
@@ -805,13 +786,6 @@ public class RemoteServicesImpl implements RemoteServices{
 	public boolean deleteAccord(int idAccord) throws DataDeleteException, WebServiceDataBaseException{
 		boolean b = false;
 		if(idAccord>0){
-			AccordPartenariatDTO a = this.accordPartenariatDomainService.getAccordFromId(idAccord);
-			List<ServiceDTO> ls = this.serviceDomainService.getServicesFromIdStructure(a.getIdStructure());
-			if(ls!=null){
-				for(ServiceDTO s : ls){
-					this.contactDomainService.deleteComptesContactFromIdService(s.getIdService());
-				}
-			}
 			b = this.accordPartenariatDomainService.deleteAccord(idAccord);
 		}
 		return b;
@@ -862,7 +836,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				throw new AdminStructureAccountException("Un administrateur a soit un Login soit un EPPN");
 			}
 			if(StringUtils.hasText(admin.getLogin())){
-				AdminStructureDTO tmp=null;
+				AdminStructureDTO tmp;
 				tmp=this.adminStructureDomainService.getAdminStructureFromLogin(admin.getLogin());
 				if(tmp!=null){
 					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login déjà utilisé : "+admin.getLogin());
@@ -872,7 +846,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				}
 			}
 			if(StringUtils.hasText(admin.getEppn())){
-				AdminStructureDTO tmp=null;
+				AdminStructureDTO tmp;
 				tmp=this.adminStructureDomainService.getAdminStructureFromEppn(admin.getEppn());
 				if(tmp!=null){
 					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN déjà utilisé : "+admin.getEppn());
@@ -898,7 +872,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				throw new AdminStructureAccountException("Un administrateur a soit un Login soit un EPPN");
 			}
 			if(StringUtils.hasText(admin.getLogin())){
-				AdminStructureDTO tmp=null;
+				AdminStructureDTO tmp;
 				tmp=this.adminStructureDomainService.getAdminStructureFromLogin(admin.getLogin());
 				if(tmp!=null && !tmp.equals(admin)){
 					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("Login déjà utilisé : "+admin.getLogin());
@@ -908,7 +882,7 @@ public class RemoteServicesImpl implements RemoteServices{
 				}
 			}
 			if(StringUtils.hasText(admin.getEppn())){
-				AdminStructureDTO tmp=null;
+				AdminStructureDTO tmp;
 				tmp=this.adminStructureDomainService.getAdminStructureFromEppn(admin.getEppn());
 				if(tmp!=null && !tmp.equals(admin)){
 					AdminStructureLoginEppnAlreadyUsedException a = new AdminStructureLoginEppnAlreadyUsedException("EPPN déjà utilisé : "+admin.getEppn());
@@ -1057,7 +1031,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	@FlushCache({Cache.AVENANT, Cache.CONVENTION})
 	public boolean deleteAvenant(int idAvenant) throws DataDeleteException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		b = this.avenantDomainService.deleteAvenant(idAvenant);
 		return b;
 	}
@@ -1159,9 +1133,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getCentreFromCritere(java.lang.String, java.lang.String)
 	 */
-	public CentreGestionDTO getCentreFromCritere(String codeCritere,
-			String codeUniversite) {
-
+	public CentreGestionDTO getCentreFromCritere(String codeCritere, String codeUniversite) {
 		return this.centreGestionDomainService.getCentreFromCritere(codeCritere, codeUniversite);
 	}
 	/**
@@ -1282,30 +1254,30 @@ public class RemoteServicesImpl implements RemoteServices{
 			Cache.STRUCTURE,
 			Cache.UFR})
 	public boolean deleteCentreGestion(int idCentreGestion) throws DataDeleteException,WebServiceDataBaseException,CentreReferenceException{
-		boolean b = false;
+		boolean b;
 
 		List<String> ref = this.centreGestionDomainService.centreGestionReference(idCentreGestion);
 
 		if (ref.isEmpty()){
 			b = this.centreGestionDomainService.deleteCentreGestion(idCentreGestion);
 		} else {
-			String raison = "";
+			StringBuilder raison = new StringBuilder("");
 
 			if (ref.size() == 1){
-				raison = ref.get(0)+".";
+				raison.append(ref.get(0)+".");
 			} else {
 				for(int i=0; i<ref.size();i++){
 					if (i==0){
-						raison += ref.get(i);
+						raison.append(ref.get(i));
 					}else if(i == ref.size()-1){
-						raison += (" et "+ref.get(i));
+						raison.append(" et "+ref.get(i));
 					} else {
-						raison += ", "+ref.get(i);
+						raison.append(", "+ref.get(i));
 					}
 				}
 			}
 
-			throw new CentreReferenceException(raison);
+			throw new CentreReferenceException(raison.toString());
 		}
 		return b;
 	}
@@ -1495,13 +1467,25 @@ public class RemoteServicesImpl implements RemoteServices{
 			Cache.OFFRE,
 			Cache.SERVICE,
 			Cache.STRUCTURE})
-	public boolean updateContactInfosAJour(int idContact, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException{
+	public boolean updateContactInfosAJour(int idContact, String loginInfosAJour) throws DataUpdateException, WebServiceDataBaseException {
 		boolean b = false;
-		if(idContact>0 && StringUtils.hasText(loginInfosAJour)){
+		if (idContact > 0 && StringUtils.hasText(loginInfosAJour)) {
 			b = this.contactDomainService.updateContactInfosAJour(idContact, loginInfosAJour);
 		}
 		return b;
-	}	
+	}
+
+	/**
+	 * @see org.esupportail.pstagedata.domain.ContactDomainService#deleteComptesContactFromIdService(int)
+	 */
+	@FlushCache({Cache.CONTACT, Cache.SERVICE})
+	public boolean deleteComptesContactFromIdService(int idService) throws DataUpdateException, WebServiceDataBaseException{
+		boolean b = false;
+		if(idService > 0) {
+			b = this.contactDomainService.deleteComptesContactFromIdService(idService);
+		}
+		return b;
+	}
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#updateContactDerniereConnexion(int, java.util.Date)
@@ -1580,8 +1564,7 @@ public class RemoteServicesImpl implements RemoteServices{
 			Cache.STRUCTURE,
 			Cache.TYPE_CONVENTION,
 			Cache.UFR})
-	public int addConvention(ConventionDTO convention) throws DataAddException,
-	WebServiceDataBaseException {
+	public int addConvention(ConventionDTO convention) throws DataAddException, WebServiceDataBaseException {
 		int b=0;
 		if(convention!=null){
 			b = this.conventionDomainService.addConvention(convention);
@@ -1620,16 +1603,15 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionFromId(int)
 	 */
 	public ConventionDTO getConventionFromId(int id) {
-		ConventionDTO tmp=null;
+		ConventionDTO tmp = null;
 		if(id>0){
 			tmp=this.conventionDomainService.getConventionFromId(id);
-			System.out.println("avant retour remote : " + tmp.getLoginValidation());
 		}
 		return tmp;
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAnneesConvention(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAnneesConventionFromCodUniv(java.lang.String)
 	 */
 	public List<String> getAnneesConventionFromCodUniv(String codeUniversite){
 		return this.conventionDomainService.getAnneesConvention(codeUniversite);
@@ -1690,14 +1672,14 @@ public class RemoteServicesImpl implements RemoteServices{
 
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventions(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsFromCodUniv(String)
 	 */
 	public List<ConventionDTO> getConventionsFromCodUniv(String codeUniversite) {
 		return this.conventionDomainService.getConventions(codeUniversite);
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsEtudiant(java.lang.String, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getConventionsEtudiantFromCodUniv(String, String)
 	 */
 	public List<ConventionDTO> getConventionsEtudiantFromCodUniv(String identEtudiant, String codeUniversite) {
 		return this.conventionDomainService.getConventionsEtudiant(identEtudiant, codeUniversite);
@@ -1711,7 +1693,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreConventionByCentreGestion(int, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getNombreConventionByCentreGestionFromCodUniv(int, java.lang.String)
 	 */
 	public int getNombreConventionByCentreGestionFromCodUniv(int idCentreGestion, String codeUniversite){
 		return this.conventionDomainService.getNombreConventionByCentreGestion(idCentreGestion, codeUniversite);
@@ -2850,24 +2832,9 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#addPersonnelCentreGestion(org.esupportail.pstagedata.domain.dto.PersonnelCentreGestionDTO)
 	 */
 	@FlushCache({Cache.CENTRE_GESTION, Cache.PERSONNEL_CENTRE_GESTION, Cache.UFR, Cache.ETAPE})
-	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException,PersonalAlreadyExistingForCentreException{
+	public int addPersonnelCentreGestion(PersonnelCentreGestionDTO pg) throws DataAddException,WebServiceDataBaseException{
 		int b=0;
 		if(pg!=null){
-			try{
-				// CET APPEL RECHARGE LE CACHE APRES LE FLUSH DONC EMPECHE DE LE REFRESH
-				List<PersonnelCentreGestionDTO> tmp = getPersonnelCentreGestionFromUid(pg.getUidPersonnel(), pg.getCodeUniversite());
-
-				if(tmp != null){
-					for(int i=0; i<tmp.size();i++){
-						if(pg.getUidPersonnel().equals(tmp.get(i).getUidPersonnel())
-								&& pg.getIdCentreGestion() == tmp.get(i).getIdCentreGestion()){
-							throw new PersonalAlreadyExistingForCentreException("Personnel déjà rattaché : " + tmp);
-						}
-					}
-				}
-			} catch (NullPointerException npe){
-				// En cas de npe, le personnel n'est pas déjà rattaché, on continue donc l'ajout normalement.
-			}
 			b = this.personnelCentreGestionDomainService.addPersonnelCentreGestion(pg);
 		}
 		return b;
@@ -3024,7 +2991,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 	// Ajout moderation Entreprise
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromVerification(boolean)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getStructuresFromVerification(int)
 	 */
 	public List<StructureDTO> getStructuresFromVerification(int estValidee){
 		return this.structureDomainService.getStructuresFromVerification(estValidee);
@@ -3219,7 +3186,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	public List<StructureDTO> getStructuresAvecAccordAValiderFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin){
 		//Voir dao pour la gestion des dates
-		List<StructureDTO> tmp=null;
+		List<StructureDTO> tmp;
 		tmp=this.structureDomainService.getStructuresAvecAccordAValiderFromRaisonSociale(raisonSociale,
 				dateDebut,dateFin);
 		return tmp;
@@ -3229,7 +3196,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 */
 	public List<StructureDTO> getStructuresAvecAccordValidesFromRaisonSociale(String raisonSociale, Date dateDebut, Date dateFin){
 		//Voir dao pour la gestion des dates
-		List<StructureDTO> tmp=null;
+		List<StructureDTO> tmp;
 		tmp=this.structureDomainService.getStructuresAvecAccordValidesFromRaisonSociale(raisonSociale,
 				dateDebut,dateFin);
 		return tmp;
@@ -3412,10 +3379,9 @@ public class RemoteServicesImpl implements RemoteServices{
 			List<ServiceDTO> ls = this.serviceDomainService.getServicesFromIdStructure(idStructure);
 			if(ls!=null){
 				for(ServiceDTO se : ls){
-					b = this.contactDomainService.deleteContactFromIdService(se.getIdService());
+					this.contactDomainService.deleteContactFromIdService(se.getIdService());
 				}
 			}
-			b = this.serviceDomainService.deleteServiceFromIdStructure(idStructure);
 			b = this.structureDomainService.deleteStructureBase(idStructure);
 		}
 		return b;
@@ -3450,7 +3416,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getRaisonsSociales()
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getRaisonsSociales(String)
 	 */
 	public List<String> getRaisonsSociales(String raisonSociale){		
 		List<String> tmp=null;
@@ -3520,7 +3486,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 *****************************************************************************/
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrs(java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrsFromCodUniv(java.lang.String)
 	 */
 	public List<UfrDTO> getUfrsFromCodUniv(String codeUniversite) {
 		return this.ufrDomainService.getUfrs(codeUniversite);
@@ -3550,7 +3516,7 @@ public class RemoteServicesImpl implements RemoteServices{
 
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrFromId(java.lang.String, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrFromIdFromCodUniv(java.lang.String, java.lang.String)
 	 */
 	public UfrDTO getUfrFromIdFromCodUniv(String code, String codeUniversite) {
 		UfrDTO tmp=null;
@@ -3561,7 +3527,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrsFromIdsCentreGestion(java.util.List, java.lang.String)
+	 * @see org.esupportail.pstagedata.remote.RemoteServices#getUfrsFromIdsCentreGestionFromCodUniv(java.util.List, java.lang.String)
 	 */
 	public List<UfrDTO> getUfrsFromIdsCentreGestionFromCodUniv(List<Integer> idsCentreGestion, String codeUniversite){
 		List<UfrDTO> lu = null;
@@ -4487,12 +4453,6 @@ public class RemoteServicesImpl implements RemoteServices{
 		this.offreStatsDomaineManager = offreStatsDomaineManager;
 	}
 
-
-
-
-
-
-
 	/**
 	 * @param conventionStatsDomaineManager
 	 */
@@ -4502,7 +4462,6 @@ public class RemoteServicesImpl implements RemoteServices{
 			ConventionStatsDomaineManager conventionStatsDomaineManager) {
 		this.conventionStatsDomaineManager = conventionStatsDomaineManager;
 	}
-
 
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getAnneesConventions(java.lang.Integer, java.lang.String)

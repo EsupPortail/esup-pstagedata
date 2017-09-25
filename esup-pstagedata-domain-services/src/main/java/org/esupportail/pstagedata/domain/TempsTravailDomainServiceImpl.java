@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.TempsTravailDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -29,6 +31,11 @@ public class TempsTravailDomainServiceImpl implements TempsTravailDomainService 
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * TempsTravailDaoService
 	 */
@@ -57,12 +64,14 @@ public class TempsTravailDomainServiceImpl implements TempsTravailDomainService 
 
 	public int addTempsTravail(TempsTravailDTO ef) throws DataAddException,
 			WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.tempsTravailDaoService.addTempsTravail(UtilsDTO.getTempsTravailFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -70,12 +79,14 @@ public class TempsTravailDomainServiceImpl implements TempsTravailDomainService 
 
 	public boolean updateTempsTravail(TempsTravailDTO ef) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = tempsTravailDaoService.updateTempsTravail(UtilsDTO.getTempsTravailFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -83,24 +94,28 @@ public class TempsTravailDomainServiceImpl implements TempsTravailDomainService 
 
 	public boolean deleteTempsTravail(int id) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = tempsTravailDaoService.deleteTempsTravail(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 
 	public boolean reactivateTempsTravail(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = tempsTravailDaoService.reactivateTempsTravail(id);
 		}catch (DataReactivateException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

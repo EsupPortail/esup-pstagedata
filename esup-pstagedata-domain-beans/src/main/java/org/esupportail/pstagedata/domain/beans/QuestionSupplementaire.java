@@ -65,6 +65,11 @@ public class QuestionSupplementaire extends ObjetMetiers implements Serializable
 		return true;
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/

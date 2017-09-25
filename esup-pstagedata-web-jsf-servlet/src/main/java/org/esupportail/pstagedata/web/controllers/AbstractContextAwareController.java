@@ -61,7 +61,7 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 	 * @see org.esupportail.pstagedata.web.controllers.AbstractDomainAwareBean#getCurrentUser()
 	 */
 	@Override
-	protected User getCurrentUser() throws Exception {
+	protected User getCurrentUser() {
 		return sessionController.getCurrentUser();
 	}
 	

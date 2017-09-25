@@ -46,7 +46,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 	/**
 	 * A logger.
 	 */
-	private final Logger logger = new LoggerImpl(this.getClass());
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 
 	/**
 	 * The external authenticator.
@@ -67,7 +67,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 	}
 
 	@Override
-	public User getUser() throws Exception {
+	public User getUser() {
 		try {
 			AuthInfo authInfo = (AuthInfo) ContextUtils
 					.getSessionAttribute(AUTH_INFO_ATTRIBUTE);
@@ -109,9 +109,8 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 				return user;
 			}
 		} catch (Exception e) {
-			String[] args = { e.getMessage() };
-			throw new Exception(I18nUtils.createI18nService().getString(
-					"AUTHENTICATION_EXCEPTION.TITLE", args));
+			logger.error(e);
+			return null;
 		}
 		return null;
 	}

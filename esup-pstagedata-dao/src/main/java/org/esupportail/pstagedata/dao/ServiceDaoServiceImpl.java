@@ -37,12 +37,14 @@ public class ServiceDaoServiceImpl extends AbstractIBatisDaoService implements S
 		try{
 			tmp = (Integer)getSqlMapClientTemplate().insert("addService", s);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -56,12 +58,14 @@ public class ServiceDaoServiceImpl extends AbstractIBatisDaoService implements S
 		try{
 			b = getSqlMapClientTemplate().delete("deleteService", idService)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -75,12 +79,14 @@ public class ServiceDaoServiceImpl extends AbstractIBatisDaoService implements S
 		try{
 			b = getSqlMapClientTemplate().delete("deleteServiceFromIdStructure", idStructure)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -139,12 +145,14 @@ public class ServiceDaoServiceImpl extends AbstractIBatisDaoService implements S
 		try{
 			b = getSqlMapClientTemplate().update("updateService", s)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -155,18 +163,20 @@ public class ServiceDaoServiceImpl extends AbstractIBatisDaoService implements S
 	 */
 	public boolean updateServiceInfosAJour(int idService, String loginInfosAJour) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idService", ""+idService);
+		parameterMap.put("idService", Integer.toString(idService));
 		parameterMap.put("loginInfosAJour", loginInfosAJour);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateServiceInfosAJour", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

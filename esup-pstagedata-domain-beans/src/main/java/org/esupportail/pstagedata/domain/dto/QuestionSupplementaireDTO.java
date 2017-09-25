@@ -89,7 +89,12 @@ public class QuestionSupplementaireDTO extends ObjetMetiersDTO implements Serial
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.ObjetMetiersDTO#toString()
 	 */

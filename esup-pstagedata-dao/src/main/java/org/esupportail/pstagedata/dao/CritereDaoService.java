@@ -1,11 +1,12 @@
 package org.esupportail.pstagedata.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.esupportail.pstagedata.domain.beans.Critere;
 import org.esupportail.pstagedata.domain.beans.Niveau;
 
-public interface CritereDaoService {
+public interface CritereDaoService extends Serializable {
 	
 	List<Critere> getCriteres();
 	List<Critere> getCriteresByNiveau(Integer niveau);

@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.NiveauFormationDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -29,6 +31,11 @@ public class NiveauFormationDomainServiceImpl implements NiveauFormationDomainSe
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * NiveauFormationDaoService
 	 */
@@ -56,12 +63,14 @@ public class NiveauFormationDomainServiceImpl implements NiveauFormationDomainSe
 
 	public int addNiveauFormation(NiveauFormationDTO ef) throws DataAddException,
 	WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.niveauFormationDaoService.addNiveauFormation(UtilsDTO.getNiveauFormationFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -69,12 +78,14 @@ public class NiveauFormationDomainServiceImpl implements NiveauFormationDomainSe
 
 	public boolean updateNiveauFormation(NiveauFormationDTO ef) throws DataUpdateException,
 	WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = niveauFormationDaoService.updateNiveauFormation(UtilsDTO.getNiveauFormationFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -82,24 +93,28 @@ public class NiveauFormationDomainServiceImpl implements NiveauFormationDomainSe
 
 	public boolean deleteNiveauFormation(int id) throws DataDeleteException,
 	WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = niveauFormationDaoService.deleteNiveauFormation(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 
 	public boolean reactivateNiveauFormation(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try {
 			b = niveauFormationDaoService.reactivateNiveauFormation(id);
 		} catch (DataReactivateException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		} catch(DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

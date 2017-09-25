@@ -124,6 +124,8 @@
 		<result property="idUniteDureeGratification" column="idUniteDureeGratification"
 			nullValue="0" />
 		<result property="monnaieGratification" column="monnaieGratification" nullValue="euros"/>
+		<result property="volumeHoraireFormation" column="volumeHoraireFormation" nullValue="0"/>
+		<result property="typePresence" column="typePresence"/>
 	</resultMap>
 
 	<resultMap id="ConventionLight" class="ClassConventionExport">
@@ -297,17 +299,22 @@
 	<statement id="getConventionsEtudiant" resultMap="ConventionLight" cacheModel="cacheConvention">
 		SELECT DISTINCT C.idConvention, C.dateDebutStage, C.dateFinStage,
 		C.validationPedagogique,
-		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape,
-		C.codeVersionEtape, C.annee,
+		C.validationConvention, C.idStructure, C.idEtudiant, C.codeUfr, C.codeEtape, C.codeVersionEtape, C.annee,
 		C.codeUniversiteUFR, C.codeUniversiteEtape,C.idCentreGestion,
 		C.envoiMailEtudiant, C.dateEnvoiMailEtudiant, C.envoiMailTuteurPedago,
 		C.dateEnvoiMailTuteurPedago, C.envoiMailTuteurPro,
 		C.dateEnvoiMailTuteurPro,
+		S.idStructure AS 'STRUCTURE_idStructure',
+		S.raisonSociale AS 'STRUCTURE_raisonSociale',
+		ET.idEtudiant AS 'ETUDIANT_id',
+		ET.nom AS 'ETUDIANT_nom',
+		ET.prenom AS 'ETUDIANT_prenom',
 		U.libelleUFR,
 		E.libelleEtape,
 		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
+		INNER JOIN Structure S ON S.idStructure = C.idStructure
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND U.codeUniversite =
 		C.codeUniversiteUFR)
 		INNER JOIN Etape E ON (CASE WHEN EXISTS
@@ -1215,7 +1222,8 @@
 		idIndemnisation,montantGratification,fonctionsEtTaches,details,annee,idAssurance,insee,codeCaisse,temConfSujetTeme,nbHeuresHebdo,quotiteTravail,
 		modeEncadreSuivi,idModeVersGratification,avantagesNature,idNatureTravail,idModeValidationStage,codeElp,libelleELP,creditECTS,travailNuitFerie,
 		dureeStage,nomEtabRef,adresseEtabRef,nomSignataireComposante,qualiteSignataire,libelleCPAM,dureeExceptionnelle,idUniteDureeExceptionnelle,idUniteGratification,
-		codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,codeRGI,loginCreation,dateCreation,nbConges,competences,idUniteDureeGratification,monnaieGratification)
+		codeFinalite,libelleFinalite,codeCursusLMD,priseEnChargeFraisMission,codeRGI,loginCreation,dateCreation,nbConges,competences,idUniteDureeGratification,monnaieGratification,
+		volumeHoraireFormation, typePresence)
 		VALUES
 		(#idConvention#,#idEtudiant#,#idCentreGestion#,#codeUFR#,#codeUniversiteUFR#,#codeDepartement#,#codeEtape#,#codeVersionEtape#,#codeUniversiteEtape#,
 		#idEnseignant#,#idStructure#,#idService#,#idContact#,#idSignataire#,#idTypeConvention#,#idOffre#,
@@ -1225,7 +1233,8 @@
 		#idIndemnisation#,#montantGratification#,#fonctionsEtTaches#,#details#,#annee#,#idAssurance#,#insee#,#codeCaisse#,#temConfSujetTeme#,#nbHeuresHebdo#,#quotiteTravail#,
 		#modeEncadreSuivi#,#idModeVersGratification#,#avantagesNature#,#idNatureTravail#,#idModeValidationStage#,#codeElp#,#libelleELP#,#creditECTS#,#travailNuitFerie#,
 		#dureeStage#,#nomEtabRef#,#adresseEtabRef#,#nomSignataireComposante#,#qualiteSignataire#,#libelleCPAM#,#dureeExceptionnelle#,#idUniteDureeExceptionnelle#,#idUniteGratification#,
-		#codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP(),#nbConges#,#competences#,#idUniteDureeGratification#,#monnaieGratification#)
+		#codeFinalite#,#libelleFinalite#,#codeCursusLMD#,#priseEnChargeFraisMission#,#codeRGI#,#loginCreation#,CURRENT_TIMESTAMP(),#nbConges#,#competences#,#idUniteDureeGratification#,
+		#monnaieGratification#,#volumeHoraireFormation#, #typePresence#)
 		<selectKey resultClass="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -1285,7 +1294,8 @@
 		#loginValidation#,dateValidation = #dateValidation#,loginSignature =
 		#loginSignature#,dateSignature=#dateSignature#,nbConges=#nbConges#,
 		competences=#competences#,idUniteDureeGratification=#idUniteDureeGratification#,
-		monnaieGratification=#monnaieGratification#
+		monnaieGratification=#monnaieGratification#, volumeHoraireFormation=#volumeHoraireFormation#,
+		typePresence=#typePresence#
 		WHERE idConvention = #idConvention#
 	</update>
 

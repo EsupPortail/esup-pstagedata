@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.StatutJuridiqueDaoService;
 import org.esupportail.pstagedata.dao.exceptions.*;
 import org.esupportail.pstagedata.domain.beans.StatutJuridique;
@@ -27,6 +29,11 @@ public class StatutJuridiqueDomainServiceImpl implements StatutJuridiqueDomainSe
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * StatutJuridiqueDaoService
 	 */
@@ -71,12 +78,14 @@ public class StatutJuridiqueDomainServiceImpl implements StatutJuridiqueDomainSe
 
 	public int addStatutJuridique(StatutJuridiqueDTO ef) throws DataAddException,
 			WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.statutJuridiqueDaoService.addStatutJuridique(UtilsDTO.getStatutJuridiqueFromDTO(ef));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -84,12 +93,14 @@ public class StatutJuridiqueDomainServiceImpl implements StatutJuridiqueDomainSe
 
 	public boolean updateStatutJuridique(StatutJuridiqueDTO ef) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = statutJuridiqueDaoService.updateStatutJuridique(UtilsDTO.getStatutJuridiqueFromDTO(ef));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -97,12 +108,14 @@ public class StatutJuridiqueDomainServiceImpl implements StatutJuridiqueDomainSe
 
 	public boolean deleteStatutJuridique(int id) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = statutJuridiqueDaoService.deleteStatutJuridique(id);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -110,12 +123,14 @@ public class StatutJuridiqueDomainServiceImpl implements StatutJuridiqueDomainSe
 
 	@Override
 	public boolean reactivateStatutJuridique(int id) throws DataReactivateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = statutJuridiqueDaoService.reactivateStatutJuridique(id);
 		}catch (DataReactivateDaoException e) {
+			logger.debug(e);
 			throw new DataReactivateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

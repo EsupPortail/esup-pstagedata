@@ -59,14 +59,6 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	private boolean saisieTuteurProParEtudiant;
 	/**
-	 * true si choix d'année possible avant le début de la nouvelle année
-	 */
-	private boolean choixAnneeAvantDebutAnnee;
-	/**
-	 * true si choix d'année possible après ledébutde la nouvelle année
-	 */
-	private boolean choixAnneeApresDebutAnnee;
-	/**
 	 * true si l'universite utilise le depot anonyme
 	 */
 	private boolean depotAnonyme;
@@ -122,7 +114,14 @@ public class CentreGestion extends Adresse implements Serializable{
 	 * true si les etudiants peuvent voir l'appreciation de leur tuteur pro
 	 */
 	private boolean visibiliteEvalPro;
-	
+	/**
+	 * true si le centre autorise ses gestionnaires a recuperer les inscription sur l'annee universitaire precedente
+	 */
+	private boolean recupInscriptionAnterieure;
+	/**
+	 * defini la duree pendant laquelle les gestionnaires peuvent voir les inscription precedente par rapport a la date de bascule
+	 */
+	private int dureeRecupInscriptionAnterieure;
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -305,34 +304,6 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public void setSaisieTuteurProParEtudiant(boolean saisieTuteurProParEtudiant) {
 		this.saisieTuteurProParEtudiant = saisieTuteurProParEtudiant;
-	}
-
-	/**
-	 * @return the choixAnneeAvantDebutAnnee
-	 */
-	public boolean isChoixAnneeAvantDebutAnnee() {
-		return choixAnneeAvantDebutAnnee;
-	}
-
-	/**
-	 * @param choixAnneeAvantDebutAnnee the choixAnneeAvantDebutAnnee to set
-	 */
-	public void setChoixAnneeAvantDebutAnnee(boolean choixAnneeAvantDebutAnnee) {
-		this.choixAnneeAvantDebutAnnee = choixAnneeAvantDebutAnnee;
-	}
-
-	/**
-	 * @return the choixAnneeApresDebutAnnee
-	 */
-	public boolean isChoixAnneeApresDebutAnnee() {
-		return choixAnneeApresDebutAnnee;
-	}
-
-	/**
-	 * @param choixAnneeApresDebutAnnee the choixAnneeApresDebutAnnee to set
-	 */
-	public void setChoixAnneeApresDebutAnnee(boolean choixAnneeApresDebutAnnee) {
-		this.choixAnneeApresDebutAnnee = choixAnneeApresDebutAnnee;
 	}
 
 	/**
@@ -577,5 +548,21 @@ public class CentreGestion extends Adresse implements Serializable{
 	 */
 	public void setQualiteViseur(String qualiteViseur) {
 		this.qualiteViseur = qualiteViseur;
+	}
+
+	public boolean isRecupInscriptionAnterieure() {
+		return recupInscriptionAnterieure;
+	}
+
+	public void setRecupInscriptionAnterieure(boolean recupInscriptionAnterieure) {
+		this.recupInscriptionAnterieure = recupInscriptionAnterieure;
+	}
+
+	public int getDureeRecupInscriptionAnterieure() {
+		return dureeRecupInscriptionAnterieure;
+	}
+
+	public void setDureeRecupInscriptionAnterieure(int dureeRecupInscriptionAnterieure) {
+		this.dureeRecupInscriptionAnterieure = dureeRecupInscriptionAnterieure;
 	}
 }

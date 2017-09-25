@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.AdminStructureDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -32,11 +34,16 @@ public class AdminStructureDomainServiceImpl implements AdminStructureDomainServ
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * AdminStructureDaoService
 	 */
-	public AdminStructureDaoService adminStructureDaoService;
+	private AdminStructureDaoService adminStructureDaoService;
 
 	/**
 	 * @return the adminStructureDaoService
@@ -57,12 +64,14 @@ public class AdminStructureDomainServiceImpl implements AdminStructureDomainServ
 	 * @see org.esupportail.pstagedata.domain.AdminStructureDomainService#addAdminStructure(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
 	public int addAdminStructure(AdminStructureDTO admin) throws DataAddException, WebServiceDataBaseException{
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = adminStructureDaoService.addAdminStructure(UtilsDTO.getAdminStructureFromDTO(admin));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -76,8 +85,10 @@ public class AdminStructureDomainServiceImpl implements AdminStructureDomainServ
 		try{
 			b = adminStructureDaoService.deleteAdminStructure(idAdminStructure);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -110,12 +121,14 @@ public class AdminStructureDomainServiceImpl implements AdminStructureDomainServ
 	 * @see org.esupportail.pstagedata.domain.AdminStructureDomainService#updateAdminStructure(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
 	public boolean updateAdminStructure(AdminStructureDTO admin) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = adminStructureDaoService.updateAdminStructure(UtilsDTO.getAdminStructureFromDTO(admin));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -125,12 +138,14 @@ public class AdminStructureDomainServiceImpl implements AdminStructureDomainServ
 	 * @see org.esupportail.pstagedata.domain.AdminStructureDomainService#updateAdminStructureDerniereConnexion(org.esupportail.pstagedata.domain.dto.AdminStructureDTO)
 	 */
 	public boolean updateAdminStructureDerniereConnexion(AdminStructureDTO admin) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = adminStructureDaoService.updateAdminStructureDerniereConnexion(UtilsDTO.getAdminStructureFromDTO(admin));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

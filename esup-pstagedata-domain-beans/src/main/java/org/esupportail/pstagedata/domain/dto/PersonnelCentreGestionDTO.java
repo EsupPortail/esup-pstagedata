@@ -159,6 +159,12 @@ public class PersonnelCentreGestionDTO extends PersonneDTO implements Serializab
 		}
 		return r;
 	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/

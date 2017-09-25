@@ -3,6 +3,8 @@ package org.esupportail.pstagedata.domain.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.domain.beans.Contact;
 
 /**
@@ -14,6 +16,11 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/* ***************************************************************
 	 * Proprietes
@@ -113,7 +120,17 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 		"infosAJour : "+infosAJour+", "+"loginInfosAJour : "+loginInfosAJour+", "+
 		"login : "+login+", "+"commentaire : "+commentaire+", "+super.toString();
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @return un string contenant les infos du Contact
 	 */
@@ -152,6 +169,7 @@ public class ContactDTO extends PersonneDTO implements Serializable,Cloneable {
 		try {
 			return super.clone();
 		}catch(CloneNotSupportedException e){
+			logger.error(e);
 			return null;
 		}
 	} 

@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.FicheEvaluationDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -38,6 +40,12 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
+
 	/**
 	 * ficheEvaluationDaoService
 	 */
@@ -60,7 +68,7 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * FICHE EVALUATION
 	 ****************************************************************/
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getFicheEvaluationFromIdCentre()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getFicheEvaluationFromIdCentre(int)
 	 */
 	public FicheEvaluationDTO getFicheEvaluationFromIdCentre(int idCentreGestion) {
 		FicheEvaluation f = this.ficheEvaluationDaoService.getFicheEvaluationFromIdCentre(idCentreGestion);
@@ -75,12 +83,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addFicheEvaluation(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
 	public int addFicheEvaluation(FicheEvaluationDTO a) throws DataAddException,WebServiceDataBaseException {
-		int tmp = 0;
+		int tmp;
 		try {
 			tmp = this.ficheEvaluationDaoService.addFicheEvaluation(UtilsDTO.getFicheEvaluationFromDTO(a));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -89,12 +99,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
 	public boolean updateFicheEvaluationEtudiant(FicheEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateFicheEvaluationEtudiant(UtilsDTO.getFicheEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -103,12 +115,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
 	public boolean updateFicheEvaluationEntreprise(FicheEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateFicheEvaluationEntreprise(UtilsDTO.getFicheEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -117,12 +131,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateFicheEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.FicheEvaluationDTO)
 	 */
 	public boolean updateFicheEvaluationEnseignant(FicheEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateFicheEvaluationEnseignant(UtilsDTO.getFicheEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -132,12 +148,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteFicheEvaluation(int)
 	 */
 	public boolean deleteFicheEvaluation(int idFicheEvaluation) throws DataDeleteException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.deleteFicheEvaluation(idFicheEvaluation);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -147,7 +165,7 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * REPONSE EVALUATION
 	 ****************************************************************/
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluationFromIdCentre()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponseEvaluation(int, int)
 	 */
 	public ReponseEvaluationDTO getReponseEvaluation(int idFicheEvaluation, int idConvention) {
 		ReponseEvaluation r = this.ficheEvaluationDaoService.getReponseEvaluation(idFicheEvaluation, idConvention);
@@ -162,12 +180,6 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#getReponsesEvaluation(int)
 	 */
 	public List<ReponseEvaluationDTO> getReponsesEvaluation(int idFicheEvaluation) {
-//		List<ReponseEvaluation> lr = this.ficheEvaluationDaoService.getReponsesEvaluation(idFicheEvaluation);
-//		List<ReponseEvaluationDTO> lrDTO = new ArrayList<ReponseEvaluationDTO>();
-//		if (r!=null){
-//			rDTO = new ReponseEvaluationDTO(r);
-//		}
-//		return rDTO;
 		return UtilsDTO.getReponseEvaluationListDTO(this.ficheEvaluationDaoService.getReponsesEvaluation(idFicheEvaluation));
 	}
 	
@@ -175,12 +187,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addReponseEvaluation(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
 	public int addReponseEvaluation(ReponseEvaluationDTO a) throws DataAddException,WebServiceDataBaseException {
-		int tmp = 0;
+		int tmp;
 		try {
 			tmp = this.ficheEvaluationDaoService.addReponseEvaluation(UtilsDTO.getReponseEvaluationFromDTO(a));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -189,12 +203,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEtudiant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
 	public boolean updateReponseEvaluationEtudiant(ReponseEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateReponseEvaluationEtudiant(UtilsDTO.getReponseEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -203,12 +219,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEntreprise(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
 	public boolean updateReponseEvaluationEntreprise(ReponseEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateReponseEvaluationEntreprise(UtilsDTO.getReponseEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -217,118 +235,134 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseEvaluationEnseignant(org.esupportail.pstagedata.domain.dto.ReponseEvaluationDTO)
 	 */
 	public boolean updateReponseEvaluationEnseignant(ReponseEvaluationDTO c) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateReponseEvaluationEnseignant(UtilsDTO.getReponseEvaluationFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteReponseEvaluation(int)
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteReponseEvaluation(int, int)
 	 */
 	public boolean deleteReponseEvaluation(int idFicheEvaluation, int idConvention) throws DataDeleteException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.deleteReponseEvaluation(idFicheEvaluation, idConvention);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEtudiant()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEtudiant(int, int)
 	 */
 	public boolean setImpressionEtudiant(int idFicheEvaluation, int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setImpressionEtudiant(idFicheEvaluation,idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEnseignant()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEnseignant(int,int)
 	 */
 	public boolean setImpressionEnseignant(int idFicheEvaluation, int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setImpressionEnseignant(idFicheEvaluation,idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEntreprise()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setImpressionEntreprise(int,int)
 	 */
 	public boolean setImpressionEntreprise(int idFicheEvaluation, int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setImpressionEntreprise(idFicheEvaluation,idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEtudiant()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEtudiant(int)
 	 */
 	public boolean setEnvoiMailEtudiant(int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setEnvoiMailEtudiant(idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEnseignant()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEnseignant(int)
 	 */
 	public boolean setEnvoiMailEnseignant(int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setEnvoiMailEnseignant(idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 	/**
-	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEntreprise()
+	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#setEnvoiMailEntreprise(int)
 	 */
 	public boolean setEnvoiMailEntreprise(int idConvention) throws DataUpdateException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.setEnvoiMailEntreprise(idConvention);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -353,12 +387,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
 	 */
 	public int addQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataAddException,WebServiceDataBaseException {
-		int tmp = 0;
+		int tmp;
 		try {
 			tmp = this.ficheEvaluationDaoService.addQuestionSupplementaire(UtilsDTO.getQuestionSupplementaireFromDTO(qs));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -367,12 +403,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateQuestionSupplementaire(org.esupportail.pstagedata.domain.dto.QuestionSupplementaireDTO)
 	 */
 	public boolean updateQuestionSupplementaire(QuestionSupplementaireDTO qs) throws DataUpdateException,WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateQuestionSupplementaire(UtilsDTO.getQuestionSupplementaireFromDTO(qs));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -381,12 +419,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#deleteQuestionSupplementaire(int)
 	 */
 	public boolean deleteQuestionSupplementaire(int idQuestionSupplementaire) throws DataDeleteException,WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.deleteQuestionSupplementaire(idQuestionSupplementaire);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -411,12 +451,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#addReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
 	 */
 	public int addReponseSupplementaire(ReponseSupplementaireDTO rs) {
-		int tmp = 0;
+		int tmp;
 		try {
 			tmp = this.ficheEvaluationDaoService.addReponseSupplementaire(UtilsDTO.getReponseSupplementaireFromDTO(rs));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -425,12 +467,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 * @see org.esupportail.pstagedata.domain.FicheEvaluationDomainService#updateReponseSupplementaire(org.esupportail.pstagedata.domain.dto.ReponseSupplementaireDTO)
 	 */
 	public boolean updateReponseSupplementaire(ReponseSupplementaireDTO rs) {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.updateReponseSupplementaire(UtilsDTO.getReponseSupplementaireFromDTO(rs));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -440,12 +484,14 @@ public class FicheEvaluationDomainServiceImpl implements FicheEvaluationDomainSe
 	 */
 	public boolean deleteReponseSupplementaire(int idQuestionSupplementaire,
 			int idConvention) {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.ficheEvaluationDaoService.deleteReponseSupplementaire(idQuestionSupplementaire,idConvention);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

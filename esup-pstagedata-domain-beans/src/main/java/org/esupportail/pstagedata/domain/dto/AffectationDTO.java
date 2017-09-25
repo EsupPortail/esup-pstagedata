@@ -47,7 +47,16 @@ public class AffectationDTO extends NomenclatureCodeDTO implements Serializable{
 	public String toString(){
 		return super.toString();
 	}
-	
+
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/	

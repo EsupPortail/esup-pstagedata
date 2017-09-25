@@ -10,7 +10,7 @@ import org.esupportail.pstagedata.domain.beans.CentreGestion;
  */
 public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	/* ***************************************************************
@@ -61,14 +61,6 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	private boolean saisieTuteurProParEtudiant;
 	/**
-	 * true si choix d'année possible avant le début de la nouvelle année
-	 */
-	private boolean choixAnneeAvantDebutAnnee;
-	/**
-	 * true si choix d'année possible après le début de la nouvelle année
-	 */
-	private boolean choixAnneeApresDebutAnnee;
-	/**
 	 * true si choix d'année possible après ledébutde la nouvelle année
 	 */
 	private boolean depotAnonyme;
@@ -112,7 +104,7 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * true si l'universite utilise la validation pedadogique
 	 */
 	private boolean validationPedagogique;
-	
+
 	/**
 	 * true si les etudiants du centre ont le droit de creer leurs conventions
 	 */
@@ -125,6 +117,16 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * true si les etudiants peuvent voir l'appreciation de leur tuteur pro
 	 */
 	private boolean visibiliteEvalPro;
+
+	/**
+	 * true si le centre autorise ses gestionnaires a recuperer les inscription sur l'annee universitaire precedente
+	 */
+	private boolean recupInscriptionAnterieure;
+	/**
+	 * defini la duree pendant laquelle les gestionnaires peuvent voir les inscription precedente par rapport a la date de bascule
+	 */
+	private int dureeRecupInscriptionAnterieure;
+
 	/* ***************************************************************
 	 * Objets
 	 ****************************************************************/
@@ -144,14 +146,14 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 * Mode d'évaludation des stages du centre
 	 */
 	private ModeValidationStageDTO modeValidationStage;
-	
+
 	/**
 	 * Constructeur
 	 */
 	public CentreGestionDTO(){
 		super();
 	}
-	
+
 	/**
 	 * @param cg
 	 */
@@ -171,8 +173,6 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 			presenceTuteurEns=cg.isPresenceTuteurEns();
 			presenceTuteurPro=cg.isPresenceTuteurPro();
 			saisieTuteurProParEtudiant=cg.isSaisieTuteurProParEtudiant();
-			choixAnneeAvantDebutAnnee=cg.isChoixAnneeAvantDebutAnnee();
-			choixAnneeApresDebutAnnee=cg.isChoixAnneeApresDebutAnnee();
 			depotAnonyme=cg.isDepotAnonyme();
 			codeUniversite=cg.getCodeUniversite();
 			nomViseur=cg.getNomViseur();
@@ -184,8 +184,10 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 				idCentreGestionSuperViseur=cg.getIdCentreGestionSuperViseur();
 			}
 			codeConfidentialite=cg.getCodeConfidentialite();
-			autoriserImpressionConvention=cg.isAutoriserImpressionConvention();	
+			autoriserImpressionConvention=cg.isAutoriserImpressionConvention();
 			visibiliteEvalPro=cg.isVisibiliteEvalPro();
+			recupInscriptionAnterieure=cg.isRecupInscriptionAnterieure();
+			dureeRecupInscriptionAnterieure=cg.getDureeRecupInscriptionAnterieure();
 			if(cg.getIdFichier() > 0)
 				idFichier=cg.getIdFichier();
 			if(cg.getNiveauCentre()!=null) niveauCentre=new NiveauCentreDTO(cg.getNiveauCentre());
@@ -200,7 +202,7 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	/* ***************************************************************
 	 * Méthodes
 	 ****************************************************************/
-	
+
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -212,38 +214,43 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 		}
 		return r;
 	}
-	
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.CentreGestionDTO#toString()
 	 */
 	@Override
 	public String toString(){
-		return 
-		"idCentreGestion : "+idCentreGestion+", "+
-		"nomCentre : "+nomCentre+", "+
-		"idNiveauCentre : "+idNiveauCentre+", "+
-		"siteWeb : "+siteWeb+", "+
-		"mail : "+mail+", "+
-		"telephone : "+telephone+", "+
-		"fax : "+fax+", "+
-		"commentaire : "+commentaire+", "+
-		"presenceTuteurEns : "+presenceTuteurEns+", "+
-		"presenceTuteurPro : "+presenceTuteurPro+", "+
-		"saisieTuteurProParEtudiant : "+saisieTuteurProParEtudiant+", "+
-		"choixAnneeAvantDebutAnnee : "+choixAnneeAvantDebutAnnee+", "+
-		"choixAnneeApresDebutAnnee : "+choixAnneeApresDebutAnnee+", "+
-		"depotAnonyme : "+depotAnonyme+", "+
-		"codeUniversite : "+codeUniversite+", "+
-		"nomViseur : "+nomViseur+", "+
-		"prenomViseur : "+prenomViseur+", "+
-		"urlPageInstruction : "+urlPageInstruction+", "+
-		"idCentreGestionSuperviseur : "+idCentreGestionSuperViseur+", "+
-		"codeConfidentialite : "+codeConfidentialite+", "+
-		"validationPedagogique : "+validationPedagogique+", "+
-		"visibiliteEvalPro : "+visibiliteEvalPro+", "+
-		"idFichier : "+idFichier+", "+super.toString();
+		return
+				"idCentreGestion : "+idCentreGestion+", "+
+						"nomCentre : "+nomCentre+", "+
+						"idNiveauCentre : "+idNiveauCentre+", "+
+						"siteWeb : "+siteWeb+", "+
+						"mail : "+mail+", "+
+						"telephone : "+telephone+", "+
+						"fax : "+fax+", "+
+						"commentaire : "+commentaire+", "+
+						"presenceTuteurEns : "+presenceTuteurEns+", "+
+						"presenceTuteurPro : "+presenceTuteurPro+", "+
+						"saisieTuteurProParEtudiant : "+saisieTuteurProParEtudiant+", "+
+						"depotAnonyme : "+depotAnonyme+", "+
+						"codeUniversite : "+codeUniversite+", "+
+						"nomViseur : "+nomViseur+", "+
+						"prenomViseur : "+prenomViseur+", "+
+						"urlPageInstruction : "+urlPageInstruction+", "+
+						"idCentreGestionSuperviseur : "+idCentreGestionSuperViseur+", "+
+						"codeConfidentialite : "+codeConfidentialite+", "+
+						"validationPedagogique : "+validationPedagogique+", "+
+						"visibiliteEvalPro : "+visibiliteEvalPro+", "+
+						"recupInscriptionAnterieure : "+recupInscriptionAnterieure+", "+
+						"dureeRecupInscriptionAnterieure : "+dureeRecupInscriptionAnterieure+", "+
+						"idFichier : "+idFichier+", "+super.toString();
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/
@@ -400,34 +407,6 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 	 */
 	public void setSaisieTuteurProParEtudiant(boolean saisieTuteurProParEtudiant) {
 		this.saisieTuteurProParEtudiant = saisieTuteurProParEtudiant;
-	}
-
-	/**
-	 * @return the choixAnneeAvantDebutAnnee
-	 */
-	public boolean getChoixAnneeAvantDebutAnnee() {
-		return choixAnneeAvantDebutAnnee;
-	}
-
-	/**
-	 * @param choixAnneeAvantDebutAnnee the choixAnneeAvantDebutAnnee to set
-	 */
-	public void setChoixAnneeAvantDebutAnnee(boolean choixAnneeAvantDebutAnnee) {
-		this.choixAnneeAvantDebutAnnee = choixAnneeAvantDebutAnnee;
-	}
-
-	/**
-	 * @return the choixAnneeApresDebutAnnee
-	 */
-	public boolean getChoixAnneeApresDebutAnnee() {
-		return choixAnneeApresDebutAnnee;
-	}
-
-	/**
-	 * @param choixAnneeApresDebutAnnee the choixAnneeApresDebutAnnee to set
-	 */
-	public void setChoixAnneeApresDebutAnnee(boolean choixAnneeApresDebutAnnee) {
-		this.choixAnneeApresDebutAnnee = choixAnneeApresDebutAnnee;
 	}
 
 	/**
@@ -678,4 +657,19 @@ public class CentreGestionDTO extends AdresseDTO implements Serializable{
 		this.qualiteViseur = qualiteViseur;
 	}
 
+	public boolean isRecupInscriptionAnterieure() {
+		return recupInscriptionAnterieure;
+	}
+
+	public void setRecupInscriptionAnterieure(boolean recupInscriptionAnterieure) {
+		this.recupInscriptionAnterieure = recupInscriptionAnterieure;
+	}
+
+	public int getDureeRecupInscriptionAnterieure() {
+		return dureeRecupInscriptionAnterieure;
+	}
+
+	public void setDureeRecupInscriptionAnterieure(int dureeRecupInscriptionAnterieure) {
+		this.dureeRecupInscriptionAnterieure = dureeRecupInscriptionAnterieure;
+	}
 }

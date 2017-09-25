@@ -135,10 +135,9 @@ public class PersonneDTO extends ObjetMetiersDTO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		PersonneDTO other = (PersonneDTO) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		return (id != other.id)?false:true;
 	}
 
 	/**

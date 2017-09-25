@@ -3,6 +3,8 @@ package org.esupportail.pstagedata.domain.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.domain.beans.Structure;
 
 /**
@@ -14,6 +16,10 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/* ***************************************************************
 	 * Proprietes
 	 ****************************************************************/
@@ -201,6 +207,11 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		return r;
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.AdresseDTO#toString()
 	 */
@@ -273,7 +284,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		((super.getCommune()==null||super.getCommune().isEmpty())?"/":super.getCommune())+", "+
 		((super.getCodePostal()==null||super.getCodePostal().isEmpty())?"/":super.getCodePostal())+",\r\n "+
 		((super.getLibCedex()==null||super.getLibCedex().isEmpty())?"/":super.getLibCedex())+",\r\n "+
-		"Code Commune : "+((super.getCodeCommune()!=null&&!super.getCodeCommune().equals("0"))?super.getCodeCommune():"/")+", "+
+		"Code Commune : "+((super.getCodeCommune()!=null&&!"0".equals(super.getCodeCommune()))?super.getCodeCommune():"/")+", "+
 		(super.getPays()!=null?super.getPays().getLibelle():"/");
 	}
 	/**
@@ -303,6 +314,7 @@ public class StructureDTO extends AdresseDTO implements Serializable, Cloneable{
 		try {
 			return super.clone();
 		}catch(CloneNotSupportedException e){
+			logger.error(e);
 			return null;
 		}
 	} 

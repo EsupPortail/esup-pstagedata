@@ -25,7 +25,7 @@ public interface CaisseRegimeDaoService extends Serializable {
 	 * @throws DataAddException 
 	 * @throws WebServiceDataBaseException 
 	 */
-	public int addCaisseRegime(CaisseRegime cr) throws DataAddException, WebServiceDataBaseException;
+	public int addCaisseRegime(CaisseRegime cr) throws WebServiceDataBaseException;
 	/**
 	 * @return boolean
 	 * @throws DataUpdateException 
@@ -45,7 +45,7 @@ public interface CaisseRegimeDaoService extends Serializable {
 	 * @throws DataReactivateException
 	 * @throws WebServiceDataBaseException
 	 */
-	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException,WebServiceDataBaseException;
+	public boolean reactivateCaisseRegime(String codeCaisse) throws DataReactivateException;
 
 	/**
 	 * @return List<CaisseRegime>

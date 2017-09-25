@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.EtapeDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -27,6 +29,11 @@ public class EtapeDomainServiceImpl implements EtapeDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * etapeDaoService
@@ -67,12 +74,14 @@ public class EtapeDomainServiceImpl implements EtapeDomainService {
 	 * @see org.esupportail.pstagedata.domain.EtapeDomainService#addEtape(org.esupportail.pstagedata.domain.dto.EtapeDTO)
 	 */
 	public int addEtape(EtapeDTO etape) throws DataAddException, WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.etapeDaoService.addEtape(UtilsDTO.getEtapeFromDTO(etape));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;

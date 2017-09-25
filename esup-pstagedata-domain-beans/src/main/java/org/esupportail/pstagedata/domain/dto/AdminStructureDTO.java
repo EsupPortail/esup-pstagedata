@@ -59,7 +59,17 @@ public class AdminStructureDTO extends PersonneDTO implements Serializable{
 		return "login : "+login+", "+"eppn : "+eppn+", "+
 		super.toString();
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @return le login ou l'eppn de l'administrateur
 	 */

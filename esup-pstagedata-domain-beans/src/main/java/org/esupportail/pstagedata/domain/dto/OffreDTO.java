@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.domain.beans.Offre;
 
 /**
@@ -15,6 +17,11 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/* ***************************************************************
 	 * Proprietes
 	 ****************************************************************/
@@ -509,7 +516,12 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 		}
 		return r;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/**
 	 * @see org.esupportail.pstagedata.domain.dto.ObjetMetiersDTO#toString()
 	 */
@@ -589,6 +601,7 @@ public class OffreDTO extends ObjetMetiersDTO implements Serializable, Cloneable
 		try {
 			return super.clone();
 		}catch(CloneNotSupportedException e){
+			logger.error(e);
 			return null;
 		}
 	} 

@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.OffreModeCandidatureDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -23,12 +25,17 @@ import org.esupportail.pstagedata.exceptions.WebServiceDataBaseException;
  *
  */
 public class OffreModeCandidatureDomainServiceImpl implements OffreModeCandidatureDomainService {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
+
 	/**
 	 * OffreModeCandidatureDaoService
 	 */
@@ -53,18 +60,19 @@ public class OffreModeCandidatureDomainServiceImpl implements OffreModeCandidatu
 	 * @see org.esupportail.pstagedata.domain.OffreModeCandidatureDomainService#addOffreModeCandidature(int, java.util.List)
 	 */
 	@Override
-	public int addOffreModeCandidature(int idOffre,
-			List<Integer> idsModeCandidature) throws DataAddException, DataDeleteException,
-			WebServiceDataBaseException {
-		int tmp=0;
+	public int addOffreModeCandidature(int idOffre, List<Integer> idsModeCandidature)
+			throws DataAddException {
+		int tmp;
 		try{
 			tmp = this.offreModeCandidatureDaoService.addOffreModeCandidature(idOffre,idsModeCandidature);
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
-		return tmp;		
+		return tmp;
 	}
 
 	/**
@@ -73,18 +81,20 @@ public class OffreModeCandidatureDomainServiceImpl implements OffreModeCandidatu
 	@Override
 	public boolean deleteOffreModeCandidatureFromId(int idOffre)
 			throws DataDeleteException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreModeCandidatureDaoService.deleteOffreModeCandidatureFromId(idOffre);
 		}catch (DataDeleteDaoException e) {
-			throw new DataDeleteException(e.getMessage());	
+			logger.debug(e);
+			throw new DataDeleteException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
 	}
 
-	
-	
+
+
 
 }

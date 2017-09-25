@@ -38,11 +38,11 @@ public interface OffreStatsDaoService  {
 	
 	/**
    * recupere les statistiques sur les nombres d'offres par type d'offre 
-   * @param idCenter : identifiant du centre de gestion
-   * @param year : annee universitaire
+   * @param idCentreDeGestion : identifiant du centre de gestion
+   * @param annee : annee universitaire
    *  @return liste des statistiques 
    */
-	public List<StatisticItem> getNumberOfOffersByType(final Integer idCentreDeGestion, final String annee, boolean validation, boolean publication) throws DataAccessDaoException;;
+	public List<StatisticItem> getNumberOfOffersByType(final Integer idCentreDeGestion, final String annee, boolean validation, boolean publication) throws DataAccessDaoException;
 	
 	
 	 /**

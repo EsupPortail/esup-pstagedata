@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.EtudiantDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -27,44 +29,34 @@ import org.esupportail.pstagedata.services.convertDto.UtilsDTO;
  *
  */
 public class EtudiantDomainServiceImpl implements EtudiantDomainService {
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
+
 	/**
 	 * EtudiantDaoService
 	 */
-	public EtudiantDaoService etudiantDaoService;
-
-
-
-	/**
-	 * @return the etudiantDaoService
-	 */
-	public EtudiantDaoService getEtudiantDaoService() {
-		return etudiantDaoService;
-	}
-
-	/**
-	 * @param etudiantDaoService the etudiantDaoService to set
-	 */
-	public void setEtudiantDaoService(EtudiantDaoService etudiantDaoService) {
-		this.etudiantDaoService = etudiantDaoService;
-	}
-
+	private EtudiantDaoService etudiantDaoService;
 
 	/**
 	 * @see org.esupportail.pstagedata.domain.EtudiantDomainService#addEtudiant(org.esupportail.pstagedata.domain.dto.EtudiantDTO)
 	 */
 	public int addEtudiant(EtudiantDTO etudiant) throws DataAddException, WebServiceDataBaseException {
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.etudiantDaoService.addEtudiant(UtilsDTO.getEtudiantFromDTO(etudiant));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -75,12 +67,14 @@ public class EtudiantDomainServiceImpl implements EtudiantDomainService {
 	 */
 	public boolean deleteEtudiant(int idEtudiant) throws DataDeleteException,
 			WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.etudiantDaoService.deleteEtudiant(idEtudiant);
 		}catch (DataDeleteDaoException e) {
-			throw new DataDeleteException(e.getMessage());	
+			logger.debug(e);
+			throw new DataDeleteException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -92,7 +86,7 @@ public class EtudiantDomainServiceImpl implements EtudiantDomainService {
 	public EtudiantDTO getEtudiantFromId(int id) {
 		Etudiant e = this.etudiantDaoService.getEtudiantFromId(id);
 		EtudiantDTO eDTO = null;
-		
+
 		if (e!=null) {
 			eDTO = new EtudiantDTO(e,false);
 		}
@@ -111,12 +105,14 @@ public class EtudiantDomainServiceImpl implements EtudiantDomainService {
 	 */
 	public boolean updateEtudiant(EtudiantDTO etudiant)
 			throws DataUpdateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.etudiantDaoService.updateEtudiant(UtilsDTO.getEtudiantFromDTO(etudiant));
 		}catch (DataUpdateDaoException e) {
-			throw new DataUpdateException(e.getMessage());	
+			logger.debug(e);
+			throw new DataUpdateException(e.getMessage());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -129,11 +125,25 @@ public class EtudiantDomainServiceImpl implements EtudiantDomainService {
 	public EtudiantDTO getEtudiantFromUid(String uidEtudiant, String codeUniversite) {
 		Etudiant e = this.etudiantDaoService.getEtudiantFromUid(uidEtudiant, codeUniversite);
 		EtudiantDTO eDTO = null;
-		
+
 		if (e!=null) {
 			eDTO = new EtudiantDTO(e,false);
 		}
 		return eDTO;
 	}
 
+
+	/**
+	 * @return the etudiantDaoService
+	 */
+	public EtudiantDaoService getEtudiantDaoService() {
+		return etudiantDaoService;
+	}
+
+	/**
+	 * @param etudiantDaoService the etudiantDaoService to set
+	 */
+	public void setEtudiantDaoService(EtudiantDaoService etudiantDaoService) {
+		this.etudiantDaoService = etudiantDaoService;
+	}
 }

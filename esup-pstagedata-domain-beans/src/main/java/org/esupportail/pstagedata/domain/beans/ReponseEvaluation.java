@@ -530,6 +530,11 @@ public class ReponseEvaluation extends ObjetMetiers implements Serializable{
 		return true;
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	/* ***************************************************************
 	 * Getters / Setters
 	 ****************************************************************/

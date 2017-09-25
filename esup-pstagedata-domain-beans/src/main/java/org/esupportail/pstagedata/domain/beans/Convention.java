@@ -341,6 +341,15 @@ public class Convention extends ObjetMetiers implements Serializable{
 	 */
 	private String monnaieGratification;
 
+	/**
+	 * volumeHoraireFormation
+	 */
+	private String volumeHoraireFormation;
+
+	/**
+	 * typePresence
+	 */
+	private String typePresence;
 
 	/* **
 	 * Objets
@@ -1838,4 +1847,20 @@ public class Convention extends ObjetMetiers implements Serializable{
 		this.monnaieGratification = monnaieGratification;
 	}
 
+
+	public String getVolumeHoraireFormation() {
+		return volumeHoraireFormation;
+	}
+
+	public void setVolumeHoraireFormation(String volumeHoraireFormation) {
+		this.volumeHoraireFormation = volumeHoraireFormation;
+	}
+
+	public String getTypePresence() {
+		return typePresence;
+	}
+
+	public void setTypePresence(String typePresence) {
+		this.typePresence = typePresence;
+	}
 }

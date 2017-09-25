@@ -37,20 +37,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	private CentreGestionDaoService centreGestionDaoService;
 
 	/**
-	 * @see org.esupportail.pstagedata.dao.OffreDaoService#countOffreADiffuser()
+	 * @see org.esupportail.pstagedata.dao.OffreDaoService#countOffreADiffuser(List)
 	 */
 	public int countOffreADiffuser(List<Integer> idsCentreGestion){
-		int i=0;
-
+		int i;
+		List<Integer> listeIds = idsCentreGestion;
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 		CentreGestion cgEntr = this.centreGestionDaoService.getCentreEntreprise();		
 		if(cgEntr!=null && cgEntr.getIdCentreGestion()>0){
-			if(idsCentreGestion==null)idsCentreGestion = new ArrayList<Integer>();
-			if(!idsCentreGestion.contains(cgEntr.getIdCentreGestion())){
-				idsCentreGestion.add(cgEntr.getIdCentreGestion());
+			if(listeIds==null)listeIds = new ArrayList<Integer>();
+			if(!listeIds.contains(cgEntr.getIdCentreGestion())){
+				listeIds.add(cgEntr.getIdCentreGestion());
 			}
 		}
-		parameterMap.put("idsCG", idsCentreGestion);
+		parameterMap.put("idsCG", listeIds);
 		i = (Integer)getSqlMapClientTemplate().queryForObject("countOffreADiffuser",parameterMap);
 		
 		return i;
@@ -79,12 +79,14 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 		try{
 			tmp = (Integer) getSqlMapClientTemplate().insert("addOffre", o);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -98,12 +100,14 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 		try{
 			b = getSqlMapClientTemplate().update("deleteOffreLogique", idOffre)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -129,7 +133,7 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 			parameterMap.put("idCGEntr", 0);
 		}
 		if(idsCentreGestion==null)return null;//Retourne null si aucun id de centre de gestion
-		parameterMap.put("idStructure", ""+idStructure);
+		parameterMap.put("idStructure", Integer.toString(idStructure));
 		parameterMap.put("idsCG", idsCentreGestion);
 		parameterMap.put("etudiant", isEtudiant?"1":null);
 		return getSqlMapClientTemplate().queryForList("getOffresFromIdStructureAndIdsCentreGestion", parameterMap);
@@ -259,19 +263,21 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateDiffusionOffre(int idOffre, String loginDiffusion, Date dateFinDiffusion) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, Object> parameterMap = new HashMap<String, Object>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("loginDiffusion", loginDiffusion);
 		parameterMap.put("dateFinDiffusion", dateFinDiffusion);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateDiffusionOffre", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -285,12 +291,14 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 		try{
 			b = getSqlMapClientTemplate().update("updateOffre", o)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -301,18 +309,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateRejetOffre(int idOffre, String loginRejetValidation) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("loginRejetValidation", loginRejetValidation);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateRejetOffre", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -323,18 +333,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateStopDiffusionOffre(int idOffre, String loginStopDiffusion) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("loginStopDiffusion", loginStopDiffusion);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateStopDiffusionOffre", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -345,18 +357,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateStopValidationOffre(int idOffre,String loginStopValidation) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("loginStopValidation", loginStopValidation);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateStopValidationOffre", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -367,18 +381,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateValidationOffre(int idOffre, String loginValidation) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("loginValidation", loginValidation);
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateValidationOffre", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -389,18 +405,20 @@ public class OffreDaoServiceImpl extends AbstractIBatisDaoService implements Off
 	 */
 	public boolean updateOffrePourvue(int idOffre, boolean estPourvue) throws DataUpdateDaoException, DataBaseDaoException{
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		parameterMap.put("idOffre", ""+idOffre);
+		parameterMap.put("idOffre", Integer.toString(idOffre));
 		parameterMap.put("estPourvue", estPourvue?"1":"0");
 		boolean b = false;
 		try{
 			b = getSqlMapClientTemplate().update("updateOffrePourvue", parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());	
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;

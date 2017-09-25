@@ -64,6 +64,7 @@ public class UfrDaoServiceImpl extends AbstractIBatisDaoService implements UfrDa
 			if(ufr.getCodeUniversite()==null) ufr.setCodeUniversite(" ");
 			tmp = (Integer) getSqlMapClientTemplate().insert("addUfr",ufr);
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -73,6 +74,7 @@ public class UfrDaoServiceImpl extends AbstractIBatisDaoService implements UfrDa
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;

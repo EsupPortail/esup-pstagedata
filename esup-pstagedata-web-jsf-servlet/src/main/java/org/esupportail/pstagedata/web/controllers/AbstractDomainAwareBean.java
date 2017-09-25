@@ -31,7 +31,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	/**
 	 * A logger.
 	 */
-	private final Logger logger = new LoggerImpl(this.getClass());
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * see {@link DomainService}.
@@ -75,7 +75,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	/**
 	 * @return the current user.
 	 */
-	protected User getCurrentUser() throws Exception {
+	protected User getCurrentUser() {
 		// this method should be overriden
 		return null;
 	}
@@ -92,8 +92,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		try {
 			currentUser = getCurrentUser();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info(e);
 		}
 		if (currentUser == null) {
 			if (logger.isDebugEnabled()) {

@@ -17,11 +17,11 @@ ConventionStatsDomaineService, Serializable {
 	/**
 	 * gestionnaire des StatisticItemDTO
 	 */
-	private StatisticsDtoManager statisticsDtoManager;	
+	private transient StatisticsDtoManager statisticsDtoManager;
 	/**
 	 * service dao pour les statistiques sur les conventions
 	 */
-	private ConventionStatsDaoService conventionStatsDaoService;
+	private transient ConventionStatsDaoService conventionStatsDaoService;
 
 
 	/**
@@ -40,7 +40,7 @@ ConventionStatsDomaineService, Serializable {
 	@Override
 	public List<String> getYears(Integer idCentreGestion)
 			throws StatsDomaineException {
-		// TODO TEST ME
+
 		List<String> years =null;
 		try {
 			years = this.conventionStatsDaoService.getYears(idCentreGestion);

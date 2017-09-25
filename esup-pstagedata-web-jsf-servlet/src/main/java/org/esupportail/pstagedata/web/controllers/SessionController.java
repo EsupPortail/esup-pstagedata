@@ -81,7 +81,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * @throws Exception 
 	 */
 	@Override
-	public User getCurrentUser() throws Exception {
+	public User getCurrentUser() {
 		return authenticator.getUser();
 	}
 

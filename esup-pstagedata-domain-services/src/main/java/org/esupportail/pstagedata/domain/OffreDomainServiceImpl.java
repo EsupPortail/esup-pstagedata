@@ -7,6 +7,8 @@ package org.esupportail.pstagedata.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.OffreDaoService;
 import org.esupportail.pstagedata.dao.OffreModeCandidatureDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
@@ -36,6 +38,11 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * OffreDaoService
 	 */
@@ -82,15 +89,18 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#addOffre(org.esupportail.pstagedata.domain.dto.OffreDTO)
 	 */
 	public int addOffre(OffreDTO o) throws DataAddException, WebServiceDataBaseException{
-		int tmp=0;
+		int tmp;
 		try{
 			tmp = this.offreDaoService.addOffre(UtilsDTO.getOffreFromDTO(o));
 			this.offreModeCandidatureDaoService.addOffreModeCandidature(tmp, o.getIdsModeCandidature());
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -100,12 +110,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#deleteOffreLogique(int)
 	 */
 	public boolean deleteOffreLogique(int idOffre) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.deleteOffreLogique(idOffre);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -159,12 +171,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#updateDiffusionOffre(int, java.lang.String, java.util.Date)
 	 */
 	public boolean updateDiffusionOffre(int idOffre, String loginDiffusion, Date dateFinDiffusion) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateDiffusionOffre(idOffre, loginDiffusion, dateFinDiffusion);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -174,15 +188,18 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#updateOffre(org.esupportail.pstagedata.domain.dto.OffreDTO)
 	 */
 	public boolean updateOffre(OffreDTO o) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateOffre(UtilsDTO.getOffreFromDTO(o));
 			this.offreModeCandidatureDaoService.addOffreModeCandidature(o.getIdOffre(), o.getIdsModeCandidature());
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -192,12 +209,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#updateRejetOffre(int, java.lang.String)
 	 */
 	public boolean updateRejetOffre(int idOffre, String loginRejetValidation) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateRejetOffre(idOffre, loginRejetValidation);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -208,12 +227,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 */
 	public boolean updateStopDiffusionOffre(int idOffre,
 			String loginStopDiffusion) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateStopDiffusionOffre(idOffre, loginStopDiffusion);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -224,12 +245,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 */
 	public boolean updateStopValidationOffre(int idOffre,
 			String loginStopValidation) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateStopValidationOffre(idOffre, loginStopValidation);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -239,12 +262,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#updateValidationOffre(int, java.lang.String)
 	 */
 	public boolean updateValidationOffre(int idOffre, String loginValidation) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateValidationOffre(idOffre, loginValidation);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -254,12 +279,14 @@ public class OffreDomainServiceImpl implements OffreDomainService {
 	 * @see org.esupportail.pstagedata.domain.OffreDomainService#updateOffrePourvue(int, boolean)
 	 */
 	public boolean updateOffrePourvue(int idOffre, boolean estPourvue) throws DataUpdateException, WebServiceDataBaseException{
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.offreDaoService.updateOffrePourvue(idOffre, estPourvue);
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

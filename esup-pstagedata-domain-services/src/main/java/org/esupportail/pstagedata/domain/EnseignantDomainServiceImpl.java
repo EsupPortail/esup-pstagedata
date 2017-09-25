@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.EnseignantDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -32,6 +34,11 @@ public class EnseignantDomainServiceImpl implements EnseignantDomainService {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
 	 * enseignantDaoService
@@ -81,19 +88,23 @@ public class EnseignantDomainServiceImpl implements EnseignantDomainService {
 		try{
 			tmp = this.enseignantDaoService.addEnseignant(UtilsDTO.getEnseignantFromDTO(enseignant));
 		}catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}catch (EnseignantAlreadyExistingForNumEtuCodeUnivException ee) {
+			logger.debug(ee);
 			try{
-				
 				Enseignant enseigantUid = this.enseignantDaoService.getEnseignantFromUid(enseignant.getUidEnseignant(), enseignant.getCodeUniversite());
 				if (enseigantUid != null) {
 					tmp = enseigantUid.getId();
 				}
 			}catch (DataAddDaoException e) {
+				logger.debug(e);
 				throw new DataAddException(e.getMessage(), e.getCause());
 			}catch (DataBaseDaoException e) {
+				logger.debug(e);
 				throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 			}
 		}
@@ -106,12 +117,14 @@ public class EnseignantDomainServiceImpl implements EnseignantDomainService {
 	 */
 	public boolean deleteEnseignant(int idEnseignant)
 			throws DataDeleteException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.enseignantDaoService.deleteEnseignant(idEnseignant);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -137,12 +150,14 @@ public class EnseignantDomainServiceImpl implements EnseignantDomainService {
 	 */
 	public boolean updateEnseignant(EnseignantDTO enseignant)
 			throws DataUpdateException, WebServiceDataBaseException {
-		boolean b = false;
+		boolean b;
 		try{
 			b = this.enseignantDaoService.updateEnseignant(UtilsDTO.getEnseignantFromDTO(enseignant));
 		}catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

@@ -6,6 +6,8 @@ package org.esupportail.pstagedata.domain;
 
 import java.util.List;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.pstagedata.dao.CentreGestionDaoService;
 import org.esupportail.pstagedata.dao.exceptions.DataAddDaoException;
 import org.esupportail.pstagedata.dao.exceptions.DataBaseDaoException;
@@ -33,6 +35,11 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * A logger.
+	 */
+	private final transient Logger logger = new LoggerImpl(this.getClass());
 	/**
 	 * centreDaoService
 	 */
@@ -140,8 +147,10 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 		try {
 			tmp = this.centreGestionDaoService.addCentreGestion(UtilsDTO.getCentreGestionFromDTO(c));
 		} catch (DataAddDaoException e) {
+			logger.debug(e);
 			throw new DataAddException(e.getMessage(), e.getCause());
 		} catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -155,8 +164,10 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 		try{
 			b = this.centreGestionDaoService.updateCentreGestion(UtilsDTO.getCentreGestionFromDTO(c));
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -170,8 +181,10 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 		try{
 			b = this.centreGestionDaoService.updateIdFichier(idCentreGestion, idFichier);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -186,8 +199,10 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 		try{
 			b = this.centreGestionDaoService.setIdFichierNull(idCentreGestion);
 		} catch (DataUpdateDaoException e) {
+			logger.debug(e);
 			throw new DataUpdateException(e.getMessage());
 		} catch (DataBaseDaoException e){
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -201,8 +216,10 @@ public class CentreGestionDomainServiceImpl implements CentreGestionDomainServic
 		try{
 			b = this.centreGestionDaoService.deleteCentreGestion(idCentreGestion);
 		}catch (DataDeleteDaoException e) {
+			logger.debug(e);
 			throw new DataDeleteException(e.getMessage());	
 		}catch (DataBaseDaoException e) {
+			logger.debug(e);
 			throw new WebServiceDataBaseException(e.getMessage(), e.getCause());
 		}
 		return b;

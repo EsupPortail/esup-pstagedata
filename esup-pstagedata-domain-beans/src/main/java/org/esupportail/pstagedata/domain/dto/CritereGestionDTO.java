@@ -46,7 +46,7 @@ public class CritereGestionDTO extends NomenclatureCodeDTO implements Serializab
 	}
 	
 	/* ***************************************************************
-	 * M�thodes
+	 * Methodes
 	 ****************************************************************/
 
 	/**
@@ -67,6 +67,11 @@ public class CritereGestionDTO extends NomenclatureCodeDTO implements Serializab
 			r = this.getCode().equals(((CritereGestionDTO)o).getCode());
 		}
 		return r;
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 	/* ***************************************************************

@@ -63,11 +63,12 @@ public class AffectationDaoServiceImpl extends AbstractIBatisDaoService implemen
 	 * @see org.esupportail.pstagedata.dao.AffectationDaoService#addAffectation(org.esupportail.pstagedata.domain.beans.Affectation)
 	 */
 	public int addAffectation(Affectation a)throws DataAddDaoException, DataBaseDaoException {
-		int tmp=0;
+		int tmp;
 		try {
 			if(a.getCodeUniversite()==null) a.setCodeUniversite(" ");
 			tmp = (Integer) getSqlMapClientTemplate().insert("addAffectation", a);
 		} catch (DataAccessException e){
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
@@ -77,6 +78,7 @@ public class AffectationDaoServiceImpl extends AbstractIBatisDaoService implemen
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;

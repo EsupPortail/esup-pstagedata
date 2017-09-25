@@ -122,13 +122,14 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 	public CentreGestion getCentreFromCritere(String codeCritere,
 											  String codeUniversite) {
 		HashMap<String, String> parameterMap = new HashMap<String, String>();
-		CentreGestion centre = new CentreGestion();
+		CentreGestion centre;
+		String tmpCode = codeCritere;
 
-		if(codeCritere.contains(";")){
-			String[] tab = codeCritere.split(";");
-			codeCritere = tab[0];
+		if(tmpCode.contains(";")){
+			String[] tab = tmpCode.split(";");
+			tmpCode = tab[0];
 			String codeVersionEtape = tab[1];
-			parameterMap.put("codeCritere", codeCritere);
+			parameterMap.put("codeCritere", tmpCode);
 			parameterMap.put("codeUniversite", codeUniversite);
 			parameterMap.put("codeVersionEtape", codeVersionEtape);
 			centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
@@ -139,7 +140,7 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 				// sinon on recherche sans le codeversionetape
 				parameterMap = new HashMap<String, String>();
 
-				parameterMap.put("codeCritere", codeCritere);
+				parameterMap.put("codeCritere", tmpCode);
 				parameterMap.put("codeUniversite", codeUniversite);
 				parameterMap.put("codeVersionEtape", "");
 
@@ -147,7 +148,7 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 			}
 
 		} else {
-			parameterMap.put("codeCritere", codeCritere);
+			parameterMap.put("codeCritere", tmpCode);
 			parameterMap.put("codeUniversite", codeUniversite);
 			parameterMap.put("codeVersionEtape", null);
 			centre = (CentreGestion) getSqlMapClientTemplate().queryForObject("getCentreFromCritere", parameterMap);
@@ -165,12 +166,14 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		try {
 			tmp = (Integer) getSqlMapClientTemplate().insert("addCentreGestion", cg);
 		} catch (DataAccessException e){
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataAddDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return tmp;
@@ -184,12 +187,14 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		try{
 			b = getSqlMapClientTemplate().update("updateCentreGestion",cg)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -206,12 +211,14 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		try{
 			b = getSqlMapClientTemplate().update("updateIdFichier",parameterMap)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -225,12 +232,14 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		try{
 			b = getSqlMapClientTemplate().update("setIdFichierNull",idCentreGestion)>0?true:false;
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1452) {//Cannot add or update
 				throw new DataUpdateDaoException(e.getMessage(),e.getCause());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
@@ -243,25 +252,27 @@ public class CentreGestionDaoServiceImpl extends AbstractIBatisDaoService implem
 		boolean b = false;
 		try{
 			// Suppression de tous les personnels rattachés
-			b = getSqlMapClientTemplate().delete("deletePersonnelsCentreGestion", idCentreGestion)>0?true:false;
+			getSqlMapClientTemplate().delete("deletePersonnelsCentreGestion", idCentreGestion);
 
 			// Suppresion du modèle de fiches d'évaluation du cg
 			FicheEvaluation f = (FicheEvaluation)getSqlMapClientTemplate().queryForObject("getFicheEvaluationFromIdCentre", idCentreGestion);
 			// Si le centre en a bien un
 			if(f != null) {
-				b = getSqlMapClientTemplate().delete("deleteFicheEvaluation", f.getIdFicheEvaluation()) > 0 ? true : false;
+				getSqlMapClientTemplate().delete("deleteFicheEvaluation", f.getIdFicheEvaluation());
 			}
 
 			// Suppression du centre de gestion
 			b = getSqlMapClientTemplate().delete("deleteCentreGestion", idCentreGestion) > 0 ? true : false;
 
 		}catch (DataAccessException e) {
+			logger.debug(e);
 			int error = ((SQLException)e.getCause()).getErrorCode();
 			if (error == 1451) {//Cannot delete or update
 				throw new DataDeleteDaoException(e.getMessage());
 			}
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}catch (Exception e) {
+			logger.debug(e);
 			throw new DataBaseDaoException(e.getMessage(), e.getCause());
 		}
 		return b;
