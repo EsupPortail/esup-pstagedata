@@ -2033,7 +2033,7 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `volumeHoraireFormation` VARCHAR(10) DEFAULT '0',
 
-  `typePresence` VARCHAR(30) NULL;
+  `typePresence` VARCHAR(30) NULL,
 
   PRIMARY KEY (`idConvention`))
 

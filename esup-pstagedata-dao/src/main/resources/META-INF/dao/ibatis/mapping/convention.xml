@@ -311,7 +311,7 @@
 		ET.prenom AS 'ETUDIANT_prenom',
 		U.libelleUFR,
 		E.libelleEtape,
-		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
+		(SELECT COUNT(*) FROM Avenant A WHERE A.idConvention = C.idConvention) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		INNER JOIN Structure S ON S.idStructure = C.idStructure
@@ -354,7 +354,7 @@
 		ET.prenom AS 'ETUDIANT_prenom',
 		U.libelleUFR,
 		E.libelleEtape,
-		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
+		(SELECT COUNT(*) FROM Avenant A WHERE A.idConvention = C.idConvention) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Etudiant ET ON C.idEtudiant = ET.idEtudiant
 		INNER JOIN Structure S ON S.idStructure = C.idStructure
@@ -407,7 +407,7 @@
 		ET.prenom AS 'ETUDIANT_prenom',
 		U.libelleUFR,
 		E.libelleEtape,
-		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
+		(SELECT COUNT(*) FROM Avenant A WHERE A.idConvention = C.idConvention) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
@@ -647,7 +647,7 @@
 		ET.prenom AS 'ETUDIANT_prenom',
 		U.libelleUFR,
 		E.libelleEtape,
-		(SELECT COUNT(*) FROM Avenant WHERE idConvention = #idConvention#) AS 'nbAvenant'
+		(SELECT COUNT(*) FROM Avenant A WHERE A.idConvention = C.idConvention) AS 'nbAvenant'
 		FROM Convention C
 		INNER JOIN Ufr U ON (U.codeUFR = C.codeUFR AND
 		U.codeUniversite = C.codeUniversiteUFR)
