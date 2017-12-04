@@ -163,7 +163,7 @@ public class PersonnelCentreGestionDaoServiceImpl extends AbstractIBatisDaoServi
 	private boolean isInterlocutor(int idPersonnelCentreGestion) {
 		List<Integer> listeOffres = (List<Integer>) getSqlMapClientTemplate().queryForList("getOffresForPersonnelCentreGestion", idPersonnelCentreGestion);
 
-		return (listeOffres != null)?true:false;
+		return (listeOffres != null && !listeOffres.isEmpty()) ? true : false;
 	}
 	
 }
