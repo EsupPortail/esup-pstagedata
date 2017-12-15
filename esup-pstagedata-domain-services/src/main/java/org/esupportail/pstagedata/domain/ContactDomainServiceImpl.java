@@ -313,7 +313,7 @@ public class ContactDomainServiceImpl implements ContactDomainService {
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#countConventionRefContact(int)
 	 */
 	public int countConventionRefContact(int idContact){
-		return this.contactDaoService.countOffreRefContact(idContact);
+		return this.contactDaoService.countConventionRefContact(idContact);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.domain.ContactDomainService#getNombreContactByCentreGestion(int)

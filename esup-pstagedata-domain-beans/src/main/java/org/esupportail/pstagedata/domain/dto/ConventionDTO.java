@@ -650,10 +650,10 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				this.loginSignature=c.getLoginSignature();
 				this.dateSignature=c.getDateSignature();
 				this.nbAvenant = c.getNbAvenant();
-				if (c.getStructure() != null) {
+				if (c.getStructure() != null && c.getIdStructure() != null) {
 					this.structure=new StructureDTO(c.getStructure(),false);
 				}
-				if (c.getEtudiant() != null) {
+				if (c.getEtudiant() != null && c.getIdEtudiant() != null) {
 					this.etudiant = new EtudiantDTO(c.getEtudiant(),false);
 				}
 				if (c.getUfr() != null) {
@@ -662,16 +662,16 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 				if (c.getEtape() != null) {
 					this.etape = new EtapeDTO(c.getEtape());
 				}
-				if (c.getService() != null) {
+				if (c.getService() != null && c.getIdService() != null) {
 					this.service = new ServiceDTO(c.getService());
 				}
-				if (c.getEnseignant() != null) {
+				if (c.getEnseignant() != null && c.getIdEnseignant() != null) {
 					this.enseignant = new EnseignantDTO(c.getEnseignant());
 				}
-				if (c.getContact() != null) {
+				if (c.getContact() != null && c.getIdContact() != null) {
 					this.contact = new ContactDTO(c.getContact());
 				}
-				if (c.getSignataire() != null) {
+				if (c.getSignataire() != null && c.getIdSignataire() != null) {
 					this.signataire = new ContactDTO(c.getSignataire());
 				}
 				this.nbConges = c.getNbConges();
@@ -735,48 +735,20 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.montantGratification=c.getMontantGratification();
 			this.fonctionsEtTaches=c.getFonctionsEtTaches();
 			this.details=c.getDetails();
-//			this.idAssurance=c.getIdAssurance();
-//			this.insee=c.getInsee();
-//			this.codeCaisse=c.getCodeCaisse();
-//			this.temConfSujetTeme=c.getTemConfSujetTeme();
-//			this.nbHeuresHebdo=c.getNbHeuresHebdo();
-//			this.quotiteTravail=c.getQuotiteTravail();
-//			this.modeEncadreSuivi=c.getModeEncadreSuivi();
-//			this.idModeVersGratification=c.getIdModeVersGratification();
 			this.avantagesNature=c.getAvantagesNature();
-//			this.idNatureTravail=c.getIdNatureTravail();
-//			this.idModeValidationStage=c.getIdModeValidationStage();
 			this.codeElp=c.getCodeElp();
 			this.libelleELP=c.getLibelleELP();
-//			this.creditECTS=c.getCreditECTS();
-//			this.travailNuitFerie=c.getTravailNuitFerie();
 			this.dureeStage=c.getDureeStage();
-//			this.nomEtabRef=c.getNomEtabRef();
-//			this.adresseEtabRef=c.getAdresseEtabRef();
-//			this.nomSignataireComposante=c.getNomSignataireComposante();
-//			this.qualiteSignataire=c.getQualiteSignataire();
-//			this.libelleCPAM=c.getLibelleCPAM();
 			this.dureeExceptionnelle=c.getDureeExceptionnelle();
 			this.idUniteDureeExceptionnelle=c.getIdUniteDureeExceptionnelle();
 			this.idUniteDureeGratification=c.getIdUniteDureeGratification();
 			this.idUniteGratification=c.getIdUniteGratification();
 			this.monnaieGratification=c.getMonnaieGratification();
-//			this.codeFinalite=c.getCodeFinalite();
-//			this.libelleFinalite=c.getLibelleFinalite();
-//			this.codeCursusLMD=c.getCodeCursusLMD();
-//			this.priseEnChargeFraisMission=c.isPriseEnChargeFraisMission();
-//			this.idFicheEvaluation=c.getIdFicheEvaluation();
-//			this.codeRGI=c.getCodeRGI();
-//			this.loginValidation=c.getLoginValidation();
-//			this.dateValidation=c.getDateValidation();
-//			this.loginSignature=c.getLoginSignature();
-//			this.dateSignature=c.getDateSignature();
-//			this.verificationConvention=c.isVerificationConvention();
 			this.nbAvenant = c.getNbAvenant();
-			if (c.getStructure() != null) {
+			if (c.getStructure() != null && c.getIdStructure() != null) {
 				this.structure=new StructureDTO(c.getStructure(),false);
 			}
-			if (c.getEtudiant() != null) {
+			if (c.getEtudiant() != null && c.getIdEtudiant() != null) {
 				this.etudiant = new EtudiantDTO(c.getEtudiant(),false);
 			}
 			if (c.getUfr() != null) {
@@ -785,16 +757,16 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			if (c.getEtape() != null) {
 				this.etape = new EtapeDTO(c.getEtape());
 			}
-			if (c.getService() != null) {
+			if (c.getService() != null && c.getIdService() != null) {
 				this.service = new ServiceDTO(c.getService());
 			}
-			if (c.getEnseignant() != null) {
+			if (c.getEnseignant() != null && c.getIdEnseignant() != null) {
 				this.enseignant = new EnseignantDTO(c.getEnseignant());
 			}
-			if (c.getContact() != null) {
+			if (c.getContact() != null && c.getIdContact() != null) {
 				this.contact = new ContactDTO(c.getContact());
 			}
-			if (c.getSignataire() != null) {
+			if (c.getSignataire() != null && c.getIdSignataire() != null) {
 				this.signataire = new ContactDTO(c.getSignataire());
 			}
 		}

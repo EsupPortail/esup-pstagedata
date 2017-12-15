@@ -350,7 +350,7 @@ public class ConventionDaoServiceImpl extends AbstractIBatisDaoService implement
 
 
 	/**
-	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionFromExport(java.util.List)
+	 * @see org.esupportail.pstagedata.dao.ConventionDaoService#getConventionsFromExport(java.util.List)
 	 */
 //	public Convention getConventionFromExport(int id) {
 //		return (Convention) getSqlMapClientTemplate().queryForObject("getConventionFromExport",id);

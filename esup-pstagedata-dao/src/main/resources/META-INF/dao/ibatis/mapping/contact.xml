@@ -148,24 +148,12 @@
     </statement>
 	<statement id="countOffreRefContact" resultClass="java.lang.Integer" cacheModel="cacheContact">
 		SELECT COUNT(*) FROM Offre O
-		INNER JOIN Structure S ON S.idStructure =
-		O.idStructure
-		INNER JOIN Service Se ON Se.idStructure = S.idStructure
-		INNER JOIN Contact C ON C.idService = Se.idService
-		WHERE
-		O.idContactCand = #idContact#
-		OR O.idContactInfo = #idContact#
+		WHERE O.idContactCand = #idContact# OR O.idContactInfo = #idContact#
 	</statement>
 
 	<statement id="countConventionRefContact" resultClass="java.lang.Integer" cacheModel="cacheContact">
 		SELECT COUNT(*) FROM Convention Co
-		INNER JOIN Structure S ON S.idStructure =
-		Co.idStructure
-		INNER JOIN Service Se ON Se.idStructure = S.idStructure
-		INNER JOIN Contact C ON C.idService = Se.idService
-		WHERE Co.idContact =
-		#idContact#
-		OR Co.idSignataire = #idContact#
+		WHERE Co.idContact = #idContact# OR Co.idSignataire = #idContact#
     </statement>
 
 	<statement id="getNombreContactByCentreGestion" resultClass="java.lang.Integer" cacheModel="cacheContact">
