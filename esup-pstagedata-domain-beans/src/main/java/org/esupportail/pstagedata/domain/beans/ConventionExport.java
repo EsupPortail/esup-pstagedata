@@ -574,7 +574,6 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		c.setDateModif(this.getDateModif());
 		c.setLoginCreation(this.getLoginCreation());
 		c.setLoginModif(this.getLoginModif());
-
 		if(getUfr() == null) {
 			Ufr u = new Ufr();
 			u.setCodeUniversite(this.codeUniversiteUFR);
@@ -658,22 +657,22 @@ public class ConventionExport extends ObjetMetiers implements Serializable{
 		} else {
 			c.setEtudiant(getEtudiant());
 		}
-
 		c.setFonctionsEtTaches(this.fonctionsEtTaches);
 		c.setIdAssurance(this.idAssurance);
 		c.setIdCentreGestion(this.idCentreGestion);
-		c.setIdContact(this.idContact);
+		c.setIdContact(this.CONTACT_id);
 		c.setIdConvention(this.idConvention);
-		c.setIdEnseignant(this.idEnseignant);
+		c.setIdEnseignant(this.ENSEIGNANT_id);
+		c.setIdEtudiant(this.ETUDIANT_id);
 		c.setIdIndemnisation(this.idIndemnisation);
 		c.setIdModeValidationStage(this.idModeValidationStage);
 		c.setIdModeVersGratification(this.idModeVersGratification);
 		c.setIdNatureTravail(this.idNatureTravail);
 		c.setIdOffre(this.idOffre);
 		c.setIdOrigineStage(this.idOrigineStage);
-		c.setIdService(this.idService);
-		c.setIdSignataire(this.idSignataire);
-		c.setIdStructure(this.idStructure);
+		c.setIdService(this.SERVICE_idService);
+		c.setIdSignataire(this.SIGNATAIRE_id);
+		c.setIdStructure(this.STRUCTURE_idStructure);
 		c.setIdTempsTravail(this.idTempsTravail);
 		c.setIdTheme(this.idTheme);
 		c.setIdTypeConvention(this.idTypeConvention);
