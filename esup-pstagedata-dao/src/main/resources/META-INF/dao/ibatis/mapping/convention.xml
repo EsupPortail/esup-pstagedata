@@ -214,6 +214,7 @@
 				jdbcType="DATETIME" />
 		<result property="idUniteDureeGratification" column="idUniteDureeGratification"/>
 		<result property="monnaieGratification" column="monnaieGratification" />
+		<result property="nbHeuresHebdo" column="nbHeuresHebdo" />
 
 		<result property="STRUCTURE_idStructure" column="idStructure" />
 		<result property="STRUCTURE_raisonSociale" column="raisonSociale" />
@@ -1110,7 +1111,7 @@
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
 		C.adresseEtudiant, C.codePostalEtudiant, C.villeEtudiant, C.paysEtudiant, C.idUniteDureeGratification,
-		C.monnaieGratification, C.dateCreation, C.dateModif,
+		C.monnaieGratification, C.dateCreation, C.dateModif, C.nbHeuresHebdo,
 
 		S.idStructure,
 		S.raisonSociale,

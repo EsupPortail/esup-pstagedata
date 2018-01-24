@@ -745,6 +745,7 @@ public class ConventionDTO extends ObjetMetiersDTO implements Serializable{
 			this.idUniteGratification=c.getIdUniteGratification();
 			this.monnaieGratification=c.getMonnaieGratification();
 			this.nbAvenant = c.getNbAvenant();
+			this.nbHeuresHebdo=c.getNbHeuresHebdo();
 			if (c.getStructure() != null && c.getIdStructure() != null) {
 				this.structure=new StructureDTO(c.getStructure(),false);
 			}
