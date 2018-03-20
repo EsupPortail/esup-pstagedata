@@ -108,7 +108,7 @@ CREATE  TABLE IF NOT EXISTS `Pays` (
 
   `CRPAY` INT(5) NULL,
 
-  `lib` VARCHAR(70) NOT NULL ,
+  `lib` VARCHAR(75) NOT NULL ,
 
   `ISO2` VARCHAR(2) NULL ,
 
@@ -2061,7 +2061,7 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `idConvention` INT NOT NULL ,
 
-  `titreAvenant` TEXT NULL DEFAULT '' ,
+  `titreAvenant` TEXT NULL ,
 
   `motifAvenant` TEXT NULL ,
 
