@@ -2061,7 +2061,7 @@ CREATE  TABLE IF NOT EXISTS `Avenant` (
 
   `idConvention` INT NOT NULL ,
 
-  `titreAvenant` TEXT NULL DEFAULT '' ,
+  `titreAvenant` TEXT NULL,
 
   `motifAvenant` TEXT NULL ,
 
