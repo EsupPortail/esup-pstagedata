@@ -328,11 +328,11 @@ COMMIT;
 
 SET AUTOCOMMIT=0;
 
-INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`) VALUES (1, 'Obligatoire', 'OBLIG', 'O');
+INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`, `modifiable`) VALUES (1, 'Formation Initiale - Stage Obligatoire', 'FI', 'O', false);
 
-INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`) VALUES (2, 'Conseillé', 'CONS', 'O');
+INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`, `modifiable`) VALUES (2, 'Formation Initiale - Stage Conseillé', 'FI', 'O', false);
 
-
+INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`, `modifiable`) VALUES (3, 'Formation Continue', 'FC', 'O', false);
 
 COMMIT;
 
