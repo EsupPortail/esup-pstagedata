@@ -847,7 +847,7 @@ public class UtilsDTO {
 			s.setLoginModif(sd.getLoginModif());
 			//En majuscules
 			s.setNom(StringUtils.hasText(sd.getNom())?sd.getNom().toUpperCase():null);
-			s.setVoie(Utils.premiereLettreMAJ(sd.getVoie()));
+			s.setVoie(sd.getVoie());
 			s.setTelephone(StringUtils.hasText(sd.getTelephone())?sd.getTelephone().toUpperCase():null);
 		}
 		return s;		
