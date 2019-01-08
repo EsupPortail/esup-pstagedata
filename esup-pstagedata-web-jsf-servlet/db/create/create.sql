@@ -1929,7 +1929,7 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `idIndemnisation` INT NOT NULL ,
 
-  `montantGratification` VARCHAR(7) NULL ,
+  `montantGratification` VARCHAR(15) NULL ,
 
   `fonctionsEtTaches` TEXT NULL ,
 
