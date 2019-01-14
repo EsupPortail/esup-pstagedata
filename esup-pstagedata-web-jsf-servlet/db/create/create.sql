@@ -1598,7 +1598,7 @@ CREATE  TABLE IF NOT EXISTS `Etape` (
 
   `codeEtape` VARCHAR(10) NOT NULL ,
 
-  `codeVersionEtape` VARCHAR(10) NULL ,
+  `codeVersionEtape` VARCHAR(10) NOT NULL ,
 
   `libelleEtape` VARCHAR(200) NOT NULL ,
 
@@ -1758,7 +1758,7 @@ DROP TABLE IF EXISTS `CaisseRegime` ;
 
 CREATE  TABLE IF NOT EXISTS `CaisseRegime` (
 
-  `codeCaisse` VARCHAR(5) NULL ,
+  `codeCaisse` VARCHAR(5) NOT NULL ,
 
   `libelleCaisse` VARCHAR(100) NOT NULL ,
 
@@ -2227,7 +2227,7 @@ CREATE  TABLE IF NOT EXISTS `CritereGestion` (
 
   `codeCritere` VARCHAR(15) NOT NULL ,
 
-  `codeVersionEtape` VARCHAR(10) NULL ,
+  `codeVersionEtape` VARCHAR(10) NOT NULL ,
 
   `libelleCritere` VARCHAR(200) NOT NULL ,
 
