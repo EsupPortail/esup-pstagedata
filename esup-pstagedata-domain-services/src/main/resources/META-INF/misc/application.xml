@@ -38,7 +38,7 @@
 	    		The minor number of the application (2 for version 1.2.3).
 	    	</description>
     	</property>
-    	<property name="versionUpdate" value="0" >
+    	<property name="versionUpdate" value="4" >
 	    	<description>
 	    		The update of the application (3 for version 1.2.3).
 	    	</description>
@@ -53,7 +53,7 @@
 	    		The vendor.
 	    	</description>
     	</property>
-    	<property name="latestVersionBaseUrl" value="http://sourcesup.cru.fr/esup-pstagedata" >
+    	<property name="latestVersionBaseUrl" value="https://github.com/esupPortail/esup-pstagedata" >
 	    	<description>
 	    		The base URL where the latest version number should be found.
 	    	</description>
