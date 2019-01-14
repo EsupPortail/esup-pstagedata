@@ -258,7 +258,7 @@ INSERT INTO `DroitAdministration` (`idDroitAdministration`, `libelleDroitAdminis
 
 INSERT INTO `DroitAdministration` (`idDroitAdministration`, `libelleDroitAdministration`, `temEnServDroitAdmin`) VALUES (3, 'ADMIN', 'O');
 
-
+INSERT INTO `DroitAdministration` (`idDroitAdministration`, `libelleDroitAdministration`, `temEnServDroitAdmin`) VALUES (4, 'ECRITURE SANS VALIDATION', 'O');
 
 COMMIT;
 

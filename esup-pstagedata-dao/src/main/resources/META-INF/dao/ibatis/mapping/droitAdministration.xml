@@ -20,6 +20,7 @@
 
 	<statement id="getDroitAdministration" resultMap="DroitAdministration" cacheModel="cacheDroitAdministration">
 		SELECT * FROM DroitAdministration
+		WHERE temEnServDroitAdmin = 'O'
 	</statement>
 
 	<statement id="getDroitAdministrationFromId" resultMap="DroitAdministration" cacheModel="cacheDroitAdministration">
