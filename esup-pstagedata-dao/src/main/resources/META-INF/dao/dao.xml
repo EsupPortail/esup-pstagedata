@@ -238,6 +238,7 @@
 		<property name="maxWait" value="10000" />
 		<property name="validationQuery" value="select 1 from dual" />
 		<property name="testOnBorrow" value="true" />
+		<property name="connectionProperties" value="useUnicode=yes;characterEncoding=utf-8;" />
 	</bean>
 
 	<!-- 	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean" -->
