@@ -217,7 +217,7 @@ CREATE  TABLE IF NOT EXISTS `Structure` (
 
   `fax` VARCHAR(20) NULL ,
 
-  `mail` VARCHAR(50) NULL ,
+  `mail` VARCHAR(100) NULL ,
 
   `siteWeb` VARCHAR(200) NULL ,
 
@@ -478,7 +478,7 @@ CREATE  TABLE IF NOT EXISTS `CentreGestion` (
 
   `siteWeb` VARCHAR(50) NULL ,
 
-  `mail` VARCHAR(50) NULL ,
+  `mail` VARCHAR(100) NULL ,
 
   `telephone` VARCHAR(20) NULL ,
 
@@ -563,7 +563,7 @@ CREATE  TABLE IF NOT EXISTS `Contact` (
 
   `prenom` VARCHAR(50) NOT NULL ,
 
-  `mail` VARCHAR(50) NULL ,
+  `mail` VARCHAR(100) NULL ,
 
   `tel` VARCHAR(50) NULL ,
 
@@ -827,7 +827,7 @@ CREATE  TABLE IF NOT EXISTS `PersonnelCentreGestion` (
 
   `prenom` VARCHAR(50) NOT NULL ,
 
-  `mail` VARCHAR(50) NULL ,
+  `mail` VARCHAR(100) NULL ,
 
   `telephone` VARCHAR(50) NULL ,
 
@@ -1662,7 +1662,7 @@ CREATE  TABLE IF NOT EXISTS `Enseignant` (
 
   `prenom` VARCHAR(50) NOT NULL ,
 
-  `mail` VARCHAR(50) NULL ,
+  `mail` VARCHAR(100) NULL ,
 
   `telephone` VARCHAR(30) NULL ,
 
@@ -1977,7 +1977,7 @@ CREATE  TABLE IF NOT EXISTS `Convention` (
 
   `qualiteSignataire` VARCHAR(60) NULL ,
 
-  `libelleCPAM` VARCHAR(100) NULL ,
+  `libelleCPAM` VARCHAR(250) NULL ,
 
   `dureeExceptionnelle` VARCHAR(4) NULL ,
 
