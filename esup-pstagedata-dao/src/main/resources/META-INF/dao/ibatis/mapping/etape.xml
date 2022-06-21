@@ -32,11 +32,18 @@
 	<statement id="getEtapesFromIdsCentreGestion" resultMap="Etape" cacheModel="cacheEtape">
 		SELECT DISTINCT E.*
 		FROM Etape E
-		INNER JOIN Convention C ON E.codeEtape = C.codeEtape
+		INNER JOIN Convention C ON E.codeEtape = C.codeEtape AND 
+		      ( (E.codeVersionEtape = C.codeVersionEtape AND C.codeVersionEtape!='' AND E.codeVersionEtape!='') OR 
+		        (C.codeVersionEtape != '' AND E.codeVersionEtape = '') OR
+		        (C.codeVersionEtape = '' AND E.codeVersionEtape != '') OR
+		        (C.codeVersionEtape = '' AND E.codeVersionEtape = '') )
 		INNER JOIN CentreGestion CG ON C.idCentreGestion = CG.idCentreGestion
 		<dynamic prepend="WHERE">
 			<isNotNull property="codeUniversite" prepend="AND">
 				E.codeUniversite = #codeUniversite#
+			</isNotNull>
+			<isNotNull property="anneeUniv" prepend="AND">
+				C.annee = #anneeUniv#
 			</isNotNull>
 			<isNotNull property="idsCG">
 				<iterate prepend="AND" property="idsCG" conjunction="OR" open="(" close=")">

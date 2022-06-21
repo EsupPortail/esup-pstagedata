@@ -45,11 +45,12 @@ public class EtapeDaoServiceImpl extends AbstractIBatisDaoService implements Eta
 	 * @see org.esupportail.pstagedata.dao.EtapeDaoService#getEtapesFromIdsCentreGestion(java.util.List, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Etape> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite){
+	public List<Etape> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite, String anneeUniv){
 		if(idsCentreGestion!=null && !idsCentreGestion.isEmpty() && StringUtils.hasText(codeUniversite)){
 			HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 			parameterMap.put("idsCG", idsCentreGestion);
 			parameterMap.put("codeUniversite", codeUniversite);
+			parameterMap.put("anneeUniv", anneeUniv);
 			return getSqlMapClientTemplate().queryForList("getEtapesFromIdsCentreGestion",parameterMap);
 		}
 		return null;

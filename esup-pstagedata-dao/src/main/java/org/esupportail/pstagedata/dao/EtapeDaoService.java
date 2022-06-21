@@ -42,7 +42,7 @@ public interface EtapeDaoService extends Serializable {
 	 * @param codeUniversite
 	 * @return Etape
 	 */
-	public List<Etape> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite);
+	public List<Etape> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite, String anneeUniv);
 	
 	/**
 	 * @param etape

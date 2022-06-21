@@ -2123,10 +2123,10 @@ public class RemoteServicesImpl implements RemoteServices{
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtapesFromIdsCentreGestion(java.util.List, java.lang.String)
 	 */
-	public List<EtapeDTO> getEtapesFromIdsCentreGestionFromCodUniv(List<Integer> idsCentreGestion, String codeUniversite){
+	public List<EtapeDTO> getEtapesFromIdsCentreGestionFromCodUniv(List<Integer> idsCentreGestion, String codeUniversite, String anneeUniv){
 		List<EtapeDTO> lu = null;
 		if(idsCentreGestion!=null &&!idsCentreGestion.isEmpty()){
-			lu=this.etapeDomainService.getEtapesFromIdsCentreGestion(idsCentreGestion, codeUniversite);
+			lu=this.etapeDomainService.getEtapesFromIdsCentreGestion(idsCentreGestion, codeUniversite, anneeUniv);
 		}
 		return lu;
 	}
@@ -2140,7 +2140,7 @@ public class RemoteServicesImpl implements RemoteServices{
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtapesFromIdsCentreGestion(java.util.List)
 	 */
 	public List<EtapeDTO> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion){
-		return getEtapesFromIdsCentreGestionFromCodUniv(idsCentreGestion, null);
+		return getEtapesFromIdsCentreGestionFromCodUniv(idsCentreGestion, null, null);
 	}
 	/**
 	 * @see org.esupportail.pstagedata.remote.RemoteServices#getEtapeFromId(java.lang.String)

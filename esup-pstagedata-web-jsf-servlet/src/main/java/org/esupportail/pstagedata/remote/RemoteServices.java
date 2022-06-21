@@ -1891,7 +1891,7 @@ public interface RemoteServices extends Serializable{
 	 * @param codeUniversite 
 	 * @return List<EtapeDTO>
 	 */
-	public List<EtapeDTO> getEtapesFromIdsCentreGestionFromCodUniv(List<Integer> idsCentreGestion, String codeUniversite);
+	public List<EtapeDTO> getEtapesFromIdsCentreGestionFromCodUniv(List<Integer> idsCentreGestion, String codeUniversite, String anneeUniv);
 	/**
 	 * @return List
 	 */

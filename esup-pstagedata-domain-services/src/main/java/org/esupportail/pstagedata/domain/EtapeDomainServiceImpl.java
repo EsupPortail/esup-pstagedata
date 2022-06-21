@@ -66,8 +66,8 @@ public class EtapeDomainServiceImpl implements EtapeDomainService {
 	/**
 	 * @see org.esupportail.pstagedata.domain.EtapeDomainService#getEtapesFromIdsCentreGestion(java.util.List, java.lang.String)
 	 */
-	public List<EtapeDTO> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite){
-		return UtilsDTO.getEtapeListDTO(this.etapeDaoService.getEtapesFromIdsCentreGestion(idsCentreGestion, codeUniversite));
+	public List<EtapeDTO> getEtapesFromIdsCentreGestion(List<Integer> idsCentreGestion, String codeUniversite, String anneeUniv){
+		return UtilsDTO.getEtapeListDTO(this.etapeDaoService.getEtapesFromIdsCentreGestion(idsCentreGestion, codeUniversite, anneeUniv));
 	}
 
 	/**
