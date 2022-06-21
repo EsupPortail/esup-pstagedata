@@ -33,8 +33,14 @@
 	<statement id="getCritereGestionFromIdCentreAndAnnee" resultMap="CritereGestion" cacheModel="cacheCritereGestion">
 		SELECT DISTINCT Crit.idCentreGestion, Crit.codeCritere, Crit.codeVersionEtape, Crit.libelleCritere FROM CritereGestion Crit
 		INNER JOIN Convention C 
-		ON (C.annee = #anneeUniv# AND (C.codeEtape = Crit.codeCritere OR C.codeUfr = Crit.codeCritere) AND C.validationConvention=true
-		AND C.idCentreGestion = Crit.idCentreGestion AND Crit.idCentreGestion = #idCentreGestion#)
+		ON (C.annee = #anneeUniv# AND 
+		   (C.codeEtape = Crit.codeCritere OR C.codeUfr = Crit.codeCritere) AND 
+		   ((C.codeVersionEtape = Crit.codeVersionEtape AND C.codeVersionEtape!='' AND Crit.codeVersionEtape!='') OR 
+		        (C.codeVersionEtape != '' AND Crit.codeVersionEtape = '') OR
+		        (C.codeVersionEtape = '' AND Crit.codeVersionEtape != '') OR
+		        (C.codeVersionEtape = '' AND Crit.codeVersionEtape = '') ) AND
+		   C.validationConvention=true AND 
+		   C.idCentreGestion = Crit.idCentreGestion AND Crit.idCentreGestion = #idCentreGestion#)
 	</statement>
 	
 	<!-- 	Recuperation d'un critere de gestion sans code version etape a partir du code etape -->
