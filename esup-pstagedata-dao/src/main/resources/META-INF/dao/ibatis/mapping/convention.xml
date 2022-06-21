@@ -190,6 +190,7 @@
 		<result property="telPortableEtudiant" column="telPortableEtudiant" />
 		<result property="montantGratification" column="montantGratification" />
 		<result property="idUniteGratification" column="idUniteGratification" />
+		<result property="idOrigineStage" column="idOrigineStage" />
 		<result property="codeDepartement" column="codeDepartement" />
 		<result property="dureeExceptionnelle" column="dureeExceptionnelle" />
 		<result property="idUniteDureeExceptionnelle" column="idUniteDureeExceptionnelle" />
@@ -1110,7 +1111,7 @@
 		C.codeUFR, C.codeEtape, C.codeVersionEtape, C.codeUniversiteUFR, C.codeUniversiteEtape, C.codeElp,
 		C.libelleElp,
 		C.commentaireStage, C.commentaireDureeTravail, C.idIndemnisation, C.avantagesNature,
-		C.adresseEtudiant, C.codePostalEtudiant, C.villeEtudiant, C.paysEtudiant, C.idUniteDureeGratification,
+		C.adresseEtudiant, C.codePostalEtudiant, C.villeEtudiant, C.paysEtudiant, C.idUniteDureeGratification, C.idOrigineStage,
 		C.monnaieGratification, C.dateCreation, C.dateModif, C.nbHeuresHebdo,
 
 		S.idStructure,
