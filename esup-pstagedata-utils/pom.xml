@@ -4,7 +4,7 @@
     <parent>
         <artifactId>esup-pstagedata</artifactId>
         <groupId>org.esupportail</groupId>
-        <version>3.0.0-SNAPSHOT</version>
+        <version>${pstagedata.version}</version>
     </parent>
     <groupId>org.esupportail</groupId>
     <artifactId>esup-pstagedata-utils</artifactId>
