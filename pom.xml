@@ -96,7 +96,7 @@
         </plugins>
     </build>
     <properties>
-        <pstagedata.version>3.0.7</pstagedata.version>
+        <pstagedata.version>3.0.8</pstagedata.version>
   		<cxf.version>2.2.3</cxf.version>
         <esupcommons.version>0.3.2</esupcommons.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
