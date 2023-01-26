@@ -334,6 +334,8 @@ INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `code
 
 INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`, `modifiable`) VALUES (3, 'Formation Continue', 'FC', 'O', false);
 
+INSERT INTO `TypeConvention` (`idTypeConvention`, `libelleTypeConvention`, `codeCtrl`, `temEnServTypeConvention`, `modifiable`) VALUES (4, 'Formation Initiale - Stage dans le cadre d\'une césure', 'CS', 'O', false);
+
 COMMIT;
 
 
